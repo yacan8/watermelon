@@ -1,0 +1,56 @@
+
+<include file="Common:edhead" />
+
+
+	<div class="row margin-bottom">
+		<div class="col-xs-12">
+	        <h3 class="page-header">发布资讯</h3>
+	    </div>
+
+	</div>
+	<!-- / .row -->
+
+	
+		<form class="form-horizontal" id='new-form' method="post" action="{:U('Infomation/save',array('id'=>$detail['id']))}" enctype="multipart/form-data">
+      <div class="form-group">
+        <label class="col-sm-1 control-label">标题</label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" id="title" name="title" placeholder="输入标题" value="{$detail.title}" required />
+        </div>
+
+      </div>
+
+
+
+
+<div class="form-group">
+    <label class="col-sm-1 control-label">内容</label>
+    <div class="col-sm-11">
+        <textarea name="content" class="form-control">{$detail.content}</textarea>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-1 control-label">图片</label>
+
+
+    <if condition="$change neq 1">
+    <div class="col-sm-11">
+        <img id="file-img" class="img-thumbnail" alt="" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTJmMzFiNjE5ZSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1MmYzMWI2MTllIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" style="width: 200px; height: 150px;">
+        <input name="file" type="file" id="file" style="display:none" />
+        <button type="button" class="btn btn-default btn-sm btn-file">浏览</button>
+    </div>
+    <else/>
+    <div class="col-sm-11">
+        <img id="file-img" class="img-thumbnail" alt="" src="{$detail.image}" style="width: 200px; height: 150px;">
+        <input name="file" type="file" id="file" style="display:none" requried/>
+        <button type="button" class="btn btn-default btn-sm btn-file">浏览</button>
+    </div>
+    </if>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-1 col-sm-11">
+        <button type="submit" class="btn btn-success btn-sm">提交</button>
+    </div>
+</div>
+</form>
+

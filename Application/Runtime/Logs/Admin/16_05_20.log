@@ -1,0 +1,12 @@
+[ 2016-05-20T15:56:55+08:00 ] ::1 /watermelon/index.php/Admin/TopicComment
+ERR: Think\Model:getList方法不存在！
+
+[ 2016-05-20T16:00:12+08:00 ] ::1 /watermelon/index.php/Admin/TopicComment
+ERR: Think\Model:getList方法不存在！
+
+[ 2016-05-20T16:00:18+08:00 ] ::1 /watermelon/index.php/Admin/TopicComment/index
+ERR: Think\Model:getList方法不存在！
+
+[ 2016-05-20T16:02:47+08:00 ] ::1 /watermelon/index.php/Admin/TopicComment/index
+ERR: Think\Model:getList方法不存在！
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Common/headerCSS" />
+    <link rel="stylesheet" href="__PUBLIC__/css/topic.css?v=20160320">
+    <link rel="stylesheet" href="__PUBLIC__/assets/viewer/css/viewer.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/assets/froalaeditor/css/plugins/emoticons.css">
+  <title>话题圈</title>
+</head>
+
+<body>
+
+    <include file="TopicContent/publish" />
+    <include file="Common/navbar" />
+
+    <div class="container m-t-sm">
+            <div class="topic-container bg-white m-b-md">
+                <div class="table-col topic-main">
+                    <div class="border-b">
+                      <a href="javascript:void(0)" class="pull-right topic-type-menu visible-xs" id="topic-type-menu">
+                           <span class="glyphicon glyphicon-menu-hamburger"></span>
+                         </a>
+                         <a href="#" class="pull-right topic-type-menu visible-xs m-r-sm" data-toggle="modal" data-target="#myModal">
+                      <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                         <span class="t_title"><span class="glyphicon glyphicon-stats"></span> 话题</span>
+                         
+                    </div>
+                    <div class="border-b topic-type-container flex-row transition-all-03">
+                        <a class="topic-item <php>if( $t =='' || $t == 0 ) echo "active";</php>" href="{:U('Topic/index')}">全部</a>
+                        <volist name="TypeList" id="vo">
+                            <a class="topic-item <php>if($vo['id'] == $t ) echo "active";</php>" href="{:U('Topic/index',array('t'=>$vo['id']))}">{$vo.type}</a>
+                        </volist>
+                    </div>
+                    <div class="topic-list">
+                        <include file="TopicContent:TopicList" />
+
+                    </div>
+                    
+                        <ul class="pager p-l-sm p-r-sm">
+                          <if condition="$p neq 1">
+                            <li class="previous" title="下一页"><a href="{:U('Topic/index',array('p'=>$p-1,'t'=>$t))}"><<</a></li>
+                          </if>
+                          <if condition ="$p+1 elt $TotalPage">
+                          <li class="next" title="下一页"><a href="{:U('Topic/index',array('p'=>$p+1,'t'=>$t))}">>></a></li>
+                          </if>
+                        </ul>
+                    
+                </div>
+                <div class="table-col t_u_t_c hidden-xs">
+                    <a href="#" class="btn btn-info btn-md btn-block" data-toggle="modal" data-target="#myModal">
+                      <span class="glyphicon glyphicon-edit"></span> 发表话题
+                    </a>
+                    
+                    {:W('TopicUserHot/hotUser')}
+                    
+                </div>
+            </div>
+
+  
+    </div>
+    
+    <include file="Common/footer" />
+</body>
+
+<include file="Common/footerJS" />
+<script type="text/javascript">
+  var zan_url = '{:U("TopicZan/AjaxZan",'',false,false)}';
+  var DATAPATH = "{:C('__DATA__')}";
+  var login_state = <if condition="session('?login')">true<else/>false</if>;
+  var img_uploap_url = '{:U("Topic/addTopicUpload",'',false,false)}';
+  var PUBLIC = "__PUBLIC__";
+  var login_url = "{:U('Login/index')}";
+  var this_url = window.location.href;
+</script>
+
+
+
+<script type="text/javascript" src="__PUBLIC__/assets/viewer/js/viewer.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.toaster.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.scrollLoading.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.cursor.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/exif/js/exif.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/topic.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/topic.i-d.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/emoji.js"></script>
+
+
+
+<script type="text/javascript">
+  $(function(){
+
+    <if condition="session('?message')">
+      <if condition='session("message") eq "200"'>
+      $.toaster({ priority : 'success', title : '<span class="glyphicon glyphicon-ok"> </span>', message : '发表成功'});
+      <else />
+      $.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"> </span>', message : '<php>echo session('message')</php>'});
+      </if>
+    <php>session('message',null);</php>
+    </if>
+  })
+
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
+</html>

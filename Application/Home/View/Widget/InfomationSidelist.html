@@ -1,0 +1,13 @@
+<div class="over-h">
+	<div class="side_t m-b-md">热点</div>
+	<!-- 侧栏列表 -->
+	<volist name="List" id="vo">
+	<div class="m-t-md b_b p-b-sm over-h">
+		<div class="t_s_i over-h m-b-sm w-220 h-140 "> 
+			<a href="{:U('Infomation/detail',array('id'=>$vo['id']))}" style="background-image:url('{:C('__DATA__')}/{$vo.image_thumb|default="Infomation/default.jpg"}')"></a>
+		</div>
+		<span class="l_t"><a href="{:U('Infomation/detail',array('id'=>$vo['id']))}">{$vo.title}</a></span>
+	</div>
+	</volist>
+	<!-- /侧栏列表 -->
+</div>

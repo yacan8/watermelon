@@ -1,0 +1,29 @@
+.logo_img{
+	padding: 21px 0;
+	float: left;
+	margin-right: 30px;
+}
+
+.nav_l{
+
+}
+.nav_l li{
+	float: left;
+	height: 80px;
+	padding: 10px 20px;
+}
+.nav_l li a{
+	transition:all .3s;-moz-transition:all .3s;-webkit-transition:all .3s;-o-transition:all .3s;
+	color: #fff;
+	padding: 15px 0;
+	line-height: 60px;
+	font-size: 15px;
+	position: relative;
+	border-bottom-width: 3px;
+	border-bottom-style:solid;
+	border-bottom-color: transparent;
+}
+.nav_l li a:hover,
+.nav_l li.active a{
+    border-bottom-color: #fff;
+}

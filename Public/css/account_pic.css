@@ -1,0 +1,10 @@
+.all_pic{
+	float: left;
+}
+.all_pic img{
+	float: left;
+	width: 320px;
+	height: 320px;
+	padding-left: 20px;
+	padding-top: 20px;
+}

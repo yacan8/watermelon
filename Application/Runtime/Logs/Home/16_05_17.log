@@ -1,0 +1,10 @@
+[ 2016-05-17T14:03:21+08:00 ] ::1 /watermelon/index.php/Comment/addComment.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000960s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001669s ]
+
+[ 2016-05-17T14:03:25+08:00 ] ::1 /watermelon/index.php/Comment/addComment.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001431s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002984s ]
+

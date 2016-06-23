@@ -1,0 +1,12 @@
+<if condition="!session('?login')">
+<li <if condition="MODULE_NAME eq 'Login'">class="active"</if>><a href="{:U('Login/index')}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 登录/注册</a></li>
+<else/>
+<li>
+  <a class="user-icon hidden-xs" href="{:U('Account/index')}">
+  	<img src="{:C(__DATA__)}/login_thumb/{$icon}">
+  	<if condition = "$count neq '0'">
+  	<span class="badge icon-message-count">{$count}</span>
+	</if>
+  </a>
+  <a class="visible-xs" href="{:U('Account/index')}">我的中心</a>
+</li></if>

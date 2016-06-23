@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<include file="Common:header" />
+	<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.scrollLoading.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/assets/viewer/css/viewer.min.css">
+	<script src="__PUBLIC__/assets/viewer/js/viewer.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('.pic_thumb,.u_icon,.u_c_icon').scrollLoading();
+		var options = {
+        title:false,
+        maxZoomRatio:1,
+        url: 'data-original',
+      };
+      $('.images').viewer(options);
+	})
+	  
+
+	</script>
+	<title>{$title}</title>
+</head>
+<body>
+	
+
+	<include file="Common:nav" />
+	<div id="page-wrapper">
+	{__CONTENT__}
+	</div>
+</body>
+</html>
+

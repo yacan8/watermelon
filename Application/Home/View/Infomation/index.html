@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Common/headerCSS" />
+	<link rel="stylesheet" href="__PUBLIC__/css/Index_t.css">
+    <title>西瓜游-资讯</title>
+</head>
+
+<body>
+    
+    <include file="Common/navbar" />
+    <div class="container m-t-md">
+		<div class="row">
+			<div class="col-xs-9">
+				<!-- 头条 -->
+				<div class="over-h t_f_con h-330">
+					<a href="{:U('Infomation/detail',array('id'=>$List[0]['id']))}" class="t_m" style="background-image:url('{$List[0].image|default="__PUBLIC__/img/default.jpg"}')"></a>
+					<h3 class="t p-l-md p-r-md">{$List[0].title}</h3>
+				</div>
+				
+				<div class="t_s_con m-t-md h-170 m-b-lg ">
+					<div class="t_s_i over-h h-170 w-354">
+						<a href="{:U('Infomation/detail',array('id'=>$List[1]['id']))}" class="t_m" style="background-image:url('{$List[1].image|default="__PUBLIC__/img/default.jpg"}')"></a>
+						<h4 class="t p-l-sm p-r-sm">{$List[1].title}</h4>
+					</div>
+
+					<div class="t_s_i over-h h-170 w-354">
+						<a href="{:U('Infomation/detail',array('id'=>$List[2]['id']))}" class="t_m" style="background-image:url('{$List[2].image|default="__PUBLIC__/img/default.jpg"}')"></a>
+						<h4 class="t p-l-sm p-r-sm">{$List[2].title}</h4>
+					</div>
+				</div>
+				<!-- /头条 -->
+				<!-- 列表 -->
+				<div id = "list_container">
+					<volist name = "List" id ="vo" offset="3">
+					<div class="I_list m-t-md">
+						<div class="t_s_i over-h h-140 w-220 pull-left m-r-md">
+							<a href="{$vo.url}" style="background-image:url('{$vo.image|default="__PUBLIC__/img/default.jpg"}')"></a>
+						</div>
+						<h4 class="l_t"><a href="{:U('Infomation/detail',array('id'=>$vo['id']))}">{$vo.title}</a></h4>
+						<div class="m-t-sm ">
+							<div class="over-h">
+								<div class="pull-left">
+									<a href="{$vo.url}"><img class="i_u_i" src="{$vo.user.icon|default="__PUBLIC__/img/udefault.png"}"></a>
+								</div>
+								<a href="#" class="m-l-xs tc-grayb"> {$vo.user.nickname}</a>
+								<span class="m-l-md tc-grayb l_h_25"><span class="iconfont icon-fabu"></span> {$vo.publish_time}</span>
+
+								<span class="m-l-md tc-grayb"><span class="iconfont icon-liulan"></span> {$vo.browse}</span>
+
+								<span class="m-l-md tc-grayb"><span class="iconfont icon-pinglun"></span> {$vo.comment_count}</span>
+							</div>
+						</div>
+					</div>
+					</volist>
+				</div>
+				<a id="loading" href="javascript:void(0)" class="btn-block p-md text-center m-t-sm bg-main">加载更多</a>
+			</div>
+
+			<div class="col-xs-3">
+				{:W('InfomationSidelist/side',array('count'=>8))}
+			</div>
+		</div>
+
+    </div>
+    <br><br>
+    <include file="Common/footer" />
+</body>
+<include file="Common/footerJS" />
+<script type="text/javascript">
+	var loading_url = "{:U('Infomation/loading')}";
+	var PUBLIC = "__PUBLIC__";
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/infomation.js"></script>
+</html>

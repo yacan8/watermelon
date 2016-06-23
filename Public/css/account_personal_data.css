@@ -1,0 +1,31 @@
+.whitebg{
+	width:700px;
+	min-height:20px;
+	padding:19px;
+	margin-bottom:20px;
+	background-color:#fff;
+	border:1px solid #e3e3e3;
+	border-radius:1px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.05);
+	box-shadow:inset 0 1px 1px rgba(0,0,0,.05);
+}
+.whitebg img{
+	text-align: right;
+	transition:all .3s;-moz-transition:all .3s;-webkit-transition:all .3s;-o-transition:all .3s;
+}
+.whitebg img:hover{
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
+.atable{
+	
+}
+.atable th{
+	text-align: right;
+}
+.atable td{
+	padding:10px;
+	line-height:30px;
+}
