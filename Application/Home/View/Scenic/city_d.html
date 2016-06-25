@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Common/headerCSS" />
+	<link rel="stylesheet" href="__PUBLIC__/css/Scenic_Index.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/carousel.css">
+    <title>西瓜游-景点</title>
+</head>
+
+<body>
+    
+    <include file="Common/navbar" />
+    <div class="border-b-gray-e ">
+	    <div class="container p-t-md">
+			<div class="row">
+				<div class="col-xs-12">
+					<a href="#">首页</a>
+					<span class="tc-gray9 font-12">></span>
+					<a href="#">东北</a>
+					<span class="tc-gray9 font-12">></span>
+					<span href="#">哈尔滨</span>
+				</div>
+				
+				<div class="col-xs-12 m-b-sm">
+					<h2>
+						<a href="#">哈尔滨市</a>
+						<span class="pull-right m-t-md font-12">
+							<span class="tc-main">20154</span>人想去这里，
+							<span class="tc-main">54</span>人去过这里
+						</span>
+					</h2>
+				</div>
+
+				
+				<div class="col-xs-12">
+					<div class="border-t-gray-e">
+						<ul class="head-menu-l">
+							<li><a href="#">景点</a></li>
+							<li><a href="#">游记</a></li>
+							<li><a href="#">照片</a></li>
+							<li><a href="#">住宿</a></li>
+							<li><a href="#">美食</a></li>
+						</ul>
+						<ul class="head-menu-l pull-right">
+							<li><a href="#">地图</a></li>
+							<li><a href="#">评论</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	    </div>
+	</div>
+
+	<div class="bg-gray-f6 p-t-md p-b-md border-b-gray-e ">
+		<div class="container">
+			
+			<div class="span-container bg-white over-h">
+				<div class="span-left focus-pic">
+					<include file="ScenicContent:Carousel" />
+				</div>
+				<div class="span-right">
+					<ul class="op-two over-h">
+						<li>
+							<span class="glyphicon glyphicon-heart icon"></span>
+							<span>想去</span>
+						</li>
+						<li>
+							<span class="glyphicon glyphicon-flag icon"></span>
+							<span>去过</span>
+						</li>
+					</ul>
+					<div class="p-md p-t-sm">
+						<div class="border-t-gray-e">
+							<h4 class="m-b-sm">热门推荐</h4>
+							<ul class="hot-scenic">
+								<li class="to1">
+									<a href="#">
+										<img src="__PUBLIC__/img/f2.png">
+									</a>
+									<a href="#">
+										冰雪世界
+									</a>
+								</li>
+
+								<li class="to1">
+									<a href="#">
+										<img src="__PUBLIC__/img/f3.jpg">
+									</a>
+									<a href="#">
+										冰雪世界
+									</a>
+								</li>
+
+								<li class="to1">
+									<a href="#">
+										<img src="__PUBLIC__/img/f4.jpg">
+									</a>
+									<a href="#">
+										冰雪世界
+									</a>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-white p-t-md">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-8">
+					<h4>哈尔滨市区景点</h4>
+					<div class="m-t-md scenic-type border-t-gray-e p-t-sm over-h">
+						<a class="active" href="#">全部</a>
+						<a href="#">滑雪</a>
+						<a href="#">农场</a>
+						<a href="#">建筑</a>
+
+					</div>
+
+					<div class="border-t-gray-e p-t-sm">
+						<div class="list">
+							<for start="1" end="10">
+							<div class="s-item p-b-sm border-b-gray-e m-b-sm over-h">
+								<div class="scenic-img">
+									<a href="#">
+										<img src="__PUBLIC__/img/f1.png">
+									</a>
+								</div>
+								<div class="scenic-info">
+									<div class="s-title">
+										<a href="#">
+											冰雪大世界
+										</a>
+									</div>
+									<div class="m-t-xs">
+										<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
+										<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
+										<span class="tc-main m-l-sm">8.5</span>
+										<span class="tc-gray6 m-l-sm">56人评论</span>
+									</div>
+									<div class="m-t-sm">
+										免费进入，内设很多展馆，可以玩一年。哈哈最后一句开玩笑的啦，但真的可以在里面玩很久，我去了两次，都没看够逛够，埃及区最...
+									</div>
+								</div>
+							</div>
+						</for>
+
+
+
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-4">
+					<h4>哈尔滨景点地图</h4>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <include file="Common/footer" />
+</body>
+<include file="Common/footerJS" />
+<script type="text/javascript">
+	var PUBLIC = "__PUBLIC__";
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/infomation.js"></script>
+</html>

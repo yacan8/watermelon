@@ -1,0 +1,94 @@
+.banner{height: 400px;}
+.banner .back-img img{width: 100%;height: 450px;background-size: cover;}
+.banner .back-img{position: relative;}
+.banner .back-text{position: absolute;margin:3% 35%;}
+.back-text h1{font-size:50px;font-weight: bold;color: #fff;text-align: center;}
+.back-text .center-text{padding:40px 40px;background-color: #000;background-size: cover;opacity: 0.7;}
+.center-text span.glyphicon{font-size:20px;top: 10px;left:-12%;cursor: pointer;}
+.center-text input{width: 300px;height: 40px;}
+.center-text .hot-cities{padding:20px 10px 10px 0px;}
+.center-text .hot-cities li a{font-size:15px;float: left;color: #fff;margin-left:8px;text-decoration: none;}
+
+/*探索美丽中国部分*/
+.Where-togo{width: 100%;}
+.Where-togo .China{float:left;width:20%;color: #727272;font-size: 20px;font-weight: bold;}
+.Where-togo .Choice{}
+.Where-togo .Choice li{float: left;margin-left: 30px;padding:8px 15px;
+	                 position: relative;cursor: pointer;}
+.Where-togo .Choice li a{color: #333;font-size:15px;}
+.Where-togo .Choice .active a{background: #63D283;border-radius: 4px;color: #fff;padding:8px 15px;}
+.Where-togo .Choice .active:after{background: #63D283;}
+.Where-togo .Choice a{text-decoration: none;}
+
+
+.equipment_type{float: left; text-align: center;padding:0 10px;position:relative;}
+.equipment_type:after{position:absolute;content:' ';right:-5px;top:50%;width:10px;height:10px;
+    margin-top:-5px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.Choice .equipment_type:after{z-index:-1;left:45%;top:90%;right: 0px;width:15px;height:15px;}
+
+
+/*图片的组合排列 */
+.Images{width: 100%;}
+.Images img{padding: 5px;} 
+.Images .left-imgs,.Images .right-imgs{float: left;}
+.Images .left-imgs{width: 80%;}
+.Images .right-imgs{width: 20%;}
+.Images  img:hover{opacity: 0.8;}
+.left-imgs .width-70{width: 70%;}
+.left-imgs .width-30{width: 30%;}
+
+.left-imgs .width-70{overflow: hidden;position: relative;width: 548px;height: 244px;}
+.left-imgs .width-30{overflow: hidden;position: relative;width: 234px;height: 244px;}
+.left-imgs .img-text{position:absolute;top:0; left:0 ;margin-top: 152px;color: #fff;}
+.right-imgs .img-text{position:absolute;top:0; left:0 ;margin-top: 395px;color: #fff;}
+.img-text a{font-size:17px;color: #fff;text-decoration: none;}
+.mouse-over:hover .img-text{margin-top: 90px;}
+.mouse-over2:hover .img-text{margin-top: 300px;}
+
+
+/*设置背景颜色渐变*/
+.Hot-travel{width:100%; height:1050px; 
+       FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#c4d263,endColorStr=#65d281); /*IE 6 7 8*/ 
+       background: -ms-linear-gradient(top, #c4d263,#65d281);/* IE 10 */
+       background:-moz-linear-gradient(top,#c4d263,#65d281);/*火狐*/ 
+       background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#c4d263), to(#65d281));/*谷歌*/ } 
+
+.Hot-travel h1{text-align: center;color: #fff;}
+
+/*首页lists*/
+.lists .item{width: 30%;float: left;background: #fff;}
+.lists .item-diff{border: 1px solid #fff;border-radius: 15px;}
+.item .item-list .img-diff{width:100%;height:210px;padding: 2px;border-radius: 10px;}
+.item .item-list .view-img{width:100%;padding: 1px;position: relative;}
+.item .item-list .person-img{position: relative;margin-left: 15%;margin-top: -15%;width:70px;height:70px;border: 10px solid #fff;}
+
+.item .item-cont{color: #1A2A37;}
+.item .item-cont .p-lg{font-size: 17px;}
+.item .item-cont .p-md{line-height: 30px;font-size: 15px;}
+.item-cont .diff-color{color: #65d281;}
+.item-cont .small-pic{float: right;padding-right: 5px;}
+.item-cont .small-pic p{float: left;padding: 0 5px;color: #000;}
+.item-cont .small-pic p a{color: #222;text-decoration: none;}
+.item-cont .small-pic  .color-diff{color: #63D283;}
+
+.item-cont .small-pic p span.glyphicon:hover{color: #63D283;}
+.item-cont .small-pic  .color-diff:hover{color: blue;}
+.bottom-words a:hover{color: blue;text-decoration: none;}
+.bottom-words a span.glyphicon:hover{color: #63D283;}
+
+
+/*listsNum*/
+.listsNum{position: relative;left: 0;bottom: 15px;width: 100%;text-align: center;}
+.listsNum a{width: 25px;height: 8px;border: 1px solid #fff;display: inline-block;margin: 0 4px;}
+.listsNum .active{background-color: #fff;}
+.num-diff a{border: 1px solid #63D283;}
+.num-diff .active{background-color: #63D283;}
+.see-more{width: 220px;margin: 0 auto;}
+.see-more button{width: 220px;}
+
+
+

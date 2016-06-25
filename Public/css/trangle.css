@@ -1,0 +1,49 @@
+
+/*伪类标签：向右三角*/
+.equipment_type{float: left; text-align: center;padding:0 10px;position:relative;}
+.equipment_type:after{position:absolute;content:' ';right:-5px;top:50%;width:10px;height:10px;
+    margin-top:-5px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.detail-cont .equipment_type{padding: 8px 16px;border-radius: 4px;}
+/*.Choice .equipment_type:after{z-index:-1;left:45%;top:90%;right: 0px;width:15px;height:15px;}*/
+.recommand .equipment_type:after{z-index:-1;left:33%;top:88%;right: 0px;width:15px;height:15px;}
+
+/*横向三个文字+图片排列组合*/
+/*装备列表页部分*/
+.equiment_list{}
+.equiment_list .item{width: 33.3%;}
+.item{float: left;height: 346px;margin-bottom: 40px;}
+.item .item_list{overflow:hidden;position: relative; width: 264px;height: 346px;border:1px solid #ccc;background-color:#f5f5f5}
+.item p{line-height: 20px;}
+.img_item{text-align: center;margin-bottom: 20px;margin-top: 20px;}
+.img_item img{width: 200px;height: 150px;}
+.img_cont{position:absolute;top:200px; left:0 ;text-align: center;}
+.img_cont h4,.img_cont a{color:#1A2A37;}
+.item .hover-text{position:absolute;top:175px; left:0 ; width: 262px; margin-top: 175px;background-color:#f5f5f5}
+.item:hover .hover-text{margin-top: -2px;}
+.some-distance p{padding:10px 5px;cursor: pointer;float: left;}
+.some-distance span.glyphicon:hover{color: blue;}
+.some-distance a{padding: 2px;}
+
+/*游记首页部分*/
+.travel_list .item{height: 357px;width: 284px;}
+.travel_list .view-img{width:99.9%;padding:4px;position: relative;}
+.travel_list .person-img{width:60px;height:60px;position:relative;margin-left: 15%;
+        margin-top: -15%;box-shadow: 0 -4px 4px #fff,-4px 0 4px #fff,4px 0 4px #fff;}
+.travel_list .item-cont p{text-indent: 2em;line-height: 26px;}
+.date-time span{font-size: 9px;}
+.date-time .small-pic{width: 194px;padding:0 0 0 14px;}
+.date-time .small-pic div{float: left;width: 60px;}
+.date-time .small-pic div a{color: #999;font-size: 9px;}
+.date-time .small-pic div a:hover{color: #63D283;text-decoration: none;}
+
+/*分页设计*/
+/*分页css*/
+.page{text-align: center;position: relative;z-index:2}
+.page a{height:24px;line-height:24px;display:inline-block;padding: 0 12px;
+        color: black;font-weight: bold; margin: 0 2px;}
+.page .hl{display:inline-block;padding: 0 12px;margin: 0 2px;}
+.page .active{background-color: #63D283;color: #ffffff;}
