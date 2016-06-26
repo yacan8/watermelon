@@ -39,20 +39,25 @@
 	width: 300px;
 }
 
-
-.op-two{
+.op-3,
+.op-2{
 	padding: 0 15px 5px 15px;
 }
-.op-two>li{
+.op-3>li,
+.op-2>li{
 	float: left;
-	width: 50%;
+	width: 135px;
 }
-.op-two>li>span{
+.op-3>li{
+	width: 90px;
+}
+.op-3>li>span,
+.op-2>li>span{
 	display: block;
 	text-align: center;
 }
-
-.op-two>li>.icon{
+.op-3>li>.icon,
+.op-2>li>.icon{
 	background-color: #63D283;
 	color: #fff;
 	width: 50px;

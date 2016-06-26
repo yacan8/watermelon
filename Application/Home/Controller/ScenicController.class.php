@@ -6,4 +6,9 @@ class ScenicController extends Controller {
     public function index(){
     	$this->display('city_d');
     }
+
+
+    public function foodhotel(){
+    	$this->display();
+    }
 }
