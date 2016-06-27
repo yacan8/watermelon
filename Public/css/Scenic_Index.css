@@ -1,8 +1,12 @@
+
 .border-b-gray-e{
 	border-bottom: 1px solid #eee;
 }
 .border-t-gray-e{
 	border-top: 1px solid #eee;
+}
+.border-gray-e{
+	border: 1px solid #eee;
 }
 .head-menu-l{
 	
@@ -128,4 +132,40 @@
 	font-size: 17px;
 	line-height: 26px;
 	font-weight: 600;
+}
+
+
+
+/*详情页*/
+.font-24{
+	font-size: 24px;
+}
+.font-14{
+	font-size: 14px;
+}
+.fh_img_con,.fh_info_con{
+	float: left;
+}
+.fh_img_con{
+	width: 250px;
+	height: 180px;
+	position: relative;
+	margin-right: 15px;
+}
+.fh_img_con img{
+	width: 100%;
+	height: 100%;
+}
+.fh_img_con>.pic_num{
+	position: absolute;
+	z-index: 5;
+	background-color:rgba(50,50,50,.5); 
+	color: #fff;
+	padding: 3px 10px;
+	border-radius: 4px;
+	left: 10px;
+	bottom: 10px;
+}
+.fh_img_con>.pic_num:hover{
+	background-color:rgba(0,0,0,.6);
 }
