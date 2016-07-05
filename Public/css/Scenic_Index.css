@@ -140,6 +140,9 @@
 .font-24{
 	font-size: 24px;
 }
+.font-18{
+	font-size: 18px;
+}
 .font-14{
 	font-size: 14px;
 }
@@ -168,4 +171,24 @@
 }
 .fh_img_con>.pic_num:hover{
 	background-color:rgba(0,0,0,.6);
+}
+.imgListCon{
+	margin-right: -10px;
+}
+.imgListCon{
+	float: left;
+	margin-right: 10px;
+	width: 193.6px;
+}
+.a_img{
+	display: block;
+	width: 193.6px;
+	height: 120px;
+}
+.mo{
+	margin-right: 0!important;
+}
+.imgListCon img{
+	width: 100%;
+	height: 100%;
 }

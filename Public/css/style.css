@@ -111,8 +111,14 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 .icon-shoucangyishoucang-copy:before { content: "\e610"; }/*已收藏*/
 .icon-dianzan1:before { content: "\e611"; }/*已点赞*/
 
-.half{position: relative;margin-left: -4px;line-height: 20px;}
+.half{position: relative;margin-left: -4px;line-height: 20px;}/*半颗星*/
+
 .m-l-14{margin-left: 14px;}
+.c_u_icon{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
 /*	<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
  <span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span>
  <i class="iconfont icon-xing tc-grayc m-l-14"></i>*/
