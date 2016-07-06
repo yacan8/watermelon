@@ -192,3 +192,62 @@
 	width: 100%;
 	height: 100%;
 }
+.c-type{
+	font-size: 12px;
+	color: #222;
+	padding: 3px 5px;
+	border-radius: 3px;
+}
+.c-type.active,
+.c-type:hover{
+	background-color: #63D283;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+/*侧栏*/
+.sideList{
+	margin-top: 20px;
+	overflow: hidden;
+}
+.sideList li{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.sideList li .sideImg1,
+.sideList li .sideImg2{
+	display: block;
+	float: left;
+	height: 90px;
+	width: 90px;
+	margin-right: 15px;
+}
+.sideList li .sideImg1{
+	height: 70px;
+	width: 70px;
+}
+.sideList li .sideContent{
+	height: 50px;
+	overflow: hidden;
+	line-height: 25px;
+	font-size: 15px;
+}
+.sideList .sideContentInfo{
+	margin-top: 10px;
+}
+.infoImg{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+.info_item{
+	margin-bottom: 6px;
+	color: #222;
+}
