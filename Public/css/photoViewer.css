@@ -1,0 +1,114 @@
+#photoViewer{
+	display: none;
+}
+.photoViewer{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(10,10,10,.9);
+	z-index: 100;
+	overflow-y: scroll;
+}
+.photoViewer>.cl{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	display: block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: rgba(50,50,50,.5);
+	color: #fff;
+	text-align: center;
+	line-height: 54px;
+	font-size: 24px;
+
+}
+.photoViewer>.cl:hover{
+	background-color: #000;
+	/*color: #000;*/
+}
+.photoViewer>.photoContainer{
+	position: relative;
+	margin: 0 auto;
+	background-color: #000;
+	width: 980px;
+	height: 656px;
+}
+.photoViewer>.photoContainer>.view{
+	position: relative;
+	padding: 15px;
+	height: 606px;
+	vertical-align: middle;
+    text-align: center;
+}
+.photoViewer>.photoContainer>.view>.op{
+	height: 606px;
+	width: 300px;
+	line-height: 606px;
+	font-size: 50px;
+	position: absolute;
+	top: 0;
+	color: #fff;
+	opacity: .2;
+	cursor: pointer;
+}
+.photoViewer>.photoContainer>.view>.op:hover{
+	opacity: 1;
+}
+.photoViewer>.photoContainer>.view>.pre{
+	padding-left: 20px;
+	text-align: left;
+	left: 0;
+}
+.photoViewer>.photoContainer>.view>.next{
+	padding-right: 20px;
+	text-align: right;
+	right: 0;
+}
+.photoViewer>.photoContainer>.view>.imgContainer{
+	display: table-cell;
+	width: 980px;
+	height: 576px;
+	vertical-align: middle;
+    text-align: center;
+    background-image: url('../img/loading.gif');
+    background-repeat:no-repeat;
+    background-position: center;
+}
+.photoViewer>.photoContainer>.view>.imgContainer>img{
+	max-width: 100%;
+	max-height: 100%;
+}
+.photoViewer>.photoContainer>.info{
+	height: 50px;
+	position: relative;
+	padding: 5px 15px;
+	color: #aaa;
+	padding-right: 65px;
+	overflow: hidden;
+}
+.photoViewer>.photoContainer>.info>.b{
+	position: absolute;
+	right: 10px;
+	top: 0;
+	display: block;
+	width: 45px;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+	font-size: 24px;
+	opacity: .7;
+}
+.photoViewer>.photoContainer>.info>.b:hover{
+	opacity: 1;
+}
+.photoViewer>.photoContainer>.info>a{
+	color: #fff;
+}
+.photoViewer .photoNum{
+	color: #fff;
+	font-size: 24px;
+	font-weight: 600;
+	margin:0 15px;
+}
