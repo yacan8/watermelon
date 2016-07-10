@@ -24,9 +24,9 @@ class InfomationModel extends RelationModel{
 	 * @return [List] [头条列表]
 	 */
 	public function Headlines(){
-		$List = $this->field('id,image,title')->order('publish_time desc')->where('state = 1')->select();
+		$List = $this->field('id,image,image_thumb,title')->order('publish_time desc')->where('state = 1')->select();
 		for ($i=0; $i < count($List); $i++) { 
-			if($List[$i]['image_thumb']== '')
+			if($List[$i]['image_thumb']=='')
 				$List[$i]['image'] = $List[$i]['image_thumb']= C('__DATA__').'/infomation/default.jpg';
 			else{
 				$List[$i]['image'] = C('__DATA__')."/".$List[$i]['image'];

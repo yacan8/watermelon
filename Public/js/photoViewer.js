@@ -23,6 +23,7 @@
             
 
             var _self = $(this);
+            _self.addClass('photo-item');
             _self.click(function(e){
               verticalAlign();
               _photoViewer.fadeIn('fast');
@@ -82,7 +83,4 @@
 
 
         });
-        
-        $("#test").photoViewer(option);
-        
       });

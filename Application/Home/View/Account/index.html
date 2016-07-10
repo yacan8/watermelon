@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Common/headerCSS" />
+    
+  	<link rel="stylesheet" href="__PUBLIC__/css/account.css">
+    <title>西瓜游-景点</title>
+
+</head>
+
+<body>
+    <include file="Common/navbar" />
+    <div class="bg-gray-f6">
+     	<div class="container p-t-md">
+        <include file="Account:menu" />
+
+
+    
+      </div>
+    </div>
+
+
+    <include file="Common/footer" />
+</body>
+<include file="Common/footerJS" />
+<script type="text/javascript">
+	var PUBLIC = "__PUBLIC__";
+
+  option = {
+        loadUrl : "{:U('Index/ajax_load')}",
+        num: 100
+    };
+ 
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
+</html>

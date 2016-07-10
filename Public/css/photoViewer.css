@@ -1,3 +1,6 @@
+.photo-item{
+	cursor: zoom-in;
+}
 #photoViewer{
 	display: none;
 }

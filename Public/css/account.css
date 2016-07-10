@@ -1,0 +1,45 @@
+
+.border-gray-e{
+	border: 1px solid #eee;
+}
+
+.u_icon{
+	float: left;
+	margin-right: 20px;
+	width: 70px;
+	height: 70px;
+	box-shadow: 0 0 5px #666;
+}
+
+.nickname{
+    font-size: 24px;
+    color: #444;
+    line-height: 40px;
+}
+
+.menu{
+    border: 1px solid #eee;
+    border-top: 0px;
+    overflow: hidden;
+}
+.menu li{
+	float: left;
+	border-right: 1px solid #dde0df;
+}
+.menu li.last{
+	float: right;
+	border-left: 1px solid #dde0df;
+	border-right: 0;
+}
+.menu li a{
+	display: block;
+	padding: 10px 20px;
+	font-size: 15px;
+	color: #333;
+}
+.menu li.active a{
+	color: #63D283;
+}
+.menu li a:hover{
+	background-color: #f9f9f9;
+}
