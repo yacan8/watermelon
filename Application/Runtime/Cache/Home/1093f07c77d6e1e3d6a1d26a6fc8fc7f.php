@@ -2,7 +2,7 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <link rel="stylesheet" href="/watermelon/Public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/watermelon/Public/css/nav.css">
     <link rel="stylesheet" href="/watermelon/Public/css/footer.css">
@@ -149,7 +149,7 @@
       </div>
       <div class="replay-container">
         <?php if(is_array($vo['comment_list'])): $i = 0; $__LIST__ = $vo['comment_list'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$cvo): $mod = ($i % 2 );++$i;?><div class="m-t-sm"><div class="media media-container"><a class="pull-left" href="<?php echo ($cvo["sender_url"]); ?>" data-toggle="tooltip" data-placement="bottom" title="<?php echo ($cvo["sender_nickname"]); ?>" data-original-title="游客1"><img class="media-object u_c_icon" src="/watermelon/Public/img/tloading.jpg" data-url="<?php echo ($cvo["sender_icon"]); ?>" alt="..."></a><div class="media-body"><a href="<?php echo ($cvo["sender_url"]); ?>" class="media-heading a_user"><?php echo ($cvo["sender_nickname"]); ?></a> - <span class="font-12 tc-gray9"><?php echo ($cvo["time"]); ?></span><div class="m-b-sm line-h22"><?php echo ($cvo["content"]); ?> 
-            <?php if($cvo['picture_count'] != '0'): $__FOR_START_18981__=0;$__FOR_END_18981__=$cvo['picture_count'];for($i=$__FOR_START_18981__;$i < $__FOR_END_18981__;$i+=1){ ?><span class="glyphicon glyphicon-picture"> </span>&nbsp;<?php } endif; ?>
+            <?php if($cvo['picture_count'] != '0'): $__FOR_START_22705__=0;$__FOR_END_22705__=$cvo['picture_count'];for($i=$__FOR_START_22705__;$i < $__FOR_END_22705__;$i+=1){ ?><span class="glyphicon glyphicon-picture"> </span>&nbsp;<?php } endif; ?>
           </div></div></div></div><?php endforeach; endif; else: echo "" ;endif; ?>
         <?php if($vo['comment_count'] > 4): ?><a href="<?php echo U('/t/'.$vo['t_id']);?>" class="more-btn">更多..</a><?php endif; ?>
 

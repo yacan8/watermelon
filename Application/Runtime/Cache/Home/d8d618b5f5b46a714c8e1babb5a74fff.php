@@ -2,7 +2,7 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <link rel="stylesheet" href="/watermelon/Public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/watermelon/Public/css/nav.css">
     <link rel="stylesheet" href="/watermelon/Public/css/footer.css">
@@ -128,7 +128,7 @@
 
 				</div>
 				<div class="span-right">
-					<ul class="op-two over-h">
+					<ul class="op-2 over-h">
 						<li>
 							<span class="glyphicon glyphicon-heart icon"></span>
 							<span>想去</span>
@@ -142,7 +142,7 @@
 						<div class="border-t-gray-e">
 							<h4 class="m-b-sm">热门推荐</h4>
 							<ul class="hot-scenic">
-								<li>
+								<li class="to1">
 									<a href="#">
 										<img src="/watermelon/Public/img/f2.png">
 									</a>
@@ -160,7 +160,7 @@
 									</a>
 								</li>
 
-								<li>
+								<li class="to1">
 									<a href="#">
 										<img src="/watermelon/Public/img/f4.jpg">
 									</a>
@@ -191,7 +191,7 @@
 
 					<div class="border-t-gray-e p-t-sm">
 						<div class="list">
-							<?php $__FOR_START_25214__=1;$__FOR_END_25214__=10;for($i=$__FOR_START_25214__;$i < $__FOR_END_25214__;$i+=1){ ?><div class="s-item p-b-sm border-b-gray-e m-b-sm over-h">
+							<?php $__FOR_START_1367__=1;$__FOR_END_1367__=10;for($i=$__FOR_START_1367__;$i < $__FOR_END_1367__;$i+=1){ ?><div class="s-item p-b-sm border-b-gray-e m-b-sm over-h">
 								<div class="scenic-img">
 									<a href="#">
 										<img src="/watermelon/Public/img/f1.png">
@@ -207,7 +207,7 @@
 										<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
 										<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
 										<span class="tc-main m-l-sm">8.5</span>
-										<span class="tc-gray6 m-l-sm">56人评论</span>
+										<span class="tc-gray9 m-l-sm font-12">56人评论</span>
 									</div>
 									<div class="m-t-sm">
 										免费进入，内设很多展馆，可以玩一年。哈哈最后一句开玩笑的啦，但真的可以在里面玩很久，我去了两次，都没看够逛够，埃及区最...

@@ -20,5 +20,5 @@
 </div>
 <?php else: ?>
 <div class="m-t-md text-center m-b-md" style="font-size:16px;">
-  <span class="tc-gray6">亲，评论需要先<a href="<?php echo U('Login/index');?>?url=<?php echo 'http://'.$_SERVER['SERVER_NAME']; ?>/watermelon/index.php/t/67.html"> 登录 </a>哦</span>
+  <span class="tc-gray6">亲，评论需要先<a href="<?php echo U('Login/index');?>?url=<?php echo 'http://'.$_SERVER['SERVER_NAME']; ?>/watermelon/index.php/t/69.html"> 登录 </a>哦</span>
 </div><?php endif; ?>

@@ -2,7 +2,7 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <link rel="stylesheet" href="/watermelon/Public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/watermelon/Public/css/nav.css">
     <link rel="stylesheet" href="/watermelon/Public/css/footer.css">

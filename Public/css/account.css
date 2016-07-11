@@ -1,8 +1,36 @@
+/*冗余CSS*/
+.media-picture{
+	width: 350px;
+}
+.media-picture li{
+	width:100px;
+	height: 100px;
+	float: left;
+	margin:0 3px 3px 0;
+}
+.pic_thumb{
+	width: 100%;
+	height: 100%;
+}
 
+.media-img{
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	border-radius: 50%;
+}
+.p-15{
+	padding: 15px;
+}
+.p-l-15{
+	padding-left: 15px;
+}
 .border-gray-e{
 	border: 1px solid #eee;
 }
-
+.border-gray-b-e{
+	border-bottom: 1px solid #eee;
+}
 .u_icon{
 	float: left;
 	margin-right: 20px;
@@ -42,4 +70,68 @@
 }
 .menu li a:hover{
 	background-color: #f9f9f9;
+}
+
+
+/*侧栏*/
+.city_list{
+
+}
+.city_list li{
+	margin-bottom: 10px;
+}
+.city_list li img{
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	margin-right: 15px;
+}
+.city_list li  a{
+	color: #222;
+}
+.img_list{
+	overflow: hidden;
+	margin-top: 18px;
+}
+
+.img_list li{
+	float: left;
+	margin:0 8px 8px 0;
+}
+.img_list li img{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+/*游记*/
+.la_item{
+	display: inline-block;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+	padding: 3px 5px;
+	color: #585858;
+}
+.travel_text{
+	line-height: 24px;
+}
+
+.travel_pic{
+	float: left;
+    width: 168px;
+    height: 126px;
+    margin:0 8px 8px 0;
+    text-align: center;
+    overflow: hidden;
+}
+.travel_pic img{
+	width: 100%;
+	height:100%;
+}
+
+.keywords{
+	color: #ff7247;
+    margin-right: 4px;
+    font-size: 22px;
+    line-height: 26px;
 }
