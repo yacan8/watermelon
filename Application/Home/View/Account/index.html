@@ -3,11 +3,17 @@
 <head>
     <include file="Common/headerCSS" />
     <link rel="stylesheet" href="__PUBLIC__/assets/viewer/css/viewer.min.css">
-  	<link rel="stylesheet" href="__PUBLIC__/css/account.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/account.css">
+  	<link rel="stylesheet" href="__PUBLIC__/css/account_board.css">
 
 
     <if condition="(CONTROLLER_NAME eq 'Account') and (ACTION_NAME eq 'topic')">
       <link rel="stylesheet" href="__PUBLIC__/css/topic.css">
+    </if>
+
+
+    <if condition="(CONTROLLER_NAME eq 'Account') and (ACTION_NAME eq 'edit')">
+      <link rel="stylesheet" href="__PUBLIC__/css/wait.css">
     </if>
 
 
@@ -28,8 +34,11 @@
         <div class="row">
           <div class="col-xs-9">
             <!-- <include file="AccountContent:dynamics" /> -->
-            <!-- <include file="AccountContent:travelNote" /> -->
-            <include file="AccountContent:topic" />
+            <!-- <include file="AccountContent:collection" /> -->
+            <!-- <include file="AccountContent:information" /> -->
+            <include file="AccountContent:edit_information" />
+            
+            <!-- <include file="AccountContent:board" /> -->
           </div>
 
           <div class="col-xs-3">
@@ -65,4 +74,13 @@
  })
 </script>
 <script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
+
+<if condition="(CONTROLLER_NAME eq 'Account') and (ACTION_NAME eq 'edit')">
+  <script type="text/javascript">
+    var province_change_url = "{:U('AddressProvinces/change')}";
+  </script>
+  <script type="text/javascript" src="__PUBLIC__/js/wait.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/edit_information.js"></script>
+</if>
+
 </html>

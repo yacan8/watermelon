@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Common/headerCSS" />
+    <link rel="stylesheet" href="__PUBLIC__/assets/viewer/css/viewer.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/account.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/account_pic.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/photoViewer.css">
+  	<link rel="stylesheet" href="__PUBLIC__/css/photo.css">
+
+
+    <title>西瓜游-景点</title>
+  <php>
+    if(session('login') != $user_id)//判断是自己还是他人
+      $self = 'TA';
+    else
+      $self = '我';
+  </php>
+</head>
+
+<body>
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">创建相册</h4>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          
+          <fieldset>
+           <div class="form-group">
+              <label for="inputEmail" class="col-lg-2 control-label">相册名</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputEmail" placeholder="输入相册名">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-success btn-sm">创建</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+    <include file="Common/navbar" />
+    <div class="bg-gray-f6">
+     	<div class="container p-t-md">
+        <include file="Account:menu" />
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="m-t-sm">
+              <a class="m-r-md font-16 tc-black" href="#">{$self}的相册(2)</a>
+              <a class="font-16 tc-black" href="#">{$self}的旅游相片(15)</a>
+
+              <a href="#" class="btn btn-sm btn-info pull-right  m-l-sm" data-toggle="modal" data-target="#myModal">+创建相册</a>
+              <a href="#" class="btn btn-sm btn-success pull-right">上传相片</a>
+
+            </div>
+            <div class="m-t-md">
+              <!-- <include file="ScenicContent:photoList" /> -->
+              <include file="AccountContent:album" />
+            </div>
+           
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+
+    <include file="Common/footer" />
+</body>
+<include file="Common/footerJS" />
+<script type="text/javascript" src="/watermelon/Public/assets/jquery/js/jquery.scrollLoading.js"></script>
+ 
+<script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
+<script type="text/javascript">
+  var PUBLIC = "__PUBLIC__";
+
+ $(function(){
+  $('.pic_thumb').scrollLoading();
+
+
+  $(".photoItem img").photoViewer({
+        loadUrl : "{:U('Index/ajax_load')}",
+        num: 100
+   });
+ })
+</script>
+</html>

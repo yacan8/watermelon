@@ -7,3 +7,39 @@ ERR: 无法加载控制器:User
 [ 2016-07-11T21:12:05+08:00 ] ::1 /watermelon/index.php/u/2
 ERR: 无法加载控制器:U
 
+[ 2016-07-11T23:44:31+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:44:58+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:45:00+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:38+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:38+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:39+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:39+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:39+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:39+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:39+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:39+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+
+[ 2016-07-11T23:46:40+08:00 ] ::1 /watermelon/index.php/Home/Image/test
+ERR: 不存在的图像文件
+

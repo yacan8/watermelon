@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="/watermelon/Public/css/style.css">
 
     <link rel="stylesheet" href="/watermelon/Public/assets/viewer/css/viewer.min.css">
-  	<link rel="stylesheet" href="/watermelon/Public/css/account.css">
+    <link rel="stylesheet" href="/watermelon/Public/css/account.css">
+  	<link rel="stylesheet" href="/watermelon/Public/css/account_board.css">
 
 
     <?php if((CONTROLLER_NAME == 'Account') and (ACTION_NAME == 'topic')): ?><link rel="stylesheet" href="/watermelon/Public/css/topic.css"><?php endif; ?>
+
+
+    <?php if((CONTROLLER_NAME == 'Account') and (ACTION_NAME == 'edit')): ?><link rel="stylesheet" href="/watermelon/Public/css/wait.css"><?php endif; ?>
 
 
     <title>西瓜游-景点</title>
@@ -50,10 +54,10 @@
 		<div class="info">
 			<div class="nickname">
 				这是一个昵称
-				<button class="btn btn-xs bg-main m-l-sm">
+				<button class="btn btn-xs btn-success m-l-sm">
 					<span class="glyphicon glyphicon-plus"></span> 加关注
 				</button>
-				<button class="btn btn-xs bg-main active m-l-sm">
+				<button class="btn btn-xs btn-success active m-l-sm">
 					<span class="glyphicon glyphicon-ok"></span> 已关注
 				</button>
 			</div>
@@ -67,10 +71,10 @@
 <ul class="menu bg-white m-b-sm">
 	<li><a href="#">动态</a></li>
 	<li class="active"><a href="#">游记</a></li>
-	<li><a href="#">装备</a></li>
 	<li><a href="#">话题</a></li>
 	<li><a href="#">留言板</a></li>
 	<li><a href="#">照片</a></li>
+	<li><a href="#">我的收藏</a></li>
 	<li><a href="#">我的消息 <span class="label label-info">5</span></a></li>
 	<li class="last"><a href="#"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
 </ul>
@@ -193,132 +197,238 @@
 	</div>
 </div>
  -->
-            <!-- <div class="travelNote-item border-gray-e p-md bg-white m-b-md">
-	<div class="media">
-	    <div class="media-left">
-	    	<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
-		</div>
-	  	<div class="media-body">
-	    	<h4 class="media-heading"><a class="tc-black" href="#">这是一个标题</a></h4>
-		    <div class="info m-t-sm font-12">
-		    	<a href="#" class="m-r-sm">这是一个昵称</a>
-		    	<span class="m-r-sm">2015-2-4</span>
-		    	<span class="m-r-sm la_item">成都</span>
-		    </div>
-		    <div class="m-t-sm travel_text">
-		   	425大地震一周年之际，BBC播出了一系列追踪报道，着重展现重灾地区现状并批判了该国严重滞后的重建进程。 当画面切换到仍旧满目疮痍的Langtang村庄，小陶扭头问我：“你还记得这里么？”“当然，上一次我们还是坐在直升机里，还是飞行员告诉我们这里是被掩埋掉的Langtang。”当时以我的近视眼，往下望，只能看到一大堆黄土截断了一条河流。“Langtang就在那堆黄土之下。”飞行员看着我那
-		   	</div>
-		    <div class="m-t-sm over-h">
-			   	<a class="travel_pic" href="#"><img src="http://image1.8264.com/forum/201605/31/191934bf17f7cc66b9q3c5.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/1929552y60qzq90jno6anj.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/193831l4r64xf9rtrl6l6s.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/194131763k6b4mom7cbeff.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/1942572gnkvvkn8kqxxxgp.jpg!t2w400h300"></a>
-		    </div>
+            <!-- 
+<div class="bg-white p-md m-b-md border-gray-e over-h">
+	<ul class="list">
+		<li>
+			<a href="#" target="_blank">
+				<span class="m-r-xs tc-gray9">[ 话题 ]</span>
+				ARCTERYX(始祖鸟) Fortrez Hoody Men's 抓绒衣裤
+			</a>
+			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
+			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<span class="m-r-xs tc-gray9">[ 游记 ]</span>
+				ARCTERYX(始祖鸟) Fortrez Hoody Men's 抓绒衣裤
+			</a>
+			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
+			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<span class="m-r-xs tc-gray9">[ 装备 ]</span>
+				ARCTERYX(始祖鸟) Fortrez Hoody Men's 抓绒衣裤
+			</a>
+			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
+			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
+		</li>
+	</ul>
 
 
-		    <div class="m-t-sm font-12 border-gray-b-e p-b-md m-b-xs">
-		   		<span class="keywords">121</span>次浏览
-		   		<span class="keywords m-l-md">121</span>次点赞
-		    </div>
-		</div>
-	</div>
-
-
-
-
-
-	<div class="media">
-	    <div class="media-left">
-	    	<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
-		</div>
-	  	<div class="media-body">
-	    	<h4 class="media-heading"><a class="tc-black" href="#">这是一个标题</a></h4>
-		    <div class="info m-t-sm font-12">
-		    	<a href="#" class="m-r-sm">这是一个昵称</a>
-		    	<span class="m-r-sm">2015-2-4</span>
-		    	<span class="m-r-sm la_item">成都</span>
-		    </div>
-		    <div class="m-t-sm travel_text">
-		   	425大地震一周年之际，BBC播出了一系列追踪报道，着重展现重灾地区现状并批判了该国严重滞后的重建进程。 当画面切换到仍旧满目疮痍的Langtang村庄，小陶扭头问我：“你还记得这里么？”“当然，上一次我们还是坐在直升机里，还是飞行员告诉我们这里是被掩埋掉的Langtang。”当时以我的近视眼，往下望，只能看到一大堆黄土截断了一条河流。“Langtang就在那堆黄土之下。”飞行员看着我那
-		   	</div>
-		    <div class="m-t-sm over-h">
-			   	<a class="travel_pic" href="#"><img src="http://image1.8264.com/forum/201605/31/191934bf17f7cc66b9q3c5.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/1929552y60qzq90jno6anj.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/193831l4r64xf9rtrl6l6s.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/194131763k6b4mom7cbeff.jpg!t2w400h300"></a>
-			   	<a href="#" class="travel_pic"><img src="http://image1.8264.com/forum/201605/31/1942572gnkvvkn8kqxxxgp.jpg!t2w400h300"></a>
-		    </div>
-
-
-		    <div class="m-t-sm font-12 border-gray-b-e p-b-md">
-		   		<span class="keywords">121</span>次浏览
-		   		<span class="keywords m-l-md">121</span>次点赞
-		    </div>
-		</div>
-	</div>
+	<ul class="pagination pagination-sm pull-right m-t-lg">
+            <li class="disabled"><a href="#">«</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
 
 
 
-	<nav class="over-h">
-	  <ul class="pagination pagination-sm pull-right">
-	    <li>
-	      <a href="#" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
-	    <li><a href="#">1</a></li>
-	    <li><a href="#">2</a></li>
-	    <li><a href="#">3</a></li>
-	    <li><a href="#">4</a></li>
-	    <li><a href="#">5</a></li>
-	    <li>
-	      <a href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
-	  </ul>
-	</nav>
 </div> -->
-            <div class="bg-white u-main p-md p-b-xs m-b-md border-gray-e">
-<div class="u_title m-b-md p-b-sm border-gray-b-e">
-  <?php echo ($self); ?>的话题
-  <span class="pull-right  tc-gray9 font-12"><?php echo ($count); ?>个话题</span>
-</div>
-<div style="margin-top:-10px">
-<?php if(count($List) != 0): if(is_array($List)): $i = 0; $__LIST__ = $List;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="p-b-sm border-b m-b-sm">
-  <div class="media media-container list">
-    <a class="pull-left">
-      <img class="media-object u_icon" src="<?php echo C('__DATA__');?>/login_thumb/<?php echo ((isset($vo["user_icon"]) && ($vo["user_icon"] !== ""))?($vo["user_icon"]):'default.jpg'); ?>" alt="..." >
-    </a>
-    <div class="media-body">
-      <a href="<?php echo U('/t/'.$vo['t_id']);?>" class="media-heading" target="_blank"><?php echo ($vo["t_title"]); ?></a>
-      <div class="media-content tc-gray9">
-          <a href="<?php echo U('Topic/index',array('t'=>$vo['type_id']));?>" class="topic-type" target="_blank"><?php echo ($vo["type"]); ?></a>
-          ·
-          <?php echo ($vo["discuss_count"]); ?>个人在讨论
-          ·
-          <?php if($vo['top_user_nickname'] != ''): ?><a href="<?php echo U('/u/'.$vo['top_user_id'],'',false,false);?>"><?php echo ($vo["top_user_nickname"]); ?></a>
-          ·
-          <?php echo ($vo["update_time"]); ?>发表了新评论
-          <?php else: ?>
-          <?php echo ($vo["update_time"]); endif; ?>
-          ·
-          <?php echo ($vo["t_browse"]); ?>次浏览
-      </div>
-    </div>
-  </div>
-  </div><?php endforeach; endif; else: echo "" ;endif; ?>
-<?php else: ?>
-<div class="text-center tc-gray9" style="height:210px;line-height:210px;">暂无话题</div><?php endif; ?>
+            <!-- <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
+	<a href="#" class="pull-right btn btn-default btn-sm">编辑资料</a>
+	<div class="m-l-md m-b-md">
+		<span class="tc-gray9 m-r-sm">用户名:</span>
+		<span class="">麦乐</span>
+	</div>
+	<div class="m-l-md m-b-md">
+		<span class="tc-gray9 m-r-sm">职业:</span>
+		<span class="">开发者</span>
+	</div>
+	<div class="m-l-md m-b-md">
+		<span class="tc-gray9 m-r-sm">所在地:</span>
+		<span class="">广西玉林</span>
+	</div>
+	<div class="m-l-md m-b-md">
+		<span class="tc-gray9 m-r-sm">注册时间:</span>
+		<span class="">2013-1-17 18:25</span>
+	</div>
+	<div class="m-l-md">
+		<span class="tc-gray9 m-r-sm">最后登录时间:</span>
+		<span class="">2013-1-17 18:25</span>
+	</div>
+</div> -->
+            <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
+	<form class="form-horizontal" method="post" action="<?php echo U('User/ChangeUserinfo');?>" enctype="multipart/form-data">
+          <fieldset>
+            <legend class="p-b-md font-16">个人资料</legend>
+            <div class="form-group">
+              <label class="col-xs-2 control-label user_icon_label">头像：</label>
+              <div class="col-xs-6">
+                 <div class="user_icon">
+                  <img class="icon" src="<?php echo C('__DATA__');?>/login_thumb/<?php echo ((isset($userinfo["icon"]) && ($userinfo["icon"] !== ""))?($userinfo["icon"]):'default.jpg'); ?>">
+                  <a href="javascript:void(0)" class="icon icon_btn transition-all-03 icon_change">修改</a>
+                  <input type="file" id="icon_file" name="file" accept="image/*" hidden/>
+                 </div>
+              </div>
+            </div>
+			
 
-<ul class="pager p-l-sm p-r-sm">
-  <?php if($p != 1): ?><li class="previous" title="下一页"><a href="<?php echo U('Account/topic',array('id'=>$user_id,'p'=>$p-1));?>"><<</a></li><?php endif; ?>
-  <?php if($p+1 <= $TotalPage): ?><li class="next" title="下一页"><a href="<?php echo U('Account/topic',array('id'=>$user_id,'p'=>$p+1));?>">>></a></li><?php endif; ?>
-</ul>
+            <div class="form-group">
+              <label class="col-xs-2 control-label">用户名：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" value="<?php echo ($user_info["tel"]); ?>" disabled/>
+              </div>
+            </div>
 
+            <div class="form-group">
+              <label class="col-xs-2 control-label">昵称：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" name="nickname" placeholder="输入昵称" value="<?php echo ($user_info["nickname"]); ?>">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">邮箱：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="<?php echo ($user_info["email"]); ?>">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">专业：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" name="profession" placeholder="如：软件工程" value="<?php echo ($user_info["userinfo"]["profession"]); ?>">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">地区：</label>
+              <div class="col-xs-4">
+                <select class="form-control" name="province">
+                  <option value="0">请选择省份</option>
+                  <?php if(is_array($provinceList)): $i = 0; $__LIST__ = $provinceList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($user_info['userinfo']['province'] == $vo['province']): ?><option selected><?php echo ($vo["province"]); ?></option>
+                      <?php else: ?>
+                      <option><?php echo ($vo["province"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+                </select>
+              </div>
+
+              <div class="col-xs-4">
+                <select class="form-control" name="city">
+                  <option value="0">请选择城市</option>
+                  <?php if(is_array($cities)): $i = 0; $__LIST__ = $cities;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($user_info['userinfo']['city'] == $vo['city']): ?><option selected><?php echo ($vo["city"]); ?></option>
+                      <?php else: ?>
+                      <option><?php echo ($vo["city"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+                </select>
+              </div>
+
+
+
+            </div>
+            
+            <div class="form-group">
+              <label for="textArea" class="col-xs-2 control-label">签名：</label>
+              <div class="col-xs-8">
+                <textarea class="form-control" rows="3" name="shelfIntroduction" placeholder="输入你的个人简介或者签名"><?php echo ($user_info["userinfo"]["shelfintroduction"]); ?></textarea>
+   
+              </div>
+            </div>
+        
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-2">
+                <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中">提交</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
 </div>
-</div>
+            
+            <!-- <div class="font-20 m-b-sm p-l-sm">留言板(20)</div>
+<div class="p-md border-gray-e bg-white m-b-md">
+	<?php $__FOR_START_7398__=1;$__FOR_END_7398__=5;for($i=$__FOR_START_7398__;$i < $__FOR_END_7398__;$i+=1){ ?><div class="board-item p-b-md border-gray-b-e m-b-md">
+		<div class="media">
+			<div class="media-left">
+				<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
+			</div>
+			<div class="media-body">
+				<a href="#" class="media-heading">Media heading</a>
+				<div class="m-t-xs line-24">
+					看完您的说说后,我的心久久不能平静!这条说说构思新颖,题材独具匠心,段落清晰,情节诡异,跌宕起伏,主线分明,引人入胜,平淡中显示出不凡的文学功底,可谓是字字珠玑,句句经典,是我辈应学习之典范.就小说艺术的角度而言,可能不算太成功,但它的实验意义却远大于成功本身
+				</div>
+				<div class="m-t-xs tc-gray9">
+					<span class="">2016-2-4</span>
+					<a href="javascript:void(0)" class="pull-right">
+						<span class="glyphicon glyphicon-comment"> </span>
+						回复
+					</a>
+				</div>
+
+				<div class="media">
+					<div class="media-left">
+						<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
+					</div>
+					<div class="media-body">
+						<a href="#" class="media-heading">Media heading</a> 回复 <a href="#" class="media-heading">昵称2</a>
+						<div class="m-t-xs line-24">
+							看完您的说说后,我的心久久不能平静!这条说说构思新颖,题材独具匠心,段落
+						</div>
+						<div class="m-t-xs tc-gray9">
+							<span class="">2016-2-4</span>
+							<a href="javascript:void(0)" class="pull-right">
+								<span class="glyphicon glyphicon-comment"> </span>
+								回复
+							</a>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div><?php } ?>
+	<div class="text-right">
+		<ul class="pagination pagination-sm">
+		  <li class="disabled"><a href="#">&laquo;</a></li>
+		  <li class="active"><a href="#">1</a></li>
+		  <li><a href="#">2</a></li>
+		  <li><a href="#">3</a></li>
+		  <li><a href="#">4</a></li>
+		  <li><a href="#">5</a></li>
+		  <li><a href="#">&raquo;</a></li>
+		</ul>	
+	</div>
+
+	<div class="font-20 m-b-lg">留个言吧</div>
+	<div class="board-item p-b-md">
+		<div class="media">
+			<div class="media-left">
+				<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
+			</div>
+			<div class="media-body">
+				<textarea class="form-control" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
+				
+					<a href="javascript:void(0)" data-loading-text="发表中..." id="addComment" class="m-t-md btn bg-main btn-md">发表评论</a>
+					<div class="reply-container">
+						<div class="btn-group btn-sm m-t-md">
+							<a class="btn btn-default reply-user" data-reply="0">回复：账号19</a>
+							<a href="javascript:void(0)" class="btn btn-info dropdown-toggle remover-reply">×</a>
+						</div>
+					</div>
+				
+				<span style="position: relative;display: inline-block;vertical-align: middle;" class="m-l-sm m-t-md tc-gray9 tag ">请回复一些有意义的信息，不健康的内容将很快被删除。</span>
+			</div>
+		</div>
+	</div>
+</div> -->
           </div>
 
           <div class="col-xs-3">
@@ -358,7 +468,7 @@
               <li><a href="#"><img src="/watermelon/Public/img/f2.png"></a></li>
               <li><a href="#"><img src="/watermelon/Public/img/f1.png"></a></li>
             </ul>
-
+            <hr>
 
           </div>
         </div>
@@ -409,4 +519,11 @@
  })
 </script>
 <script type="text/javascript" src="/watermelon/Public/js/photoViewer.js"></script>
+
+<?php if((CONTROLLER_NAME == 'Account') and (ACTION_NAME == 'edit')): ?><script type="text/javascript">
+    var province_change_url = "<?php echo U('AddressProvinces/change');?>";
+  </script>
+  <script type="text/javascript" src="/watermelon/Public/js/wait.js"></script>
+  <script type="text/javascript" src="/watermelon/Public/js/edit_information.js"></script><?php endif; ?>
+
 </html>

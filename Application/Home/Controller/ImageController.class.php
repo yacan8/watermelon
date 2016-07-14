@@ -37,6 +37,15 @@ class ImageController extends Controller {
     }
 
 
-
+    public function test(){
+      
+            $image = new \Think\Image(\Think\Image::IMAGE_GD); 
+            $image->open('http://localhost:9096/watermelon/Public/img/f4.jpg');
+            $img1 = $image->thumb(100, 100,\Think\Image::IMAGE_THUMB_CENTER)->getImg();
+            $i = $img1->getImg();
+            header ('Content-Type:'.$img1->mime());
+            imagejpeg ( $i );
+        
+    }
     
 }

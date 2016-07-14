@@ -44,4 +44,17 @@ class AccountController extends Controller{
 		}
 		
 	}
+
+
+
+	// 资料编辑view
+	
+	public function edit(){
+
+
+		$provinceList = M("AddressProvinces")->select();
+
+		$this->assign('provinceList',$provinceList);
+		$this->display('index');
+	}
 }

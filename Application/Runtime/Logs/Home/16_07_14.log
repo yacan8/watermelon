@@ -1,0 +1,142 @@
+[ 2016-07-14T00:02:42+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000834s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001382s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000689s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000777s ]
+
+[ 2016-07-14T00:02:45+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000855s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001443s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000953s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001053s ]
+
+[ 2016-07-14T08:56:19+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000724s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001191s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000623s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000674s ]
+
+[ 2016-07-14T08:56:33+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000619s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001161s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000544s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000585s ]
+
+[ 2016-07-14T08:56:35+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000482s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000848s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000496s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000536s ]
+
+[ 2016-07-14T08:56:36+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000528s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000982s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000606s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000668s ]
+
+[ 2016-07-14T08:56:37+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000944s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001609s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000759s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000833s ]
+
+[ 2016-07-14T08:56:37+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000516s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000943s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001085s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001184s ]
+
+[ 2016-07-14T08:56:38+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000601s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001122s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000552s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000599s ]
+
+[ 2016-07-14T08:56:39+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001292s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002088s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000985s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001084s ]
+
+[ 2016-07-14T08:56:39+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000515s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000967s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000532s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000579s ]
+
+[ 2016-07-14T08:56:50+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000735s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001315s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000897s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000990s ]
+
+[ 2016-07-14T08:56:56+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000930s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001820s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000794s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000876s ]
+
+[ 2016-07-14T08:56:57+08:00 ] ::1 /watermelon/index.php/Index/ajax_load.html?phonoId=1234
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000502s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000895s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001170s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001299s ]
+
+[ 2016-07-14T22:04:59+08:00 ] ::1 /watermelon/index.php/AddressProvinces/change.html?text=%E5%A4%A9%E6%B4%A5%E5%B8%82
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000857s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001377s ]
+ERR: 无法加载控制器:AddressProvinces
+
+[ 2016-07-14T22:06:20+08:00 ] ::1 /watermelon/index.php/AddressProvinces/change.html?text=%E5%B1%B1%E8%A5%BF%E7%9C%81
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000903s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001499s ]
+SQL: select c.city from wt_address_cities c,wt_address_provinces p where c.provinceid = p.provinceid and p.province = '山西省' [ RunTime:0.0007s ]
+
+[ 2016-07-14T22:06:50+08:00 ] ::1 /watermelon/index.php/AddressProvinces/change.html?text=%E5%A4%A9%E6%B4%A5%E5%B8%82
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001272s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002510s ]
+SQL: select c.city from wt_address_cities c,wt_address_provinces p where c.provinceid = p.provinceid and p.province = '天津市' [ RunTime:0.0014s ]
+
+[ 2016-07-14T22:07:01+08:00 ] ::1 /watermelon/index.php/AddressProvinces/change.html?text=%E6%B2%B3%E5%8C%97%E7%9C%81
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000735s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001313s ]
+SQL: select c.city from wt_address_cities c,wt_address_provinces p where c.provinceid = p.provinceid and p.province = '河北省' [ RunTime:0.0009s ]
+
+[ 2016-07-14T22:07:06+08:00 ] ::1 /watermelon/index.php/AddressProvinces/change.html?text=%E5%B9%BF%E8%A5%BF%E5%A3%AE%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001380s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002220s ]
+SQL: select c.city from wt_address_cities c,wt_address_provinces p where c.provinceid = p.provinceid and p.province = '广西壮族自治区' [ RunTime:0.0004s ]
+

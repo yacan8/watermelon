@@ -1,0 +1,95 @@
+<div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
+	<form class="form-horizontal" method="post" action="{:U('User/ChangeUserinfo')}" enctype="multipart/form-data">
+          <fieldset>
+            <legend class="p-b-md font-16">个人资料</legend>
+            <div class="form-group">
+              <label class="col-xs-2 control-label user_icon_label">头像：</label>
+              <div class="col-xs-6">
+                 <div class="user_icon">
+                  <img class="icon" src="{:C('__DATA__')}/login_thumb/{$userinfo.icon|default='default.jpg'}">
+                  <a href="javascript:void(0)" class="icon icon_btn transition-all-03 icon_change">修改</a>
+                  <input type="file" id="icon_file" name="file" accept="image/*" hidden/>
+                 </div>
+              </div>
+            </div>
+			
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">用户名：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" value="{$user_info.tel}" disabled/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">昵称：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" name="nickname" placeholder="输入昵称" value="{$user_info.nickname}">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">邮箱：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">职业：</label>
+              <div class="col-xs-6">
+                <input type="text" class="form-control" name="profession" placeholder="如：程序员" value="">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-2 control-label">地区：</label>
+              <div class="col-xs-4">
+                <select class="form-control" name="province">
+                  <option value="0">请选择省份</option>
+                  <volist name="provinceList" id= 'vo'>
+                    <if condition = "$user_info['userinfo']['province'] eq $vo['province']">
+                      <option selected>{$vo.province}</option>
+                      <else/>
+                      <option>{$vo.province}</option>
+                    </if>
+                  </volist>
+                </select>
+              </div>
+
+              <div class="col-xs-4">
+                <select class="form-control" name="city">
+                  <option value="0">请选择城市</option>
+                  <volist name="cities" id= 'vo'>
+                    <if condition = "$user_info['userinfo']['city'] eq $vo['city']">
+                      <option selected>{$vo.city}</option>
+                      <else/>
+                      <option>{$vo.city}</option>
+                    </if>
+                  </volist>
+                </select>
+              </div>
+
+
+
+            </div>
+            
+            <div class="form-group">
+              <label for="textArea" class="col-xs-2 control-label">签名：</label>
+              <div class="col-xs-8">
+                <textarea class="form-control" rows="3" name="shelfIntroduction" placeholder="输入你的个人简介或者签名">{$user_info.userinfo.shelfintroduction}</textarea>
+   
+              </div>
+            </div>
+        
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-2">
+                <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中">提交</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+</div>
