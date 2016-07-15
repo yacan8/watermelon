@@ -113,6 +113,25 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 
 .half{position: relative;margin-left: -4px;line-height: 20px;}/*半颗星*/
 
+
+/*公共CSS*/
+.font-16{
+	font-size: 16px;
+}
+.p-15{
+	padding: 15px;
+}
+.p-l-15{
+	padding-left: 15px;
+}
+.border-gray-e{
+	border: 1px solid #eee;
+}
+.border-gray-b-e{
+	border-bottom: 1px solid #eee;
+}
+
+
 .m-l-14{margin-left: 14px;}
 .c_u_icon{
 	width: 40px;

@@ -98,10 +98,10 @@
 <ul class="menu bg-white m-b-sm">
 	<li><a href="#">动态</a></li>
 	<li class="active"><a href="#">游记</a></li>
-	<li><a href="#">装备</a></li>
 	<li><a href="#">话题</a></li>
 	<li><a href="#">留言板</a></li>
 	<li><a href="#">照片</a></li>
+	<li><a href="#">我的收藏</a></li>
 	<li><a href="#">我的消息 <span class="label label-info">5</span></a></li>
 	<li class="last"><a href="#"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
 </ul>

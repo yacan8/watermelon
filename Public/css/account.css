@@ -14,22 +14,6 @@
 }
 
 
-/*公共CSS*/
-.font-16{
-	font-size: 16px;
-}
-.p-15{
-	padding: 15px;
-}
-.p-l-15{
-	padding-left: 15px;
-}
-.border-gray-e{
-	border: 1px solid #eee;
-}
-.border-gray-b-e{
-	border-bottom: 1px solid #eee;
-}
 
 
 /**/
@@ -219,4 +203,46 @@
 	font-weight: 400;
 	padding-top: 9px!important;
 	color: #666;
+}
+
+
+/*侧栏菜单*/
+.sidelist-group{
+	margin-bottom: 10px;
+}
+.progress {
+	border-radius: 0;
+    -webkit-box-shadow: none;
+	box-shadow: none;
+}
+.sidelist-group li{
+	border-left:2px solid transparent;
+	padding-left: 25px;
+	border-bottom: 1px solid #eee;
+}
+.sidelist-group li.active{
+	border-left-color: #63D283;
+	
+}
+.sidelist-group li.active a{
+	color: #63D283;
+}
+.sidelist-group li a{
+	display: block;
+	padding: 10px 0;
+}
+
+
+
+/*粉丝*/
+.fans-icon{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 3px;
+	
+}
+.fans-item{
+	border-bottom: 1px solid #f1f1f1;
 }

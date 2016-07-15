@@ -37,6 +37,27 @@
 
 
 
+    <div class="p-t-md">
+      <div class="container">
+          <h2>热门城市</h2>
+          <div class="hot_container over-h m-t-lg">
+            <?php $__FOR_START_9571__=1;$__FOR_END_9571__=9;for($i=$__FOR_START_9571__;$i < $__FOR_END_9571__;$i+=1){ ?><div class="hit_item">
+              <a class="img_a" href="#">
+                <img class="transition-all-1" src="/watermelon/Public/img/f1.png">
+              </a>
+              <div class="p-sm text-center">
+                <div class="font-bold font-16">
+                  <a class="title" href="#">四川-成都</a>
+                </div>
+                <div class="m-t-xs font-12 tc-gray9">
+                  <span class="keywords">2015</span>人想去
+                </div>
+              </div>
+            </div><?php } ?>
+          </div>
+        </div>
+    </div>
+    
    	<div class="container">
       <h2 class="pull-left">城市列表</h2>
       <div class="city-type m-l-lg pull-left">

@@ -297,15 +297,15 @@
             <div class="form-group">
               <label class="col-xs-2 control-label">邮箱：</label>
               <div class="col-xs-6">
-                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="<?php echo ($user_info["email"]); ?>">
+                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="">
               </div>
             </div>
 
 
             <div class="form-group">
-              <label class="col-xs-2 control-label">专业：</label>
+              <label class="col-xs-2 control-label">职业：</label>
               <div class="col-xs-6">
-                <input type="text" class="form-control" name="profession" placeholder="如：软件工程" value="<?php echo ($user_info["userinfo"]["profession"]); ?>">
+                <input type="text" class="form-control" name="profession" placeholder="如：程序员" value="">
               </div>
             </div>
 
@@ -350,10 +350,48 @@
           </fieldset>
         </form>
 </div>
+
+
+<!-- 修改密码 -->
+<div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
+	<form class="form-horizontal" action="<?php echo U('User/ChangePassword');?>" method="post">
+	  <fieldset>
+	    <legend class="p-b-md font-16">修改密码</legend>
+
+	    <div class="form-group">
+	      <label for="inputPassword" class="col-md-2 control-label">原密码</label>
+	      <div class="col-md-6">
+	        <input type="password" class="form-control" name="o_password" placeholder="" >
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="inputPassword" class="col-md-2 control-label">新密码</label>
+	      <div class="col-md-6">
+	        <input type="password" class="form-control" name="n_password" >
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="inputPassword" class="col-md-2 control-label">确认新密码</label>
+	      <div class="col-md-6">
+	        <input type="password" class="form-control" name="re_password">
+	      </div>
+	    </div>
+		
+
+	    <div class="form-group">
+	      <div class="col-lg-10 col-lg-offset-2">
+	        <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中">提交修改</button>
+	      </div>
+	    </div>
+	  </fieldset>
+	</form>
+</div>
             
             <!-- <div class="font-20 m-b-sm p-l-sm">留言板(20)</div>
 <div class="p-md border-gray-e bg-white m-b-md">
-	<?php $__FOR_START_7398__=1;$__FOR_END_7398__=5;for($i=$__FOR_START_7398__;$i < $__FOR_END_7398__;$i+=1){ ?><div class="board-item p-b-md border-gray-b-e m-b-md">
+	<?php $__FOR_START_7807__=1;$__FOR_END_7807__=5;for($i=$__FOR_START_7807__;$i < $__FOR_END_7807__;$i+=1){ ?><div class="board-item p-b-md border-gray-b-e m-b-md">
 		<div class="media">
 			<div class="media-left">
 				<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
