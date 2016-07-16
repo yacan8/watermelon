@@ -80,17 +80,36 @@
 </ul>
         <div class="row">
           <div class="col-xs-9">
-            <div class="bg-white border-gray-e p-md font-12">
+            <!-- <div class="bg-white border-gray-e p-md font-12">
 	<div class="font-16 p-b-md border-gray-b-e m-b-md">
-		<?php echo ($self); ?>的粉丝
+		<?php echo ($self); ?>的粉丝(5)
 	</div>
-	<?php $__FOR_START_2181__=1;$__FOR_END_2181__=8;for($i=$__FOR_START_2181__;$i < $__FOR_END_2181__;$i+=1){ ?><div class="fans-item p-b-md m-b-md">
+	<?php $__FOR_START_25049__=1;$__FOR_END_25049__=8;for($i=$__FOR_START_25049__;$i < $__FOR_END_25049__;$i+=1){ ?><div class="fans-item p-b-md m-b-md">
 		<a href="#"><img class="fans-icon" src="/watermelon/Public/img/f1.png"></a>
 		<a class="m-r-sm" href="#">麦乐</a>
-		<span class="glyphicon glyphicon-home tc-gray9"></span> 地区：广西壮族自治区 玉林市
+		<span class="glyphicon glyphicon-home tc-grayb"></span> 广西壮族自治区 玉林市
 		<a class="btn btn-success btn-xs pull-right m-t-sm f-theme follow" data-id="2"><span class="glyphicon glyphicon-plus"></span> 加关注</a>
 	</div><?php } ?>
 
+</div> -->
+            <div class="bg-white border-gray-e p-md font-12">
+	<div class="font-16 p-b-md border-gray-b-e m-b-md">
+		<?php echo ($self); ?>的想去(5)
+	</div>
+	<div class="row border-gray-b-e">
+		<?php $__FOR_START_12412__=1;$__FOR_END_12412__=9;for($i=$__FOR_START_12412__;$i < $__FOR_END_12412__;$i+=1){ ?><div class="col-xs-6">
+			<div class="w_item">
+				<a href="#">
+					<img class="w_img" src="/watermelon/Public/img/f1.png">
+				</a>
+				<div class="info">
+					<div class="title"><a href="#">成都</a></div>
+					<div class="m-t-xs tc-gray9"><span class="keyword">1535</span>个人想去</div>
+					<div class="m-t-xs tc-gray9">更新时间：<span class="tc-black">2016-2-5</span></div>
+				</div>
+			</div>
+		</div><?php } ?>
+	</div>
 </div>
             
             

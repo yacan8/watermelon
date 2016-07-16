@@ -263,135 +263,40 @@
 		<span class="">2013-1-17 18:25</span>
 	</div>
 </div> -->
-            <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
-	<form class="form-horizontal" method="post" action="<?php echo U('User/ChangeUserinfo');?>" enctype="multipart/form-data">
-          <fieldset>
-            <legend class="p-b-md font-16">个人资料</legend>
-            <div class="form-group">
-              <label class="col-xs-2 control-label user_icon_label">头像：</label>
-              <div class="col-xs-6">
-                 <div class="user_icon">
-                  <img class="icon" src="<?php echo C('__DATA__');?>/login_thumb/<?php echo ((isset($userinfo["icon"]) && ($userinfo["icon"] !== ""))?($userinfo["icon"]):'default.jpg'); ?>">
-                  <a href="javascript:void(0)" class="icon icon_btn transition-all-03 icon_change">修改</a>
-                  <input type="file" id="icon_file" name="file" accept="image/*" hidden/>
-                 </div>
-              </div>
-            </div>
-			
-
-            <div class="form-group">
-              <label class="col-xs-2 control-label">用户名：</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" value="<?php echo ($user_info["tel"]); ?>" disabled/>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-2 control-label">昵称：</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" name="nickname" placeholder="输入昵称" value="<?php echo ($user_info["nickname"]); ?>">
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-xs-2 control-label">邮箱：</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="">
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-xs-2 control-label">职业：</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" name="profession" placeholder="如：程序员" value="">
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-xs-2 control-label">地区：</label>
-              <div class="col-xs-4">
-                <select class="form-control" name="province">
-                  <option value="0">请选择省份</option>
-                  <?php if(is_array($provinceList)): $i = 0; $__LIST__ = $provinceList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($user_info['userinfo']['province'] == $vo['province']): ?><option selected><?php echo ($vo["province"]); ?></option>
-                      <?php else: ?>
-                      <option><?php echo ($vo["province"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
-                </select>
-              </div>
-
-              <div class="col-xs-4">
-                <select class="form-control" name="city">
-                  <option value="0">请选择城市</option>
-                  <?php if(is_array($cities)): $i = 0; $__LIST__ = $cities;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($user_info['userinfo']['city'] == $vo['city']): ?><option selected><?php echo ($vo["city"]); ?></option>
-                      <?php else: ?>
-                      <option><?php echo ($vo["city"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
-                </select>
-              </div>
-
-
-
-            </div>
             
-            <div class="form-group">
-              <label for="textArea" class="col-xs-2 control-label">签名：</label>
-              <div class="col-xs-8">
-                <textarea class="form-control" rows="3" name="shelfIntroduction" placeholder="输入你的个人简介或者签名"><?php echo ($user_info["userinfo"]["shelfintroduction"]); ?></textarea>
-   
-              </div>
-            </div>
-        
-            <div class="form-group">
-              <div class="col-xs-10 col-xs-offset-2">
-                <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中">提交</button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-</div>
 
-
-<!-- 修改密码 -->
-<div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
-	<form class="form-horizontal" action="<?php echo U('User/ChangePassword');?>" method="post">
-	  <fieldset>
-	    <legend class="p-b-md font-16">修改密码</legend>
-
-	    <div class="form-group">
-	      <label for="inputPassword" class="col-md-2 control-label">原密码</label>
-	      <div class="col-md-6">
-	        <input type="password" class="form-control" name="o_password" placeholder="" >
-	      </div>
-	    </div>
-
-	    <div class="form-group">
-	      <label for="inputPassword" class="col-md-2 control-label">新密码</label>
-	      <div class="col-md-6">
-	        <input type="password" class="form-control" name="n_password" >
-	      </div>
-	    </div>
-
-	    <div class="form-group">
-	      <label for="inputPassword" class="col-md-2 control-label">确认新密码</label>
-	      <div class="col-md-6">
-	        <input type="password" class="form-control" name="re_password">
-	      </div>
-	    </div>
+<div class="media p-md m-b-sm bg-white u-message">
+	<div class="media-left">
+		<a href="/cl/index.php/u/6">
+	  		<img class="media-object media-img" src="/watermelon/Public/img/f1.png">
+		</a>
+		</div>
+		 <div class="media-body">
+		<div class="m-b-xs">
+			<a class="tc-main" href="/cl/index.php/u/6">游客7</a> 评论了我的话题
+		</div>
+		<div class="font-12 tc-gray9 m-b-xs">
+			2016-07-04			        	
+		</div>
 		
+	</div>
+	<p>不如全身赤裸 还给我 那脆弱。</p>
+	<div class="m-t-xs bg-gray-f6 over-h">
 
-	    <div class="form-group">
-	      <div class="col-lg-10 col-lg-offset-2">
-	        <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中">提交修改</button>
-	      </div>
-	    </div>
-	  </fieldset>
-	</form>
+		<a href="#" class="content-img"><img src="/watermelon/Public/img/f2.png"></a>
+		
+		<div class="content">
+			<a class="tc-main" href="/cl/index.php/u/6">游客7</a>：<a class="tc-black" href="/cl/index.php/t/34.html" target="_blank">如何在网上找到最好的赚钱生意&nbsp;</a>
+		</div>
+			
+	</div>
+
 </div>
+            
             
             <!-- <div class="font-20 m-b-sm p-l-sm">留言板(20)</div>
 <div class="p-md border-gray-e bg-white m-b-md">
-	<?php $__FOR_START_7807__=1;$__FOR_END_7807__=5;for($i=$__FOR_START_7807__;$i < $__FOR_END_7807__;$i+=1){ ?><div class="board-item p-b-md border-gray-b-e m-b-md">
+	<?php $__FOR_START_4176__=1;$__FOR_END_4176__=5;for($i=$__FOR_START_4176__;$i < $__FOR_END_4176__;$i+=1){ ?><div class="board-item p-b-md border-gray-b-e m-b-md">
 		<div class="media">
 			<div class="media-left">
 				<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
