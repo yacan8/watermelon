@@ -1,5 +1,5 @@
 <ul class="sidelist-group bg-white">
-	<li class="border-l-main active <if condition="ACTION_NAME eq 'edit'">active</if>"><a href="{:U('User/edit')}">{$self}的粉丝</a></li>
+	<li class="border-l-main <if condition="ACTION_NAME eq 'edit'">active</if>"><a href="{:U('User/edit')}">{$self}的粉丝</a></li>
 	<li class="border-l-main <if condition="ACTION_NAME eq 'safe'">active</if>"><a href="{:U('User/safe')}">{$self}的关注</a></li>
 	<li class="border-l-main <if condition="ACTION_NAME eq 'safe'">active</if>"><a href="{:U('User/safe')}">{$self}想去</a></li>
 	<li class="border-l-main <if condition="ACTION_NAME eq 'safe'">active</if>"><a href="{:U('User/safe')}">{$self}去过</a></li>

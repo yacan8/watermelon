@@ -20,7 +20,7 @@
 
 
     <title>西瓜游-景点</title>
-  <?php if(session('login') == $user_id) $self = '我'; else $self = 'TA'; ?>
+  <?php if(session('login') == '2') $self = '我'; else $self = 'TA'; ?>
 </head>
 
 <body>
@@ -69,18 +69,19 @@
 	</div>
 </div>
 <ul class="menu bg-white m-b-sm">
-	<li><a href="#">动态</a></li>
-	<li class="active"><a href="#">游记</a></li>
-	<li><a href="#">话题</a></li>
-	<li><a href="#">留言板</a></li>
-	<li><a href="#">照片</a></li>
-	<li><a href="#">我的收藏</a></li>
-	<li><a href="#">我的消息 <span class="label label-info">5</span></a></li>
-	<li class="last"><a href="#"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+	<li <?php if(ACTION_NAME == 'dynamics'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/dynamics');?>">动态</a></li>
+	<li <?php if(ACTION_NAME == 'travelNote'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/travelNote');?>">游记</a></li>
+	<li <?php if(ACTION_NAME == 'topic'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/topic',array('id'=>$user_id));?>">话题</a></li>
+	<li <?php if(ACTION_NAME == 'board'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/board');?>">留言板</a></li>
+	<li <?php if(ACTION_NAME == 'album' or ACTION_NAME == 'photo'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/album');?>">照片</a></li>
+	<li <?php if(ACTION_NAME == 'collection'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/collection');?>">我的收藏</a></li>
+	<li <?php if(ACTION_NAME == 'message'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/message');?>">我的消息 <span class="label label-info">5</span></a></li>
+	<li class="last <?php if(ACTION_NAME == 'information'): ?>active<?php endif; ?>"><a href="<?php echo U('Account/information');?>"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+	<li><a href="#">退出登录</a></li>
 </ul>
         <div class="row">
           <div class="col-xs-9">
-            <!-- <div class="dynamics-item bg-white border-gray-e m-b-sm">
+            <div class="dynamics-item bg-white border-gray-e m-b-sm">
 	<div class="p-15 border-gray-b-e">
 		<div class="media">
 		  <div class="media-left">
@@ -196,187 +197,16 @@
 		<span class="glyphicon glyphicon-time"></span> 2016-2-4
 	</div>
 </div>
- -->
-            <!-- 
-<div class="bg-white p-md m-b-md border-gray-e over-h">
-	<ul class="list">
-		<li>
-			<a href="#" target="_blank">
-				<span class="m-r-xs tc-gray9">[ 话题 ]</span>
-				ARCTERYX(始祖鸟) Fortrez Hoody Men's 抓绒衣裤
-			</a>
-			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
-			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
-		</li>
-		<li>
-			<a href="#" target="_blank">
-				<span class="m-r-xs tc-gray9">[ 游记 ]</span>
-				ARCTERYX(始祖鸟) Fortrez Hoody Men's 抓绒衣裤
-			</a>
-			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
-			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
-		</li>
-		<li>
-			<a href="#" target="_blank">
-				<span class="m-r-xs tc-gray9">[ 装备 ]</span>
-				ARCTERYX(始祖鸟) Fortrez Hoody Men's 抓绒衣裤
-			</a>
-			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
-			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
-		</li>
-	</ul>
 
-
-	<ul class="pagination pagination-sm pull-right m-t-lg">
-            <li class="disabled"><a href="#">«</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
-
-
-
-</div> -->
-            <!-- <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
-	<a href="#" class="pull-right btn btn-default btn-sm">编辑资料</a>
-	<div class="m-l-md m-b-md">
-		<span class="tc-gray9 m-r-sm">用户名:</span>
-		<span class="">麦乐</span>
-	</div>
-	<div class="m-l-md m-b-md">
-		<span class="tc-gray9 m-r-sm">职业:</span>
-		<span class="">开发者</span>
-	</div>
-	<div class="m-l-md m-b-md">
-		<span class="tc-gray9 m-r-sm">所在地:</span>
-		<span class="">广西玉林</span>
-	</div>
-	<div class="m-l-md m-b-md">
-		<span class="tc-gray9 m-r-sm">注册时间:</span>
-		<span class="">2013-1-17 18:25</span>
-	</div>
-	<div class="m-l-md">
-		<span class="tc-gray9 m-r-sm">最后登录时间:</span>
-		<span class="">2013-1-17 18:25</span>
-	</div>
-</div> -->
             
-
-<div class="media p-md m-b-sm bg-white u-message">
-	<div class="media-left">
-		<a href="/cl/index.php/u/6">
-	  		<img class="media-object media-img" src="/watermelon/Public/img/f1.png">
-		</a>
-		</div>
-		 <div class="media-body">
-		<div class="m-b-xs">
-			<a class="tc-main" href="/cl/index.php/u/6">游客7</a> 评论了我的话题
-		</div>
-		<div class="font-12 tc-gray9 m-b-xs">
-			2016-07-04			        	
-		</div>
-		
-	</div>
-	<p>不如全身赤裸 还给我 那脆弱。</p>
-	<div class="m-t-xs bg-gray-f6 over-h">
-
-		<a href="#" class="content-img"><img src="/watermelon/Public/img/f2.png"></a>
-		
-		<div class="content">
-			<a class="tc-main" href="/cl/index.php/u/6">游客7</a>：<a class="tc-black" href="/cl/index.php/t/34.html" target="_blank">如何在网上找到最好的赚钱生意&nbsp;</a>
-		</div>
-			
-	</div>
-
-</div>
-            
-            
-            <!-- <div class="font-20 m-b-sm p-l-sm">留言板(20)</div>
-<div class="p-md border-gray-e bg-white m-b-md">
-	<?php $__FOR_START_4176__=1;$__FOR_END_4176__=5;for($i=$__FOR_START_4176__;$i < $__FOR_END_4176__;$i+=1){ ?><div class="board-item p-b-md border-gray-b-e m-b-md">
-		<div class="media">
-			<div class="media-left">
-				<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
-			</div>
-			<div class="media-body">
-				<a href="#" class="media-heading">Media heading</a>
-				<div class="m-t-xs line-24">
-					看完您的说说后,我的心久久不能平静!这条说说构思新颖,题材独具匠心,段落清晰,情节诡异,跌宕起伏,主线分明,引人入胜,平淡中显示出不凡的文学功底,可谓是字字珠玑,句句经典,是我辈应学习之典范.就小说艺术的角度而言,可能不算太成功,但它的实验意义却远大于成功本身
-				</div>
-				<div class="m-t-xs tc-gray9">
-					<span class="">2016-2-4</span>
-					<a href="javascript:void(0)" class="pull-right">
-						<span class="glyphicon glyphicon-comment"> </span>
-						回复
-					</a>
-				</div>
-
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
-					</div>
-					<div class="media-body">
-						<a href="#" class="media-heading">Media heading</a> 回复 <a href="#" class="media-heading">昵称2</a>
-						<div class="m-t-xs line-24">
-							看完您的说说后,我的心久久不能平静!这条说说构思新颖,题材独具匠心,段落
-						</div>
-						<div class="m-t-xs tc-gray9">
-							<span class="">2016-2-4</span>
-							<a href="javascript:void(0)" class="pull-right">
-								<span class="glyphicon glyphicon-comment"> </span>
-								回复
-							</a>
-						</div>
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-	</div><?php } ?>
-	<div class="text-right">
-		<ul class="pagination pagination-sm">
-		  <li class="disabled"><a href="#">&laquo;</a></li>
-		  <li class="active"><a href="#">1</a></li>
-		  <li><a href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		  <li><a href="#">&raquo;</a></li>
-		</ul>	
-	</div>
-
-	<div class="font-20 m-b-lg">留个言吧</div>
-	<div class="board-item p-b-md">
-		<div class="media">
-			<div class="media-left">
-				<a href="#"><img class="media-object media-img" src="/watermelon/Public/img/f2.png" alt="..."></a>
-			</div>
-			<div class="media-body">
-				<textarea class="form-control" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
-				
-					<a href="javascript:void(0)" data-loading-text="发表中..." id="addComment" class="m-t-md btn bg-main btn-md">发表评论</a>
-					<div class="reply-container">
-						<div class="btn-group btn-sm m-t-md">
-							<a class="btn btn-default reply-user" data-reply="0">回复：账号19</a>
-							<a href="javascript:void(0)" class="btn btn-info dropdown-toggle remover-reply">×</a>
-						</div>
-					</div>
-				
-				<span style="position: relative;display: inline-block;vertical-align: middle;" class="m-l-sm m-t-md tc-gray9 tag ">请回复一些有意义的信息，不健康的内容将很快被删除。</span>
-			</div>
-		</div>
-	</div>
-</div> -->
           </div>
 
           <div class="col-xs-3">
             
-            <h4>TA去过的城市</h4>
+            <h4>
+              <?php echo ($self); ?>去过的城市
+            <a class="font-12 tc-gray9 pull-right m-t-xs" href="#">>>更多</a>
+            </h4>
             <ul class="city_list">
               <li><a href="#"><img src="/watermelon/Public/img/f5.jpg"></a><a href="#">哈尔滨</a></li>
               <li><a href="#"><img src="/watermelon/Public/img/f4.jpg"></a><a href="#">成都</a></li>
@@ -387,7 +217,7 @@
 
             <hr>
             <h4>
-              TA的粉丝(25)
+              <?php echo ($self); ?>的粉丝(25)
               <a class="font-12 tc-gray9 pull-right m-t-xs" href="#">>>更多</a>
             </h4>
             <ul class="img_list">
@@ -401,7 +231,7 @@
 
             <hr>
             <h4>
-              TA的关注(25)
+              <?php echo ($self); ?>的关注(25)
               <a class="font-12 tc-gray9 pull-right m-t-xs" href="#">>>更多</a>
             </h4>
             <ul class="img_list">

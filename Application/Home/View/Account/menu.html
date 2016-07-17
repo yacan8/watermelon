@@ -19,12 +19,13 @@
 	</div>
 </div>
 <ul class="menu bg-white m-b-sm">
-	<li><a href="#">动态</a></li>
-	<li class="active"><a href="#">游记</a></li>
-	<li><a href="#">话题</a></li>
-	<li><a href="#">留言板</a></li>
-	<li><a href="#">照片</a></li>
-	<li><a href="#">我的收藏</a></li>
-	<li><a href="#">我的消息 <span class="label label-info">5</span></a></li>
-	<li class="last"><a href="#"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+	<li <if condition="ACTION_NAME eq 'dynamics'">class="active"</if> ><a href="{:U('Account/dynamics')}">动态</a></li>
+	<li <if condition="ACTION_NAME eq 'travelNote'">class="active"</if> ><a href="{:U('Account/travelNote')}">游记</a></li>
+	<li <if condition="ACTION_NAME eq 'topic'">class="active"</if> ><a href="{:U('Account/topic',array('id'=>$user_id))}">话题</a></li>
+	<li <if condition="ACTION_NAME eq 'board'">class="active"</if> ><a href="{:U('Account/board')}">留言板</a></li>
+	<li <if condition="ACTION_NAME eq 'album' or ACTION_NAME eq 'photo'">class="active"</if> ><a href="{:U('Account/album')}">照片</a></li>
+	<li <if condition="ACTION_NAME eq 'collection'">class="active"</if> ><a href="{:U('Account/collection')}">我的收藏</a></li>
+	<li <if condition="ACTION_NAME eq 'message'">class="active"</if> ><a href="{:U('Account/message')}">我的消息 <span class="label label-info">5</span></a></li>
+	<li class="last <if condition="ACTION_NAME eq 'information'">active</if>"><a href="{:U('Account/information')}"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+	<li><a href="#">退出登录</a></li>
 </ul>

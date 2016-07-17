@@ -96,14 +96,15 @@
 	</div>
 </div>
 <ul class="menu bg-white m-b-sm">
-	<li><a href="#">动态</a></li>
-	<li class="active"><a href="#">游记</a></li>
-	<li><a href="#">话题</a></li>
-	<li><a href="#">留言板</a></li>
-	<li><a href="#">照片</a></li>
-	<li><a href="#">我的收藏</a></li>
-	<li><a href="#">我的消息 <span class="label label-info">5</span></a></li>
-	<li class="last"><a href="#"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+	<li <?php if(ACTION_NAME == 'dynamics'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/dynamics');?>">动态</a></li>
+	<li <?php if(ACTION_NAME == 'travelNote'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/travelNote');?>">游记</a></li>
+	<li <?php if(ACTION_NAME == 'topic'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/topic',array('id'=>$user_id));?>">话题</a></li>
+	<li <?php if(ACTION_NAME == 'board'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/board');?>">留言板</a></li>
+	<li <?php if(ACTION_NAME == 'album' or ACTION_NAME == 'photo'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/album');?>">照片</a></li>
+	<li <?php if(ACTION_NAME == 'collection'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/collection');?>">我的收藏</a></li>
+	<li <?php if(ACTION_NAME == 'message'): ?>class="active"<?php endif; ?> ><a href="<?php echo U('Account/message');?>">我的消息 <span class="label label-info">5</span></a></li>
+	<li class="last <?php if(ACTION_NAME == 'information'): ?>active<?php endif; ?>"><a href="<?php echo U('Account/information');?>"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+	<li><a href="#">退出登录</a></li>
 </ul>
         <div class="row">
           <div class="col-xs-12">
@@ -116,7 +117,7 @@
 
             </div>
             <div class="m-t-md">
-              <!-- <div class="photoCon"> 
+              <div class="photoCon"> 
   <div class="photoItem">
     <img src="http://img2.3lian.com/2014/f2/132/d/6.jpg">
     <div class="info">
@@ -207,28 +208,6 @@
       <span class="glyphicon glyphicon-trash"></span>
     </a>
   </div>
-</div> -->
-              
-<div class="album_con">
-	<div class="album_item">
-		<a href="#" class="pic_con" style="background-image:url('/watermelon/Public/img/f1.png')">
-			<span class="num">
-				<span class="font-12 glyphicon glyphicon-eye-open"></span>
-					25
-				<span class="font-12 m-l-sm glyphicon glyphicon-picture"></span>	
-					15
-			</span>
-			<span class="browse">
-
-			</span>
-		</a>
-		<div class="to1 info">
-			<a class="tc-black" href="#">这是一个相册名</a>
-		</div>
-	</div>
-
-
-
 </div>
             </div>
            
