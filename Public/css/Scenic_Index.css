@@ -72,7 +72,9 @@
 	border-radius: 50%;
 }
 
-
+.m-t-3{
+	margin-top: 3px;
+}
 .hot-scenic{
 	margin-top: 17px;
 }
@@ -82,10 +84,10 @@
 .hot-scenic>li:last-child{
 	margin-bottom: 0;
 }
-.hot-scenic>li>a{
+.hot-scenic>li a{
 	color: #222;
 }
-.hot-scenic>li>a>img{
+.hot-scenic>li a img{
 	width: 100px;
 	height: 60px;
 	display: inline-block;
@@ -159,7 +161,7 @@
 	width: 100%;
 	height: 100%;
 }
-.fh_img_con>.pic_num{
+.pic_num{
 	position: absolute;
 	z-index: 5;
 	background-color:rgba(50,50,50,.5); 
@@ -169,7 +171,8 @@
 	left: 10px;
 	bottom: 10px;
 }
-.fh_img_con>.pic_num:hover{
+.pic_num:hover{
+	color: #fff;
 	background-color:rgba(0,0,0,.6);
 }
 .imgListCon{

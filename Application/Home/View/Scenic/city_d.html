@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,25 +9,20 @@
 </head>
 
 <body>
-    
     <include file="Common/navbar" />
     <div class="border-b-gray-e ">
 	    <div class="container p-t-md">
 			<div class="row">
 				<div class="col-xs-12">
-					<a href="#">首页</a>
-					<span class="tc-gray9 font-12">></span>
-					<a href="#">东北</a>
-					<span class="tc-gray9 font-12">></span>
-					<span href="#">哈尔滨</span>
+					{:W('Scenic/breadcrumb',array('type'=>1,'id'=>$city_id))}
 				</div>
 				
 				<div class="col-xs-12 m-b-sm">
 					<h2>
-						<a href="#">哈尔滨市</a>
+						<a >{$city_name}</a>
 						<span class="pull-right m-t-md font-12">
-							<span class="tc-main">20154</span>人想去这里，
-							<span class="tc-main">54</span>人去过这里
+							<span class="want_count tc-main">{$want_count}</span>人想去这里，
+							<span class="been_count tc-main">{$been_count}</span>人去过这里
 						</span>
 					</h2>
 				</div>
@@ -57,6 +53,7 @@
 			<div class="span-container bg-white over-h">
 				<div class="span-left focus-pic">
 					<include file="ScenicContent:Carousel" />
+					<a class="pic_num" href="#">152张照片</a>
 				</div>
 				<div class="span-right">
 					<ul class="op-2 over-h">
@@ -73,32 +70,22 @@
 						<div class="border-t-gray-e">
 							<h4 class="m-b-sm">热门推荐</h4>
 							<ul class="hot-scenic">
-								<li class="to1">
-									<a href="#">
-										<img src="__PUBLIC__/img/f2.png">
-									</a>
-									<a href="#">
-										冰雪世界
-									</a>
-								</li>
+								<!-- 热门推荐 -->
+								<foreach name="HotScenicList" item="vo" >
+								<li>
+									<div class="pull-left">
+										<a href="#">
+											<img src="{:U('Image/ScenicImg',array('image'=>urlencode($vo['image']).'!feature'),false,false)}">
+										</a>
+									</div>
+									<div class="to1"><a href="#">{$vo.name}</a></div>
+									<div class="m-t-3 to1">
+										{:W('Scenic/score',array('score'=>$vo['grade']))}
 
-								<li class="to1">
-									<a href="#">
-										<img src="__PUBLIC__/img/f3.jpg">
-									</a>
-									<a href="#">
-										冰雪世界
-									</a>
+									</div>
+									<div class="m-t-3 font-12 tc-gray9 to1">{$vo.want_count}个人想去</div>
 								</li>
-
-								<li class="to1">
-									<a href="#">
-										<img src="__PUBLIC__/img/f4.jpg">
-									</a>
-									<a href="#">
-										冰雪世界
-									</a>
-								</li>
+								</foreach>
 							</ul>
 
 						</div>
@@ -136,9 +123,7 @@
 										</a>
 									</div>
 									<div class="m-t-xs">
-										<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
-										<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
-										<span class="tc-main m-l-sm">8.5</span>
+										{:W('Scenic/score',array('score'=>'9.5'))}
 										<span class="tc-gray9 m-l-sm font-12">56人评论</span>
 									</div>
 									<div class="m-t-sm">

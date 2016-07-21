@@ -17,6 +17,43 @@ class IndexController extends Controller {
     }
 
 
+    public function getImg(){
+
+        $url = 'http://pic2.qyer.com/album/1ad/04/1839217/index/300_200';
+        $result = getImage($url,'./Data/',uniqid().'.png');
+        dump($result);
+    }
+
+
+
+
+    public function imgUrlChange(){
+        $ScenicModel = M('Scenic');
+        $List = $ScenicModel->field('id,image')->select(); 
+        $date = date("Y-m-d",time());
+        for ($i=0; $i < count($List); $i++) {
+            $bool  = check_url($List[$i]['image']);
+            if($bool){
+                $filename=uniqid().'.jpg';
+                $result = getImage($List[$i]['image'],'./Data/Scenic/scenic/'.$date.'/',$filename);
+                if($result['file_name']!=''){
+                    $data['image'] = 'Scenic/scenic/'.$date.'/'.$result['file_name'];
+                    $re = $ScenicModel->where('id ='.$List[$i]['id'])->save($data);
+                    dump($re);
+                }else{
+                    dump($result);
+                }
+            }
+        }
+
+    }
+
+
+    public function changeScenicType(){
+
+    }
+
+    
     public function ajax_load(){
         $img[] = 'http://img2.3lian.com/2014/f2/132/d/6.jpg';
         $img[] = 'http://img2.3lian.com/2014/f2/132/d/5.jpg';
