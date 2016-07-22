@@ -100,38 +100,45 @@
 				<div class="col-xs-8">
 					<h4>哈尔滨市区景点</h4>
 					<div class="m-t-md scenic-type border-t-gray-e p-t-sm over-h">
-						<a class="active" href="#">全部</a>
-						<a href="#">滑雪</a>
-						<a href="#">农场</a>
-						<a href="#">建筑</a>
-
+						
+						<a <if condition ="$type_id eq '0'">class="active"</if> href="{:U('Scenic/city',array('id'=>$city_id))}">全部</a>
+						<foreach name="TypeList" item="vo">
+							<a <if condition ="$type_id eq $vo['id']">class="active"</if> href="{:U('Scenic/city',array('id'=>$city_id,'type_id'=>$vo['id']))}">{$vo.type}</a>
+						</foreach>
 					</div>
 
 					<div class="border-t-gray-e p-t-sm">
 						<div class="list">
-							<for start="1" end="10">
+							<foreach name="ScenicList" item="vo" >
 							<div class="s-item p-b-sm border-b-gray-e m-b-sm over-h">
 								<div class="scenic-img">
 									<a href="#">
-										<img src="__PUBLIC__/img/f1.png">
+										<img src="{:U('Image/ScenicImg',array('w'=>225,'h'=>150,'image'=>urlencode($vo['image'].'!feature')),false,false)}">
 									</a>
 								</div>
 								<div class="scenic-info">
 									<div class="s-title">
 										<a href="#">
-											冰雪大世界
+											{$vo.name}
 										</a>
 									</div>
 									<div class="m-t-xs">
-										{:W('Scenic/score',array('score'=>'9.5'))}
-										<span class="tc-gray9 m-l-sm font-12">56人评论</span>
+										{:W('Scenic/score',array('score'=>$vo['grade']))}
+										<span class="tc-gray9 m-l-sm font-12">{$vo.comment_count}人评论</span>
+										<span class="tc-gray9 pull-right font-12 m-r-xs">{$vo.type}</span>
+
 									</div>
 									<div class="m-t-sm">
-										免费进入，内设很多展馆，可以玩一年。哈哈最后一句开玩笑的啦，但真的可以在里面玩很久，我去了两次，都没看够逛够，埃及区最...
+										{:str_sub($vo['desciption'],170)}
 									</div>
 								</div>
 							</div>
-						</for>
+						</foreach>
+						<div class="text-right">
+							<ul class="pagination pagination-sm">
+							  {$page}
+							</ul>	
+						</div>
 
 
 

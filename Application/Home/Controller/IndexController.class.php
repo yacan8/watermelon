@@ -50,6 +50,17 @@ class IndexController extends Controller {
 
 
     public function changeScenicType(){
+        $ScenicModel = D('Scenic');
+        $str = '郭碗瓢盆-<span style="color:#f00;">PHP</span>';
+        $str1 = strip_tags($str);          // 删除所有HTML标签
+        $str2 = strip_tags($str,'<span>'); // 保留 <span>标签
+        echo $str1; // 输出 郭碗瓢盆-PHP
+        echo $str2; // 样式不一样喔
+        for ($i=1; $i < 450; $i++) { 
+            $data['type_id'] = rand(1,8);
+            dump($ScenicModel->where('id = '.$i)->save($data));
+        }
+        
 
     }
 

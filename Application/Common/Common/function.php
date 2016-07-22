@@ -62,3 +62,20 @@ function check_url($url){
     }
     return true;
 }
+
+
+
+/**
+ * [str_sub 景点描述字符串截取]
+ * @param  [STRING] $text   [截取字符串]
+ * @param  [integer] $length [截取长度]
+ * @return [string]
+ */
+function str_sub($text,$length){
+    $strip_tags_text = strip_tags($text);
+    $result = mb_substr($strip_tags_text,0,$length,"utf-8");
+    if($result == $strip_tags_text)//如果没有截取，字符串长度小于截取长度
+        return $strip_tags_text;
+    else//否则返回截取后+省略号 
+        return $result.'...';
+}

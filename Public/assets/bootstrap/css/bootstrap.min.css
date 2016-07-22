@@ -15,27 +15,28 @@ body{
 
 .pagination li a{
 	border:none;
-	color: #F65A4A;
+	color: #63D283;
 }
+.pagination li a:hover,
 .pagination>.active>a,
 .pagination>.active>a:focus, 
 .pagination>.active>a:hover, 
 .pagination>.active>span, 
 .pagination>.active>span:focus, 
 .pagination>.active>span:hover{
-	background-color: #F65A4A;
+	background-color: #63D283;
 	color: #fff;
-	border-color: #F65A4A;
+	border-color: #63D283;
 }
 .pagination li a:focus,
-.pagination li a:hover,
+
 .pagination li a:focus{
-	color: #eb4f38;
+	color: #63D283;
 	background-color: #fff;
 }
 .media-heading{
 	line-height: 20px;
 }
 .badge{
-	background-color: #F65A4A;
+	background-color: #63D283;
 }
