@@ -42,7 +42,7 @@
                     <div class="input-g m-r-110">
                         <span class="input-icon glyphicon glyphicon-check"></span>
                         <input id="verify" class="from-input" type="text" placeholder="图形验证码" title="图形验证码" required/>
-                        <img class="verify" src="{:U('Index/verify')}" title="看不清？点击刷新验证码">
+                        <img class="verify" src="{:U('Login/verify')}" title="看不清？点击刷新验证码">
                         <span class="help-block m-t-sm"></span>
                     </div>
 
@@ -72,7 +72,7 @@
         var sight = 0;
         var check_verify_url = "{:U('Login/check_verify')}";
         var check_url = "{:U('Login/check')}";
-        var verify_src = "{:U('Index/verify')}";
+        var verify_src = "{:U('Login/verify')}";
         var check_nickname_url = "{:U('Login/nickname_check')}";
         $(function(){
             <if condition="session('?message')">

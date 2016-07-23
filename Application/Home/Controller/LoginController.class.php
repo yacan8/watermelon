@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class LoginController extends Controller{
+	
 	//登录view
 	public function index(){
 		$url = I("get.url",'');
@@ -10,6 +11,16 @@ class LoginController extends Controller{
 		// C('TOKEN_ON',false);
 		$this->display();
 	}
+
+	//验证码
+    public function verify(){
+        $Verify =  new \Think\Verify();
+        $Verify->fontSize = 200;
+        $Verify->length   = 4;
+        $Verify->useNoise = false;
+        $Verify->entry();
+    }
+
 	//ajax检查用户名为登录或注册
 	public function check(){
 		$LoginModel = D('Login');

@@ -2,7 +2,7 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <link rel="stylesheet" href="/watermelon/Public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/watermelon/Public/css/nav.css">
     <link rel="stylesheet" href="/watermelon/Public/css/footer.css">
@@ -16,12 +16,11 @@
 </head>
 
 <body>
-    
-<nav class="nav bg-main">
+    <nav class="nav bg-main">
 	<div class="container">
-		<a href="#"><img class="logo_img" src="/watermelon/Public/img/logo.png"></a>
+		<a href="<?php echo U('Index/index');?>"><img class="logo_img" src="/watermelon/Public/img/logo.png"></a>
 		<ul class="nav_l">
-			<li class="active"><a href="#">首页</a></li>
+			<li class="active"><a href="<?php echo U('Index/index');?>">首页</a></li>
 			<li class="transition-all-03"><a class="transition-all-03" href="#">资讯</a></li>
 			<li><a href="#">景点</a></li>
 			<li><a href="#">装备</a></li>
@@ -30,8 +29,8 @@
 		</ul>
 
 		<ul class="nav_l pull-right">
-			<li><a href="#">注册/登录</a></li>
-			<li class="user"><a href="#">_杨溜溜</a></li>
+			<?php if(session('url') != null): ?><li class="user"><a href="#">杨溜溜</a></li>
+			<?php else: ?><li><a href="<?php echo U('Login/index');?>">注册/登录</a></li><li class="user">游客</li><?php endif; ?>
 		</ul>
 	</div>
 </nav>
@@ -71,7 +70,7 @@
                     <div class="input-g m-r-110">
                         <span class="input-icon glyphicon glyphicon-check"></span>
                         <input id="verify" class="from-input" type="text" placeholder="图形验证码" title="图形验证码" required/>
-                        <img class="verify" src="<?php echo U('Index/verify');?>" title="看不清？点击刷新验证码">
+                        <img class="verify" src="<?php echo U('Login/verify');?>" title="看不清？点击刷新验证码">
                         <span class="help-block m-t-sm"></span>
                     </div>
 
@@ -117,7 +116,7 @@
         var sight = 0;
         var check_verify_url = "<?php echo U('Login/check_verify');?>";
         var check_url = "<?php echo U('Login/check');?>";
-        var verify_src = "<?php echo U('Index/verify');?>";
+        var verify_src = "<?php echo U('Login/verify');?>";
         var check_nickname_url = "<?php echo U('Login/nickname_check');?>";
         $(function(){
             <?php if(session('?message')): ?>alert("<?php echo session('message') ?>");

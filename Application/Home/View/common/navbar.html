@@ -1,19 +1,19 @@
-
 <nav class="nav bg-main">
 	<div class="container">
-		<a href="#"><img class="logo_img" src="__PUBLIC__/img/logo.png"></a>
+		<a href="{:U('Index/index')}"><img class="logo_img" src="__PUBLIC__/img/logo.png"></a>
 		<ul class="nav_l">
-			<li class="active"><a href="#">首页</a></li>
+			<li class="active"><a href="{:U('Index/index')}">首页</a></li>
 			<li class="transition-all-03"><a class="transition-all-03" href="#">资讯</a></li>
 			<li><a href="#">景点</a></li>
-			<li><a href="#">装备</a></li>
+			<li><a href="{:U('Equipment/index')}">装备</a></li>
 			<li><a href="#">游记</a></li>
 			<li><a href="#">论坛</a></li>
 		</ul>
 
 		<ul class="nav_l pull-right">
-			<li><a href="#">注册/登录</a></li>
-			<li class="user"><a href="#">_杨溜溜</a></li>
+			<if condition="session('url') neq null"><li class="user"><a href="#">杨溜溜</a></li>
+			<else /><li><a href="{:U('Login/index')}">注册/登录</a></li><li class="user">游客</li>
+			</if>
 		</ul>
 	</div>
 </nav>
