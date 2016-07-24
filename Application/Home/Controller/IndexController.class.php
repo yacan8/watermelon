@@ -64,6 +64,27 @@ class IndexController extends Controller {
 
     }
 
+    public function imgChange(){
+        
+        $model = M('Image');
+        $List = $model->field('id,image,time,user_id')->where('id BETWEEN 1725 and 1726')->select();
+        for ($i=0; $i < count($List); $i++) {
+            $bool  = check_url($List[$i]['image']);
+            if($bool){
+                $filename=uniqid().'.jpg';
+                $date = substr($List[$i]['time'], 0,10);
+
+                $result = getImage($List[$i]['image'],'./Data/Scenic/image/'.$List[$i]['user_id'].'/'.$date.'/',$filename);
+                if($result['file_name']!=''){
+                    $data['image'] = 'Scenic/image/'.$List[$i]['user_id'].'/'.$date.'/'.$result['file_name'];
+                    // $re = $model->where('id ='.$List[$i]['id'])->save($data);
+                    dump($re);
+                }else{
+                    dump($result);
+                }
+            }
+        }
+    }
     
     public function ajax_load(){
         $img[] = 'http://img2.3lian.com/2014/f2/132/d/6.jpg';

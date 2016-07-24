@@ -33,7 +33,10 @@ class ScenicController extends Controller {
             $Page  = new  \Think\Page($count,$One_page_count);
             $show  = $Page->show();// 分页显示输出
             
-
+            $ImageModel = D('Image');
+            $imgCount = $ImageModel->getCountByCityId($city_id);
+            $imgList = $ImageModel->getListByCityId($city_id,1,5);
+            // dump($imgList);
 
 
             $this->assign('TypeList',$TypeList);
