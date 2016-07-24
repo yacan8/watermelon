@@ -1,0 +1,127 @@
+[ 2016-07-23T08:22:26+08:00 ] ::1 /watermelon/%7BU('Index/index')%7D
+ERR: 无法加载控制器:{U('Index
+
+[ 2016-07-23T08:51:11+08:00 ] ::1 /watermelon/index.php/Login/nickname_check.html?nickname=root
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001680s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003118s ]
+SQL: SHOW COLUMNS FROM `wt_login` [ RunTime:0.0253s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wt_login` WHERE `nickname` = 'root' LIMIT 1   [ RunTime:0.0034s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002559s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002844s ]
+
+[ 2016-07-23T08:51:12+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000945s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001654s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000817s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000937s ]
+
+[ 2016-07-23T08:53:17+08:00 ] ::1 /watermelon/index.php/Login/nickname_check.html?nickname=root
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000771s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001397s ]
+SQL: SHOW COLUMNS FROM `wt_login` [ RunTime:0.0271s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wt_login` WHERE `nickname` = 'root' LIMIT 1   [ RunTime:0.0012s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002963s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003327s ]
+
+[ 2016-07-23T08:53:18+08:00 ] ::1 /watermelon/index.php/Login/nickname_check.html?nickname=root
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000651s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001152s ]
+SQL: SHOW COLUMNS FROM `wt_login` [ RunTime:0.0205s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wt_login` WHERE `nickname` = 'root' LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001647s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001812s ]
+
+[ 2016-07-23T08:53:20+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001829s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003255s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000791s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000902s ]
+
+[ 2016-07-23T08:53:23+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000774s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001403s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000812s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000905s ]
+
+[ 2016-07-23T08:53:24+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000882s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001419s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000719s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000818s ]
+
+[ 2016-07-23T08:53:25+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001054s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001832s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001247s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001401s ]
+
+[ 2016-07-23T08:53:26+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000758s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001360s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000777s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000861s ]
+
+[ 2016-07-23T08:53:26+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000715s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001455s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000964s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001126s ]
+
+[ 2016-07-23T08:53:29+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000964s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001871s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002088s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002632s ]
+
+[ 2016-07-23T08:55:25+08:00 ] ::1 /watermelon/index.php/Login/check_verify.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000873s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001550s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001514s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001667s ]
+
+[ 2016-07-23T09:08:55+08:00 ] ::1 /watermelon/Public/js/main.js
+ERR: 无法加载控制器:Public
+
+[ 2016-07-23T09:08:55+08:00 ] ::1 /watermelon/Public/js/main.js
+ERR: 无法加载控制器:Public
+
+[ 2016-07-23T09:14:35+08:00 ] ::1 /watermelon/Public/js/main.js
+ERR: 无法加载控制器:Public
+
+[ 2016-07-23T09:14:35+08:00 ] ::1 /watermelon/Public/js/main.js
+ERR: 无法加载控制器:Public
+
+[ 2016-07-23T09:22:04+08:00 ] ::1 /watermelon/Public/js/main.js
+ERR: 无法加载控制器:Public
+
+[ 2016-07-23T09:22:04+08:00 ] ::1 /watermelon/Public/js/main.js
+ERR: 无法加载控制器:Public
+
+[ 2016-07-23T09:29:42+08:00 ] ::1 /watermelon/index.php/Equipment/index.html
+ERR: 1054:Unknown column 'adddate' in 'order clause'
+ [ SQL语句 ] : SELECT * FROM `wt_equipment` ORDER BY adddate desc LIMIT 0,9  
+
