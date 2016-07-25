@@ -23,7 +23,6 @@ class ImageModel extends Model{
 	/**
 	 * [getListByCityId 获取图片列表通过城市编号]
 	 * @param  [Integer] $city_id [城市编号]
-	 * @param  [Integer] $type    [类型]
 	 * @param  [Integer] $page    [description]
 	 * @param  [Integer] $count   [description]
 	 * @return [List]          [description]
@@ -32,9 +31,10 @@ class ImageModel extends Model{
 		$DB_PREFIX =$this->tablePrefix;
 		$Model = M('');
 		$List = $Model  ->table($DB_PREFIX.'image')
-						->field('id,other_id,time,user_id')
+						->field('id,scenic_id,time,user_id,image')
 						->where('delete_tag = 0 and scenic_id in(select id from '.$DB_PREFIX.'scenic where city_id = '.$city_id.')')
 						->page("$page,$count")
+						->order('time desc')
 						->select();
 		return $List;
 	}

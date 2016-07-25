@@ -13,11 +13,12 @@ class ScenicWidget extends Controller{
 		$CityModel = D('City');
 		if($type==1){//如果为城市页
 			$Data = $CityModel->getById($id);
-		}else if($type=2){//如果为景点页
+		}else if($type==2){//如果为景点页
 			$ScenicModel = M('Scenic');
 			$ScenicInfo = $ScenicModel->field('city_id,name')->find($id);
 			$Data = $CityModel->getById($ScenicInfo['city_id']);
 			$Data['scenic'] = $ScenicInfo['name'];
+			$Data['scenic_id'] = $id;
 		}
 		$this->assign('Data',$Data);
 		$this->display('ScenicContent:breadcrumb');
@@ -28,7 +29,7 @@ class ScenicWidget extends Controller{
 	 * [score 评分星星]
 	 * @param  [float] $score [评分系数]
 	 */
-	public function score($score){
+	public function score($score,$comment_count=''){
 		$score_int = round($score);//四舍五入
 		$xing_num = floor($score_int/2);//星星数
 		if($score_int%2==0){//如果为整的星星
@@ -63,8 +64,108 @@ class ScenicWidget extends Controller{
 			}
 			
 		}
-		echo '<span class="tc-main m-l-md">'.$score.'</span>';
+		if($comment_count=='')
+			echo '<span class="tc-main m-l-md">'.$score.'</span>';
+		else
+			echo '<span class="tc-gray9 m-l-md font-12">'.$comment_count.'人评论</span>';
+	}
+	/**
+	 * [cityWant 城市想去widget]
+	 * @param  [integer] $city_id [城市Id]
+	 */
+	public function cityWant($city_id){
+		if(session('?login')){
+			$user_id = session('login');
+			$count = M('CityWant')->where(array('user_id'=>$user_id,'city_id'=>$city_id,'delete_tag'=>(bool)0))->count();
+			if($count == 0)
+				$bool = false;
+			else
+				$bool = true;
+		}else{
+			$bool = false;
+		}
+		$this->assign('bool',$bool);
+		$this->display('Widget:cityWant');
 	}
 
 
+	/**
+	 * [cityBeen 城市去过widget]
+	 * @param  [integer] $city_id [城市Id]
+	 */
+	public function cityBeen($city_id){
+		if(session('?login')){
+			$user_id = session('login');
+			$count = M('CityBeen')->where(array('user_id'=>$user_id,'city_id'=>$city_id,'delete_tag'=>(bool)0))->count();
+			if($count == 0)
+				$bool = false;
+			else
+				$bool = true;
+		}else{
+			$bool = false;
+		}
+		$this->assign('bool',$bool);
+		$this->display('Widget:cityBeen');
+	}
+
+
+
+	/**
+	 * [cityZan 景点去过widget]
+	 * @param  [integer] $scenic_id [景点Id]
+	 */
+	public function ScenicZan($scenic_id){
+		if(session('?login')){
+			$user_id = session('login');
+			$count = M('Zan')->where(array('user_id'=>$user_id,'other_id'=>$scenic_id,'type'=>1,'delete_tag'=>(bool)0))->count();
+			if($count == 0)
+				$bool = false;
+			else
+				$bool = true;
+		}else{
+			$bool = false;
+		}
+		$this->assign('bool',$bool);
+		$this->display('Widget:scenicZan');
+	}
+
+
+	/**
+	 * [scenicWant 景点想去widget]
+	 * @param  [integer] $city_id [景点Id]
+	 */
+	public function scenicWant($scenic_id){
+		if(session('?login')){
+			$user_id = session('login');
+			$count = M('ScenicWant')->where(array('user_id'=>$user_id,'scenic_id'=>$scenic_id,'delete_tag'=>(bool)0))->count();
+			if($count == 0)
+				$bool = false;
+			else
+				$bool = true;
+		}else{
+			$bool = false;
+		}
+		$this->assign('bool',$bool);
+		$this->display('Widget:scenicWant');
+	}
+
+
+	/**
+	 * [scenicBeen 景点去过widget]
+	 * @param  [integer] $scenic_id [景点Id]
+	 */
+	public function scenicBeen($scenic_id){
+		if(session('?login')){
+			$user_id = session('login');
+			$count = M('ScenicBeen')->where(array('user_id'=>$user_id,'scenic_id'=>$scenic_id,'delete_tag'=>(bool)0))->count();
+			if($count == 0)
+				$bool = false;
+			else
+				$bool = true;
+		}else{
+			$bool = false;
+		}
+		$this->assign('bool',$bool);
+		$this->display('Widget:scenicBeen');
+	}
 }

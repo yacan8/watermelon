@@ -53,17 +53,19 @@
 			<div class="span-container bg-white over-h">
 				<div class="span-left focus-pic">
 					<include file="ScenicContent:Carousel" />
-					<a class="pic_num" href="#">152张照片</a>
+					<if condition="$imgCount eq 0">
+					<a class="pic_num" href="#">还没有相片，上传照片吧</a>
+					<else/>
+					<a class="pic_num" href="#">{$imgCount}张照片</a>
+					</if>
 				</div>
 				<div class="span-right">
 					<ul class="op-2 over-h">
 						<li>
-							<span class="glyphicon glyphicon-heart icon"></span>
-							<span>想去</span>
+							{:W('Scenic/cityWant',array('city_id'=>$city_id))}
 						</li>
 						<li>
-							<span class="glyphicon glyphicon-flag icon"></span>
-							<span>去过</span>
+							{:W('Scenic/cityBeen',array('city_id'=>$city_id))}
 						</li>
 					</ul>
 					<div class="p-md p-t-sm">

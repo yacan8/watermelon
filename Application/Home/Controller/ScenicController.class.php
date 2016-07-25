@@ -34,11 +34,12 @@ class ScenicController extends Controller {
             $show  = $Page->show();// 分页显示输出
             
             $ImageModel = D('Image');
-            $imgCount = $ImageModel->getCountByCityId($city_id);
-            $imgList = $ImageModel->getListByCityId($city_id,1,5);
-            // dump($imgList);
+            $imgCount = $ImageModel->getCountByCityId($city_id);//图片数量
+            $imgList = $ImageModel->getListByCityId($city_id,1,5);//图片列表
 
 
+            $this->assign('imgList',$imgList);
+            $this->assign('imgCount',$imgCount);
             $this->assign('TypeList',$TypeList);
             $this->assign('type_id',$type_id);
             $this->assign('page',$show);
@@ -53,8 +54,20 @@ class ScenicController extends Controller {
     		$this->error('页面错误');
     	}
     }
+    //景点详情view
+    public function scenic(){
+        $scenic_id = I('get.id');
+        if($scenic_id!=''){
+            $ScenicModel = D('Scenic');
 
-    public function foodhotel(){
-    	$this->display();
+            $ScenicInfo = $ScenicModel->getById($scenic_id);//获取景点信息
+            // dump($ScenicInfo);
+
+
+
+            $this->assign('ScenicInfo',$ScenicInfo);
+            $this->assign('scenic_id',$scenic_id);
+            $this->display();
+        }else $this->error('页面错误');
     }
 }

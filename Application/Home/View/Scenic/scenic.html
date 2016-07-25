@@ -14,33 +14,24 @@
 	    <div class="container p-t-md">
 			<div class="row">
 				<div class="col-xs-12">
-					<a href="#">首页</a>
-					<span class="tc-gray9 font-12">></span>
-					<a href="#">东北</a>
-					<span class="tc-gray9 font-12">></span>
-					<a href="#">哈尔滨</a>
-					<span class="tc-gray9 font-12">></span>
-					<span>福满楼</span>
+					{:W('Scenic/breadcrumb',array('type'=>2,'id'=>$scenic_id))}
 				</div>
 				
 				<div class="col-xs-8 m-b-sm">
 					<h2>
-						<a href="#">福满楼</a>
+						<a>{$ScenicInfo.name}</a>
 					</h2>
 				</div>
 				<div class="col-xs-4">
 					<ul class="op-3 over-h m-b-sm">
 						<li>
-							<span class="iconfont icon-shoucangyishoucang-copy icon"></span>
-							<span>想去</span>
+							{:W('Scenic/scenicWant',array('scenic_id'=>$scenic_id))}
 						</li>
 						<li>
-							<span class="glyphicon glyphicon-flag icon"></span>
-							<span>去过</span>
+							{:W('Scenic/scenicBeen',array('scenic_id'=>$scenic_id))}
 						</li>
 						<li>
-							<span class="glyphicon glyphicon-thumbs-up icon"></span>
-							<span>点赞</span>
+							{:W('Scenic/scenicZan',array('scenic_id'=>$scenic_id))}
 						</li>
 					</ul>
 				</div>
@@ -58,16 +49,14 @@
 						<div class="top_con over-h">
 							<div class="fh_img_con">
 								<a class="pic_num" href="#">152张照片</a>
-								<a href="#"><img src="__PUBLIC__/img/f1.png"></a>
+								<a href="#"><img src="{:U('Image/ScenicImg',array('w'=>250,'h'=>180,'image'=>urlencode($ScenicInfo['image']).'!feature'),false,false)}"></a>
 							</div>
 							<div class="fh_info_con p-t-xs">
-								<span class="tc-main font-24">8.5</span>
+								<span class="tc-main font-24">{$ScenicInfo.grade}</span>
 								<span class="tc-main m-r-sm">分</span>
 								<span class="glyphicon glyphicon-signal tc-main font-14"></span>
 								<div class="m-t-md">
-									<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
-									<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
-									<span class="tc-gray9 m-l-sm font-12">56人评论</span>
+									{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
 								</div>
 								<div class="m-t-sm">
 									<div class="m-b-xs"><span class="glyphicon glyphicon-flag m-r-xs tc-grayd"> <span class="tc-gray6">2015位瓜友去过这里</span></span> </div>
@@ -81,11 +70,11 @@
 
 
 						<div class="m-t-md">
-							星光大道位于香港九龙尖沙咀东部的尖沙咀海滨花园，是为表扬香港电影界的杰出人士而设置的特色景点。它仿效美国好莱坞星光大道，将逾百名电影工作者的芳名与手掌印镶嵌在特制的纪念牌匾，以年代依次排列在星光大道上，表扬他们为香港百年电影业所作的贡献。在尖沙咀海旁，还可以观赏两米高的李小龙铜像、电影发展里程碑。当你漫步在星光大道上，在观看众多名人手印同时，还可以欣赏到香港著名的维多利亚港景色、香港岛沿岸特色建筑，这里还是香港崭新的多媒体灯光音乐汇演－幻彩咏香江的理想观赏点。
+							{$ScenicInfo.desciption}
 						</div>
 						<div class="m-t-md">
 							<span class="tc-gray9">地址：</span>
-							香港山頂山頂道128號(查看地图)
+							{$ScenicInfo.address}
 						</div>
 
 
@@ -104,9 +93,7 @@
 										<a href="#">福利社</a>
 									</div>
 									<div class="m-t-xs text-center">
-										<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
-										<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
-										<span class="tc-gray9 m-l-sm font-12">56人评论</span>
+										{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
 									</div>
 								</div>
 								<div class="imgListCon">
@@ -117,9 +104,8 @@
 										<a href="#">福利社</a>
 									</div>
 									<div class="m-t-xs text-center">
-										<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
-										<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
-										<span class="tc-gray9 m-l-sm font-12">56人评论</span>
+
+										{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
 									</div>
 								</div>
 								<div class="imgListCon mo">
@@ -130,9 +116,7 @@
 										<a href="#">福利社</a>
 									</div>
 									<div class="m-t-xs text-center">
-										<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
-										<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
-										<span class="tc-gray9 m-l-sm font-12">56人评论</span>
+										{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
 									</div>
 								</div>
 								

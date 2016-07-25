@@ -5,6 +5,30 @@ use Think\Model\RelationModel;
 class ScenicModel extends RelationModel{
 
 
+
+
+
+	//关联属性
+	protected $_link = array(
+	    'type'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'ScenicType',
+	        'foreign_key'=>'type_id',
+	        'mapping_fields'=>'type',
+	        'as_fields'=>'type'
+	    )
+	);
+	/**
+	 * [getById 通过ID获取景点]
+	 * @param  [Integer] $id [景点编号]
+	 * @return [array]
+	 */
+	public function getById($id){
+		$result = $this->relation('type')->find($id);
+		return $result;
+	}
+
+
 	/**
 	 * [getHotScenicByCityId 根据城市编号获取做多人想去的景点]
 	 * @param  [Integer] $city_id [城市编号]

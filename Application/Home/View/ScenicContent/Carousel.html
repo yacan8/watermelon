@@ -4,23 +4,12 @@
 
          <!-- Wrapper for slides -->
          <div class="carousel-inner" role="listbox">
-             <div class="item active">
-                 <a href="#"><img src="__PUBLIC__/img/f1.png" alt="活动一"></a>
-             </div>
-             <div class="item">
-                 <a href="#"><img src="__PUBLIC__/img/f2.png" alt="活动二"></a>
-             </div>
-              <div class="item">
-                 <a href="#"><img src="__PUBLIC__/img/f4.jpg" alt="活动三"></a>
-             </div>
-             <div class="item">
-                 <a href="#"><img src="__PUBLIC__/img/f3.jpg" alt="活动四"></a>
-             </div>
-             <div class="item">
-                 <a href="#"><img src="__PUBLIC__/img/f5.jpg" alt="活动五"></a>
-             </div>
+            <volist name="imgList" id="vo">
+                 <div class="item <if condition="$i eq 1">active</if>">
+                     <a href="#"><img src="{:U('Image/ScenicImg',array('w'=>680,'h'=>380,'image'=>urlencode($vo['image']).'!feature'),false,false)}"></a>
+                 </div>
+            </volist>
          </div>
-
          <!-- Controls -->
          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
