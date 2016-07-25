@@ -96,4 +96,22 @@ class IndexController extends Controller {
         $json['src']    = $img[$rand];
         echo json_encode($json);
     }
+
+
+    public function test(){
+        $Model = M('');
+        $List = $Model->query('select s.id,c.city ,s.name from wt_city c,wt_scenic s where c.id = s.city_id and s.id between 406 and 450');
+        $this->assign('List',$List);
+
+        $this->display();
+    }
+
+
+    public function change(){
+        $id= I('get.id');
+        $data['longitude'] = I('get.lng');
+        $data['latitude'] = I('get.lat');
+        $result = M('Scenic')->where('id = '.$id)->save($data);
+        echo $result;
+    }
 }

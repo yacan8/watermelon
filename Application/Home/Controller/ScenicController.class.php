@@ -22,7 +22,7 @@ class ScenicController extends Controller {
             $been_count = D('CityBeen')->getCountByCityId($city_id);//去过该城市的人数量
 
             $ScenicTypeModel = D('ScenicType');
-            $TypeList = $ScenicTypeModel->getTypeByCityId($city_id);
+            $TypeList = $ScenicTypeModel->getTypeByCityId($city_id);//获取景点类型
             
 
 
@@ -59,12 +59,17 @@ class ScenicController extends Controller {
         $scenic_id = I('get.id');
         if($scenic_id!=''){
             $ScenicModel = D('Scenic');
-
+            $want_count = D('ScenicWant')->getCountByScenicId($scenic_id);//想去该景点的人数量
+            $been_count = D('ScenicBeen')->getCountByScenicId($scenic_id);//去过该景点的人数量
+            $img_count = D('Image')->getCountByScenicId($scenic_id);//该景点图片数量
             $ScenicInfo = $ScenicModel->getById($scenic_id);//获取景点信息
+
             // dump($ScenicInfo);
 
 
-
+            $this->assign('img_count',$img_count);
+            $this->assign('want_count',$want_count);
+            $this->assign('been_count',$been_count);
             $this->assign('ScenicInfo',$ScenicInfo);
             $this->assign('scenic_id',$scenic_id);
             $this->display();

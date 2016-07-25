@@ -48,7 +48,7 @@
 					<div class="bg-white p-md border-gray-e">
 						<div class="top_con over-h">
 							<div class="fh_img_con">
-								<a class="pic_num" href="#">152张照片</a>
+								<a class="pic_num" href="#">{$img_count}张照片</a>
 								<a href="#"><img src="{:U('Image/ScenicImg',array('w'=>250,'h'=>180,'image'=>urlencode($ScenicInfo['image']).'!feature'),false,false)}"></a>
 							</div>
 							<div class="fh_info_con p-t-xs">
@@ -59,8 +59,8 @@
 									{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
 								</div>
 								<div class="m-t-sm">
-									<div class="m-b-xs"><span class="glyphicon glyphicon-flag m-r-xs tc-grayd"> <span class="tc-gray6">2015位瓜友去过这里</span></span> </div>
-									<div class="tc-gray6"><span class="glyphicon glyphicon-heart m-r-xs tc-grayd"> <span class="tc-gray6">25位瓜友想过这里</span></span></span> </div>
+									<div class="m-b-xs"><span class="glyphicon glyphicon-flag m-r-xs tc-grayd"> <span class="tc-gray6">{$been_count}位瓜友去过这里</span></span> </div>
+									<div class="tc-gray6"><span class="glyphicon glyphicon-heart m-r-xs tc-grayd"> <span class="tc-gray6">{$want_count}位瓜友想过这里</span></span></span> </div>
 								</div>
 								<div class="m-t-md">
 									<a class="btn bg-main btn-sm"><span class="glyphicon glyphicon-edit"></span> 写评论</a>

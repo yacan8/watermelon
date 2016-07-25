@@ -8,7 +8,6 @@ class ImageModel extends Model{
 	/**
 	 * [getCountByCityId 通过城市ID获取该城市照片数量]
 	 * @param  [Integer] $city_id [城市ID]
-	 * @param  [Integer] $type [图片类型 1为景点]
 	 * @return [Integer]
 	 */
 	public function getCountByCityId($city_id){
@@ -19,6 +18,17 @@ class ImageModel extends Model{
 						->count();
 		return $count;
 	}
+
+	/**
+	 * [getCountByScenicId 通过景点ID获取该城市照片数量]
+	 * @param  [Integer] $scenic_id [景点ID]
+	 * @return [Integer]
+	 */
+	public function getCountByScenicId($scenic_id){
+		$count = $this ->where(array('delete_tag'=>(bool)0,'scenic_id'=>$scenic_id))->count();
+		return $count;
+	}
+
 
 	/**
 	 * [getListByCityId 获取图片列表通过城市编号]
