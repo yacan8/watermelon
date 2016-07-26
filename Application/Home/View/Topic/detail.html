@@ -157,7 +157,7 @@
   var collect_url = '{:U("Collection/AjaxCollecting",'',false,false)}';
   var zan_url = '{:U("TopicZan/AjaxZan",'',false,false)}';
   var topic_id = {$topic.id};
-  var login_state = <if condition="session('?login')">true<else/>false</if>;
+  var login_state = <if condition="session('?login')">else<true/>false</if>;
   var img_uploap_url = '{:U("Topic/addTopicUpload",'',false,false)}';
   var PUBLIC = "__PUBLIC__";
   var login_url = "{:U('Login/index')}";
@@ -165,8 +165,8 @@
 </script>
 <include file="Common/footerJS" />
 <if condition ="session('?login')">
-      <include file="Common/edhead" />
-    </if>
+    <include file="Common/edhead" />
+</if>
 <script type="text/javascript" src="__PUBLIC__/assets/viewer/js/viewer.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.toaster.js"></script>
 <script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.scrollLoading.js"></script>

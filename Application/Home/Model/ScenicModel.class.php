@@ -82,5 +82,23 @@ class ScenicModel extends RelationModel{
 		return $List;
 		// select s.id,s.name,s.desciption,s.grade,st.type,(select count(*) from wt_scenic_grade where scenic_id = s.id) comment_count from wt_scenic s,wt_scenic_type st where s.type_id=st.id order by grade desc
 	}
+
+
+	/**
+	 * [getNearestScenic 获取最近的景点]
+	 * @param  [Integer] $scenic_id [景点ID]
+	 * @param  [Integer] $lat       [数量]
+	 * @return [List]
+	 */
+	public function getNearestScenic($scenic_id,$count=3){
+		$DB_PREFIX = $this->tablePrefix;
+		$info = $this->field('city_id,longitude,latitude')->find($scenic_id);
+		$lng = $info['longitude'];
+		$lat = $info['latitude'];
+		$city_id = $info['city_id'];
+		$sql = "SELECT id,name,grade,image,ROUND(6378.138*2*ASIN(SQRT(POW(SIN(($lat*PI()/180-latitude*PI()/180)/2),2)+COS($lat*PI()/180)*COS(latitude*PI()/180)*POW(SIN(($lng*PI()/180-longitude*PI()/180)/2),2)))*1000) distance FROM wt_scenic where city_id = $city_id and latitude <> '' and id <> $scenic_id ORDER BY distance asc limit $count";
+		$List = M('')->query($sql);
+		return $List;
+	}
 }
 

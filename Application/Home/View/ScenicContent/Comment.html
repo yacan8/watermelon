@@ -1,0 +1,43 @@
+<div class="m-t-md bg-white p-md border-gray-e">
+	<div class="p-b-sm font-18 border-b-gray-e">
+		<span class="m-r-md">点评</span>
+		<a class="m-l-sm c-type <if condition='$recommend_level eq 0'>active</if>" href="{:U('Scenic/scenic',array('id'=>$scenic_id))}">全部</a>
+		<a class="m-l-sm c-type <if condition='$recommend_level eq 5'>active</if>" href="{:U('Scenic/scenic',array('id'=>$scenic_id,'r'=>5))}">五星</a>
+		<a class="m-l-sm c-type <if condition='$recommend_level eq 4'>active</if>" href="{:U('Scenic/scenic',array('id'=>$scenic_id,'r'=>4))}">四星</a>
+		<a class="m-l-sm c-type <if condition='$recommend_level eq 3'>active</if>" href="{:U('Scenic/scenic',array('id'=>$scenic_id,'r'=>3))}">三星</a>
+		<a class="m-l-sm c-type <if condition='$recommend_level eq 2'>active</if>" href="{:U('Scenic/scenic',array('id'=>$scenic_id,'r'=>2))}">二星</a>
+		<a class="m-l-sm c-type <if condition='$recommend_level eq 1'>active</if>" href="{:U('Scenic/scenic',array('id'=>$scenic_id,'r'=>1))}">一星</a>
+	</div>
+	<div class="commentCon p-t-md">
+
+		<if condition ="count($GradeList) neq 0">
+		<volist name="GradeList" id="vo">
+			<div class="media m-t-md">
+			  <div class="media-left">
+			    <a href="#">
+			      <img class="media-object c_u_icon" src="{$vo.icon|default='__PUBLIC__/img/udefault.png'}" alt="...">
+			    </a>
+			  </div>
+			  <div class="media-body p-b-md border-b-gray-e">
+			    <h5 class="media-heading">
+			    	<a href="#">{$vo.nickname}</a>
+			    	<span class="pull-right tc-gray9">
+						{:W('Scenic/score',array('score'=>$vo['recommend_level'],'info'=>substr($vo['time'],0,10)))}
+			    	</span>
+			    </h5>
+			    <div>{$vo.description}</div>
+			  </div>
+			</div>
+
+		</volist>
+
+		<div class="text-right">
+			<ul class="pagination pagination-sm">
+			  {$page}
+			</ul>	
+		</div>
+		<else/>
+		<div class="text-center tc-gray9 " style="height:400px;line-height:400px;">暂无评论</div>
+		</if>
+	</div>
+</div>

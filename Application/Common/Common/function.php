@@ -79,3 +79,13 @@ function str_sub($text,$length){
     else//否则返回截取后+省略号 
         return $result.'...';
 }
+
+/**
+ * [kilometre 距离 米转化为公里]
+ * @param  [Integer] $distance [距离 单位米]
+ * @return [String]           [公里字符串]
+ */
+function kilometre($distance){
+    $kil = (float)$distance/1000;
+    return sprintf("%.2f",$kil).'公里';
+}

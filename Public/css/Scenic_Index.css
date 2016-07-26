@@ -255,3 +255,8 @@
 	margin-bottom: 6px;
 	color: #222;
 }
+
+/*编辑IMG图片按钮隐藏*/
+.input[name="img[]"] {
+    display: none;
+}

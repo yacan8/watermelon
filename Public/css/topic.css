@@ -37,30 +37,7 @@
 .input[name="img[]"]{
 	display: none;
 }
-.fr-element.fr-view li{
-	list-style: inherit!important;
-}
-.fr-toolbar .fr-command.fr-btn i, .fr-popup .fr-command.fr-btn i{
-	margin: 12px 11.5px!important;
-	font-size: 12px!important;
-}
-.fr-box{
-	z-index: 0!important;
-}
-.fr-btn.fr-command[data-cmd="emoticons"]{
-    display: inline-block!important;
-}
-.fr-toolbar .fr-command.fr-btn{
-	color: #666!important;
-}
-.fr-toolbar .fr-command.fr-btn.fr-active, .fr-popup .fr-command.fr-btn.fr-active {
-    color: #1e88e5!important;
-    background: 0 0;
-}
-.fr-toolbar {
-	border-width: 1px!important;
-	border-color: #eee!important;
-}
+
 .line-h22{
 	line-height: 22px;
 }

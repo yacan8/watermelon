@@ -29,7 +29,7 @@ class ScenicWidget extends Controller{
 	 * [score 评分星星]
 	 * @param  [float] $score [评分系数]
 	 */
-	public function score($score,$comment_count=''){
+	public function score($score,$info=''){
 		$score_int = round($score);//四舍五入
 		$xing_num = floor($score_int/2);//星星数
 		if($score_int%2==0){//如果为整的星星
@@ -64,10 +64,16 @@ class ScenicWidget extends Controller{
 			}
 			
 		}
-		if($comment_count=='')
-			echo '<span class="tc-main m-l-md">'.$score.'</span>';
+		if((float)$score>=8.5&&(float)$score<9.5)//配合CSS 如果最后一个星星为绝对定位
+			$m_l = 'm-l-md';
+		else{
+			$m_l = 'm-l-sm';
+		}
+			
+		if($info=='')
+			echo '<span class="tc-main '.$m_l.'">'.$score.'</span>';
 		else
-			echo '<span class="tc-gray9 m-l-md font-12">'.$comment_count.'人评论</span>';
+			echo '<span class="tc-gray9 '.$m_l.' font-12">'.$info.'</span>';
 	}
 	/**
 	 * [cityWant 城市想去widget]

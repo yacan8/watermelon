@@ -37,7 +37,7 @@ class ScenicController extends Controller {
             $imgCount = $ImageModel->getCountByCityId($city_id);//图片数量
             $imgList = $ImageModel->getListByCityId($city_id,1,5);//图片列表
 
-
+ 
             $this->assign('imgList',$imgList);
             $this->assign('imgCount',$imgCount);
             $this->assign('TypeList',$TypeList);
@@ -58,15 +58,29 @@ class ScenicController extends Controller {
     public function scenic(){
         $scenic_id = I('get.id');
         if($scenic_id!=''){
+            $p = I('get.p',1);
+            $recommend_level = I('get.r',0);//评论星级
             $ScenicModel = D('Scenic');
             $want_count = D('ScenicWant')->getCountByScenicId($scenic_id);//想去该景点的人数量
             $been_count = D('ScenicBeen')->getCountByScenicId($scenic_id);//去过该景点的人数量
             $img_count = D('Image')->getCountByScenicId($scenic_id);//该景点图片数量
             $ScenicInfo = $ScenicModel->getById($scenic_id);//获取景点信息
+            $NearestScenicList = $ScenicModel->getNearestScenic($scenic_id);//距离最近的景点
 
-            // dump($ScenicInfo);
 
+            $ScenicGradeModel = D('ScenicGrade');
+            $GradeList = $ScenicGradeModel->getList($scenic_id,0,$recommend_level,$p,10);//列表评论
+            $comment_count = $ScenicGradeModel->getCount($scenic_id);//总的评论数量
 
+            $count = $ScenicGradeModel->getCount($scenic_id,0,$recommend_level);//评论数量
+            $Page  = new  \Think\Page($count,10);
+            $show  = $Page->show();// 分页显示输出
+
+            $this->assign('page',$show);
+            $this->assign('comment_count',$comment_count);
+            $this->assign('recommend_level',$recommend_level);
+            $this->assign('GradeList',$GradeList);
+            $this->assign('NearestScenicList',$NearestScenicList);
             $this->assign('img_count',$img_count);
             $this->assign('want_count',$want_count);
             $this->assign('been_count',$been_count);
@@ -76,3 +90,4 @@ class ScenicController extends Controller {
         }else $this->error('页面错误');
     }
 }
+

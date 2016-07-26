@@ -4,6 +4,7 @@
     <include file="Common/headerCSS" />
 	<link rel="stylesheet" href="__PUBLIC__/css/Scenic_Index.css">
 	<link rel="stylesheet" href="__PUBLIC__/css/carousel.css">
+
     <title>西瓜游-景点</title>
 </head>
 
@@ -56,7 +57,7 @@
 								<span class="tc-main m-r-sm">分</span>
 								<span class="glyphicon glyphicon-signal tc-main font-14"></span>
 								<div class="m-t-md">
-									{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
+									{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'info'=>$comment_count.'人评论'))}
 								</div>
 								<div class="m-t-sm">
 									<div class="m-b-xs"><span class="glyphicon glyphicon-flag m-r-xs tc-grayd"> <span class="tc-gray6">{$been_count}位瓜友去过这里</span></span> </div>
@@ -85,42 +86,19 @@
 								这里附近还有
 							</span>
 							<div class="m-t-md over-h">
-								<div class="imgListCon">
-									<a class="a_img" href="#">
-										<img class="imgList3" src="__PUBLIC__/img/f1.png">
-									</a>
-									<div class="m-t-sm text-center">
-										<a href="#">福利社</a>
+								<volist name="NearestScenicList" id ="vo">
+									<div class="imgListCon <if condition ='$i/3 eq 1'> mo</if>">
+										<a class="a_img" href="#">
+											<img class="imgList3" src="{:U('Image/ScenicImg',array('w'=>193,'h'=>120,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+										</a>
+										<div class="m-t-sm text-center">
+											<a href="#">{$vo.name}</a>
+										</div>
+										<div class="m-t-xs text-center">
+											{:W('Scenic/score',array('score'=>$vo['grade'],'info'=>kilometre($vo['distance'])))}
+										</div>
 									</div>
-									<div class="m-t-xs text-center">
-										{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
-									</div>
-								</div>
-								<div class="imgListCon">
-									<a class="a_img" href="#">
-										<img class="imgList3" src="__PUBLIC__/img/f1.png">
-									</a>
-									<div class="m-t-sm text-center">
-										<a href="#">福利社</a>
-									</div>
-									<div class="m-t-xs text-center">
-
-										{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
-									</div>
-								</div>
-								<div class="imgListCon mo">
-									<a class="a_img" href="#">
-										<img class="imgList3" src="__PUBLIC__/img/f1.png">
-									</a>
-									<div class="m-t-sm text-center">
-										<a href="#">福利社</a>
-									</div>
-									<div class="m-t-xs text-center">
-										{:W('Scenic/score',array('score'=>$ScenicInfo['grade'],'comment_count'=>'57'))}
-									</div>
-								</div>
-								
-								
+								</volist>
 							</div>
 						</div>
 					</div>
@@ -128,8 +106,8 @@
 
 
 
-					<include file="ScenicContent/foodhotelComment" />
-
+					<include file="ScenicContent/Comment" />
+					{:W('Edit/edit')}
 
 				</div>
 
@@ -150,5 +128,8 @@
 <script type="text/javascript">
 	var PUBLIC = "__PUBLIC__";
 </script>
+<if condition ="session('?login')">
+    <include file="Common/edhead" />
+</if>
 <script type="text/javascript" src="__PUBLIC__/js/infomation.js"></script>
 </html>
