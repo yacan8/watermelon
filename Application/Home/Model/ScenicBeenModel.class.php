@@ -12,4 +12,20 @@ class ScenicBeenModel extends Model{
 		$count = $this->where(array('scenic_id'=>$scenic_id,'delete_tag'=>0))->count();
 		return $count;
 	}
+
+
+
+	/**
+	 * [checkByScenicIdAndUserId 检测是否去过]
+	 * @param  [Integer] $scenic_id  [景点ID]
+	 * @param  [Integer] $user_id   [用户ID]
+	 * @return [list]          [返回查询结果 如果存在长度且删除标识delete_tag为0 为已被去过 否则为未去过]
+	 */
+	public function checkByScenicIdAndUserId($scenic_id,$user_id){
+		$condition['user_id'] = $user_id;
+	    $condition['scenic_id'] = $scenic_id;
+		$condition['_logic'] = 'AND';
+		$list = $this->where($condition)->field('id,delete_tag')->select();
+		return $list;
+	}
 }
