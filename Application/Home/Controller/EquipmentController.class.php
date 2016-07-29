@@ -9,13 +9,13 @@ class EquipmentController extends Controller {
 
 
 		//获取装备品牌
-		$brand = M('equipment_brand');
+		$brand = M('EquipmentBrand');
 		$bresult = $brand->select();
 		//获取装备类型
-		$type = M('equipment_type');
+		$type = M('EquipmentType');
 		$tresult = $type->select();
 		//获取装备列表
-		$equipment = M('equipment');
+		$equipment = M('Equipment');
 		$condition = null;
 		$count = $equipment->count();
 		$Page = new \Think\Page($count,9);

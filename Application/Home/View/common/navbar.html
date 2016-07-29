@@ -11,7 +11,7 @@
 		</ul>
 
 		<ul class="nav_l pull-right">
-			<if condition="session('url') neq null"><li class="user"><a href="#">杨溜溜</a></li>
+			<if condition="session('id') neq null"><li class="user"><a href="#">{$Think.session.nickname}</a></li>
 			<else /><li><a href="{:U('Login/index')}">注册/登录</a></li><li class="user">游客</li>
 			</if>
 		</ul>

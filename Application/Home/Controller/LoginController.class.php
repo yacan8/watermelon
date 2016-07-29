@@ -5,7 +5,9 @@ class LoginController extends Controller{
 	
 	//登录view
 	public function index(){
+		//记录跳转登录页前的页面
 		$url = I("get.url",'');
+		echo $url;
 		if($url!='')
 			session('url',$url);
 		// C('TOKEN_ON',false);
@@ -38,7 +40,7 @@ class LoginController extends Controller{
 		$this->display();
 	}
 
-	//忘记密码
+	//忘记密码view
 	public function forget(){
 		$this->display();
 	}
@@ -106,7 +108,7 @@ class LoginController extends Controller{
 	}
 	//退出登录
 	public function outlogin(){
-		session('login',null);
+		session(null);
 		$this->redirect("Index/index",array());
 	}
 

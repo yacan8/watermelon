@@ -3,36 +3,31 @@ namespace Home\Controller;
 use Think\Controller;
 class AccountController extends Controller{
 
-
-
-
 	public function index(){
-		$LoginModel = D('Login');
-		$id = session('login');
-		$userinfo = $LoginModel->getById($id);
-		$this->assign('userinfo',$userinfo);
-		$this->display();
+		$model = D('User');
+		$id = session('userid');
+		$signature = $model->getSignaById($id);
+		if($signature){	
+			session('signature',$signature);
+		}
+		$this->display('index');
 	}
-
-
-
-	
-
-
-
-	
 
 	// 个人动态view
 	public function dynamics(){
-
+		$model = D('Dynamics');
+		$reslut = $model->select(); 
 		$this->assign('content','AccountContent/dynamics');
+		$this->assign('content','');
 		$this->display('index');
 	}
 
 	// 个人游记view
 	public function travelNote(){
+		$model = D('TravelNote');
 		$this->assign('content','AccountContent/travelNote');
-		$this->display('index');
+		$model->test();
+		// $this->display('index');
 	}
 
 	//个人话题view
@@ -92,7 +87,11 @@ class AccountController extends Controller{
 
 	// 个人资料页
 	public function information(){
+		$umodel = D('User');
+		$lmodel = D('Login');
 		$this->assign('content','AccountContent/information');
+		$this->assign('userinfo',$umodel->getUserInfoById(session('userid')));
+		$this->assign('logininfo',$lmodel->getLoginInfoById(session('id')));
 		$this->display('index');
 	}
 

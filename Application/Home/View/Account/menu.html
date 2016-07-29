@@ -3,7 +3,7 @@
 		<img class="u_icon" src="__PUBLIC__/img/f4.jpg">
 		<div class="info">
 			<div class="nickname">
-				这是一个昵称
+				{$Think.session.nickname}
 				<button class="btn btn-xs btn-success m-l-sm">
 					<span class="glyphicon glyphicon-plus"></span> 加关注
 				</button>
@@ -13,7 +13,9 @@
 			</div>
 			<div class="text tc-gray9">
 				<span style="font-size:24px">“</span>
-				做我自己想做的事，走自己想走的路，过不一样的生活，我的人生我做主我为自己代言，我就是哑舍格拉
+				<if condition="session('signature') neq null">{$Think.session.signature}
+				<else />这个用户很懒，什么都没有留下
+				</if>
 			</div>
 		</div>
 	</div>

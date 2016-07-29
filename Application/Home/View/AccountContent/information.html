@@ -2,22 +2,22 @@
 	<a href="{:U('Account/edit')}" class="pull-right btn btn-default btn-sm">编辑资料</a>
 	<div class="m-l-md m-b-md">
 		<span class="tc-gray9 m-r-sm">用户名:</span>
-		<span class="">麦乐</span>
+		<span class="">{$Think.session.nickname}</span>
 	</div>
 	<div class="m-l-md m-b-md">
 		<span class="tc-gray9 m-r-sm">职业:</span>
-		<span class="">开发者</span>
+		<span class="">{$userinfo.job}</span>
 	</div>
 	<div class="m-l-md m-b-md">
 		<span class="tc-gray9 m-r-sm">所在地:</span>
-		<span class="">广西玉林</span>
+		<span class="">{$userinfo.province}</span>
 	</div>
 	<div class="m-l-md m-b-md">
 		<span class="tc-gray9 m-r-sm">注册时间:</span>
-		<span class="">2013-1-17 18:25</span>
+		<span class="">{$logininfo.reg_time}</span>
 	</div>
 	<div class="m-l-md">
 		<span class="tc-gray9 m-r-sm">最后登录时间:</span>
-		<span class="">2013-1-17 18:25</span>
+		<span class="">{$logininfo.last_time}</span>
 	</div>
 </div>

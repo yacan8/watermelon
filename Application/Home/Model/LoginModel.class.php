@@ -42,9 +42,11 @@ class LoginModel extends RelationModel{
 	public function login($data){
 		$tel = $data['tel'];
 		$password = md5($data['password']);
-		$info = $this->where(array('tel'=>$tel))->field('id,password')->find();
+		$info = $this->where(array('tel'=>$tel))->field('id,password,user_id,nickname')->find();
 		if($password == $info['password']){
-			session('login',$info['id']);
+			session('id',$info['id']);
+			session('userid',$info['user_id']);
+			session('nickname',$info['nickname']);
 			return true;
 		}
 		else return false;
@@ -117,5 +119,16 @@ class LoginModel extends RelationModel{
 			return "密码错误";
 		}
 
+	}
+
+	/**
+	 *	[getLoginInfoById 获取登陆信息]
+	 *	@param [Integer] $id 登陆编号
+	 *	@return 登陆信息 
+	 */
+	public function getLoginInfoById($id){
+		$condition['id'] = $id;
+		$result = $this->where($condition)->find();
+		return $result;
 	}
 }
