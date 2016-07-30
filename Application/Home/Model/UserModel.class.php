@@ -22,4 +22,5 @@ class UserModel extends Model{
 		$result = $this->where($condition)->find();
 		return $result;
 	}
+
 }

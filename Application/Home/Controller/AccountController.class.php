@@ -26,8 +26,12 @@ class AccountController extends Controller{
 	public function travelNote(){
 		$model = D('TravelNote');
 		$this->assign('content','AccountContent/travelNote');
-		$model->test();
-		// $this->display('index');
+		$Page = new \Think\Page($model->getCount(),2);
+		$reslut = $model->getList($Page->firstRow,$Page->listRows);
+		$this->assign('result',$reslut);
+		$this->assign('page',$Page->show());
+		// dump($reslut);
+		$this->display('index');
 	}
 
 	//个人话题view

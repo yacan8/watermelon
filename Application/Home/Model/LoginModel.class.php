@@ -131,4 +131,15 @@ class LoginModel extends RelationModel{
 		$result = $this->where($condition)->find();
 		return $result;
 	}
+
+	/**
+	 * [getNickByUser_Id 获取用户昵称]
+	 * @param [Integer] $userid
+	 * @return 用户昵称
+	 */
+	public function getNickByUserId($userid){
+		$condition['user_id'] = $userid;
+		$result = $this->where($condition)->field('nickname')->find();
+		return $result['nickname'];
+	}
 }
