@@ -78,4 +78,26 @@
 	};
 
 
+	$('.submit-gj').click(function(event) {
+		var _obj = $('#comment_content');
+		var content = _obj.val();
+		var grade_obj = $('.grade');
+		var grade = grade_obj.attr('data-grade');
+		if(content.length<30){
+			$.toaster({ priority : 'danger', title : '通知', message : '评论至少30个字哦，亲'});
+			return false;
+		}else if(grade == '0'){
+			$.toaster({ priority : 'danger', title : '通知', message : '请点击星星进行评分'});
+			return false;
+		}else{
+			$('.recommend_level').val(grade);
+			return true;
+		}
+	});
+
+	$("#comment_content").focus(function(event) {
+		if(!login_state){
+			window.location.href = _login_url;
+		}
+	});
 });

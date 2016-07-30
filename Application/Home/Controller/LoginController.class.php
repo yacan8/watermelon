@@ -7,7 +7,6 @@ class LoginController extends Controller{
 	public function index(){
 		//记录跳转登录页前的页面
 		$url = I("get.url",'');
-		echo $url;
 		if($url!='')
 			session('url',$url);
 		// C('TOKEN_ON',false);

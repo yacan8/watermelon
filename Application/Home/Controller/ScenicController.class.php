@@ -4,6 +4,16 @@ use Think\Controller;
 
 class ScenicController extends Controller {
     public function index(){
+
+
+        $CityModel = D('City');
+        $CityList = $CityModel->getList(1,8);
+
+        $ProvinceModel = D('Province');
+        $ProvinceList = $ProvinceModel->relation('city')->select();
+    
+        $this->assign('ProvinceList',$ProvinceList);
+        $this->assign('CityList',$CityList);
     	$this->display('city_list');
     }
 
@@ -16,8 +26,9 @@ class ScenicController extends Controller {
     	if($city_id!=''){
             $type_id = I('get.type_id',0);
             $p = I('get.p',1);
-            $CityModel = M('City');
-            $city_name = $CityModel->where(array('id'=>$city_id))->getField('city');//获取城市名
+            $CityModel = D('City');
+            $city_info = $CityModel->getCityAndProvice($city_id);//获取城市名
+
             $want_count = D('CityWant')->getCountByCityId($city_id);//想去该城市的人数量
             $been_count = D('CityBeen')->getCountByCityId($city_id);//去过该城市的人数量
 
@@ -47,7 +58,7 @@ class ScenicController extends Controller {
             $this->assign('HotScenicList',$HotScenicList);
             $this->assign('want_count',$want_count);
             $this->assign('been_count',$been_count);
-            $this->assign('city_name',$city_name);
+            $this->assign('city_info',$city_info);
             $this->assign('city_id',$city_id);
     		$this->display('city_d');
     	}else{

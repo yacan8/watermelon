@@ -14,178 +14,49 @@
       <div class="container">
           <h2>热门城市</h2>
           <div class="hot_container over-h m-t-lg">
-            <for start="1" end="9">
+            <volist name="CityList" id="vo">
             <div class="hit_item">
-              <a class="img_a" href="#">
-                <img class="transition-all-1" src="__PUBLIC__/img/f1.png">
+              <a class="img_a" href="{:U('Scenic/city',array('id'=>$vo['id']))}">
+                <img class="transition-all-1" src="{$vo.image|default="__PUBLIC__/img/city.jpg"}">
               </a>
               <div class="p-sm text-center">
                 <div class="font-bold font-16">
-                  <a class="title" href="#">四川-成都</a>
+                  <a class="title" href="{:U('Scenic/city',array('id'=>$vo['id']))}">{$vo.city}</a>
                 </div>
                 <div class="m-t-xs font-12 tc-gray9">
-                  <span class="keywords">2015</span>人想去
+                  <span class="keywords">{$vo.want}</span>人想去
+                  <span class="m-l-sm keywords">{$vo.been}</span>人去过
                 </div>
               </div>
             </div>
-            </for>
+            </volist>
           </div>
         </div>
     </div>
     
    	<div class="container">
       <h2 class="pull-left">城市列表</h2>
-      <div class="city-type m-l-lg pull-left">
+      <!-- <div class="city-type m-l-lg pull-left">
             <a class="active" href="#">全部</a>
             <a href="#">东北</a>
             <a href="#">华东</a>
             <a href="#">西南</a>
-      </div>
+      </div> -->
       <div style="clear: both;"></div>
       
       <div style="clear: both;">
-        <h3 class="tc-main">东北</h3>
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">大庆市</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
+        <!-- <h3 class="tc-main">东北</h3> -->
+        <volist name="ProvinceList" id="vo">
+          <div class="p-item">
+            <span class="p-title">{$vo.province}</span>
+            <ul class="city_list">
+              <volist name="vo.city" id="c_item">
+                <li><a href="{:U('Scenic/city',array('id'=>$c_item['id']))}">{$c_item.city}</a></li>
+              </volist>
+            </ul>
+          </div>
+        </volist>
 
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">大庆市</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-
-
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">大庆市</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-
-
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-
-
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-      </div>
-          <div style="clear: both;">
-        <h3 class="tc-main">东北</h3>
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">大庆市</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
-
-        <div class="p-item">
-          <span class="p-title">黑龙江</span>
-          <ul class="city_list">
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">齐齐哈尔市</a></li>
-            <li><a href="#">鸡西市</a></li>
-            <li><a href="#">大庆市</a></li>
-            <li><a href="#">掌不住</a></li>
-            <li><a href="#">不懂</a></li>
-            <li><a href="#">哈尔滨</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">黑色幽默</a></li>
-            <li><a href="#">相同</a></li>
-          </ul>
-        </div>
 
 
       </div>

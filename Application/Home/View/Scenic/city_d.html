@@ -19,7 +19,7 @@
 				
 				<div class="col-xs-12 m-b-sm">
 					<h2>
-						<a >{$city_name}</a>
+						<a >{$city_info.city}</a>
 						<span class="pull-right m-t-md font-12">
 							<span class="want_count tc-main">{$want_count}</span>人想去这里，
 							<span class="been_count tc-main">{$been_count}</span>人去过这里
@@ -38,7 +38,7 @@
 							<li><a href="#">美食</a></li>
 						</ul>
 						<ul class="head-menu-l pull-right">
-							<li><a href="#">地图</a></li>
+							<li><a class="map-view" href="javascript:void(0)">地图</a></li>
 							<li><a href="#">评论</a></li>
 						</ul>
 					</div>
@@ -155,21 +155,69 @@
 
 				<div class="col-xs-4">
 					<h4>哈尔滨景点地图</h4>
-
+					<div id="map" style="height:300px;"></div>
+					<button class="map-view btn btn-sm btn-default btn-block m-t-sm">查看地图</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
     <include file="Common/footer" />
+	<!-- 地图模态框 -->
+    <div class="modal fade bs-example-modal-lg"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">
+          	{$city_info.city}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div style="height:500px;width:100%;">
+          	<div id="modal-map" style="height:100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.toaster.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=i1n66UyP2DFctjvKLRt68GKY"></script>
 <script type="text/javascript">
 	var PUBLIC = "__PUBLIC__";
 	var city_id = {$city_id};
 	var c_want_url = "{:U('CityWant/want')}";
 	var c_been_url = "{:U('CityBeen/been')}";
+
+	// 百度地图API功能
+	var map = new BMap.Map("map");
+	map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+	map.enableScrollWheelZoom(true);
+
+
+
+	var modal_map = new BMap.Map("modal-map");
+	// var m_point = new BMap.Point({$ScenicInfo.longitude},{$ScenicInfo.latitude});
+	modal_map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+	modal_map.enableScrollWheelZoom(true);
+
+	$(function(){
+		$(".map-view").click(function(event) {
+			$('#myModal').modal('show');
+			setTimeout(function(){
+			   modal_map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+			}, 400);
+			
+		});
+	})
 </script>
 <script type="text/javascript" src="__PUBLIC__/js/op.js"></script>
 </html>

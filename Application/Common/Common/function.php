@@ -89,3 +89,24 @@ function kilometre($distance){
     $kil = (float)$distance/1000;
     return sprintf("%.2f",$kil).'公里';
 }
+
+/**
+* 可以统计中文字符串长度的函数
+* @param $str 要计算长度的字符串
+* @param $type 计算长度类型，0(默认)表示一个中文算一个字符，1表示一个中文算两个字符
+*
+*/
+function abslength($str)
+{
+    if(empty($str)){
+        return 0;
+    }
+    if(function_exists('mb_strlen')){
+        return mb_strlen($str,'utf-8');
+    }
+    else {
+        preg_match_all("/./u", $str, $ar);
+        return count($ar[0]);
+    }
+}
+

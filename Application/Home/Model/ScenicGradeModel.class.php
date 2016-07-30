@@ -3,6 +3,16 @@ namespace Home\Model;
 use Think\Model;
 class ScenicGradeModel extends Model{
 
+
+
+	protected $_validate = array(     
+		array('description','require','请输入评论内容！'), 
+		array('recommend_level','require','请选择评分星级'), 
+		array('scenic_id','require','数据错误！')
+	);
+
+
+
 	/**
 	 * [getList 获取列表]
 	 * @param  integer  $scenic_id [景点ID]

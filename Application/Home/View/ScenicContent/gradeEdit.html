@@ -1,0 +1,41 @@
+<span class='font-18'>发表评论</span>
+						<div class="m-t-md">
+							<if condition="session('?login')">
+								<a href="{:U('/u/'.$info['id'],'',false,false)}">
+									<img class="c_u_icon m-r-sm" src="{$info.icon|default='__PUBLIC__/img/udefault.png'}">
+									{$info.nickname}
+								</a>
+							<else/>
+								<a>
+									<img class="c_u_icon m-r-sm" src="__PUBLIC__/img/udefault.png">
+									游客
+								</a>
+							</if>
+
+
+							<div class="grade-select">
+								<span class="grade" data-grade='0'>
+									<i class="grade-item iconfont icon-xing tc-grayd"></i>
+									<i class="grade-item iconfont icon-xing tc-grayd"></i>
+									<i class="grade-item iconfont icon-xing tc-grayd"></i>
+									<i class="grade-item iconfont icon-xing tc-grayd"></i>
+									<i class="grade-item iconfont icon-xing tc-grayd"></i>
+								</span>
+
+								<span class="grade-description m-l-sm">点击星星为它评分</span>
+							</div>
+
+						</div>
+						<form action="{:U('ScenicGrade/comment')}" method="post">
+						<input type="hidden" name="scenic_id" value="{$scenic_id}">
+						<input type="hidden" class="recommend_level" name="recommend_level" value="">
+						<div class="m-t-sm">
+							<textarea id="comment_content" name="description" class="form-control" rows="5" placeholder="这里有哪些亮点？哪些方面还不够好？大家都期待着你的点评" style="resize: none;"></textarea>
+						</div>
+						<div class="comment-op">
+							<div class="m-t-sm over-h">
+						        <span class="tc-gray9 font-12">30个字起评，不砍价哦</span>
+						        <button type="submit" class="btn bg-main btn-sm pull-right submit-gj" data-loading-text="提交中...">提交</button>
+						    </div>
+						</div>
+						</form>

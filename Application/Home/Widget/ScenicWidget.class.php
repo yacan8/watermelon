@@ -174,4 +174,16 @@ class ScenicWidget extends Controller{
 		$this->assign('bool',$bool);
 		$this->display('Widget:scenicBeen');
 	}
+
+
+
+	public function gradeEdit(){
+
+		if(session('?login')){
+			$user_id = session('login');
+			$info = M('Login')->field('id,icon,nickname')->find($user_id);
+			$this->assign('info',$info);
+		}
+		$this->display('ScenicContent/gradeEdit');
+	}
 }

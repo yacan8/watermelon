@@ -111,41 +111,7 @@
 					
 					
 					<div class="m-t-md bg-white p-md border-gray-e">
-						<span class='font-18'>发表评论</span>
-						<div class="m-t-md">
-							<a href="#">
-								<img class="c_u_icon m-r-sm" src="__PUBLIC__/img/udefault.png">
-								这是一个昵称
-							</a>
-
-
-							<div class="grade-select">
-								<span class="grade" data-grade='0'>
-									<i class="grade-item iconfont icon-xing tc-grayd"></i>
-									<i class="grade-item iconfont icon-xing tc-grayd"></i>
-									<i class="grade-item iconfont icon-xing tc-grayd"></i>
-									<i class="grade-item iconfont icon-xing tc-grayd"></i>
-									<i class="grade-item iconfont icon-xing tc-grayd"></i>
-								</span>
-
-								<span class="grade-description m-l-sm">点击星星为它评分</span>
-							</div>
-
-						</div>
-						<div class="m-t-sm">
-							<textarea class="form-control" rows="3" placeholder="这里有哪些亮点？哪些方面还不够好？大家都期待着你的点评"></textarea>
-						</div>
-						<div class="comment-op">
-							<div class="m-t-sm over-h">
-						        <a href="javascript:void(0)" title="上传图片" class="btn btn-sm img_uploap" style="border: 1px solid #eee;">添加图片</a>
-						        <span class="m-l-sm tc-gray9 font-12">允许:jpg,jpeg,png,gif,最多添加9张</span>
-						        <button type="button" class="btn bg-main btn-sm pull-right submit-gj" data-loading-text="提交中..." data-cid="0">提交</button>
-						    </div>
-						    <div class="upload-img-container "><ul class="images media-picture over-h"><ul></ul></ul></div>
-						    <input name="img[]" class="input" type="file" hidden="ture" accept="image/jpg,image/png,image/gif,image/jpeg" multiple="multiple">
-						</div>
-
-
+						{:W('Scenic/gradeEdit')}
 					</div>
 
 				</div>
@@ -162,6 +128,27 @@
 	
 
     <include file="Common/footer" />
+
+
+ <div class="modal fade bs-example-modal-lg"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">
+          	{$ScenicInfo.name}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div style="height:500px;width:100%;">
+          	<div id="modal-map" style="height:100%;"></div>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript" src="__PUBLIC__/assets/exif/js/exif.min.js"></script>
@@ -172,8 +159,39 @@
 	var s_zan_url = "{:U('Zan/AjaxZan')}";
 	var s_want_url = "{:U('ScenicWant/want')}";
 	var s_been_url = "{:U('ScenicBeen/been')}";
+	var login_state = <if condition="session('?login')">true<else/>false</if>;
+	var _login_url = "{:U('Login/index')}?url=__SELF__";
 </script>
 <script type="text/javascript" src="__PUBLIC__/js/scenic_comment.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/op.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/topic.i-d.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=i1n66UyP2DFctjvKLRt68GKY"></script>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("map");
+	var point = new BMap.Point({$ScenicInfo.longitude},{$ScenicInfo.latitude});
+	var m_point = point;
+	var marker = new BMap.Marker(point);
+	map.centerAndZoom(point, 15);
+	map.addOverlay(marker);
+	map.disableDragging();     //禁止拖拽
+	map.enableScrollWheelZoom();
+
+	var modal_map = new BMap.Map("modal-map");
+	// var m_point = new BMap.Point({$ScenicInfo.longitude},{$ScenicInfo.latitude});
+	var m_marker = new BMap.Marker(m_point);
+	modal_map.centerAndZoom(m_point, 15);
+	modal_map.addOverlay(m_marker);
+	modal_map.enableScrollWheelZoom(true);
+
+	$(function(){
+		$("#map").click(function(event) {
+			$('#myModal').modal('show');
+			setTimeout(function(){
+			   modal_map.centerAndZoom(m_point, 15);
+			}, 400);
+			
+		});
+	})
+</script>
 </html>
