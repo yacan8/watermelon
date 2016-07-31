@@ -4,7 +4,8 @@
   <include file="Common/headerCSS" />
   <link rel="stylesheet" href="__PUBLIC__/css/photoViewer.css">
   <link rel="stylesheet" href="__PUBLIC__/css/Scenic_Index.css">
-	<link rel="stylesheet" href="__PUBLIC__/css/photo.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/photo.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/photo_upload.css">
   <title>西瓜游-景点</title>
 
 </head>
@@ -56,7 +57,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <a href="#" class="btn btn-sm bg-main pull-right m-t-md m-r-sm">上传相片</a>
+          <a href="#" class="btn btn-sm bg-main pull-right m-t-md m-r-sm" data-toggle="modal" data-target="#photo_upload">上传相片</a>
           <h3>{$name}共{$img_count}张照片</h3>
         </div>
 
@@ -93,6 +94,17 @@
 	
 
     <include file="Common/footer" />
+
+
+    <include file="ScenicContent/photoUpload" />
+
+
+
+
+
+
+
+
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
