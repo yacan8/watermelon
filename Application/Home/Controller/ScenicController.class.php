@@ -3,15 +3,13 @@ namespace Home\Controller;
 use Think\Controller;
 
 class ScenicController extends Controller {
+    //城市首页
     public function index(){
-
 
         $CityModel = D('City');
         $CityList = $CityModel->getList(1,8);
-
         $ProvinceModel = D('Province');
         $ProvinceList = $ProvinceModel->relation('city')->select();
-    
         $this->assign('ProvinceList',$ProvinceList);
         $this->assign('CityList',$CityList);
     	$this->display('city_list');
@@ -99,6 +97,42 @@ class ScenicController extends Controller {
             $this->assign('scenic_id',$scenic_id);
             $this->display();
         }else $this->error('页面错误');
+    }
+
+
+
+    public function photo(){
+        $type = I('get.type',1);//1为城市、2为景点
+        $id = I('get.id');
+        $p = I('get.p',1);
+        $count = 20;//每页显示照片个数
+        if(($id != '')&&($type!=1||$type!=2)){
+            $ImageModel = D('Image');
+            if($type==1){
+                $name = M('City')->where(array('id'=>$id))->getField('city');//城市名
+                $img_count = $ImageModel->getCountByCityId($id);
+                $imgList = $ImageModel->getListByCityId($id,$p,30,true);
+            }else{
+                $name = M('Scenic')->where(array('id'=>$id))->getField('name');//景点名
+                $img_count = $ImageModel->getCountByScenicId($id);
+                $imgList = $ImageModel->getListByScenicId($id,$p,30,true);
+            }
+            
+            $Page  = new  \Think\Page($img_count,$count);
+            $show  = $Page->show();// 分页显示输出
+
+
+            $this->assign('page',$show);
+            $this->assign('name',$name);
+            $this->assign('type',$type);
+            $this->assign('id',$id);
+            $this->assign('img_count',$img_count);
+            $this->assign('imgList',$imgList);
+            $this->display('photo');
+        }else{
+            exit('参数错误');
+        }
+
     }
 }
 

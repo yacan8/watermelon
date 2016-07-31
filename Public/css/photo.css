@@ -25,6 +25,9 @@
 	padding: 8px;
 	opacity: 0;
 }
+.photoItem .info a:hover{
+	text-decoration: underline!important;
+}
 .photoItem:hover .p_delete,
 .photoItem:hover .info {
 	opacity: 1;

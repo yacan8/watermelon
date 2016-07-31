@@ -51,4 +51,24 @@ class ImageController extends Controller {
             imagejpeg ( $i );
         }
     }
+    public function imgLoad(){
+        $type = I('get.type');
+        $image_id = I('get.photoId');
+        $ImageModel = D('Image');
+        $info = $ImageModel->getImage($image_id,$type);
+        $info['time']= substr($info['time'],0,10);
+        if($info['scenic_id']!='0')
+            $info['describe'] = "<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a> 上传于 <a href='".U('Scenic/scenic',array('id'=>$info['scenic_id']))."'>".$info['scenic']['name']."</a>";
+        else
+            $info['describe'] = "<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a> 上传于 ".$info['time'];
+        $info['image'] = C('__DATA__').'/'.$info['image'];
+        unset($info['user']);
+        unset($info['scenic']);
+        unset($info['user_id']);
+        unset($info['scenic_id']);
+        unset($info['id']);
+        echo json_encode($info);
+        // http://localhost:9096/watermelon/index.php/Image/imgLoad/type/2/photoId/1500.html
+        // dump($info);
+    }
 }

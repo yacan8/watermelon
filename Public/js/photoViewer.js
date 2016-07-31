@@ -7,13 +7,13 @@
             
             var option = {//默认参数
               num : 2,
-              loadUrl:""
+              loadUrl:"",
             };
-
-
+            if(data.params!=undefined)
+              option.params = data.params;
             option.num = data.num==undefined?option.num:data.num;   //参数覆盖
             option.loadUrl = data.loadUrl==undefined||data.loadUrl==''?option.loadUrl:data.loadUrl;   //参数覆盖
-            var viewerStr = '<div class="photoViewer" id="photoViewer"><div class="photoContainer"><div class="view"><a class="op pre"><span class="glyphicon glyphicon-chevron-left"></span></a><a class="op next"><span class="glyphicon glyphicon-chevron-right"></span></a><div class="imgContainer"><img id="phoneImg" src=""></div></div><div class="info"><span class="photoNum"><span class="photoCount"></span> / '+option.num+'</span><span class="info-text"></span><a href="javascript:void(0)" class="b"><span class="glyphicon glyphicon-share"></span></a></div></div><a class="cl" href="javascript:void(0)"><span class="glyphicon glyphicon-remove"></span></a></div>';
+            var viewerStr = '<div class="photoViewer" id="photoViewer"><div class="photoContainer"><div class="view"><a data-id="" class="op pre"><span class="glyphicon glyphicon-chevron-left"></span></a><a data-id="" class="op next"><span class="glyphicon glyphicon-chevron-right"></span></a><div class="imgContainer"><img id="phoneImg" src=""></div></div><div class="info"><span class="photoNum"><span class="photoCount"></span> / '+option.num+'</span><span class="info-text"></span><a href="javascript:void(0)" class="b"><span class="glyphicon glyphicon-share"></span></a></div></div><a class="cl" href="javascript:void(0)"><span class="glyphicon glyphicon-remove"></span></a></div>';
 
             if(_body.find('#photoViewer').length==0){//添加容器
               _body.prepend(viewerStr);
@@ -23,49 +23,68 @@
             
 
             var _self = $(this);
+            var _pre = _photoViewer.find('.op.pre');
+            var _next = _photoViewer.find('.op.next');
             _self.addClass('photo-item');
             _self.click(function(e){
+              var obj = $(this);
               verticalAlign();
-              _photoViewer.fadeIn('fast');
+              
               _body.css('overflow','hidden');
               _photoViewer.find(".imgContainer>#phoneImg").fadeIn('fast');
-              ajax_load(1234,success_callback);
-              console.log(option);
+              ajax_load(obj,success_callback);
+              _photoViewer.fadeIn('fast');
+              // console.log(option);
             });
 
-            _photoViewer.find('.op.pre').click(function(){//上一张
-              ajax_load(1234,success_callback);
+            _pre.click(function(){//上一张
+              var __pre = $(this);
+              if(__pre.attr('data-id')==''||__pre.attr('data-id')==undefined)
+                return false;
+              else
+                ajax_load(__pre,success_callback);
             });
 
-            _photoViewer.find('.op.next').click(function(){//下一张
-              ajax_load(1234,success_callback);
+            _next.click(function(){//下一张
+              var __next = $(this);
+              if(__next.attr('data-id')==''||__next.attr('data-id')==undefined)
+                return false;
+              else
+                ajax_load(__next,success_callback);
+                
             });
 
 
-            $('#photoViewer .cl').click(function(e){//关闭按钮
+            _photoViewer.find('.cl').click(function(e){//关闭按钮
                 _body.css('overflow','visible');
                 _photoViewer.fadeOut('fast');
             });
 
 
-            var ajax_load =  function(phonoId,callback){//ajax加载
+            var ajax_load =  function(obj,callback){//ajax加载
               _photoViewer.find(".imgContainer #phoneImg").fadeOut('fast');
-              $.get(option.loadUrl,{phonoId:phonoId},function(data) {
+              var photoId = obj.attr('data-id');
+              if(option.params!=undefined)
+                option.params.photoId = photoId;
+              else
+                option.params = {photoId:photoId};
+              // console.log( option.params);
+              $.get(option.loadUrl,option.params,function(data) {
                 var result = $.parseJSON(data);
                 callback(result);
               });
             };
       
             var success_callback = function(data){//加载成功回调函数
-              _photoViewer.find(".imgContainer #phoneImg").attr('src',data.src);
+              _photoViewer.find(".imgContainer #phoneImg").attr('src',data.image);//图片src改变
               document.getElementById('phoneImg').onload=function(){
-                  // 加载完成
                   _photoViewer.find(".imgContainer #phoneImg").fadeIn('fast');
-
               };
-              _photoViewer.find(".info-text").html(data.describe);
-              _photoViewer.find(".photoCount").html(data.count);
-              console.log(data);
+              _pre.attr('data-id',data.next);//时间逆序输出
+              _next.attr('data-id',data.pre);
+              _photoViewer.find(".info-text").html(data.describe);//描述
+              _photoViewer.find(".photoCount").html(data.count);//第几张图片
+              // console.log(data);
             };
 
 

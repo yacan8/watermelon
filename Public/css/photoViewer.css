@@ -106,8 +106,13 @@
 .photoViewer>.photoContainer>.info>.b:hover{
 	opacity: 1;
 }
-.photoViewer>.photoContainer>.info>a{
-	color: #fff;
+.photoViewer>.photoContainer>.info a{
+	color: #fff!important;
+	font-size: 13px;
+}
+
+.photoViewer>.photoContainer>.info a:hover{
+	text-decoration: underline!important;
 }
 .photoViewer .photoNum{
 	color: #fff;

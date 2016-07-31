@@ -6,9 +6,29 @@
 <a href="#">{$Data.province.province}</a>
 <span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
 <if condition="$Data['scenic'] eq ''">
+
+
+<if condition= "ACTION_NAME neq 'photo'">
 <span>{$Data.city}</span>
+<else/>
+<a href="{:U('Scenic/index',array('city'=>$Data['city_id']))}">{$Data.city}</a>
+<span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
+<span>{$Data.city}的相片</span>
+</if>
+
+
+
+
+
 <else/>
 <a href="#">{$Data.city}</a>
 <span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
+<if condition ="ACTION_NAME neq 'photo'">
 <span>{$Data.scenic}</span>
+<else/>
+<a href="{:U('Scenic/scenic',array('id'=>$Data['scenic_id']))}">{$Data.scenic}</a>
+<span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
+<span>{$Data.scenic}的相片</span>
+</if>
+
 </if>

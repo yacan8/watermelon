@@ -15,35 +15,40 @@
       <div class="container p-t-md">
         <div class="row">
           <div class="col-xs-12">
-            <a href="#">首页</a>
-            <span class="tc-gray9 font-12">></span>
-            <a href="#">东北</a>
-            <span class="tc-gray9 font-12">></span>
-            <a href="#">哈尔滨</a>
-            <span class="tc-gray9 font-12">></span>
-            <span>福满楼</span>
+            {:W('Scenic/breadcrumb',array('type'=>$type,'id'=>$id))}
           </div>
           
           <div class="col-xs-8 m-b-sm">
             <h2>
-              <a href="#">福满楼</a>
+              <a>{$name}</a>
             </h2>
           </div>
           <div class="col-xs-4">
-            <ul class="op-3 over-h m-b-sm">
-              <li>
-                <span class="iconfont icon-shoucangyishoucang-copy icon"></span>
-                <span>想去</span>
-              </li>
-              <li>
-                <span class="glyphicon glyphicon-flag icon"></span>
-                <span>去过</span>
-              </li>
-              <li>
-                <span class="glyphicon glyphicon-thumbs-up icon"></span>
-                <span>点赞</span>
-              </li>
-            </ul>
+            
+              <if condition="$type eq 1">
+                <ul class="op-2 over-h m-b-sm">
+
+                <li>
+                  {:W('Scenic/cityWant',array('city_id'=>$id))}
+                </li>
+                <li>
+                  {:W('Scenic/cityBeen',array('city_id'=>$id))}
+                </li>
+                </ul>
+                <else/>
+                <ul class="op-3 over-h m-b-sm">
+                <li>
+                  {:W('Scenic/scenicWant',array('scenic_id'=>$id))}
+                </li>
+                <li>
+                  {:W('Scenic/scenicBeen',array('scenic_id'=>$id))}
+                </li>
+                <li>
+                  {:W('Scenic/scenicZan',array('scenic_id'=>$id))}
+                </li>
+                </ul>
+              </if>
+            
           </div>
         </div>
       </div>
@@ -52,115 +57,34 @@
       <div class="row">
         <div class="col-xs-12">
           <a href="#" class="btn btn-sm bg-main pull-right m-t-md m-r-sm">上传相片</a>
-          <h3>福满楼共99张照片</h3>
+          <h3>{$name}共{$img_count}张照片</h3>
         </div>
 
 
 
         <div class="col-xs-12 m-t-md">
           <div class="photoCon">
-            <for start="1" end = "5">
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/6.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
+            <volist name="imgList" id ="vo">
+              <div class="photoItem">
+                <img data-id="{$vo.id}" src="{:U('Image/ScenicImg',array('w'=>180,'h'=>160,'image'=>urlencode($vo['image']).'!feature'),false,false)}"_>
+                <div class="info">
+                  <if condition ="$vo['scenic_id'] neq '0'">
+                  <a href="{:U('/u/'.$vo['user_id'],'',false,false)}">{$vo.user.nickname}</a> 上传于 <a href="{:U('Scenic/scenic',array('id'=>$vo['scenic_id']))}">{$vo.scenic.name}</a>
+                  <else/>
+                  <a href="{:U('/u/'.$vo['user_id'],'',false,false)}">{$vo.user.nickname}</a> 上传于 {$vo.time}
+                  </if>
+                </div>
+                <if condition="session('login') eq $vo['user_id']">
+                  <a href="javascript:void(0)" class="p_delete">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </a>
+                </if>
               </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/1.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/2.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/3.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/4.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/5.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/7.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/8.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/9.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            <div class="photoItem">
-              <img src="http://img2.3lian.com/2014/f2/132/d/11.jpg">
-              <div class="info">
-                <a href="#">麦乐</a> 上传于 2016-2-4
-              </div>
-              <a href="javascript:void(0)" class="p_delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </div>
-            </for>
+            </volist>
 
           </div>
           <ul class="pagination pagination-sm pull-right">
-            <li class="disabled"><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+            {$page}
           </ul>
         </div>
       </div>
@@ -172,13 +96,27 @@
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/op.js"></script>
 <script type="text/javascript">
 	var PUBLIC = "__PUBLIC__";
+  var type = {$type};
+  <if condition = "$type eq 1">
 
+  var city_id = {$id};
+  var c_want_url = "{:U('CityWant/want')}";
+  var c_been_url = "{:U('CityBeen/been')}";
+  <else/>
+  var scenic_id = {$id};
+  var s_zan_url = "{:U('Zan/AjaxZan')}";
+  var s_want_url = "{:U('ScenicWant/want')}";
+  var s_been_url = "{:U('ScenicBeen/been')}";
+
+  </if>
  $(function(){
   $(".photoItem img").photoViewer({
-        loadUrl : "{:U('Index/ajax_load')}",
-        num: 100
+        loadUrl : "{:U('Image/imgLoad')}",
+        num: {$img_count},
+        params:{'type':type}
    });
  })
 </script>

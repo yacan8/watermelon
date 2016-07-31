@@ -11,6 +11,7 @@ class ScenicWidget extends Controller{
 	 */
 	public function breadcrumb($type,$id){
 		$CityModel = D('City');
+
 		if($type==1){//如果为城市页
 			$Data = $CityModel->getById($id);
 		}else if($type==2){//如果为景点页
@@ -20,6 +21,8 @@ class ScenicWidget extends Controller{
 			$Data['scenic'] = $ScenicInfo['name'];
 			$Data['scenic_id'] = $id;
 		}
+		
+		$this->assign('type',$type);
 		$this->assign('Data',$Data);
 		$this->display('ScenicContent:breadcrumb');
 	}
