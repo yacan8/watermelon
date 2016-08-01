@@ -57,7 +57,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <a href="#" class="btn btn-sm bg-main pull-right m-t-md m-r-sm" data-toggle="modal" data-target="#photo_upload">上传相片</a>
+          <a href="javascript:void(0)" class="btn btn-sm bg-main pull-right m-t-md m-r-sm photo_upload">上传相片</a>
           <h3>{$name}共{$img_count}张照片</h3>
         </div>
 
@@ -109,11 +109,16 @@
 <include file="Common/footerJS" />
 <script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/op.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/exif/js/exif.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
+  var _login_url = "{:U('Login/index')}?url=__SELF__";
+  var upload_url ="{:U('Upload/upload')}";
+  var album_url = "{:U('Album/load')}";
 	var PUBLIC = "__PUBLIC__";
+  var login_state = <if condition="session('?login')">true<else/>false</if>;
   var type = {$type};
   <if condition = "$type eq 1">
-
   var city_id = {$id};
   var c_want_url = "{:U('CityWant/want')}";
   var c_been_url = "{:U('CityBeen/been')}";
@@ -122,7 +127,6 @@
   var s_zan_url = "{:U('Zan/AjaxZan')}";
   var s_want_url = "{:U('ScenicWant/want')}";
   var s_been_url = "{:U('ScenicBeen/been')}";
-
   </if>
  $(function(){
   $(".photoItem img").photoViewer({
@@ -132,4 +136,6 @@
    });
  })
 </script>
+<script type="text/javascript" src="__PUBLIC__/js/img_base64.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/photo_upload.js"></script>
 </html>
