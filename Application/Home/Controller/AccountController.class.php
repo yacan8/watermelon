@@ -30,7 +30,6 @@ class AccountController extends Controller{
 		$reslut = $model->getList($Page->firstRow,$Page->listRows);
 		$this->assign('result',$reslut);
 		$this->assign('page',$Page->show());
-		// dump($reslut);
 		$this->display('index');
 	}
 
@@ -63,6 +62,11 @@ class AccountController extends Controller{
 	// 留言板view
 	public function board(){
 		$this->assign('content','AccountContent/board');
+		$model = D('Board');
+		$Page = new \Think\Page($model->getCount(session('userid')),4);
+		$result = $model->getList(session('userid'),$Page->firstRow,$Page->listRows);
+		$this->assign('board',$result);
+		$this->assign('page',$Page->show());
 		$this->display('index');
 	}
 
