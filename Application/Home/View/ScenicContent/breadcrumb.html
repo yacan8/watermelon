@@ -1,9 +1,9 @@
 <!-- 路径导航 -->
 
 
-<a href="{:U('Index/index')}">首页</a>
+<a href="{:U('Scenic/index')}">首页</a>
 <span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-<a href="#">{$Data.province.province}</a>
+<a href="{:U('Scenic/index',array('province'=>$Data['province']['id']))}">{$Data.province.province}</a>
 <span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
 <if condition="$Data['scenic'] eq ''">
 
@@ -11,7 +11,7 @@
 <if condition= "ACTION_NAME neq 'photo'">
 <span>{$Data.city}</span>
 <else/>
-<a href="{:U('Scenic/index',array('city'=>$Data['city_id']))}">{$Data.city}</a>
+<a href="{:U('Scenic/city',array('id'=>$Data['id']))}">{$Data.city}</a>
 <span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
 <span>{$Data.city}的相片</span>
 </if>
@@ -21,7 +21,7 @@
 
 
 <else/>
-<a href="#">{$Data.city}</a>
+<a href="{:U('Scenic/city',array('id'=>$Data['id']))}">{$Data.city}</a>
 <span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
 <if condition ="ACTION_NAME neq 'photo'">
 <span>{$Data.scenic}</span>

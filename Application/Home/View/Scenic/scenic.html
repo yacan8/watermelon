@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/carousel.css">
 	
 
-    <title>西瓜游-景点</title>
+    <title>西瓜游-{$ScenicInfo.name}</title>
 </head>
 
 <body>
@@ -50,7 +50,7 @@
 					<div class="bg-white p-md border-gray-e">
 						<div class="top_con over-h">
 							<div class="fh_img_con">
-								<a class="pic_num" href="#">{$img_count}张照片</a>
+								<a class="pic_num" href="{:U('Scenic/photo',array('type'=>2,'id'=>$scenic_id))}">{$img_count}张照片</a>
 								<a href="#"><img src="{:U('Image/ScenicImg',array('w'=>250,'h'=>180,'image'=>urlencode($ScenicInfo['image']).'!feature'),false,false)}"></a>
 							</div>
 							<div class="fh_info_con p-t-xs">
@@ -175,7 +175,7 @@
 	map.centerAndZoom(point, 15);
 	map.addOverlay(marker);
 	map.disableDragging();     //禁止拖拽
-	map.enableScrollWheelZoom();
+
 
 	var modal_map = new BMap.Map("modal-map");
 	// var m_point = new BMap.Point({$ScenicInfo.longitude},{$ScenicInfo.latitude});

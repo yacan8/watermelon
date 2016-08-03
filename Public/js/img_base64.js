@@ -44,8 +44,8 @@ function compressImg(imgData, type,dir, onCompress) {
       var height = img.height;
       //如果图片大于四百万像素，计算压缩比并将大小压至400万以下
       var ratio;
-      if ( (3000000/(width*height)) <1) {
-        ratio = (3000000 / (width*height)) ;
+      if ( (6000000/(width*height)) <1) {
+        ratio = (6000000 / (width*height)) ;
       }else{
         ratio = 1;
       }

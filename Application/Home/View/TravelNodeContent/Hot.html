@@ -1,0 +1,24 @@
+<ul class="sideList">
+		<!-- 游记 -->
+		<volist name="TravelNoteList" id="vo">
+			<li>
+				<a href="#">
+					<if condition="$vo['image'] eq ''">
+						<img class="sideImg2" src="__PUBLIC__/img/tndefault.jpg">
+					<else/>
+						<img class="sideImg2" src="{:U('Image/ScenicImg',array('w'=>90,'h'=>90,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+					</if>
+				</a>
+				<div class="sideContent">
+					<a class="tc-black" href="#">{$vo.title}</a>
+				</div>
+				<div class="sideContentInfo">
+					<a class="tc-black" href="{:U('/u/'.$vo['user_id'],'',false,false)}">
+						<img class="infoImg" src="{$vo.icon|default='__PUBLIC__/img/udefault.png'}">
+						{$vo.nickname}
+					</a>
+				</div>
+			</li>
+		</volist>
+		<!-- /游记 -->
+	</ul>

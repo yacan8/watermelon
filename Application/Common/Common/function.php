@@ -96,8 +96,7 @@ function kilometre($distance){
 * @param $type 计算长度类型，0(默认)表示一个中文算一个字符，1表示一个中文算两个字符
 *
 */
-function abslength($str)
-{
+function abslength($str){
     if(empty($str)){
         return 0;
     }

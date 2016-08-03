@@ -25,4 +25,28 @@ class TravelNoteModel extends Model{
 		return $this->count();
 	}
 
+
+	/**
+	 * [getHotByCityId 通过城市ID获取最热游记]
+	 * @param  [Integer] $city_id [城市ID]
+	 * @param  [Integer] $count   [数量]
+	 * @return [List]
+	 */
+	public function getHotByCityId($city_id,$count){
+		$DB_PREFIX = $this->tablePrefix;
+		$Model = M('');
+		$condition['t.city_id'] = $city_id;
+		$condition['_string'] = 't.user_id = l.id';
+		$condition['_logic'] = 'and';
+		// SELECT t.id,t.title,t.image,l.id user_id,l.nickname,l.icon FROM wt_travel_note t,wt_login l WHERE t.user_id = l.id
+		$List = $Model  ->table($DB_PREFIX.'travel_note t,'.$DB_PREFIX.'login l')
+						->field('t.id,t.title,t.image,l.id user_id,l.nickname,l.icon')
+						->where($condition)
+						->limit($count)
+						->order('t.browse desc')
+						->select();
+						// dump($Model->getLastSql());
+		return $List;
+
+	}
 }

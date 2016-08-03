@@ -1,0 +1,22 @@
+<ul class="sideList">
+		<!-- 美食 -->
+		<volist name="HotFoodList" id="vo">
+			<li>
+				<a href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">
+					<img class="sideImg1" src="{:U('Image/ScenicImg',array('w'=>90,'h'=>70,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+				</a>
+				<div class="sideContent1">
+					<div class="info_item">
+						<a class="tc-black" href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">{$vo.name}</a>
+					</div>
+					<div class="info_item">
+						{:W('Scenic/score',array('score'=>$vo['grade']))}
+					</div>
+					<div class="info_item font-12 tc-gray6">
+						{$vo.want_count}个人想去这里
+					</div>
+				</div>
+			</li>
+		</volist>
+		<!-- /美食 -->
+	</ul>

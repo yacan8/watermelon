@@ -10,14 +10,19 @@
         <h6 class="modal-title">
           
           <form class="form-inline">
-              <div class="form-group">
+              <div id="old_album" class="form-group">
                 <label class="m-r-md">将照片保存到相册：</label>
                 <select class="form-control input-sm" id="album">
                 </select>
               </div>
-              
-              
-            </form>
+              <div id="new_album" class="form-group hidden">
+                <label class="m-r-md">相册名：</label>
+                <input type="text" class="form-control" id="album_name" maxLength="15" placeholder="长度不大于15个字符">
+              </div>
+              <button id="add_album" type="button" class="btn btn-default btn-sm hidden" data-loading-text="新建中...">+ 新建</button>
+
+              <a id="add_album_toggle" href="javascript:void(0)" class="font-12 tc-black m-l-lg">新建相册</a>
+          </form>
         </h6>
       </div>
       <div class="modal-body">
@@ -36,11 +41,11 @@
         <!-- </form> -->
       </div>
       <div class="modal-footer">
-        <button type="button" id="img_ok" class="btn btn-primary hidden">确定</button>
+        <button type="button" id="img_ok" class="btn btn-primary hidden" data-loading-text="提交中...">确定</button>
       </div>
     </div>
   </div>
 </div>
-<form id="upload_form" method="post" action="{:U('Upload/upload')}" enctype="multipart/form-data">
+<form id="upload_form" method="post" action="{:U('Image/scenic_img_upload')}" enctype="multipart/form-data">
   <input name="img_str" type="hidden" value="">
 </form>

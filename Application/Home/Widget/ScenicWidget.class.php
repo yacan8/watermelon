@@ -21,7 +21,6 @@ class ScenicWidget extends Controller{
 			$Data['scenic'] = $ScenicInfo['name'];
 			$Data['scenic_id'] = $id;
 		}
-		
 		$this->assign('type',$type);
 		$this->assign('Data',$Data);
 		$this->display('ScenicContent:breadcrumb');
@@ -179,7 +178,9 @@ class ScenicWidget extends Controller{
 	}
 
 
-
+	/**
+	 * [gradeEdit 评论widet]
+	 */
 	public function gradeEdit(){
 
 		if(session('?login')){
@@ -189,4 +190,16 @@ class ScenicWidget extends Controller{
 		}
 		$this->display('ScenicContent/gradeEdit');
 	}
+	/**
+	 * [HotFood 侧栏热门美食]
+	 * @param [Integer] $city_id [城市编号]
+	 * @param [Integer] $count [数量]
+	 */
+	public function HotFood($city_id,$count){
+		$ScenicModel = D('Scenic');
+		$List = $ScenicModel ->getHotScenicByCityId($city_id,1,$count,'美食');
+		$this->assign('HotFoodList',$List);
+		$this->display('ScenicContent/hotFood');
+	}
+
 }

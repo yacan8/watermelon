@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <include file="Common/headerCSS" />
 	<link rel="stylesheet" href="__PUBLIC__/css/Scenic_Index.css">
 	<link rel="stylesheet" href="__PUBLIC__/css/carousel.css">
-    <title>西瓜游-景点</title>
+    <title>西瓜游-{$city_info.city}</title>
 </head>
 
 <body>
@@ -19,7 +18,7 @@
 				
 				<div class="col-xs-12 m-b-sm">
 					<h2>
-						<a >{$city_info.city}</a>
+						<a>{$city_info.city}</a>
 						<span class="pull-right m-t-md font-12">
 							<span class="want_count tc-main">{$want_count}</span>人想去这里，
 							<span class="been_count tc-main">{$been_count}</span>人去过这里
@@ -31,15 +30,13 @@
 				<div class="col-xs-12">
 					<div class="border-t-gray-e">
 						<ul class="head-menu-l">
-							<li><a href="#">景点</a></li>
+							<li><a href="javascript:void(0)" data-content="scenic">景点</a></li>
 							<li><a href="#">游记</a></li>
-							<li><a href="#">照片</a></li>
-							<li><a href="#">住宿</a></li>
-							<li><a href="#">美食</a></li>
+							<li><a href="{:U('Scenic/photo',array('type'=>1,'id'=>$city_id))}">照片</a></li>
+							<li><a href="{:U('Scenic/city',array('id'=>$city_id,'type_id'=>$food_id))}">美食</a></li>
 						</ul>
 						<ul class="head-menu-l pull-right">
 							<li><a class="map-view" href="javascript:void(0)">地图</a></li>
-							<li><a href="#">评论</a></li>
 						</ul>
 					</div>
 				</div>
@@ -53,11 +50,7 @@
 			<div class="span-container bg-white over-h">
 				<div class="span-left focus-pic">
 					<include file="ScenicContent:Carousel" />
-					<if condition="$imgCount eq 0">
-					<a class="pic_num" href="#">还没有相片，上传照片吧</a>
-					<else/>
-					<a class="pic_num" href="#">{$imgCount}张照片</a>
-					</if>
+					<a class="pic_num" href="{:U('Scenic/photo',array('type'=>1,'id'=>$city_id))}">{$imgCount}张照片</a>
 				</div>
 				<div class="span-right">
 					<ul class="op-2 over-h">
@@ -100,7 +93,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8">
-					<h4>哈尔滨市区景点</h4>
+					<h4 id="scenic">{$city_info.city}景点</h4>
 					<div class="m-t-md scenic-type border-t-gray-e p-t-sm over-h">
 						
 						<a <if condition ="$type_id eq '0'">class="active"</if> href="{:U('Scenic/city',array('id'=>$city_id))}">全部</a>
@@ -114,13 +107,13 @@
 							<foreach name="ScenicList" item="vo" >
 							<div class="s-item p-b-sm border-b-gray-e m-b-sm over-h">
 								<div class="scenic-img">
-									<a href="#">
+									<a href="{:U('Scenic/scenic',array('id'=>$vo[id]))}">
 										<img src="{:U('Image/ScenicImg',array('w'=>225,'h'=>150,'image'=>urlencode($vo['image'].'!feature')),false,false)}">
 									</a>
 								</div>
 								<div class="scenic-info">
 									<div class="s-title">
-										<a href="#">
+										<a href="{:U('Scenic/scenic',array('id'=>$vo[id]))}">
 											{$vo.name}
 										</a>
 									</div>
@@ -154,9 +147,18 @@
 				</div>
 
 				<div class="col-xs-4">
-					<h4>哈尔滨景点地图</h4>
+					<h4>{$city_info.city}地图</h4>
 					<div id="map" style="height:300px;"></div>
 					<button class="map-view btn btn-sm btn-default btn-block m-t-sm">查看地图</button>
+					<hr>
+					<div class="font-18 m-t-sm">
+						该城市游记
+						<a href="#" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
+					</div>
+					<div class="m-t-sm">
+						{:W('TravelNote/Hot',array('city_id'=>$city_id,'count'=>3))}
+					</div>
+					<hr>
 				</div>
 			</div>
 		</div>
@@ -199,23 +201,39 @@
 
 	// 百度地图API功能
 	var map = new BMap.Map("map");
-	map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+	
 	map.enableScrollWheelZoom(true);
 
 
 
 	var modal_map = new BMap.Map("modal-map");
-	// var m_point = new BMap.Point({$ScenicInfo.longitude},{$ScenicInfo.latitude});
-	modal_map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+	<if condition="$city_info['province'] eq '台湾省'">
+		var point = new BMap.Point({$lnglatstr});
+		map.centerAndZoom(point, 9.5);
+		modal_map.centerAndZoom(point, 9.5);
+	<else/>
+		map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+		modal_map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+	</if>
+	
 	modal_map.enableScrollWheelZoom(true);
 
 	$(function(){
 		$(".map-view").click(function(event) {
 			$('#myModal').modal('show');
 			setTimeout(function(){
-			   modal_map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 12);
+				<if condition="$city_info['province'] eq '台湾省'">
+					modal_map.centerAndZoom(point, 9.5);
+				<else/>
+					modal_map.centerAndZoom('中国{$city_info.province}{$city_info.city}', 21);
+				</if>
 			}, 400);
-			
+		});
+
+		$(".head-menu-l li a").click(function(event) {
+			var content = $(this).attr('data-content');
+			if(content!=undefined)
+				$("html,body").animate({scrollTop:$("#"+content).offset().top},200);
 		});
 	})
 </script>

@@ -34,17 +34,21 @@ class ScenicModel extends RelationModel{
 	 * @param  [Integer] $city_id [城市编号]
 	 * @param  [Integer] $page    [页数]
 	 * @param  [Integer] $count   [每页个数]
+	 * @param  [Integer] $type   [类型]
 	 * @return [List]
 	 */
-	public function getHotScenicByCityId($city_id,$page,$count){
+	public function getHotScenicByCityId($city_id,$page,$count,$type=''){
 		$DB_PREFIX = $this->tablePrefix;//数据库表前缀
 		$Model = M('');
-		$firstRow = ($page-1)*$count;
+		if($type!=''){
+			$condition['s.type_id'] = M('ScenicType')->where(array('type'=>$type))->getField('id');
+		}
+		$condition['s.city_id'] = $city_id;
 		$List = $Model->table($DB_PREFIX.'scenic s')
 					   ->field('s.id,s.image,s.name,s.grade,(select count(*) from '.$DB_PREFIX.'scenic_want where scenic_id = s.id) want_count')
 					   ->order('want_count desc,grade desc')
-					   ->where(array('s.city_id'=>$city_id))
-					   ->limit("$firstRow,$count")
+					   ->where($condition)
+					   ->page("$page,$count")
 					   ->select();
 		return $List;
 	}

@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="__PUBLIC__/css/Scenic_Index.css">
   <link rel="stylesheet" href="__PUBLIC__/css/photo.css">
 	<link rel="stylesheet" href="__PUBLIC__/css/photo_upload.css">
-  <title>西瓜游-景点</title>
+  <title>西瓜游-{$name}</title>
 
 </head>
 
@@ -57,7 +57,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <a href="javascript:void(0)" class="btn btn-sm bg-main pull-right m-t-md m-r-sm photo_upload">上传相片</a>
+          <a href="javascript:void(0)" class="btn btn-sm bg-main pull-right m-t-md photo_upload">上传相片</a>
           <h3>{$name}共{$img_count}张照片</h3>
         </div>
 
@@ -75,11 +75,7 @@
                   <a href="{:U('/u/'.$vo['user_id'],'',false,false)}">{$vo.user.nickname}</a> 上传于 {$vo.time}
                   </if>
                 </div>
-                <if condition="session('login') eq $vo['user_id']">
-                  <a href="javascript:void(0)" class="p_delete">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </a>
-                </if>
+                
               </div>
             </volist>
 
@@ -113,15 +109,18 @@
 <script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
   var _login_url = "{:U('Login/index')}?url=__SELF__";
-  var upload_url ="{:U('Upload/upload')}";
   var album_url = "{:U('Album/load')}";
 	var PUBLIC = "__PUBLIC__";
   var login_state = <if condition="session('?login')">true<else/>false</if>;
   var type = {$type};
+  var save_url = "{:U('Image/upload_save')}";
+  var delete_url = "{:U('Image/cancel')}";
+  var add_album_url = "{:U('Album/add')}";
   <if condition = "$type eq 1">
   var city_id = {$id};
   var c_want_url = "{:U('CityWant/want')}";
   var c_been_url = "{:U('CityBeen/been')}";
+  var scenic_id = 0;
   <else/>
   var scenic_id = {$id};
   var s_zan_url = "{:U('Zan/AjaxZan')}";

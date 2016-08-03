@@ -5,11 +5,13 @@ use Think\Controller;
 class ScenicController extends Controller {
     //城市首页
     public function index(){
-
+        $province = I('get.province',0);
         $CityModel = D('City');
         $CityList = $CityModel->getList(1,8);
         $ProvinceModel = D('Province');
-        $ProvinceList = $ProvinceModel->relation('city')->select();
+        if($province!=0)
+            $condition['id'] = $province;
+        $ProvinceList = $ProvinceModel->where($condition)->relation('city')->select();
         $this->assign('ProvinceList',$ProvinceList);
         $this->assign('CityList',$CityList);
     	$this->display('city_list');
@@ -26,7 +28,10 @@ class ScenicController extends Controller {
             $p = I('get.p',1);
             $CityModel = D('City');
             $city_info = $CityModel->getCityAndProvice($city_id);//获取城市名
-
+            if($city_info['province']=='台湾省'){//老版百度地图的台湾地图无法定位
+                $lnglatstr = '121.044242,23.782898';
+                $this->assign('lnglatstr',$lnglatstr);
+            }
             $want_count = D('CityWant')->getCountByCityId($city_id);//想去该城市的人数量
             $been_count = D('CityBeen')->getCountByCityId($city_id);//去过该城市的人数量
 
@@ -46,7 +51,15 @@ class ScenicController extends Controller {
             $imgCount = $ImageModel->getCountByCityId($city_id);//图片数量
             $imgList = $ImageModel->getListByCityId($city_id,1,5);//图片列表
 
- 
+
+            for ($i=0; $i < count($TypeList); $i++) { 
+                if($TypeList[$i]['type']=='美食')
+                    $food_id = $TypeList[$i]['id'];
+            }
+
+            
+            $this->assign('food_id',$food_id);
+            $this->assign('lnglatstr',$lnglatstr);
             $this->assign('imgList',$imgList);
             $this->assign('imgCount',$imgCount);
             $this->assign('TypeList',$TypeList);
@@ -70,12 +83,13 @@ class ScenicController extends Controller {
             $p = I('get.p',1);
             $recommend_level = I('get.r',0);//评论星级
             $ScenicModel = D('Scenic');
+            $city_id = $ScenicModel->where(array('id'=>$scenic_id))->getField('city_id');
             $want_count = D('ScenicWant')->getCountByScenicId($scenic_id);//想去该景点的人数量
             $been_count = D('ScenicBeen')->getCountByScenicId($scenic_id);//去过该景点的人数量
             $img_count = D('Image')->getCountByScenicId($scenic_id);//该景点图片数量
             $ScenicInfo = $ScenicModel->getById($scenic_id);//获取景点信息
             $NearestScenicList = $ScenicModel->getNearestScenic($scenic_id);//距离最近的景点
-
+            $food_id = M('ScenicType')->where('type = "美食"')->getField('id');//侧栏美食的ID
 
             $ScenicGradeModel = D('ScenicGrade');
             $GradeList = $ScenicGradeModel->getList($scenic_id,0,$recommend_level,$p,10);//列表评论
@@ -85,6 +99,8 @@ class ScenicController extends Controller {
             $Page  = new  \Think\Page($count,10);
             $show  = $Page->show();// 分页显示输出
 
+            $this->assign('city_id',$city_id);
+            $this->assign('food_id',$food_id);
             $this->assign('page',$show);
             $this->assign('comment_count',$comment_count);
             $this->assign('recommend_level',$recommend_level);

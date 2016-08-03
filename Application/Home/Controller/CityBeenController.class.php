@@ -40,6 +40,7 @@ class CityBeenController extends Controller {
 					// 16-在帖子*中回复了*、
 					// 17-点赞了话题*、
 					// 18-点赞了话题*中的评论
+					// 19-上传了*张照片
 
 					// 动态content_id内容ID
 					// 1-资讯评论ID、
@@ -59,6 +60,7 @@ class CityBeenController extends Controller {
 					// 16-话题评论ID、
 					// 17-话题点赞ID、
 					// 18-话题点赞ID
+					// 19-为0
 					//添加动态
 					$id = $CityBeenModel->getLastInsID();
 					$Data['type'] = 7;

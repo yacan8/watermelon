@@ -53,7 +53,7 @@ class CityModel extends RelationModel{
 	public function getList($page,$count){
 		$DB_PREFIX = $this->tablePrefix;
 		// select c.city,(select count(*) from wt_city_want where city_id = c.id) want from wt_city c order by want desc
-		$List = M('')->table($DB_PREFIX."city c")->field("id,c.city,image,(select count(*) from ".$DB_PREFIX."city_want where city_id = c.id) want,(select count(*) from ".$DB_PREFIX."city_been where city_id = c.id) been")->page("$page,$count")->order('want desc')->select();
+		$List = M('')->table($DB_PREFIX."city c")->where($condition)->field("id,c.city,image,(select count(*) from ".$DB_PREFIX."city_want where city_id = c.id) want,(select count(*) from ".$DB_PREFIX."city_been where city_id = c.id) been")->page("$page,$count")->order('want desc')->select();
 		return $List;
 	}
 }

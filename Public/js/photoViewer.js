@@ -29,11 +29,10 @@
             _self.click(function(e){
               var obj = $(this);
               verticalAlign();
-              
               _body.css('overflow','hidden');
               _photoViewer.find(".imgContainer>#phoneImg").fadeIn('fast');
               ajax_load(obj,success_callback);
-              _photoViewer.fadeIn('fast');
+              // _photoViewer.fadeIn('fast');
               // console.log(option);
             });
 
@@ -72,6 +71,7 @@
               $.get(option.loadUrl,option.params,function(data) {
                 var result = $.parseJSON(data);
                 callback(result);
+                _photoViewer.fadeIn('fast');
               });
             };
       

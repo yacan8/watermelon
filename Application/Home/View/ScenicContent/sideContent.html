@@ -8,89 +8,21 @@
 	<a href="#" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
 </div>
 <div class="m-t-sm">
-	<ul class="sideList">
-		<!-- 游记 -->
-		<for start="1" end="4">
-			<li>
-				<a href="#">
-					<img class="sideImg2" src="__PUBLIC__/img/f1.png">
-				</a>
-				<div class="sideContent">
-					<a class="tc-black" href="#">Hea遍香港！最上镜拍照取景地</a>
-				</div>
-				<div class="sideContentInfo">
-					<a class="tc-black" href="#">
-						<img class="infoImg" src="__PUBLIC__/img/f2.png">
-						大是倒萨都
-					</a>
-				</div>
-			</li>
-		</for>
-		<!-- /游记 -->
-	</ul>
+	{:W('TravelNote/Hot',array('city_id'=>$city_id,'count'=>3))}
 </div>
 <hr>
 
 
 <div class="font-18 m-t-sm">
 	该城市美食
-	<a href="#" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
+	<a href="{:U('Scenic/city',array('id'=>$city_id,'type_id'=>$food_id))}" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
 </div>
 <div class="m-t-sm">
-	<ul class="sideList">
-		<!-- 美食 -->
-		<for start="1" end="4">
-			<li>
-				<a href="#">
-					<img class="sideImg1" src="__PUBLIC__/img/f3.jpg">
-				</a>
-				<div class="sideContent1">
-					<div class="info_item">										<a class="tc-black" href="#">意粉屋(W Square店)</a>
-					</div>
-					<div class="info_item">
-						<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
-						<span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span><i class="iconfont icon-xing tc-grayc m-l-14"></i>
-						<span class="tc-gray6 m-l-sm font-12">8.5</span>
-					</div>
-					<div class="info_item font-12 tc-gray6">
-						250个人想去这里
-					</div>
-				</div>
-			</li>
-		</for>
-		<!-- /美食 -->
-	</ul>
+	{:W('Scenic/HotFood',array('city_id'=>$city_id,'count'=>4))}
 </div>
 
 <hr>
 
-
-<div class="font-18 m-t-sm">
-	该城市酒店
-	<a href="#" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
-</div>
-<div class="m-t-sm">
-	<ul class="sideList">
-		<!-- 酒店 -->
-		<for start="1" end="4">
-			<li>
-				<a href="#">
-					<img class="sideImg1" src="__PUBLIC__/img/f3.jpg">
-				</a>
-				<div class="sideContent1">
-					<div class="info_item">										<a class="tc-black" href="#">意粉屋(W Square店)</a>
-					</div>
-					<div class="info_item">
-						
-						<span class="tc-gray6">￥125起</span>
-					</div>
-					
-				</div>
-			</li>
-		</for>
-		<!-- /酒店 -->
-	</ul>
-</div>
 
 <hr>
 

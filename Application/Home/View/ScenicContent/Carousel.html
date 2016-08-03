@@ -6,7 +6,7 @@
          <div class="carousel-inner" role="listbox">
             <volist name="imgList" id="vo">
                  <div class="item <if condition="$i eq 1">active</if>">
-                     <a href="#"><img src="{:U('Image/ScenicImg',array('w'=>680,'h'=>380,'image'=>urlencode($vo['image']).'!feature'),false,false)}"></a>
+                     <a href="{:U('Scenic/photo',array('type'=>1,'id'=>$city_id))}"><img src="{:U('Image/ScenicImg',array('w'=>680,'h'=>380,'image'=>urlencode($vo['image']).'!feature'),false,false)}"></a>
                  </div>
             </volist>
          </div>
