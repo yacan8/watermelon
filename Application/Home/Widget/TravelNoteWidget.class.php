@@ -11,7 +11,7 @@ class TravelNoteWidget extends Controller{
 		$TravelNoteModel = D('TravelNote');
 		$List = $TravelNoteModel->getHotByCityId($city_id,$count);
 		$this->assign('TravelNoteList',$List);
-		$this->display('TravelNodeContent/Hot');
+		$this->display('TravelNoteContent/Hot');
 	}
 
 }

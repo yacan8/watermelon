@@ -4,7 +4,6 @@ use Think\Controller;
 
 class TravelNoteController extends Controller {
     public function index(){
-
-
+    	$this->display();
     }
 }

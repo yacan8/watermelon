@@ -131,7 +131,9 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 	border-bottom: 1px solid #eee;
 }
 
-
+.font-20{
+	font-size: 20px;
+}
 .m-l-14{margin-left: 14px;}
 .c_u_icon{
 	width: 40px;

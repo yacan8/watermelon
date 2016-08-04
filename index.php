@@ -22,5 +22,5 @@ define('APP_PATH','./Application/');
 
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
-$_SESSION['login'] = '1';
+$_SESSION['login'] = '2';
 // 亲^_^ 后面不需要任何代码了 就是如此简单

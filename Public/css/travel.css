@@ -1,36 +1,36 @@
-
-/*游记首页*/
-.recommand{margin-top:20px;}
-.recommand li{float: left;padding: 8px 15px;font-size: 18px;font-weight: bold;position: relative;}
-.recommand .active a{background: #63D283;color: #fff;border-radius: 4px;padding: 6px 15px;}
-.recommand .active:after{background: #63D283;}
-.recommand a{text-decoration: none;color: #222;}
-
-.search-img{left: -25px;top: 6px;color:#63D283;font-size: 20px; }
-.search-box input{padding:5px;border-radius: 6px;}
-
- /*旅行list:在trangle.css里面整合*/
-
-/*游记详情页面css*/
-.reading{background:#f0f0f0; }
-.reading .left-words{max-width: 300px;}
-.left-words i:hover{color: #444;}
-.left-words a{color: #999;}
-.reading .right-words{width: 300px;}
-.right-words .text-center{width: 100px;float: left;}
-.text-center a{color: #999;text-decoration: none;}
-.text-center a:hover{color: #000;}
-.right-words .glyphicon{font-size: 18px;}
+.t-header{
+	background-color: #fafcfa;
+}
 
 
-/*图片+文字的描述*/
-.text-img{border-bottom: 1px solid #999;padding-bottom: 20px;}
-.text-img img{margin:15px 0px;height: 260px;width: 980px;}
-.text-img p{text-indent: 2em;line-height: 26px;}
+/*游记*/
+.la_item{
+	display: inline-block;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+	padding: 3px 5px;
+	color: #585858;
+}
+.travel_text{
+	line-height: 24px;
+}
 
-/*相关阅读*/
-.relevant-reading .item{width: 25%;float: left;margin-top: 6px;}
-.item .item-cont p{line-height:25px;text-indent: 2em;}
-.item-list img{width: 180px;height: 180px;}
-.item .item-cont a{color: #999;text-decoration: none;}
-.item .item-cont a:hover{color:#555;text-decoration:underline;}
+.travel_pic{
+	float: left;
+    width: 168px;
+    height: 126px;
+    margin:0 8px 8px 0;
+    text-align: center;
+    overflow: hidden;
+}
+.travel_pic img{
+	width: 100%;
+	height:100%;
+}
+
+.keywords{
+	color: #ff7247;
+    margin-right: 4px;
+    font-size: 22px;
+    line-height: 26px;
+}
