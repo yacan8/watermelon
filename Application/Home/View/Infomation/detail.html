@@ -34,7 +34,7 @@
 	            <div class="c_area">
 	            	<h4 class="b_main"><span class="b_border">发表评论</span></h4>
 	            	<textarea class="form-control m-t-lg" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
-					<a href="javascript:void(0)" data-loading-text="发表中..." id="addComment" class="m-t-md btn bg-main btn-md">发表评论</a>
+					<a href="javascript:void(0)" data-loading-text="发表中..." id="addComment" data-type="2" class="m-t-md btn bg-main btn-md">发表评论</a>
 					<div class="reply-container" style="position: relative;display: inline-block;vertical-align: middle;">
 						
 					</div>
@@ -69,9 +69,9 @@
 						</volist>
 						</div>
 						<if condition="$infomation['comment_count'] gt 4">
-						<a id="comment_loading" href="javascript:void(0)" class="btn-block p-md text-center m-t-sm bg-main">加载更多</a>
+						<a id="comment_loading" data-type='2' href="javascript:void(0)" class="btn-block p-md text-center m-t-sm bg-main m-b-md">加载更多</a>
 						<else/>
-						<a href="javascript:void(0)" class="btn-block p-md text-center m-t-sm bg-main">暂无更多评论</a>
+						<a href="javascript:void(0)" class="btn-block p-md text-center m-t-sm bg-main m-b-md">暂无更多评论</a>
 						</if>
 						<!-- /评论列表 -->
 						<else />
@@ -106,10 +106,10 @@
 	                </div>
 				</div>
 				{:W('InfomationSidelist/side',array('count'=>5))}
-				<!-- <div  id="side-list"> -->
-					<!-- <h4 class="b_main m-b-lg"><span class="b_border">本文作者</span></h4>
-					<div class="img-center"> -->
-<!-- 						<a href="#"><img src="__PUBLIC__/img/default.jpg" class="author"></a>
+				<!-- <div  id="side-list">
+					<h4 class="b_main m-b-lg"><span class="b_border">本文作者</span></h4>
+					<div class="img-center">
+						<a href="#"><img src="__PUBLIC__/img/default.jpg" class="author"></a>
 						<h4 class="text-center"><a href="#">麦乐</a></h4>
 						<div class="flex-row">
 							<div class="text-center m-t-sm" style="width:50%">
@@ -128,15 +128,14 @@
 						<div class="m-t-sm text-center">
 							<a href="#" class="btn bg-main btn-sm m-xs "><span class="glyphicon glyphicon-plus"> </span> 关注</a>
 							 <a href="#" class="btn bg-main btn-sm m-xs"><span class="glyphicon glyphicon-ok"> </span> 已关注</a> 
-						</div> -->
+						</div>
 
 						
-					<!-- </div> -->
-				<!-- </div> -->
+					</div>
+				</div> -->
 			</div>
 		</div>
     </div>
-    <br><br>
     <include file="Common/footer" />
 </body>
 <include file="Common/footerJS" />

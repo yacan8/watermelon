@@ -21,7 +21,7 @@ class EquipmentController extends Controller {
 		$Page = new \Think\Page($count,9);
 		$eresult = $equipment->where($condition)->limit($Page->firstRow.','.$Page->listRows)->select();
 		
-		// $this->display();
+		$this->display();
 		
 	}
 

@@ -1,6 +1,3 @@
-.t-header{
-	background-color: #fafcfa;
-}
 
 
 /*游记*/
@@ -10,6 +7,10 @@
 	border-radius: 10px;
 	padding: 3px 5px;
 	color: #585858;
+}
+.la_item.active{
+	border-color: #63D283;
+	color: #63D283;
 }
 .travel_text{
 	line-height: 24px;
@@ -33,4 +34,89 @@
     margin-right: 4px;
     font-size: 22px;
     line-height: 26px;
+}
+.city_btn,
+.city_btn_label{
+	float: right;
+	line-height: 50px;
+	margin-left: 15px;
+}
+
+
+.city_btn{
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 50%;
+	border:1px solid #eee;
+	color: #777;
+	font-size: 20px;
+}
+.city_btn.active{
+	 -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.travel_note_content{
+	line-height: 22px;
+}
+.travel_note_content img{
+	max-width: 100%;
+	margin: 10px 0;
+}
+.sideList{
+	margin-top: 15px;
+}
+
+.sideList li{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.sideList .side_img{
+	width: 70px;
+	height: 58px;
+	float: left;
+	margin-right: 10px;
+}
+
+.fixed{
+	position: fixed;
+	width: 306.656px;
+	top: 12px;
+}
+.share-btn {
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    color: #fff;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+.icon {
+	display: block;
+    background-color: #63D283;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    margin: 15px auto 5px auto;
+    padding-top: 12px;
+    font-size: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.b_border{
+	border-bottom: 3px solid #63D283;
+	padding-bottom: 7px;
+}
+.c-content{
+	line-height: 26px;
+}
+.b_main{
+	border-bottom: 1px solid #eee;
+	padding-bottom: 11px;
 }

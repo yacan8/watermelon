@@ -69,12 +69,13 @@
 		// 评论加载点击事件绑定
 		$("#comment_loading").click(function(event) {
 			var _self = $(this);
+			var type = _self.attr('data-type');
 			if(!_self.hasClass('disabled'))
 				$.ajax({
 					url: loading_url,
 					type: 'get',
 					dataType: 'html',
-					data: {page: page,id:id,type:2},
+					data: {page: page,id:id,type:type},
 					beforeSend:function(xhr){
 						_self.html('加载中...');
 					},
@@ -127,19 +128,20 @@ $(document).on('click','#addComment',function(){
 	var _self = $(this);
 	var content = $("#saytext").val();
 	var _content = $.trim(content);
+	var type = _self.attr('data-type');
 	var receiver = 0;
 	if($('.reply-container').find('.btn-group').length!=0){
 		receiver = $('.reply-container').find('.btn-group').attr('data-reply');
 	}
-	addComment(id,content,receiver,_self,addComment_url);
+	addComment(id,content,receiver,type,_self,addComment_url);
 })
-function addComment(other_id,content,receiver,obj,url){
+function addComment(other_id,content,receiver,type,obj,url){
 	obj.button('loading');
 	$.ajax({
 		url: url,
 		type: 'post',
 		dataType: 'html',
-		data: {other_id: other_id,receiver:receiver,content:content},
+		data: {other_id: other_id,receiver:receiver,type:type,content:content},
 		success:function(data){
 			var result = $.parseJSON(data);
 			if(result.Code !='200'){
