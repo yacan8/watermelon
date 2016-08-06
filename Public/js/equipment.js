@@ -52,11 +52,14 @@ $(function () {
 			  	if(!pf_bool){
 					$.toaster({ priority : 'danger', title : '通知', message : '请点击星星选择星级'});
 			  	}
-			  	bool = pf_bool;
 			  	_self.button('reset');
 			  	$("#recommend").val(2*int_pf);
-			  	return bool;
+			  	if(bool&&pf_bool)
+			  		return true;
+			  	else
+				  	return false;
 			  }else{
+			  	return false;
 			  	window.location.href = _login_url;
 			  }
 		  	
