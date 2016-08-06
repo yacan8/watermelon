@@ -1,5 +1,5 @@
 ;$(function(){
-	var descriptions = ['很差','差','一般','好','很好'];
+	var descriptions = ['很差','较差','还行','推荐','力荐'];
 
 	$('.grade .grade-item').hover(function() {
 		var _self = $(this);
@@ -19,7 +19,6 @@
 
 	var restore = function(){
 		var grade = $('.grade').attr('data-grade');
-		console.log(grade);
 		var index = parseInt(grade);
 		gradeChange(index-1);
 	};

@@ -21,7 +21,7 @@
 
 				<span class="m-l-md tc-grayb"><span class="iconfont icon-liulan"></span> {$infomation.browse}</span>
 
-				<span class="m-l-md tc-grayb"><span class="iconfont icon-pinglun"></span> {$infomation.comment_count}</span>
+				<span class="m-l-md tc-grayb"><span class="glyphicon glyphicon-comment"></span> {$infomation.comment_count}</span>
 				<div class="img-center">
 					<img src="{$infomation.image|default="__PUBLIC__/img/default.jpg"}">
 				</div>
@@ -33,7 +33,7 @@
 
 	            <div class="c_area">
 	            	<h4 class="b_main"><span class="b_border">发表评论</span></h4>
-	            	<textarea class="form-control m-t-lg" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
+	            	<textarea class="pl_textarea m-t-lg" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
 					<a href="javascript:void(0)" data-loading-text="发表中..." id="addComment" data-type="2" class="m-t-md btn bg-main btn-md">发表评论</a>
 					<div class="reply-container" style="position: relative;display: inline-block;vertical-align: middle;">
 						
@@ -62,7 +62,7 @@
 							    {$vo.content}
 								</p>
 								<if condition="session('login') neq $vo['sender_id']">
-									<a class="reply-btn" href="javascript:void(0)" data-reply="{$vo.sender_id}"><span class="iconfont icon-pinglun"> </span> 回复</a>
+									<a class="reply-btn" href="javascript:void(0)" data-reply="{$vo.sender_id}"><span class="glyphicon glyphicon-comment"> </span> 回复</a>
 								</if>
 							  </div>
 							</div>

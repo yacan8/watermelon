@@ -84,7 +84,7 @@
 	<div class="container bg-gray-fa p-t-md p-b-md">
 		<div class="equipment_container">
 			<ul class="equipment_list">
-
+				<for start="1" end="5">
 				<li class="equipment_item">
 					<div class="img_con">
 						<a href="#"><img src="http://image1.8264.com/forum/201403/26/180735gpgzqzryftaatzus.jpg!t1w231h231"></a>
@@ -95,7 +95,7 @@
 						<div class="m-t-sm text-center m-b-sm">
 							{:W('Scenic/score',array('score'=>rand(2,10)))}
 						</div>
-						<div class="dp_btn"><a href="#" class="btn bg-main btn-md" style="width:150px;">点评</a></div>
+						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
 						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
 					</div>
 				</li>
@@ -109,9 +109,9 @@
 						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="#">Decathlon(迪卡侬)</a></div>
 						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="#">Decathlon（迪卡侬）男式皮肤风衣 QUECHUA HELIUM WIND</a></div>
 						<div class="m-t-sm text-center m-b-sm">
-							{:W('Scenic/score',array('score'=>rand(2,10)))}
+							{:W('Scenic/score',array('score'=>10))}
 						</div>
-						<div class="dp_btn"><a href="#" class="btn bg-main btn-md" style="width:150px;">点评</a></div>
+						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
 						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
 					</div>
 				</li>
@@ -127,7 +127,7 @@
 						<div class="m-t-sm text-center m-b-sm">
 							{:W('Scenic/score',array('score'=>rand(2,10)))}
 						</div>
-						<div class="dp_btn"><a href="#" class="btn bg-main btn-md" style="width:150px;">点评</a></div>
+						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
 						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
 					</div>
 				</li>
@@ -142,29 +142,35 @@
 						<div class="m-t-sm text-center m-b-sm">
 							{:W('Scenic/score',array('score'=>rand(2,10)))}
 						</div>
-						<div class="dp_btn"><a href="#" class="btn bg-main btn-md" style="width:150px;">点评</a></div>
-						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
-					</div>
-				</li>
-
-
-				<for start="1" end="21">
-				<li class="equipment_item">
-					<div class="img_con">
-						<a href="#"><img src="http://image1.8264.com/forum/201403/19/1607328z3ozcce0elcb15s.jpg!t1w231h231"></a>
-					</div>
-					<div class="equipment_info p-sm text-center">
-						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="#">Decathlon(迪卡侬)-Quechua（趣岳）</a></div>
-						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="#">迪卡侬户外抓绒衣QUECHUA</a></div>
-						<div class="m-t-sm text-center m-b-sm">
-							{:W('Scenic/score',array('score'=>rand(2,10)))}
-						</div>
-						<div class="dp_btn"><a href="#" class="btn bg-main btn-md" style="width:150px;">点评</a></div>
+						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
 						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
 					</div>
 				</li>
 				</for>
 			</ul>
+
+			<nav class="over-h">
+					  <ul class="pagination pagination-sm pull-right">
+						
+						<li>
+					      <a href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li class="active"><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+					    <li>
+					      <a href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+					</nav>
+
+
 		</div>
 	</div>
 	<include file="Common/footer" />
@@ -175,12 +181,12 @@
 		$(".equipment_item").hover(function(){
 			var _self = $(this);
 			_self.find('.equipment_info').stop().animate({marginTop: '-50px'},'fast');
-			_self.find('.d_text to1').stop().animate({height:0},'fast');
+			_self.find('.d_text').stop().animate({height:0},'fast');
 			_self.find(".dp_btn").stop().animate({marginTop: '10px'},'fast');
 		},function(){
 			var _self = $(this);
 			_self.find('.equipment_info').stop().animate({marginTop: 0},'fast');
-			_self.find('.d_text to1').stop().animate({height:'16px'},'fast');
+			_self.find('.d_text').stop().animate({height:'16px'},'fast');
 			_self.find(".dp_btn").stop().animate({marginTop: '30px'},'fast');
 		})
 	})

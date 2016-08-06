@@ -12,7 +12,7 @@
 		var str = '<div class="media"><div class="media-left"><a href="'+data.sender_url+'"><img class="media-object c_u_icon" src="'+data.sender_icon+'"></a></div><div class="media-body b_main"><h5 class="media-heading m-t-sm"><a href="'+data.sender_url+'">'+data.sender_nickname+'</a> ';
 		if(data.receiver_id != null)
 			str = str + '回复了 <a href="'+data.receiver_url+'">'+data.receiver_nickname+'</a>';
-		str = str + '<span class="pull-right tc-gray9">'+data.time+'</span></h5><p class="m-t-sm c-content">'+data.content+'</p><a href="javascript:void(0)" data-reply="'+data.sender_id+'"><span class="iconfont icon-pinglun"> </span> 回复</a></div></div>';
+		str = str + '<span class="pull-right tc-gray9">'+data.time+'</span></h5><p class="m-t-sm c-content">'+data.content+'</p><a href="javascript:void(0)" data-reply="'+data.sender_id+'"><span class="glyphicon glyphicon-comment"> </span> 回复</a></div></div>';
 		return str;
 	}
 
@@ -29,7 +29,7 @@
 			data.image_thumb = PUBLIC+'/img/default.jpg';
 		if(data.user.icon == '')
 			data.user.icon = PUBLIC+'/img/udefault.png';
-		str = '<div class="I_list m-t-md"><div class="t_s_i over-h h-140 w-220 pull-left m-r-md"><a href="'+data.url+'" style="background-image:url(\''+data.image_thumb+'\')"></a></div><h4 class="l_t"><a href="'+data.url+'">'+data.title+'</a></h4><div class="m-t-sm "><div class="over-h"><div class="pull-left"><a href="'+data.sender_url+'"><img class="i_u_i" src="'+data.user.icon+'"></a></div><a href="#" class="m-l-xs tc-grayb"> '+data.user.nickname+'</a><span class="m-l-md tc-grayb l_h_25"><span class="iconfont icon-fabu"></span> '+data.publish_time+'</span><span class="m-l-md tc-grayb"><span class="iconfont icon-liulan"></span> '+data.browse+'</span><span class="m-l-md tc-grayb"><span class="iconfont icon-pinglun"></span> '+data.comment_count+'</span></div></div></div>';
+		str = '<div class="I_list m-t-md"><div class="t_s_i over-h h-140 w-220 pull-left m-r-md"><a href="'+data.url+'" style="background-image:url(\''+data.image_thumb+'\')"></a></div><h4 class="l_t"><a href="'+data.url+'">'+data.title+'</a></h4><div class="m-t-sm "><div class="over-h"><div class="pull-left"><a href="'+data.sender_url+'"><img class="i_u_i" src="'+data.user.icon+'"></a></div><a href="#" class="m-l-xs tc-grayb"> '+data.user.nickname+'</a><span class="m-l-md tc-grayb l_h_25"><span class="iconfont icon-fabu"></span> '+data.publish_time+'</span><span class="m-l-md tc-grayb"><span class="iconfont icon-liulan"></span> '+data.browse+'</span><span class="m-l-md tc-grayb"><span class="glyphicon glyphicon-comment"></span> '+data.comment_count+'</span></div></div></div>';
 		return str;
 	}
 	;$(function(){

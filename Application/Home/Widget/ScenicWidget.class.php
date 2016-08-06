@@ -41,41 +41,28 @@ class ScenicWidget extends Controller{
 			for ($i=0; $i < 5-$xing_num; $i++) { 
 				echo '<i class="iconfont icon-xing tc-grayc"></i>';
 			}
-		}else{//如果存在
+		}else{//如果存在半颗星
 			if($xing_num==0){
-				echo '<span class="m-l-xs"></span> <span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span>';
-				echo '<i class="iconfont icon-xing tc-grayc m-l-14"></i>';
-				for ($i=0; $i < 3; $i++) { 
+				echo '<span class="m-l-xs"></span> <span class="over-h half" ><i class="iconfont icon-xing tc-grayc"></i><i class="iconfont icon-1 tc-main"></i></span>';
+				for ($i=0; $i < 4; $i++) { 
 					echo '<i class="iconfont icon-xing tc-grayc"></i>';
 				}
 			}else{
 				for ($i=0; $i < $xing_num; $i++) { 
 					echo '<i class="iconfont icon-xing tc-main"></i>';
 				}
-				echo ' <span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span>';
-				if($xing_num<=3){
-					echo '<i class="iconfont icon-xing tc-grayc m-l-14"></i>';
-					for ($j=0; $j < 3-$xing_num; $j++) { 
-						echo '<i class="iconfont icon-xing tc-grayc"></i>';
-					}
-				}else{
-					for ($i=0; $i < 4-$xing_num; $i++) { 
-						echo '<i class="iconfont icon-xing tc-grayc"></i>';
-					}
+				echo ' <span class="over-h half" ><i class="iconfont icon-xing tc-grayc"></i><i class="iconfont icon-1 tc-main"></i></span>';
+				for ($i=0; $i < 4-$xing_num; $i++) { 
+					echo '<i class="iconfont icon-xing tc-grayc"></i>';
 				}
+				
 			}
 			
 		}
-		if((float)$score>=8.5&&(float)$score<9.5)//配合CSS 如果最后一个星星为绝对定位
-			$m_l = 'm-l-md';
-		else{
-			$m_l = 'm-l-sm';
-		}
-			
 		if($info=='')
-			echo '<span class="tc-main '.$m_l.'">'.$score.'</span>';
+			echo '<span class="tc-main m-l-sm">'.$score.'</span>';
 		else
-			echo '<span class="tc-gray9 '.$m_l.' font-12">'.$info.'</span>';
+			echo '<span class="tc-gray9 m-l-sm font-12">'.$info.'</span>';
 	}
 	/**
 	 * [cityWant 城市想去widget]

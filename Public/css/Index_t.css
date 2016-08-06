@@ -1,3 +1,6 @@
+a{
+	color: #222;
+}
 .t_f_con{
 	position: relative;
 }
@@ -79,13 +82,13 @@
 	bottom: 3px;
 }
 .l_t{
-	line-height: 26px;
-    font-size: 16px;
+
+    font-size: 12px;
 }
 .i_u_i{
 	width: 25px;
 	height: 25px;
-	border-radius: 30px;
+	border-radius: 2px;
 }
 .l_h_25{
 	line-height: 25px;
@@ -154,3 +157,15 @@
 	color: #fff;
 }
 
+.pl_textarea{
+	border: 1px solid #dfdfdf;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #fdfdfd;
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.03) inset;
+    box-shadow: 0 2px 2px rgba(0,0,0,.03) inset;
+    padding: 8px 12px;
+    width: 727px;
+    resize: none;
+}

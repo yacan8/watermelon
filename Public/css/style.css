@@ -52,6 +52,7 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 .tc-graya{color:#aaa;}.tc-grayb{color:#bbb;}.tc-grayc{color:#ccc;}.tc-grayd{color:#ddd;}
 .tc-graye{color:#eee;}
 .tc-red{color:red;}
+.tc-blue{color: #45a6e5;}
 .tc-white{color: #fff;}
 .font-bold{font-weight:600!important;}
 .font-12{font-size: 12px!important; }
@@ -112,7 +113,7 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 .icon-dianzan1:before { content: "\e611"; }/*已点赞*/
 
 .half{position: relative;margin-left: -4px;line-height: 20px;}/*半颗星*/
-
+.half>.icon-1{position: absolute;left: 0}
 
 /*公共CSS*/
 .font-16{
@@ -136,9 +137,9 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 }
 .m-l-14{margin-left: 14px;}
 .c_u_icon{
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	border-radius: 3px;
 }
 /*	<i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i><i class="iconfont icon-xing tc-main"></i>
  <span class="over-h half" ><i class="iconfont icon-xing tc-grayc" style="position:absolute;"></i><i class="iconfont icon-1 tc-main" style="position:absolute;"></i></span>
