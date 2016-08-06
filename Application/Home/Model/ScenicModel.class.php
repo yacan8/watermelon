@@ -100,7 +100,7 @@ class ScenicModel extends RelationModel{
 		$lng = $info['longitude'];
 		$lat = $info['latitude'];
 		$city_id = $info['city_id'];
-		$sql = "SELECT id,name,grade,image,ROUND(6378.138*2*ASIN(SQRT(POW(SIN(($lat*PI()/180-latitude*PI()/180)/2),2)+COS($lat*PI()/180)*COS(latitude*PI()/180)*POW(SIN(($lng*PI()/180-longitude*PI()/180)/2),2)))*1000) distance FROM wt_scenic where city_id = $city_id and latitude <> '' and id <> $scenic_id ORDER BY distance asc limit $count";
+		$sql = "SELECT id,name,grade,image,round(6378.138*2*asin(sqrt(pow(sin(($lat*PI()/180-latitude*PI()/180)/2),2)+COS($lat*PI()/180)*COS(latitude*PI()/180)*POW(SIN(($lng*PI()/180-longitude*PI()/180)/2),2)))*1000) distance FROM wt_scenic where city_id = $city_id and latitude <> '' and id <> $scenic_id ORDER BY distance asc limit $count";
 		$List = M('')->query($sql);
 		return $List;
 	}
