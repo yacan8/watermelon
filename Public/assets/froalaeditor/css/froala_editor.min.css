@@ -30,3 +30,10 @@
 	border-width: 1px!important;
 	border-color: #eee!important;
 }
+.fr-popup {
+	border-top: 1px solid #aaa;
+}
+.fr-popup .fr-arrow{
+	top: -5px;
+	border-bottom: 5px solid #aaa;
+}

@@ -1,6 +1,6 @@
 <if condition="session('?login')">
 <div class="m-lr-15 p-t-sm m-t-sm m-b-sm border-t">
-    <a href="/cl/index.php/u/12">
+    <a href="{:U('/u/'.$userinfo['id'])}">
       <img class="u_c_icon pull-left m-r-sm" src="{:C('__DATA__')}/login_thumb/{$userinfo.icon|default='default.jpg'}" alt="...">
     </a>
     <a href="{:U('/u/'.$userinfo['id'])}" style="line-height:43px;">{$userinfo.nickname}</a>
@@ -8,7 +8,7 @@
 <div class="m-lr-15 p-b-sm m-t-xs">
 
     <div id="#foo"></div>
-    <textarea name="content" class="to_input"></textarea>
+    <textarea id="content" name="content" class="to_input"></textarea>
     <div class="comment-op" style="display:block">
       <div class="m-t-sm over-h">
         <a href="javascript:void(0)" title="上传图片" class="btn btn-sm img_uploap" style="border: 1px solid #eee;">添加图片</a>

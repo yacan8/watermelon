@@ -17,16 +17,14 @@
   <script type="text/javascript" src="__PUBLIC__/assets/froalaeditor/js/languages/zh_cn.js"></script>
   <script type="text/javascript">
   $(function(){
-    $('textarea[name="content"]').froalaEditor({
+    $('#content').froalaEditor({
       placeholderText: '亲，说说你的看法吧^_^',
       heightMin: 200,
       language: 'zh_cn',
       pasteDeniedAttrs: ['class', 'id','style'],
       toolbarButtons: ['bold', 'italic', 'underline',  '|', 'formatOL', '|', 'insertLink', 'emoticons','undo']
     });
-
     $("a[href='https://froala.com/wysiwyg-editor']").remove();
-    
   })
 
   </script>

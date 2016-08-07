@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Common/headerCSS" />
+	<link rel="stylesheet" href="__PUBLIC__/css/account.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/travel.css">
+    <title>西瓜游-游记</title>
+</head>
+
+<body>
+    <include file="Common/navbar" />
+
+
+	<div class="p-t-sm border-gray-b-e p-b-sm ">
+		<div class="container">
+			<div class="font-20">
+				游记攻略
+			</div>
+			<div class="m-t-xs">
+				<a href="#">首页</a>
+				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
+				<a href="#">游记攻略</a>
+				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
+				<span>发表游记</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container m-t-md">
+		<form action="#" method="post">
+			<div class="form-group">
+		        <input type="text" name="title" class="form-control" title="请输入标题" placeholder="标题：说明你到了什么地方游玩吧" required/>
+		    </div>
+			<div class="form-group">
+			    <div class="dd-container">
+			    	<span data-id="1" class="dd-item">成都<span data-role="remove">×</span></span>
+			    	<input type="text" data-role="dd-input" class="dd-input" placeholder="地点，如：成都、星光大道" style="width: 20em;">
+			    	<ul class="dd-load-list dropdown-menu" style="display:none;"></ul>
+			    </div>
+			</div>
+			<div class="m-t-dm m-b-md">
+				<textarea id="dd_content" name="content" style="height:0;resize:none;width:0;overflow:hidden;"></textarea>
+			</div>
+			<div class="m-b-md">
+				<button id="submit" type="submit" class="btn-main">发布</button>
+			</div>
+			<input type="hidden" name="space" />
+		</form>
+	</div>
+
+				
+
+
+
+		
+
+<include file="Common/footer" />
+
+</body>
+<include file="Common/footerJS" />
+<include file="TravelNoteContent/edhead" />
+
+<script type="text/javascript">
+	var PUBLIC = "__PUBLIC__";
+	var dd_load_url = "{:U('TravelNoteSpace/loading')}";
+	$('#dd_content').froalaEditor({
+      heightMin: 300,
+      imageUploadURL: '{:U('Upload/upload')}',
+      language: 'zh_cn',
+      pasteDeniedAttrs: ['class', 'id','style'],
+      placeholderText:"告诉大家你游玩的地方是什么样子的吧！！！"
+
+    });
+    $("a[href='https://froala.com/wysiwyg-editor']").remove();
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/travel_publish.js"></script>
+</html>
