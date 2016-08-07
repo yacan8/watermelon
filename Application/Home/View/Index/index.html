@@ -3,38 +3,160 @@
 <head>
     <include file="Common/headerCSS" />
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=i1n66UyP2DFctjvKLRt68GKY"></script>
-    
-
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/index.css">
     <title>西瓜游</title>
 </head>
 
 <body>
     
     <include file="Common/navbar" />
-    <img src="http://image1.8264.com/forum/day_100220/1002202355daf9364fc3e9f7ae.jpg!t1w1500h1500">
-    <div class="container" style="min-height:500px;">
-    	<div id="allmap" style="height:500px;"></div>
+ 
+    <div class="index-header">
+    	<div class="header-img-container"><img src="__PUBLIC__/img/index.jpg" alt="..." class="header-img"></div>
+    	<div class="search-container">
+    		<h1 class='index-hello'>你好,中国！</h1>
+    		<div class="panel-inner">
+                <form class="search-form" target="_blank" action="http://place.qyer.com/lac-leman-ch/" method="post">
+                    <input class="search-input" type="text" placeholder="去哪儿？">
+                    <button class="search-btn" type="submit" data-bn-ipg="index-top-place-search">搜索</button>
+                </form>
+                <div class="search-hot">
+                	<div class="hot-title">热门搜索</div>
+                	<div class="hot-container">
+                		<a href="#">深度</a>
+                		<a href="#">反倒是</a>
+                		<a href="#">规范的加</a>
+                		<a href="#">跟韩剧</a>
+                		<a href="#">合法</a>
+                		<a href="#">深度</a>
+                		<a href="#">圣诞节</a>
+                		<a href="#">方式</a>
+                		<a href="#">深度</a>
+                		<a href="#">飞</a>
+                		<a href="#">公司的</a>
+                		<a href="#">飞士大夫</a>
+                	</div>
+	            </div>
+    		</div>
+    	</div>
+    </div>
 
+    <div class="container m-t-md">
+    	<h3 class="text-center">你想去哪儿？</h3>
+    	<div class="m-t-lg">
+    		<ul class="index-scenic-list">
+    			<for start="1" end="9">
+    			<li>
+    				<a href="#">
+    					<img class="scenic-img" src="__PUBLIC__/img/f5.jpg">
+    				</a>
+    				<div class="scenic-info">
+    					<div class="scenic-title to1">
+    						<a href="#">星光大道</a>
+    					</div>
+    					<div class="scenic-bottom">
+    						<span class="bottom-text" href="#">香港</span>
+							<span class="bottom-right">
+								<span class="keyword">15</span>人想去
+							</span>
+    					</div>
+    				</div>
+    			</li>
+	    		</for>
+    		</ul>
+    	</div>
+
+    	<div class="m-t-md">
+    		<div class="row">
+    			<div class="col-xs-8">
+    				<div class="p-b-sm m-b-sm border-gray-b-e">
+    					<a class="font-20 tc-black" href="#">丨最新资讯</a>
+    					<a href="#" class="tc-black pull-right m-t-xs">>></a>
+    				</div>
+    				<div class="infomation-container">
+    					<for start="1" end="8">
+    					<div class="infomation-item">
+    						<a href="#"><img class="infomation-img pull-right m-l-sm" src="__PUBLIC__/img/f2.png"></a>
+    						<div class="infomation-title to3">
+	    						<a class="tc-black" href="#">广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动</a>
+	    					</div>
+	    					<div class="to1 tc-gray9">
+	    						<a class='tc-black' href="#"><span class="glyphicon glyphicon-user tc-gray8 font-12"></span> 河边人</a> · <span class='tc-gray9 font-12'>16-8-8 00:04</span>
+	    					</div>
+    					</div>
+	    				</for>
+	    				<div class="text-center m-t-md m-b-md">
+	    					<a href="#" class="btn-blue">查看更多</a>
+	    				</div>
+    				</div>
+
+    			</div>
+    			<div class="col-xs-4">
+    				<div class="p-b-sm m-b-sm border-gray-b-e">
+    					<a class="font-20 tc-black" href="#">丨热评装备</a>
+    					<a href="#" class="tc-black pull-right m-t-xs">>></a>
+    				</div>
+    				<div class="equipment-container">
+    					<ul class="sideList m-b-sm">
+							<for start="1" end ="6">
+							<li>
+								<a href="#"><img class="side_img" src="http://image1.8264.com/forum/201403/21/141256huu0nrurbb9z0gbb.jpg!t1w231h231"></a>
+								<div class="side_info">
+									<a href="#" class="tc-black to2">兄弟偕行走川藏——从然乌湖、岗乡、林芝到松潘、九寨沟</a>
+									<div class="m-t-xs tc-gray9 font-12">
+										{:W('Scenic/score',array('score'=>'8.0'))}
+										<span class="pull-right">
+										<span class="glyphicon glyphicon-comment tc-grayd"></span> <php>echo rand(1,200);</php>
+										</span>
+
+									</div>
+								</div>
+							</li>
+							</for>
+						</ul>
+    				</div>
+    				<div class="p-b-sm m-b-sm border-gray-b-e m-t-md">
+    					<a class="font-20 tc-black" href="#">丨热门话题</a>
+    					<a href="#" class="tc-black pull-right m-t-xs">>></a>
+    				</div>
+    				<div class="topic-container">
+    					<for start="1" end="8">
+    					<div class="topic-item">
+    						<div class="m-b-xs to1">
+    							<a href="#" class="tc-black">今天第一天上班。。有点小紧张呢~~我帅气吗？！~</a>
+    						</div>
+    						<div class="topic-info font-12 to1">			
+						          <a href="#" class="tc-black">青春故事</a>
+						          ·
+						          3个人在讨论
+						          ·
+						          222次浏览
+    						</div>
+    					</div>
+	    				</for>
+    				</div>
+    			</div>
+    		
+	    	</div>
+    	</div>
     </div>
     <include file="Common/footer" />
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript">
-		// 百度地图API功能
-		var map = new BMap.Map("allmap");
-		var point = new BMap.Point(116.331398,39.897445);
-		map.centerAndZoom(point,12);
-		// 创建地址解析器实例
-		var myGeo = new BMap.Geocoder();
-		// 将地址解析结果显示在地图上,并调整地图视野
-		myGeo.getPoint("北京市海淀区上地10街", function(point){
-			if (point) {
-				map.centerAndZoom(point, 16);
-				map.addOverlay(new BMap.Marker(point));
-	          alert(point.lng+'   '+point.lat)
-			}else{
-				alert("您选择地址没有解析到结果!");
-			}
-		}, "北京市");
-	</script>
+$(function(){
+	$(".search-input").focus(function(event) {
+		$(".search-hot").addClass('active');
+	}).bind('blur',search_hot_hide);
+	$(".search-hot").mouseover(function(event) {
+		$(".search-input").unbind('blur');
+	}).mouseout(function(event) {
+		$(".search-input").bind('blur',search_hot_hide);
+	});;
+})
+function search_hot_hide(){
+	$(".search-hot").removeClass('active');
+}
+
+</script>
 </html>
