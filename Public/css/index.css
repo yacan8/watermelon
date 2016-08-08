@@ -196,3 +196,50 @@
 	background-color: #46965D;
 	color: #fff;
 }
+
+.search-input.hover{
+	border:1px solid #A6C8FF;
+}
+.search-page{
+	margin: 50px 0 30px 130px; 
+}
+.search-menu{
+	text-align: center;
+	margin: 20px auto 15px auto;
+	border-bottom:1px solid #ddd;
+	padding-bottom: 15px;
+}
+.search-menu a{
+	font-size: 16px;
+	padding: 8px 10px;
+	margin: 0 10px;
+	color: #999;
+}
+.search-menu a:hover,
+.search-menu a.active{
+	font-weight: 700;
+	color: #222;
+}
+.search-item,
+.search-scenic{
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	overflow: hidden;
+	border-bottom: 1px dashed #eee;
+}
+.search-img{
+	width: 200px;
+	height: 135px;
+	float: left;
+	margin-right: 15px;
+}
+.line-22{
+	line-height: 22px;
+}
+.search-eq-img{
+	width: 62px;
+	height: 62px;
+	float: right;
+	margin-right: 10px;
+	border:1px solid #eee;
+}

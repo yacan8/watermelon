@@ -36,31 +36,31 @@ class ScenicWidget extends Controller{
 		$xing_num = floor($score_int/2);//星星数
 		if($score_int%2==0){//如果为整的星星
 			for ($i=0; $i < $xing_num; $i++) { 
-				echo '<i class="iconfont icon-xing tc-main"></i>';
+				echo '<i class="iconfont icon-xing tc-main-d"></i>';
 			}
 			for ($i=0; $i < 5-$xing_num; $i++) { 
-				echo '<i class="iconfont icon-xing tc-grayc"></i>';
+				echo '<i class="iconfont icon-xing tc-graye"></i>';
 			}
 		}else{//如果存在半颗星
 			if($xing_num==0){
-				echo '<span class="m-l-xs"></span> <span class="over-h half" ><i class="iconfont icon-xing tc-grayc"></i><i class="iconfont icon-1 tc-main"></i></span>';
+				echo '<span class="m-l-xs"></span> <span class="over-h half" ><i class="iconfont icon-xing tc-graye"></i><i class="iconfont icon-1 tc-main-d"></i></span>';
 				for ($i=0; $i < 4; $i++) { 
-					echo '<i class="iconfont icon-xing tc-grayc"></i>';
+					echo '<i class="iconfont icon-xing tc-graye"></i>';
 				}
 			}else{
 				for ($i=0; $i < $xing_num; $i++) { 
-					echo '<i class="iconfont icon-xing tc-main"></i>';
+					echo '<i class="iconfont icon-xing tc-main-d"></i>';
 				}
-				echo ' <span class="over-h half" ><i class="iconfont icon-xing tc-grayc"></i><i class="iconfont icon-1 tc-main"></i></span>';
+				echo ' <span class="over-h half" ><i class="iconfont icon-xing tc-graye"></i><i class="iconfont icon-1 tc-main-d"></i></span>';
 				for ($i=0; $i < 4-$xing_num; $i++) { 
-					echo '<i class="iconfont icon-xing tc-grayc"></i>';
+					echo '<i class="iconfont icon-xing tc-graye"></i>';
 				}
 				
 			}
 			
 		}
 		if($info=='')
-			echo '<span class="tc-main m-l-sm">'.$score.'</span>';
+			echo '<span class="tc-main-d m-l-sm">'.$score.'</span>';
 		else
 			echo '<span class="tc-gray9 m-l-sm font-12">'.$info.'</span>';
 	}

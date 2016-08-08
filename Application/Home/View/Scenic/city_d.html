@@ -120,10 +120,10 @@
 									<div class="m-t-xs">
 										{:W('Scenic/score',array('score'=>$vo['grade']))}
 										<span class="tc-gray9 m-l-sm font-12">{$vo.comment_count}人评论</span>
-										<span class="tc-gray9 pull-right font-12 m-r-xs">{$vo.type}</span>
+										<span class="tc-gray9 pull-right font-12 m-t-xs">{$vo.type}</span>
 
 									</div>
-									<div class="m-t-sm">
+									<div class="m-t-xs tc-gray6">
 										{:str_sub($vo['desciption'],170)}
 									</div>
 								</div>
@@ -156,7 +156,7 @@
 						<a href="#" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
 					</div>
 					<div class="m-t-sm">
-						{:W('TravelNote/Hot',array('city_id'=>$city_id,'count'=>3))}
+						
 					</div>
 					<hr>
 				</div>

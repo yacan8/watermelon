@@ -47,6 +47,7 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 .btn.bg-main:active{outline: none;background-color:#63D283;}
 /*文本颜色*/
 .tc-main{color:#63D283;}
+.tc-main-d{color:#5CAD77;}
 .tc-black{color:#111;}
 .tc-gray6{color:#666;}.tc-gray7{color:#777;}.tc-gray8{color:#888;}.tc-gray9{color:#999;}
 .tc-graya{color:#aaa;}.tc-grayb{color:#bbb;}.tc-grayc{color:#ccc;}.tc-grayd{color:#ddd;}
@@ -111,7 +112,6 @@ a.bg-main:hover,a.bg-main:focus{color: #fff}
 .icon-weishoucang:before { content: "\e60f"; }/*未收藏*/
 .icon-shoucangyishoucang-copy:before { content: "\e610"; }/*已收藏*/
 .icon-dianzan1:before { content: "\e611"; }/*已点赞*/
-
 .half{position: relative;margin-left: -4px;line-height: 20px;}/*半颗星*/
 .half>.icon-1{position: absolute;left: 0}
 
