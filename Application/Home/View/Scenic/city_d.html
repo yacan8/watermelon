@@ -4,6 +4,9 @@
     <include file="Common/headerCSS" />
 	<link rel="stylesheet" href="__PUBLIC__/css/Scenic_Index.css">
 	<link rel="stylesheet" href="__PUBLIC__/css/carousel.css">
+	<if condition = "$imgCount eq 0">
+		<link rel="stylesheet" href="__PUBLIC__/css/photo_upload.css">
+	</if>
     <title>西瓜游-{$city_info.city}</title>
 </head>
 
@@ -50,7 +53,11 @@
 			<div class="span-container bg-white over-h">
 				<div class="span-left focus-pic">
 					<include file="ScenicContent:Carousel" />
+					<if condition = "$imgCount neq 0">
 					<a class="pic_num" href="{:U('Scenic/photo',array('type'=>1,'id'=>$city_id))}">{$imgCount}张照片</a>
+					<else/>
+					<a class="pic_num photo_upload" href="javascript:void(0)">这里还没有照片，立即上传</a>
+					</if>
 				</div>
 				<div class="span-right">
 					<ul class="op-2 over-h">
@@ -187,18 +194,38 @@
 
 
 
-
+<if condition = "$imgCount eq 0">
+	<include file="ScenicContent/photoUpload" />
+</if>
 
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.toaster.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=i1n66UyP2DFctjvKLRt68GKY"></script>
+<if condition = "$imgCount eq 0">
+<include file="ScenicContent/photoUpload" />	
+<script type="text/javascript" src="__PUBLIC__/assets/exif/js/exif.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.form.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/img_base64.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/photo_upload.js"></script>
+</if>
 <script type="text/javascript">
 	var PUBLIC = "__PUBLIC__";
 	var city_id = {$city_id};
 	var c_want_url = "{:U('CityWant/want')}";
 	var c_been_url = "{:U('CityBeen/been')}";
-
+	var _login_url = "{:U('Login/index')}?url=__SELF__";
+    var login_state = <if condition="session('?login')">true<else/>false</if>;
+    
+    <if condition = "$imgCount eq 0">
+    var album_url = "{:U('Album/load')}";
+    var type = 1;
+    var scenic_id = 0;
+	var city_id = {$city_id};
+    var save_url = "{:U('Image/upload_save')}";
+    var delete_url = "{:U('Image/cancel')}";
+    var add_album_url = "{:U('Album/add')}";
+    </if>
 	// 百度地图API功能
 	var map = new BMap.Map("map");
 	

@@ -40,13 +40,12 @@
   <script type="text/javascript">
   $(function(){
     $('textarea').froalaEditor({
-      heightMin: 200,
-      imageUploadURL: '{:U('Upload/upload')}',
+      heightMin: 350,
+      imageUploadURL: '{$imageUploadUrl}',
       language: 'zh_cn',
-      pasteDeniedAttrs: ['class', 'id','style']
+      pasteDeniedAttrs: ['class', 'id','style'],
+      placeholderText: '{$placeholderText}'
     });
     $("a[href='https://froala.com/wysiwyg-editor']").remove();
   })
-
-
   </script>

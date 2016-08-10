@@ -27,11 +27,9 @@ class ImageModel extends RelationModel{
 	 * @return [Integer]
 	 */
 	public function getCountByCityId($city_id){
-		$DB_PREFIX =$this->tablePrefix;
-		$Model = M('');
-		$count = $Model ->table($DB_PREFIX.'image')
-						->where('delete_tag = 0 and scenic_id in(select id from '.$DB_PREFIX.'scenic where city_id = '.$city_id.')')
-						->count();
+		$condition['delete_tag'] = (bool)0;
+		$condition['city_id'] = $city_id;
+		$count = $this ->where($condition)->count();
 		return $count;
 	}
 
@@ -59,9 +57,11 @@ class ImageModel extends RelationModel{
 		$subQuery  =$ScenicModel->field('id')->where(array('city_id'=>$city_id))->select(false);//生成子查询语句
 		if($relation!==false)
 			$relationStr = true;
+		$condition['delete_tag'] = (bool)0;
+		$condition['city_id'] = $city_id;
 		$List = $this	->field('id,scenic_id,time,user_id,image')
 						->relation($relationStr)
-						->where('delete_tag = 0 and scenic_id in('.$subQuery.')')
+						->where($condition)
 						->page("$page,$count")
 						->order('id desc')
 						->select();
@@ -96,49 +96,33 @@ class ImageModel extends RelationModel{
 	/**
 	 * [getImage 获取图片信息]
 	 * @param  [Integer]  $id   [图片ID]
-	 * @param  integer $type [类型 1为景点图片加载 2为城市图片加载]
+	 * @param  integer $type [类型 1为城市图片加载 2为景点图片加载]
 	 * @return [obj]
 	 */
 	public function getImage($id,$type){
-
-	
-
 		if($type == 2){
 			$scenic_id = $this->where(array('id'=>$id))->getField('scenic_id');
 			$condition['delete_tag'] = (bool)0;
 			$condition['_logic'] = 'and';
 			$condition['scenic_id'] = $scenic_id;
-			$array = $this	->field('id,scenic_id,time,user_id,image')
-							->relation(true)
-							->where($condition)
-							->find($id);
-			
-			$next_condition = $pre_condition = $condition;
 
-			
-			$next_condition['id']  = array('gt',$id);
-			$pre_condition['id']  = array('lt',$id);
-			$array['next'] = $this->where($next_condition)->limit('1')->getField('id');//上一个ID
-			$array['pre']  = $this->where($pre_condition)->order('id desc')->limit('1')->getField('id');//下一个ID
-			$array['count'] = $this->where($next_condition)->count()+1;
 		}
 		else if($type == 1){
-			$ScenicModel = M('Scenic');
-			$scenicSubQuery = $this->field('scenic_id')->where(array('id'=>$id))->select(false);
-			$city_id = $ScenicModel->where('id = ('.$scenicSubQuery.')')->getField('city_id');
-			$subQuery  =$ScenicModel->field('id')->where(array('city_id'=>$city_id))->select(false);//生成子查询语句
-			$condition['_string'] = 'delete_tag = 0 and scenic_id in('.$subQuery.')';
-			$array = $this	->field('id,scenic_id,time,user_id,image')
+			$city_id = $this->where(array('id'=>$id))->getField('city_id');
+			$condition['delete_tag'] = (bool)0;
+			$condition['_logic'] = 'and';
+			$condition['city_id'] = $city_id;
+		}
+		$array = $this	->field('id,scenic_id,time,user_id,image')
 							->relation(true)
 							->where($condition)
 							->find($id);
-			$next_condition = $pre_condition = $condition;
-			$next_condition['id']  = array('gt',$id);
-			$pre_condition['id']  = array('lt',$id);
-			$array['next'] = $this->where($next_condition)->limit('1')->getField('id');//上一个ID
-			$array['pre'] = $this->where($pre_condition)->limit('1')->order('id desc')->getField('id');//下一个ID
-			$array['count'] = $this->where($next_condition)->count()+1;
-		}
+		$next_condition = $pre_condition = $condition;
+		$next_condition['id']  = array('gt',$id);
+		$pre_condition['id']  = array('lt',$id);
+		$array['next'] = $this->where($next_condition)->limit('1')->getField('id');//上一个ID
+		$array['pre'] = $this->where($pre_condition)->limit('1')->order('id desc')->getField('id');//下一个ID
+		$array['count'] = $this->where($next_condition)->count()+1;
 		return $array;
 		
 	}

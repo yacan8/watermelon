@@ -1,0 +1,27 @@
+
+<div class="modal fade" id="addCity" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">添加城市</h4>
+      </div>
+      <form class="form-horizontal" method="post" action="{:U('Province/cityAdd')}" enctype="multipart/form-data">
+      <div class="modal-body">
+        <input type="text" class="form-control" name="city" placeholder="城市名：如成都、香格里拉" required/>
+        <button type="button" id="city_img_button" class="m-t-md btn-blue"><span class="glyphicon glyphicon-picture"></span> 选择封片</button>
+        <input type="hidden" value="{$province_id}" name="province" required/>
+        <input type="file" name="city_img" style="display:none" />
+        <div class="m-t-md" id="city_img_container">
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中...">添加</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/js/admin/addcity.js"></script>

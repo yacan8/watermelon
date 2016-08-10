@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade bs-example-modal-sm" id="addProvince" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">添加省份</h4>
+      </div>
+      <form class="form-horizontal" method="post" action="{:U('Province/add')}">
+      <div class="modal-body">
+        <input type="text" class="form-control" name="province" placeholder="省份：如广东、四川" required/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-success btn-sm" data-loading-text="提交中...">添加</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

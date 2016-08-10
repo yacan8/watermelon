@@ -208,8 +208,10 @@
 	color: #fff;
 }
 
-
-
+.imgListCon a,
+.desciption a{
+	color: #52A068;
+}
 
 
 

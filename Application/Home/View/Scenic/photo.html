@@ -116,23 +116,33 @@
   var save_url = "{:U('Image/upload_save')}";
   var delete_url = "{:U('Image/cancel')}";
   var add_album_url = "{:U('Album/add')}";
+  var scenic_id = {$scenic_id};
+  var city_id = {$city_id};
   <if condition = "$type eq 1">
-  var city_id = {$id};
   var c_want_url = "{:U('CityWant/want')}";
   var c_been_url = "{:U('CityBeen/been')}";
-  var scenic_id = 0;
   <else/>
-  var scenic_id = {$id};
   var s_zan_url = "{:U('Zan/AjaxZan')}";
   var s_want_url = "{:U('ScenicWant/want')}";
   var s_been_url = "{:U('ScenicBeen/been')}";
   </if>
  $(function(){
+      var hash = window.location.hash;
+      if(hash!=''){
+        var c = hash.substr(1);
+        if(c=='upload')
+        setTimeout(function(){
+           $(".photo_upload").click();
+        },100);
+      }
+
+
   $(".photoItem img").photoViewer({
         loadUrl : "{:U('Image/imgLoad')}",
         num: {$img_count},
         params:{'type':type}
    });
+
  })
 </script>
 <script type="text/javascript" src="__PUBLIC__/js/img_base64.js"></script>

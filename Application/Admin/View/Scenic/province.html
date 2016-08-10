@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">省份城市管理</h3>
+	</div>
+	<div class="col-xs-12 p-l-md tc-gray9">
+		总共<span class="tc-black"> {$count} </span>个省份
+	</div>
+	<div class="col-xs-12 m-t-sm">
+		<div class="boder-e-container">
+			<volist name="List" id="vo">
+				<a href="{:U('Province/province',array('id'=>$vo['id']))}" class="space-item <if condition="$province eq $vo['province']"> active</if>">{$vo.province}({$vo.count})</a>
+			</volist>
+			<a href="#" class="space-item" data-toggle="modal" data-target="#addProvince"><span class="glyphicon glyphicon-plus"></span> 添加省份</a>
+		</div>
+	</div>
+	<div class="col-xs-12 p-l-md m-t-sm tc-gray9">
+		<span class="tc-black">{$province}</span> 总共 <span class="tc-black"> {$city_count} </span>个城市
+		<if condition="$province_id neq ''">
+			<a href="#" class="pull-right" data-toggle="modal" data-target="#addCity"><span class="glyphicon glyphicon-plus"></span> 添加城市</a>
+		</if>
+	</div>
+	<div class="col-xs-12 m-t-sm">
+		<div class="city-container">
+			<volist name="cityList" id="vo">
+			<div class="city-item">
+				<div class="left-img">
+					<a class="img-change-btn" data-id="{$vo.id}" href="javascrip:;">修改封面</a>
+					<img src="{$vo.image|default='__PUBLIC__/img/city.jpg'}">
+				</div>
+				<div class="font-12 tc-gray9 item-info">
+						<a class="font-bold" href="{:U('Scenic/scenic',array('city_id'=>$vo['id']))}">{$vo.city}</a>
+						·
+						<a class="" href="#">{$vo.scenic_count}</a>个评论
+						·
+						<a href="#">{$vo.image_count}</a>张图片
+				</div>
+			</div>
+
+			</volist>
+		</div>
+	</div>
+</div>
+<form action="{:U('Province/city_img_change')}" id="img-change-form" method="post" data-obj="" enctype="multipart/form-data">
+	<input type="hidden" name="id" />
+	<input type="file" name="img" class="hidden" accept="image/jpg,image/png,image/jpeg"/>
+</form>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.form.js"></script>
+<include file="ScenicContent/addProvince" />
+<include file="ScenicContent/addCity" />
+
+
+<script type="text/javascript">
+	$(function(){
+		$('button[type="submit"]').click(function(){
+			$(this).button('loading');
+		}).blur(function(){
+			$(this).button('reset');
+		});
+	})
+</script>

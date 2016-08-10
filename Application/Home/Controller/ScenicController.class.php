@@ -136,8 +136,17 @@ class ScenicController extends Controller {
             
             $Page  = new  \Think\Page($img_count,$count);
             $show  = $Page->show();// 分页显示输出
+            if($type == 2){
+                $city_id = M('Scenic')->where(array('id'=>$id))->getField('city_id');
+                $this->assign('scenic_id',$id);
+                $this->assign('city_id',$city_id);
+            }else{
+                $this->assign('scenic_id',0);
+                $this->assign('city_id',$id);
+            }
 
-
+            
+            
             $this->assign('page',$show);
             $this->assign('name',$name);
             $this->assign('type',$type);

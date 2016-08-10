@@ -1,0 +1,184 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">{$scenic.name|default="发布景点"}</h3>
+	</div>
+	
+	<div class="col-xs-12">
+
+		<form class="form-horizontal" method="post" action="{:U('Scenic/opScenic')}" enctype="multipart/form-data">
+			<input name="scenic_id" type="hidden" value="{$scenic_id}">
+		  	<fieldset>
+				<div class="form-group">
+			      <div class="col-xs-12">
+			        <input type="text" id="scenic-name" class="form-control" name="name" placeholder="景点名" value="{$scenic.name}" required/>
+			      </div>
+			    </div>
+
+			    <div class="form-group">
+			    	<div class="col-xs-4">
+				        <select class="form-control" id="province">
+				          <option value="0">--省份--</option>
+				          <volist name="provinceList" id="vo">
+				          	<option value="{$vo.id}" <if condition="$province_id eq $vo['id']">selected</if>>{$vo.province}</option>
+				          </volist>
+				        </select>
+			    	</div>
+			        <div class="col-xs-4">
+				      	<select class="form-control" id="city" name="city">
+				          <option value="0">--城市--</option>
+				          <volist name="cityList" id="vo">
+				          	<option value="{$vo.id}" <if condition="$city_id eq $vo['id']">selected</if>>{$vo.city}</option>
+				          </volist>
+				        </select>
+			        </div>
+				    <div class="col-xs-4">
+				      	<select class="form-control" id="type" name="type">
+				          <option value="0">--景点类型--</option>
+				          <volist name="typeList" id="vo">
+				          	<option value="{$vo.id}" <if condition="$scenic['type_id'] eq $vo['id']">selected</if>>{$vo.type}</option>
+				          </volist>
+				        </select>
+				    </div>
+			    </div>
+				
+				
+
+
+				<div class="form-group">
+					<div class="col-xs-12">
+						<textarea id="desciption" name="desciption" style="resize:none;height:1px;width:1px" required>{$scenic.desciption}</textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+			      <div class="col-xs-4">
+			        <input type="text" class="form-control" name="address" placeholder="景点地址" value="{$scenic.address}" />
+			      </div>
+			      <div class="col-xs-2">
+			      	<a href="#" id="map-get-address" class="btn btn-default btn-block" target="_blank">百度地图获取</a>
+			      </div>
+
+			      <div class="col-xs-4">
+			        <input type="text" class="form-control" name="lng_lat" id="lng_lat" placeholder="经纬度，格式：经度,纬度" value="{$scenic.longitude},{$scenic.latitude}" required/>
+			      </div>
+			      <div class="col-xs-2">
+			      	<a href="#" id="map-get-point" class="btn btn-default btn-block" target="_blank">坐标获取</a>
+			      </div>
+				
+			    </div>
+			    <div class="form-group">
+			    	<div class="col-xs-12">
+				    	<button type="button" id="fm-img-btn" class="btn-blue btn-sm"><span class="glyphicon glyphicon-picture"></span> 选择封片</button>
+				    	<input type="file" id="fm-img-file" name="fm-img-file" class="hidden"/>
+				    	<button type="submit" id="jd-submit" class="btn-blue btn-main pull-right" style="min-width:150px;" data-loading-text="提交发布中...">发布</button>
+				    </div>
+			    </div>
+			    <div id="img-upload-container">
+			    	<if condition="$scenic['image'] neq ''">
+			    		<img src="{:C('__DATA__')}/{$scenic.image}" style="margin:10px 0;max-width:100%;padding:5px;border-radio:2px;border:1px solid #eee;">
+			    	</if>
+			    </div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+var city_load_url = "{:U('City/city_load')}"; 
+	$(function(){
+		$("#map-get-address").click(function(){
+			var name = $.trim($("#scenic-name").val());
+			var city = $("select[name='city'] option:selected").html();
+			if(name!=''&&$("select[name='city']").val()!='0'){
+				var url = "http://api.map.baidu.com/geocoder?address="+city+name+"&output=html";
+				$(this).attr('href',url);
+			}else{
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '必须先填写景点名和选择城市'});
+				return false;
+			}
+		})
+		$("#map-get-point").click(function(){
+			var name = $.trim($("#scenic-name").val());
+			var city = $("select[name='city'] option:selected").html();
+			if(name!=''&&$("select[name='city']").val()!='0'){
+				var url = "{:U('Scenic/getPoint')}?city="+city+"&word="+name;
+				$(this).attr('href',url);
+			}else{
+
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '必须先填写景点名和选择城市'});
+				return false;
+			}
+		})
+
+		$("#fm-img-btn").click(function(event) {
+			$("#fm-img-file").click();
+		});
+		$("#fm-img-file").change(function(event) {
+			var objUrl = getObjectURL($(this).get(0).files[0]) ;
+            if (objUrl) {
+            	var str = '<img src="'+objUrl+'" style="margin:10px 0;max-width:100%;padding:5px;border-radio:2px;border:1px solid #eee;">';
+                $("#img-upload-container").html(str);//设置灯箱效果的值
+            }
+		});
+
+
+		$("#province").change(function(event) {
+			var p = $(this).val();
+			$.ajax({
+				url: city_load_url,type: 'get',dataType: 'json',data: {p: p},
+				success:function(data){
+					var str = "";
+					for(var i=0;i<data.length;i++){str = str + "<option value='"+data[i].id+"'>"+data[i].city+"</option>";}
+					$("#city").html(str);
+				},
+				error:function(){alert('加载失败');}
+			})
+			
+		});
+
+		$("#jd-submit").click(function(){
+			var _self = $(this);
+			_self.button('loading');
+			var type = $.trim($("#type").val());
+			var city = $.trim($("#city").val());
+			var content = $.trim($("#desciption").val());
+			var name = $.trim($("#scenic-name").val());
+			var lng_lat = $.trim($("#lng_lat").val());
+			var bool = true;
+			if(name==''){
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '请输入景点名'});
+				bool = false;
+			}
+			if(city == '0'){
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '请选择城市'});
+				bool = false;
+			}
+			if(content == ''){
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '请输入简介'});
+				bool = false;
+			}
+			if(type == '0'){
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '请选择类型'});
+				bool = false;
+			}
+			if(lng_lat == ''){
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '请输入经纬度'});
+				bool = false;
+			}else{
+				var jwd_arr = lng_lat.split(',');
+				if(jwd_arr.length!=2||!verify(jwd_arr[0])||!verify(jwd_arr[1])){
+					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : '请正确的经纬度格式，如114.052791,22.315581'});
+					bool = false;
+				}
+			}
+			if(!bool)
+				_self.button('reset');
+			return bool;
+		})
+	})
+
+function verify(str){
+if(str.match(/^(:?(:?\d+.\d+)|(:?\d+))$/)) return true;
+else return false;
+}
+</script>
+<include file="Common/edhead" />

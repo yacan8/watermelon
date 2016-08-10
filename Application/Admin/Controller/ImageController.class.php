@@ -35,4 +35,21 @@ class ImageController extends Controller {
             imagejpeg ( $i );
         }
     }
+
+
+    public function i(){
+        $img = I('get.i');
+        if($img !=''){
+            $img = urldecode($img);
+            $h = I('get.h',120);
+            $w = I('get.w',200);
+            $imgNameArray = explode('!',$img);
+            $image = new \Think\Image(\Think\Image::IMAGE_GD); 
+            $image->open('Data/'.$imgNameArray[0]);
+            $img = $image->thumb($w, $h,\Think\Image::IMAGE_THUMB_CENTER)->getImg();
+            $i = $img->getImg();
+            header ('Content-Type:'.$img->mime());
+            imagejpeg ( $i );
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Model;
-use Think\Model\RelationModel;
-class LoginModel extends RelationModel{
+use Think\Model;
+class LoginModel extends Model{
 
 	//关联数据
 	protected $_link = array(
@@ -13,7 +13,13 @@ class LoginModel extends RelationModel{
 	    
 	);
 
-
+	public function checkPower($user_id){
+		$power = $this->where(array('id'=>$user_id))->getField('power');
+		if((int)$power>0)
+			return true;
+		else
+			return false;
+	}
 	/**
 	 * [setPower 权限切换，若为普通人员，设置为管理员，若为管理员，设置为普通人员]
 	 * @param [string] $tel [传入的用户名]

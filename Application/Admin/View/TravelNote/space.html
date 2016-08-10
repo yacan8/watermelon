@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">游记地点管理</h3>
+	</div>
+	<div class="col-xs-12 p-l-md tc-gray9">
+		总共<span class="tc-black">{$count}</span>个地点
+	</div>
+	<div class="col-xs-12 m-t-sm">
+		<div class="boder-e-container">
+			<volist name="List" id="vo">
+				<span class="space-item">{$vo.city}<a href="{:U('TravelNoteSpace/delete',array('id'=>$vo['id']))}" data-role="remove" onclick="return confirm('确认删除吗？')">×</a></span>
+			</volist>
+
+		</div>
+	</div>
+
+
+
+		
+</div>

@@ -81,7 +81,8 @@ class InfomationController extends Controller {
 			$this->assign('change',0);
 		}
 
-		
+		$this->assign('imageUploadUrl',U('Upload/upload'));
+		$this->assign('placeholderText','输入资讯内容');
 
 		$this->display('infomation');
 	}

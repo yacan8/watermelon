@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">游记管理</h3>
+	</div>
+	<if condition ="$user_id neq ''">
+		<div class="col-xs-12">
+			<a href="{:U('TravelNote/index')}">全部</a>
+			<span class="m-l-xs m-r-xs tc-gray9">/</span>
+			<a class='m-r-sm tc-gray6'>{$nickname} </a>
+		</div>
+	</if>
+	<div class="col-xs-12 m-t-sm">
+		<div class="boder-e-container">
+			<volist name="List" id="vo">
+			<div class="boder-b-dashed">
+				<div class="travel-note-title"><a href="#">{$vo.title}</a></div>
+				<div class="m-t-sm"> 
+					
+					<volist name="vo.pic" id="item" offset="0" length='6'>
+						<a href="{$item}" target="_blank"><img class="travel-note-img" src="{$item}"></a>
+					</volist>
+				</div>
+				<div class="travel-note-info">
+					<a href="{:U('TravelNote/index',array('user_id'=>$vo['user_id']))}" class="tc-gray6 m-r-md"><span class="glyphicon glyphicon-user tc-gray9"></span> {$vo.nickname}</a>
+					<span class="tc-gray9 m-r-md">{$vo.time}</span>
+					<span class="tc-gray4 m-r-md"><span class="glyphicon glyphicon-eye-open tc-gray9"></span> {$vo.browse}</span>
+					<span class="tc-gray4 m-r-md"><span class="glyphicon glyphicon-comment tc-gray9"></span> {$vo.comment}</span>
+					<span class="tc-gray4 m-r-md"><span class="glyphicon glyphicon glyphicon-thumbs-up tc-gray9"></span> {$vo.zan}</span>
+				</div>
+				<div class="m-t-sm">
+					<a href="#" class="btn btn-default btn-xs m-r-sm" target="_blank">查看</a>
+					<a href="{:U('TravelNote/delete',array('id'=>$vo['id']))}" class="btn btn-danger btn-xs" onclick="return confirm('确认删除吗？')">删除</a>
+				</div>
+			</div>
+
+			</volist>
+			<ul class="pagination pagination-sm m-t-lg">
+					{$page}
+			</ul>
+
+
+
+		</div>
+	</div>
+
+
+
+		
+</div>

@@ -137,6 +137,7 @@ class ImageController extends Controller {
     public function upload_save(){
         if(session('?login')){
             $scenic_id = I('post.scenic_id',0);
+            $city_id = I('post.city_id',0);
             $album_id = I('post.album_id',0);
             $img_name_str = I('post.img_name_str',0);
 
@@ -163,6 +164,7 @@ class ImageController extends Controller {
             for ($i=0; $i < count($ImgArray); $i++) { //形成数据
                 $ImgData[] = array(
                     'scenic_id'=>$scenic_id,
+                    'city_id'=>$city_id,
                     'album_id'=> $album_id,
                     'dynamics_id'=> $dynamics_id,
                     'time'=> $time,

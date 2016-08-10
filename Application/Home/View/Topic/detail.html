@@ -157,7 +157,7 @@
   var collect_url = '{:U("Collection/AjaxCollecting",'',false,false)}';
   var zan_url = '{:U("TopicZan/AjaxZan",'',false,false)}';
   var topic_id = {$topic.id};
-  var login_state = <if condition="session('?login')">else<true/>false</if>;
+  var login_state = <if condition="session('?login')">true<else/>false</if>;
   var img_uploap_url = '{:U("Topic/addTopicUpload",'',false,false)}';
   var PUBLIC = "__PUBLIC__";
   var login_url = "{:U('Login/index')}";

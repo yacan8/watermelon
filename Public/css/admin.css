@@ -1,4 +1,14 @@
-
+a,a:active,a:focus{
+	color: #52A068;
+}
+a:hover{
+	color: #63D283;
+}
+.boder-b-dashed{
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #eee;
+}
 .fr-emoticon.fr-emoticon-img{
 	display: inline-block;
     width: 20px;
@@ -81,10 +91,10 @@
 .topic-sections .active a{
 	color: #63D283;
 }
+.boder-e-container,
 .topic-container{
 	border:1px solid #eee;
 	padding: 10px;
-
 }
 .topic-item{
 	padding:  15px 0;
@@ -106,4 +116,111 @@
 .media-picture li img{
 	width: 100%;
 	height: 100%;
+}
+/*/话题*/
+
+/*游记*/
+.travel-note-img{
+	width: 160px;
+	height: 120px;
+	margin:0 10px 10px 0;
+	padding: 3px;
+	border-radius: 2px;
+	border:1px solid #eee;
+}
+.space-item{
+	display: inline-block;
+    color: #017e66;
+    background-color: #e7f2ed;
+    font-size: 13px;
+    text-align: center;
+    padding: 5px 8px;
+    line-height: 1;
+    margin:0 5px 5px 0;
+}
+.space-item.active{
+	background-color: #34B79E;
+	color: #e7f2ed;
+}
+[data-role="remove"]{
+	cursor: pointer;
+}
+
+/*城市管理*/
+.city-container{
+	margin-right: -15px;
+	overflow: hidden;
+}
+.city-item{
+	margin: 0 20px 5px 0;
+	width: 173px;
+	height: 167px;
+	overflow: hidden;
+	float: left;
+}
+.left-img{
+	position: relative;
+	width: 173px;
+	height: 100px;
+	border-color:#eee;
+	border-style: solid;
+	border-width: 1px 1px 0 1px;
+	padding:5px 5px 0 5px;
+	border-radius: 3px 3px 0 0;
+	margin-right: 10px;
+}
+.item-info{
+	border-color:#eee;
+	border-style: solid;
+	border-width: 0 1px 1px 1px;
+	padding:10px 5px 5px 5px;
+	border-radius:0 0 3px 3px;
+}
+.upload-progress,
+.left-img a{
+	position: absolute;
+	display: block;
+	text-align: center;
+	line-height: 100px;
+	background-color: rgba(0,0,0,.5);
+	color: #fff;
+	border-radius: 3px;
+	width: 161px;
+    height: 94px;
+	opacity: 0;
+}
+.upload-progress{
+	opacity: 1;
+}
+.left-img:hover a{
+	opacity: 1;
+}
+.left-img img{
+	border-radius: 3px;
+	width: 100%;
+	height: 100%;
+}
+.right-info{
+	font-size: 12px;
+}
+
+.btn-blue{
+	color: #69B2E0;
+	font-size: 20px;
+	font-family: 600;
+	color: #fff;
+	background-color: #69B2E0;
+	padding: 10px 15px;
+	border: none;
+}
+.btn-blue.btn-main{
+	background-color: #63D283;
+}
+.btn-blue.btn-main:hover{
+	background-color: #46965D;
+}
+.btn-blue.btn-sm{
+	border-radius: 0;
+	padding: 5px 8px;
+	font-size: 14px;
 }

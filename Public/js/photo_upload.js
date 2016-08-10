@@ -22,7 +22,7 @@
 				else
 					img_name_str =img_name_str+ img_obj.eq(i).attr('data-name');
 			}
-			var params = {scenic_id:scenic_id,album_id:album_id,img_name_str:img_name_str};
+			var params = {city_id:city_id,scenic_id:scenic_id,album_id:album_id,img_name_str:img_name_str};
 			$.post(save_url, params, function(data) {
 				var result = $.parseJSON(data);
 				if(result.Code == '200'){

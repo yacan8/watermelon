@@ -4,12 +4,19 @@
 
          <!-- Wrapper for slides -->
          <div class="carousel-inner" role="listbox">
+            <if condition="$imgCount neq 0">
             <volist name="imgList" id="vo">
                  <div class="item <if condition="$i eq 1">active</if>">
                      <a href="{:U('Scenic/photo',array('type'=>1,'id'=>$city_id))}"><img src="{:U('Image/ScenicImg',array('w'=>680,'h'=>380,'image'=>urlencode($vo['image']).'!feature'),false,false)}"></a>
                  </div>
             </volist>
+            <else/>
+                <div class="item active">
+                     <a><img src="__PUBLIC__/img/scenicdefault.jpg" style="width:680px;height:380px;"></a>
+                 </div>
+            </if>
          </div>
+         <if condition="$imgCount neq 0">
          <!-- Controls -->
          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -19,5 +26,6 @@
              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
              <span class="sr-only">Next</span>
          </a>
+         </if>
        </div>
     </div>

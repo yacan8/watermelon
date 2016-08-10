@@ -9,8 +9,9 @@
 		</div>
 		<if condition ="$userinfo neq ''">
 			<div class="col-xs-12 m-t-md">
-				<a href="{:U('Topic/index')}" class='m-r-sm'>全部</a>
-				<a class='m-r-sm tc-gray6'>{$userinfo.nickname} </a>
+				<a href="{:U('Topic/index')}">全部</a>
+				<span class="m-l-xs m-r-xs tc-gray9">/</span>
+				<a class='tc-gray6'>{$userinfo.nickname} </a>
 			</div>
 		</if>
 		<div class="col-xs-12 m-t-md">

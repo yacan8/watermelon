@@ -28,6 +28,7 @@ class TopicModel extends RelationModel{
 	 * @param  [Integer] $type  [类型Id]
 	 * @param  [Integer] $page  [页数]
 	 * @param  [Integer] $count [每页显示个数]
+	 * @param  [Integer] $user_id [用户id]
 	 * @return [List]        [List查询到的列表]
 	 */
 	public function getList($type,$page,$count,$user_id=0){

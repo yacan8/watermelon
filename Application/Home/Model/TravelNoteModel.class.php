@@ -64,12 +64,12 @@ class TravelNoteModel extends Model{
 		$condition['_string'] = 't.user_id = l.id';
 		$condition['_logic'] = 'and';
 		// SELECT t.id,t.title,t.image,l.id user_id,l.nickname,l.icon FROM wt_travel_note t,wt_login l WHERE t.user_id = l.id
-		$List = $Model  ->table($DB_PREFIX.'travel_note t,'.$DB_PREFIX.'login l')
-						->field('t.id,t.title,t.image,l.id user_id,l.nickname,l.icon')
-						->where($condition)
-						->limit($count)
-						->order('t.browse desc')
-						->select();
+		// $List = $Model  ->table($DB_PREFIX.'travel_note t,'.$DB_PREFIX.'login l')
+		// 				->field('t.id,t.title,t.image,l.id user_id,l.nickname,l.icon')
+		// 				->where($condition)
+		// 				->limit($count)
+		// 				->order('t.browse desc')
+		// 				->select();
 						// dump($Model->getLastSql());
 		return $List;
 
