@@ -1,0 +1,108 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">{$userinfo.nickname|default="景点"}图片的管理</h3>
+	</div>
+	<div class="col-xs-12 p-l-md tc-gray9">
+		总共<span class="tc-black"> {$province_count} </span>个省份
+	</div>
+	<div class="col-xs-12 m-t-sm">
+		<div class="boder-e-container">
+			<a href="{:U('Scenic/image')}" class="space-item <if condition="$province_id eq ''"> active</if>">全部({$all_province_image_count})</a>
+			<volist name="provinceList" id="vo">
+				<a href="{:U('Scenic/image',array('province_id'=>$vo['id']))}" class="space-item <if condition="$province_id eq $vo['id']"> active</if>">{$vo.province}({$vo.count})</a>
+			</volist>
+		</div>
+	</div>
+	<if condition = "$province_id neq ''">
+	<div class="col-xs-12 p-l-md tc-gray9 m-t-sm">
+		<span class="tc-black">{$province}</span> 总共 <span class="tc-black"> {$city_count} </span>个城市
+	</div>
+	<div class="col-xs-12 m-t-sm">
+		<div class="boder-e-container">
+			<a href="{:U('Scenic/image',array('province_id'=>$province_id))}" class="space-item <if condition="$city_id eq ''"> active</if>">全部({$all_city_image_count})</a>
+			<volist name="cityList" id="vo">
+				<a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$vo['id']))}" class="space-item <if condition="$city_id eq $vo['id']"> active</if>">{$vo.city}({$vo.count})</a>
+			</volist>
+		</div>
+	</div>
+	</if>
+
+	<if condition ="$userinfo neq '' or $scenic_name neq ''">
+	<div class="col-xs-12 m-t-md">
+		<if condition ="$userinfo neq ''">
+			<span class='space-item'>{$userinfo.nickname} <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'scenic_id'=>$scenic_id))}">×</a></span>
+		</if>
+		<if condition ="$scenic_name neq ''">
+			<span class='space-item'>{$scenic_name} <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'user_id'=>$user_id))}">×</a></span>
+		</if>
+	</div>
+	</if>
+
+
+
+
+
+	<div class="col-xs-12 p-l-md m-t-sm tc-gray9">
+		<span class="tc-black">{$city}</span> 总共 <span class="tc-black"> {$all_count} </span>张照片
+		
+	</div>
+	<div class="col-xs-12 m-t-sm">
+          <div class="photoCon">
+            <volist name="imageList" id ="vo">
+              <div class="photoItem">
+              	<a href="javascript:void(0)" class="p_delete">
+				    <span class="glyphicon glyphicon-trash"></span>
+				</a>
+                <img data-id="{$vo.id}" src="{:U('Home/Image/ScenicImg',array('w'=>180,'h'=>160,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+                <div class="info">
+                  <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'user_id'=>$vo['user_id'],'scenic_id'=>$scenic_id))}">{$vo.user.nickname}</a> 上传于 <a href="array('province_id'=>$province_id,'city_id'=>$vo['city']['id'],'user_id'=>$vo['user_id']))}">{$vo.city.city}</a>
+                  <if condition ="$vo['scenic_id'] neq '0'">
+				  /
+                  <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$vo['city']['id'],'user_id'=>$user_id,'scenic_id'=>$vo['scenic']['id']))}">{$vo.scenic.name}</a>
+                  </if>
+                  
+                </div>
+                
+              </div>
+            </volist>
+        </div>
+          
+          <ul class="pagination pagination-sm">
+            {$page}
+          </ul>
+	</div>
+
+
+</div>
+
+<link rel="stylesheet" href="__PUBLIC__/css/photo.css">
+<link rel="stylesheet" href="__PUBLIC__/css/photoViewer.css">
+<script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/admin/scenic_img_manage.js"></script>
+<script type="text/javascript">
+
+
+	var PUBLIC = "__PUBLIC__";
+	var user_id = '{$user_id}';
+	var scenic_id = '{$scenic_id}';
+	var city_id = '{$city_id}';
+	var province_id = '{$province_id}';
+	var params = {user_id:user_id,scenic_id:scenic_id,city_id:city_id,province_id:province_id};
+	var delect_url = "{:U('Image/img_delete')}";
+	$(function(){
+		$('button[type="submit"]').click(function(){
+			$(this).button('loading');
+		}).blur(function(){
+			$(this).button('reset');
+		});
+		$(".photoItem img").photoViewer({
+	        loadUrl : "{:U('Image/imgLoad')}",
+	        num: {$all_count},
+	        params:params,
+	        opClass:'glyphicon glyphicon-remove image-delete'
+	   });
+	})
+
+
+
+</script>

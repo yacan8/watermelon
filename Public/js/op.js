@@ -80,14 +80,18 @@
 
 	$('.submit-gj').click(function(event) {
 		var _obj = $('#comment_content');
+		var _self = $(this);
+		_self.button('loading');
 		var content = _obj.val();
 		var grade_obj = $('.grade');
 		var grade = grade_obj.attr('data-grade');
 		if(content.length<30){
 			$.toaster({ priority : 'danger', title : '通知', message : '评论至少30个字哦，亲'});
+			_self.button('reset');
 			return false;
 		}else if(grade == '0'){
 			$.toaster({ priority : 'danger', title : '通知', message : '请点击星星进行评分'});
+			_self.button('reset');
 			return false;
 		}else{
 			$('.recommend_level').val(grade);

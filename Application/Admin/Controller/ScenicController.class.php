@@ -82,7 +82,12 @@ class ScenicController extends Controller{
 		}
 		$this->ajaxReturn($json);
 	}
-
+	/**
+	 * [scenic_image_upload 景点图片封面]
+	 * @param  [string] $name    [上传 input=file的name]
+	 * @param  [integer] $city_id [城市归属ID]
+	 * @return [array]          [键值result代表上传是否成功,message带面上传成功后的图片路径或失败后的错误信息]
+	 */
 	private function scenic_image_upload($name,$city_id){
 		$config = array(    
 			'maxSize'    =>    3145728,
@@ -107,7 +112,7 @@ class ScenicController extends Controller{
 	}
 
 
-
+	//修改或发布景点view
 	public function scenicFrom(){
 		$scenic_id = I('get.id','');
 		$ProvinceModel = D('Province');
@@ -162,7 +167,7 @@ class ScenicController extends Controller{
 	}
 
 
-
+	//修改或发布景点action
 	public function opScenic(){
 		$id = I('post.scenic_id');
 		$data['name'] = trim(I('post.name'));
@@ -210,15 +215,94 @@ class ScenicController extends Controller{
 			if($result!==false){
 				$this->success('操作成功', U('Scenic/scenic',array('city_id'=>$data['city_id'])));
 			}
+		}
+	}
 
-
-
-
-
+	public function image(){
+		$province_id = I('get.province_id','');
+		$city_id = I('get.city_id','');
+		$CityModel = D('City');
+		$user_id = I('get.user_id',0);
+		$scenic_id = I('get.scenic_id',0);
+		if($scenic_id!=0){//如果选中了景点
+			$scenic_name = M('Scenic')->where(array('id'=>$scenic_id))->getField('name');
+			$this->assign('scenic_name',$scenic_name);
+			if($city_id==''){
+				$city_id = M('Scenic')->where(array('id'=>$scenic_id))->getField('city_id');
+				if($province_id==''){
+					$province_id = M('City')->where(array('id'=>$city_id))->getField('province');
+				}
+			}
+		}
+		if($user_id!=0){//如果选中了用户
+			$userinfo = D("Login")->getInfoByid($user_id);
+			$this->assign('userinfo',$userinfo);
 		}
 
 
+		$ProvinceModel = D('Province');
+		$ImageModel = D('Image');
+		$province_count = $ProvinceModel->count();
+		$provinceList = $ImageModel->getProvinceCountList($user_id);//获取省份列表
+		$this->assign('province_count',$province_count);
+		$this->assign('provinceList',$provinceList);
+		$all_province_image_count = 0;
+		for ($i=0; $i <count($provinceList); $i++) { //查找省份名
+			if($provinceList[$i]['id']==$province_id){
+				$province = $provinceList[$i]['province'];
+				$all_count = $provinceList[$i]['count'];
+			}
+			$all_province_image_count = $all_province_image_count + $provinceList[$i]['count'];
+		}
+		if($province_id==''){
+			$all_count = $all_province_image_count;
+		}
+		$this->assign('province',$province);//省份名称
+		$this->assign('all_province_image_count',$all_province_image_count);
+		if($province_id!=''){//如果为选择省份
+			$cityList = $ImageModel->getCityCountListByProvinceId($province_id,$user_id);//城市信息列表
+			$city_count = $CityModel->where(array('province'=>$province_id))->count();//城市数量
+			$this->assign('city_count',$city_count);
+			$this->assign('cityList',$cityList);
+			$all_city_image_count = 0;
+			for ($i=0; $i <count($cityList); $i++) { //查找城市名
+				if($cityList[$i]['id']==$city_id){
+					$city = $cityList[$i]['city'];
+					$all_count = $cityList[$i]['count'];
+				}
+				$all_city_image_count = $all_city_image_count+$cityList[$i]['count'];
+			}
+			if($city_id==''){
+				$all_count = $all_city_image_count;
+			}
+			$this->assign('all_city_image_count',$all_city_image_count);
+			$this->assign('city',$city);//城市名
+		}
+		$p = I('get.p',1);
+		$count = 30;
+		$imageList = $ImageModel->getList($province_id,$city_id,$scenic_id,$user_id,$p,$count);
+		
+		if($scenic_id!=0){//如果选择景点、总的图片数量直接获取
+			$all_count = $ImageModel->getCountByScenicIdAndUserId($scenic_id,$user_id);
+		}
+		
+		$this->assign('imageList',$imageList);
+		$this->assign('scenic_id',$scenic_id);
+		$this->assign('user_id',$user_id);
+		$this->assign('province_id',$province_id);
+		$this->assign('city_id',$city_id);
+		$this->assign('all_count',$all_count);//分页数量
+		
+
+		$Page       = new \Think\Page($all_count,$count);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show       = $Page->show();// 分页显示输出
+		$this->assign('page',$show);
+		$this->display('image');
 	}
+
+
+
+
 	//百度坐标拾取器
 	public function getPoint(){
 		layout(false);

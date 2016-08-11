@@ -57,16 +57,19 @@ class ImageController extends Controller {
         $ImageModel = D('Image');
         $info = $ImageModel->getImage($image_id,$type);
         $info['time']= substr($info['time'],0,10);
-        if($info['scenic_id']!='0')
-            $info['describe'] = "<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a> 上传于 <a href='".U('Scenic/scenic',array('id'=>$info['scenic_id']))."'>".$info['scenic']['name']."</a>";
-        else
-            $info['describe'] = "<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a> 上传于 ".$info['time'];
+        $info['describe'] = $info['describe']."<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a>";
+        $info['describe'] = $info['describe']." ".$info['time']." 上传于";
+        $info['describe'] = $info['describe']." <a href='".U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$info['city']['id'],'user_id'=>$user_id))."'>".$info['city']['city']."</a>";
+        if($info['scenic_id']!='0'){
+            $info['describe'] = $info['describe']." / <a href='".U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'scenic_id'=>$info['scenic_id'],'user_id'=>$user_id))."'>".$info['scenic']['name']."</a>";  
+        }
+        
         $info['image'] = C('__DATA__').'/'.$info['image'];
         unset($info['user']);
         unset($info['scenic']);
         unset($info['user_id']);
         unset($info['scenic_id']);
-        unset($info['id']);
+        unset($info['city']);
         echo json_encode($info);
     }
 

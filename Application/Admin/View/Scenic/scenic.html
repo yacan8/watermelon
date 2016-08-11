@@ -45,11 +45,11 @@
 				<div class="font-12 tc-gray9 item-info">
 						<a class="font-bold">{$vo.name}（<a href="{:U('Home/Scenic/scenic',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Scenic/scenicFrom',array('id'=>$vo['id']))}">修改</a>）</a>
 						·
-						评分 <a href="#">{$vo.grade}</a>
+						评分 <a>{$vo.grade}</a>
 						·
-						<a class="" href="#">{$vo.comment_count}</a>个评论
+						<a href="{:U('ScenicGrade/grade',array('scenic_id'=>$vo['id']))}">{$vo.comment_count}</a>个评论
 						·
-						<a href="#">{$vo.image_count}</a>张图片
+						<a href="{:U('Scenic/image',array('scenic_id'=>$vo['id']))}">{$vo.image_count}</a>张图片
 				</div>
 			</div>
 

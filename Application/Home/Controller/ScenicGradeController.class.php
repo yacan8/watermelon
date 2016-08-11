@@ -13,7 +13,8 @@ class ScenicGradeController extends Controller {
 			$ScenicGradeModel->user_id = $user_id;
 			$ScenicGradeModel->time = $time;
 			$ScenicGradeModel->delete_tag = (bool)0;
-			$ScenicGradeModel->recommend_level = (int)$ScenicGradeModel->recommend_level*2;
+			$recommend_level = (int)I('post.recommend_level')*2;
+			$ScenicGradeModel->recommend_level = $recommend_level;
 
 			if($result){
 				$scenic_id = I('post.scenic_id');
@@ -23,7 +24,7 @@ class ScenicGradeController extends Controller {
 				}else{
 					$model = M('');
 					$model->startTrans();//开启事务
-
+					dump($ScenicGradeModel->recommend_level);
 					$gradeResult = $ScenicGradeModel->add();//添加评分
 
 					if($gradeResult!==false){
@@ -37,7 +38,7 @@ class ScenicGradeController extends Controller {
 						$comment_count = $ScenicGradeModel->getCount($scenic_id);
 						$ScenicModel = M('Scenic');
 						$grade =$ScenicModel->where(array('id'=>$scenic_id))->getField('grade');
-						$dataGrade = ((int)$comment_count*(float)$grade+(float)$recommend_level)/((int)$comment_count+1);//冗余字段评分修改
+						$dataGrade = ((int)($comment_count-1)*(float)$grade+(float)$recommend_level)/((int)$comment_count);//冗余字段评分修改
 						$data['grade'] = sprintf("%.1f",$dataGrade);
 						$scenicResult = $ScenicModel -> where(array('id'=>$scenic_id))->save($data);//修改景点评分
 
@@ -47,11 +48,11 @@ class ScenicGradeController extends Controller {
 							$this->redirect('Scenic/scenic',array('id'=>$scenic_id));
 						}else{
 							$model->rollback();
-							$this->error('操作失败');
+							// $this->error('操作失败');
 						}
 					}else{
 						$model->rollback();
-						$this->error('操作失败');
+						// $this->error('操作失败');
 					}
 					
 				}
