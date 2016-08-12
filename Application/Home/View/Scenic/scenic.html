@@ -65,7 +65,7 @@
 									<div class="tc-gray6"><span class="glyphicon glyphicon-heart m-r-xs tc-grayd"> <span class="tc-gray6">{$want_count}位瓜友想过这里</span></span></span> </div>
 								</div>
 								<div class="m-t-md">
-									<a class="btn bg-main btn-sm"><span class="glyphicon glyphicon-edit"></span> 写评论</a>
+									<a id="xie_dp" class="btn bg-main btn-sm"><span class="glyphicon glyphicon-edit"></span> 写评论</a>
 								</div>
 							</div>
 						</div>
@@ -190,7 +190,9 @@
 			setTimeout(function(){
 			   modal_map.centerAndZoom(m_point, 15);
 			}, 400);
-			
+		});
+		$("#xie_dp").click(function(event) {
+			$("html,body").animate({scrollTop:$('#dp').offset().top},200);
 		});
 	})
 </script>

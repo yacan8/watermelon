@@ -55,7 +55,7 @@
 				</a>
                 <img data-id="{$vo.id}" src="{:U('Home/Image/ScenicImg',array('w'=>180,'h'=>160,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
                 <div class="info">
-                  <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'user_id'=>$vo['user_id'],'scenic_id'=>$scenic_id))}">{$vo.user.nickname}</a> 上传于 <a href="array('province_id'=>$province_id,'city_id'=>$vo['city']['id'],'user_id'=>$vo['user_id']))}">{$vo.city.city}</a>
+                  <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'user_id'=>$vo['user_id'],'scenic_id'=>$scenic_id))}">{$vo.user.nickname}</a> 上传于 <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$vo['city']['id'],'user_id'=>$vo['user_id'])))}">{$vo.city.city}</a>
                   <if condition ="$vo['scenic_id'] neq '0'">
 				  /
                   <a href="{:U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$vo['city']['id'],'user_id'=>$user_id,'scenic_id'=>$vo['scenic']['id']))}">{$vo.scenic.name}</a>

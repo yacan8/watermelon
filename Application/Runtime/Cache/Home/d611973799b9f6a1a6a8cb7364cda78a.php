@@ -1,2 +1,0 @@
-<?php if (!defined('THINK_PATH')) exit();?>
-<a class="op-group-item i-zan <?php if(session('?login')&&$count!=0) echo 'active'; ?>" href="javascript:void(0)" data-type="<?php echo ($type); ?>" data-id="<?php echo ($id); ?>"><span title="点赞" class="glyphicon glyphicon-thumbs-up"> </span> <span class="count"><?php echo ($zan_count); ?></span></a>

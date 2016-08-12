@@ -1,3 +1,0 @@
-<?php if (!defined('THINK_PATH')) exit(); if( count($List) != 0): ?><ul class="images media-picture m-t-sm over-h">
-	<?php if(is_array($List)): $i = 0; $__LIST__ = $List;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><img class="pic_thumb" src="/watermelon/Public/img/tloading.jpg" data-url="<?php echo U('Image/Timg',array('image'=>$vo['image_loading'].'!feature'),false,false);?>" data-original="<?php echo C('__DATA__');?>/<?php echo ($vo["image"]); ?>" alt="Picture"></li><?php endforeach; endif; else: echo "" ;endif; ?>
-</ul><?php endif; ?>

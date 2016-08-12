@@ -59,9 +59,9 @@ class ImageController extends Controller {
         $info['time']= substr($info['time'],0,10);
         $info['describe'] = $info['describe']."<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a>";
         $info['describe'] = $info['describe']." ".$info['time']." 上传于";
-        $info['describe'] = $info['describe']." <a href='".U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$info['city']['id'],'user_id'=>$user_id))."'>".$info['city']['city']."</a>";
+        $info['describe'] = $info['describe']." <a href='".U('Scenic/city',array('id'=>$info['city']['id']))."'>".$info['city']['city']."</a>";
         if($info['scenic_id']!='0'){
-            $info['describe'] = $info['describe']." / <a href='".U('Scenic/image',array('province_id'=>$province_id,'city_id'=>$city_id,'scenic_id'=>$info['scenic_id'],'user_id'=>$user_id))."'>".$info['scenic']['name']."</a>";  
+            $info['describe'] = $info['describe']." / <a href='".U('Scenic/scenic',array('id'=>$info['scenic_id']))."'>".$info['scenic']['name']."</a>";  
         }
         
         $info['image'] = C('__DATA__').'/'.$info['image'];

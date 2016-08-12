@@ -217,13 +217,19 @@ class ScenicController extends Controller{
 			}
 		}
 	}
-
+	/**
+	 * [image 图片管理]
+	 * @param [Integer] $province_id 省份ID get参数
+	 * @param [Integer] $city_id 城市ID get参数
+	 * @param [Integer] $scenic_id 景点ID get参数
+	 * @param [Integer] $user_id 用户ID get参数
+	 */
 	public function image(){
 		$province_id = I('get.province_id','');
 		$city_id = I('get.city_id','');
-		$CityModel = D('City');
 		$user_id = I('get.user_id',0);
 		$scenic_id = I('get.scenic_id',0);
+		$CityModel = D('City');
 		if($scenic_id!=0){//如果选中了景点
 			$scenic_name = M('Scenic')->where(array('id'=>$scenic_id))->getField('name');
 			$this->assign('scenic_name',$scenic_name);
@@ -250,12 +256,12 @@ class ScenicController extends Controller{
 		for ($i=0; $i <count($provinceList); $i++) { //查找省份名
 			if($provinceList[$i]['id']==$province_id){
 				$province = $provinceList[$i]['province'];
-				$all_count = $provinceList[$i]['count'];
+				$all_count = $provinceList[$i]['count'];//设置实际要分页的数据总数
 			}
-			$all_province_image_count = $all_province_image_count + $provinceList[$i]['count'];
+			$all_province_image_count = $all_province_image_count + $provinceList[$i]['count'];//省份图片的总数
 		}
 		if($province_id==''){
-			$all_count = $all_province_image_count;
+			$all_count = $all_province_image_count; //省份图片的总数
 		}
 		$this->assign('province',$province);//省份名称
 		$this->assign('all_province_image_count',$all_province_image_count);

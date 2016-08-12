@@ -18,6 +18,12 @@ class ImageModel extends RelationModel{
 	        'foreign_key'=>'scenic_id',
 	        'mapping_fields'=>'id,name'
 	    ),
+	    'city'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'City',
+	        'foreign_key'=>'city_id',
+	        'mapping_fields'=>'id,city'
+	    ),
 	);
 
 
@@ -59,7 +65,7 @@ class ImageModel extends RelationModel{
 			$relationStr = true;
 		$condition['delete_tag'] = (bool)0;
 		$condition['city_id'] = $city_id;
-		$List = $this	->field('id,scenic_id,time,user_id,image')
+		$List = $this	->field('id,scenic_id,time,user_id,image,city_id')
 						->relation($relationStr)
 						->where($condition)
 						->page("$page,$count")
@@ -74,7 +80,7 @@ class ImageModel extends RelationModel{
 	 * @param  [Integer] $scenic_id [景点编号]
 	 * @param  [Integer] $page    [页数]
 	 * @param  [Integer] $count   [每页显示个数]
-	 * * @param  [bool] $relation   [是否关联用户数据]
+	 * @param  [bool] $relation   [是否关联用户数据]
 	 * @return [List]
 	 */
 	public function getListByScenicId($scenic_id,$page,$count,$relation = false){
@@ -83,7 +89,7 @@ class ImageModel extends RelationModel{
 		$condition['scenic_id'] = $scenic_id;
 		if($relation!==false)
 			$relationStr = true;
-		$List = $this	->field('id,scenic_id,time,user_id,image')
+		$List = $this	->field('id,scenic_id,time,user_id,image,city_id')
 						->relation($relationStr)
 						->where($condition)
 						->page("$page,$count")
@@ -113,7 +119,7 @@ class ImageModel extends RelationModel{
 			$condition['_logic'] = 'and';
 			$condition['city_id'] = $city_id;
 		}
-		$array = $this	->field('id,scenic_id,time,user_id,image')
+		$array = $this	->field('id,scenic_id,time,user_id,image,city_id')
 							->relation(true)
 							->where($condition)
 							->find($id);

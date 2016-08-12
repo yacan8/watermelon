@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-xs-12">
+		<input id="search-brand" class="pull-right" type="text" style="margin-top:40px; padding-left:10px;" placeholder="查找"/>
+		<h3 class="page-header to">装备品牌管理</h3>
+	</div>
+	<div class="col-xs-12 p-l-md tc-gray9">
+		总共<span class="tc-black">{$count}</span>个品牌
+		<a href="#" class="pull-right" data-toggle="modal" data-target="#addBrand">＋添加</a>
+	</div>
+	<div class="col-xs-12 m-t-sm">
+		<div class="boder-e-container" id="brand-container">
+			<volist name="List" id="vo">
+				<span class="space-item "><span>{$vo.brand}</span>({$vo.count}) <a href="{:U('Equipment/equipment',array('brand_id'=>$vo['id']))}" data-role="remove">查看</a><a>丨</a><a href="{:U('EquipmentBrand/delete',array('id'=>$vo['id']))}" data-role="remove" onclick="return confirm('确认删除吗？')">删除</a></span>
+			</volist>
+		</div>
+	</div>
+</div>
+<include file="EquipmentContent:addBrand" />
+
+<script type="text/javascript">
+	$(function(){
+		$("#search-brand").keyup(function(event) {
+			var value = $.trim($(this).val());
+			var container = $('#brand-container');
+			var objList = container.children('.space-item');
+			for(var i=0;i<objList.length;i++){
+				var obj = objList.eq(i).children('span');
+				var old_text = obj.text();
+				obj.children('font').remove();
+				var new_text;
+				if(old_text.indexOf(value) >= 0){
+					new_text = old_text.replace(value,"<font color='red'>"+value+"</font>"); 
+					obj.html(new_text);
+				}else{
+					obj.html(old_text);
+				}
+				
+			}
+		});
+	})
+</script>
