@@ -12,14 +12,13 @@ class EquipmentController extends Controller {
 
 		$typeList = $TypeModel->getTypeList($brand_id);
 		$type_count = count($typeList);
-		for ($i=0; $i < count($typeList); $i++) {
-			if($type_id!=0){
+		if($type_id!=0){//如果选择了装备类型，获取装备类型名称
+			for ($i=0; $i < count($typeList); $i++) {
 				if($typeList[$i]['id']==$type_id){
 					$type = $typeList[$i]['type'];
 					$this->assign('type',$type);
 				}
 			}
-			
 		}
 
 		$BrandModel = D('EquipmentBrand');
@@ -174,6 +173,15 @@ class EquipmentController extends Controller {
 		}
 	}
 
+
+	//发布装备时品牌加载
+	public function brand_load(){
+		$key = I('get.word');
+		$condition['brand']  = array('like', '%'.$key.'%');
+		$List = M('EquipmentBrand')->where($condition)->field('id,brand name')->select();
+		// $this->ajaxReturn($List);
+		echo json_encode($List);
+	}
 
 	public function imgChange(){
         

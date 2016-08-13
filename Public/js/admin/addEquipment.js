@@ -30,31 +30,38 @@
 			var container = $(".dd-container");
 			var item = container.children('.dd-item');
 			var length = item.length;
-			if(length>0){
-				var str = '';
-				for(var i=0;i<length;i++){
-					if(i==0){
-						str = str + item.eq(i).attr('data-id');
-					}else{
-						str = str +','+item.eq(i).attr('data-id');
-					}
-				}
-				if($.trim($("input[name='title']").val())==''){
-					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入标题'});
+			if(length==1){
+				var str = item.first().attr('data-id');
+				if($.trim($("input[name='name']").val())==''){
+					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入装备名'});
 					_self.button('reset');
 					return false;
 				}else if($.trim($("#dd_content").val())==''){
-					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入内容'});
+					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入装备简介'});
+					_self.button('reset');
+					return false;
+				}else if($('input[name="type_id"]').val()=='0'){
+					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请选择装备类型'});
 					_self.button('reset');
 					return false;
 				}
-				$("input[name='space']").val(str);
+				$("input[name='brand']").val(str);
+			}else if(length==0){
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入品牌'});
+				_self.button('reset');
+				return false;
 			}else{
-				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '至少选择一个旅游地点'});
+				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '最多选择一个装备品牌'});
 				_self.button('reset');
 				return false;
 			}
 		})
+		$('form').keypress(function(event) {
+			if(event.keyCode == 13){
+				//按键Enter
+				event.preventDefault();
+			}
+		});
 		$('[data-role="dd-input"]').keyup(function(e) {
 			var _self = $(this);
 			var load_list =$(".dd-load-list");
@@ -76,8 +83,11 @@
 				}
 			}else if(e.keyCode == 13){
 				//按键Enter
-				add_dd_item();
-				_self.val('');
+				 e.preventDefault();
+				if(load_list.css('display')!='none'){
+					add_dd_item();
+					_self.val('');
+				}
 			}else{
 				var value = $.trim(_self.val());
 				if(value!=''){
@@ -92,7 +102,7 @@
 									str = str + '<li class="active" data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
 							}
 						}else{
-							str = '<li data-id="0"><a href="javascript:;">创建地点 <span>'+value+'</span></a></li>';
+							str = '<li data-id="0"><a href="javascript:;">创建品牌 <span>'+value+'</span></a></li>';
 						}
 						var con = _self.parents('.form-group');
 							var left = _self.offset().left-con.offset().left-5;
@@ -124,15 +134,10 @@
 		if(dd_length==0)
 			dd_item_container.prepend(dd_item_str);
 		else{
-			var bool = true;
 			for(var j=0;j<dd_item_obj.length;j++){
-				var data_id = dd_item_obj.eq(j).attr('data-id');
-				if(data_id == id){
-					bool =false;
-				}
+				dd_item_obj.eq(j).remove();
 			}
-			if(bool)
-				dd_item_obj.last().after(dd_item_str);
+			dd_item_container.prepend(dd_item_str);
 		}
 			
 		load_list.html('').hide();

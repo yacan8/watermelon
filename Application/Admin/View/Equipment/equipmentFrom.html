@@ -1,0 +1,103 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">{$equipment.name|default="发布装备"}</h3>
+	</div>
+	
+	<div class="col-xs-12">
+
+		<form class="form-horizontal" method="post" action="{:U('Scenic/opScenic')}" enctype="multipart/form-data">
+			<input name="scenic_id" type="hidden" value="{$scenic_id}">
+		  	<fieldset>
+
+		  		<div class="form-group">
+		  			<div class="col-xs-12">
+				        <input type="text" name="name" class="form-control" title="请输入装备名" placeholder="装备名" value="{$scenic.name}" required/>
+				    </div>
+			    </div>
+				<div class="form-group">
+					<div class="col-xs-12">
+					    <div class="dd-container">
+					    	
+					    	<input type="text" data-role="dd-input" class="dd-input" placeholder="地点，如：森马、奈克" style="width: 20em;">
+					    	<ul class="dd-load-list dropdown-menu" style="display:none;"></ul>
+					    </div>
+				    </div>
+				</div>
+				<input type="hidden" name="brand" />
+
+
+			    <div class="form-group">
+				    <div class="col-xs-4">
+				      	<select class="form-control" id="type" name="type">
+				          <option value="0">--装备类型--</option>
+				          <volist name="typeList" id="vo">
+				          	<option value="{$vo.id}" <if condition="$scenic['type_id'] eq $vo['id']">selected</if>>{$vo.type}</option>
+				          </volist>
+				        </select>
+				    </div>
+			    </div>
+				
+				
+
+
+				<div class="form-group">
+					<div class="col-xs-12">
+						<textarea id="dd_content" name="desciption" style="resize:none;height:1px;width:1px" required>{$scenic.desciption}</textarea>
+					</div>
+				</div>
+			    <div class="form-group">
+			    	<div class="col-xs-12">
+				    	<button type="button" id="fm-img-btn" class="btn-blue btn-sm"><span class="glyphicon glyphicon-picture"></span> 选择封片</button>
+				    	<input type="file" id="fm-img-file" name="fm-img-file" class="hidden"/>
+				    	<button type="submit" id="submit" class="btn-blue btn-main pull-right" style="min-width:150px;" data-loading-text="提交发布中...">发布</button>
+				    </div>
+			    </div>
+			    <div id="img-upload-container">
+			    	<if condition="$scenic['image'] neq ''">
+			    		<img src="{:C('__DATA__')}/{$scenic.image}" style="margin:10px 0;max-width:100%;padding:5px;border-radio:2px;border:1px solid #eee;">
+			    	</if>
+			    </div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<include file="Common/edhead" />
+<script type="text/javascript">
+	var PUBLIC = "__PUBLIC__";
+	var dd_load_url = "{:U('Equipment/brand_load')}";
+	$('#dd_content').froalaEditor({
+      heightMin: 300,
+      imageUploadURL: '{:U('Upload/equipment_upload')}',
+      language: 'zh_cn',
+      pasteDeniedAttrs: ['class', 'id','style'],
+      placeholderText:"在这里写入装备的介绍！！！"
+    });
+    $("a[href='https://froala.com/wysiwyg-editor']").remove();
+</script>
+<link rel="stylesheet" href="__PUBLIC__/css/travel.css">
+<script type="text/javascript" src="__PUBLIC__/js/admin/addEquipment.js"></script>
+
+
+
+<script type="text/javascript">
+var city_load_url = "{:U('City/city_load')}"; 
+	$(function(){
+		
+		
+		$("#fm-img-btn").click(function(event) {
+			$("#fm-img-file").click();
+		});
+		$("#fm-img-file").change(function(event) {
+			var objUrl = getObjectURL($(this).get(0).files[0]) ;
+            if (objUrl) {
+            	var str = '<img src="'+objUrl+'" style="margin:10px 0;max-width:100%;padding:5px;border-radio:2px;border:1px solid #eee;">';
+                $("#img-upload-container").html(str);//设置灯箱效果的值
+            }
+		});
+
+
+
+		
+	})
+
+</script>
