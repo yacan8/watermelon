@@ -3,6 +3,11 @@ namespace Admin\Controller;
 use Think\Controller;
 class EquipmentController extends Controller {
 
+
+	
+
+
+
 	//装备管理view
 	public function equipment(){
 		$type_id = I('get.type_id',0);
@@ -182,6 +187,108 @@ class EquipmentController extends Controller {
 		// $this->ajaxReturn($List);
 		echo json_encode($List);
 	}
+
+
+
+	//修改或发布装备view
+	public function equipmentForm(){
+		$equipment_id = I('get.id','');
+		$CityModel = D('City');
+		$EquipmentTypeModel = D('EquipmentType');
+		$typeList = $EquipmentTypeModel->select();
+		if($equipment_id!=''){
+			$EquipmentModel = D('Equipment');
+			$equipment = $EquipmentModel->field('id,name,type_id,brand_id,description,image,price')->relation('brand')->find($equipment_id);
+			$this->assign('equipment',$equipment);
+		}
+		$this->assign('imageUploadUrl',U('Equipment/desciption_img_upload'));
+		$this->assign('placeholderText','输入装备介绍');//简介的placeholder内容
+		$this->assign('equipment_id',$equipment_id);
+		$this->assign('typeList',$typeList);
+		$this->display();
+	}
+
+	//简介编辑图片上传URL
+	public function desciption_img_upload(){
+		layout(false);
+		C('SHOW_PAGE_TRACE',false);
+		$config = array(
+				'maxSize' => 3145728,// 设置附件上传大小
+				'exts' => array('jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
+				'savePath'=>'Equipment/desciption/',// 设置附件上传目录
+				'rootPath'=> './Data/',
+				'autoSub'    =>    true,
+				'subName'    =>    array('date','Y-m-d')
+			);
+		$upload = new \Think\Upload($config);// 实例化上传类
+		$info = $upload->uploadOne($_FILES['file']);
+	    if(!$info) {// 上传错误提示错误信息
+	        $this->error($upload->getError());
+	    }else{// 上传成功
+			$link['link'] = __ROOT__."/Data/".$info['savepath'].$info['savename'];
+			echo stripslashes(json_encode($link));
+	    }
+	}
+
+	//修改或发布景点action
+	public function opEquipment(){
+		$id = I('post.equipment_id');
+		$data['name'] = trim(I('post.name'));
+		$data['description'] = htmlspecialchars_decode(trim(I('post.description')));
+		$data['type_id'] = I('post.type');
+		$data['brand_id'] = I('post.brand');
+		$data['price'] = I('post.price');
+		if(abslength($data['name'])>40){
+			$this->error('装备名长度不得大于40');
+		}else if(abslength($data['description'])>4000){
+			$this->error('装备简介长度不得大于4000');
+		}else if(!is_double((double)$data['price'])){
+			$this->error('请输入正确的价格格式');
+		}else if(!is_int((int)$data['type_id'])||!is_int((int)$data['brand_id'])){
+			exit('数据错误');
+		}else{
+			$model = M('');
+			$model->startTrans();
+			if($data["brand_id"]=='0'){//如果品牌未存在，添加品牌
+				$brandData['brand'] = trim(I('post.brand_name'));
+				$EquipmentBrandModel= M('EquipmentBrand');
+				$brandResult = $EquipmentBrandModel->add($brandData);
+				$brand_id = $EquipmentBrandModel->getLastInsID();
+				$data['brand_id'] = $brand_id;
+			}else{
+				$brandResult = 1;
+			}
+			if($_FILES['fm-img-file']['name']!=null){//判断是否上传了封面
+				$bool = true;
+				$upload_result = $this->equipment_image_upload('fm-img-file',$data['brand_id']);
+				if($upload_result['result']!==false){
+					$data['image'] = $upload_result['message'];
+					$bool = true;
+				}else{
+					$bool = false;
+					$this->error($upload_result['message']);
+				}
+			}
+			$EquipmentModel = M('Equipment');
+			if($id!=''&&$data['image']!=''){
+				$equipment_image = $EquipmentModel->where(array('id'=>$id))->getField('image');
+				unlink('./Data/'.$equipment_image);
+			}
+			if($id!=''){
+				$result = $EquipmentModel->where(array('id'=>$id))->save($data);
+			}else{
+				$result = $EquipmentModel->where(array('id'=>$id))->add($data);
+			}
+			if($result!==false&&$brandResult!==false){
+				$model->commit();
+				$this->success('操作成功', U('Equipment/equipment',array('city_id'=>$data['city_id'])));
+			}else{
+				$model->rollback();
+				$this->error('操作失败');
+			}
+		}
+	}
+
 
 	public function imgChange(){
         

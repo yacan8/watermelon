@@ -113,7 +113,7 @@ class ScenicController extends Controller{
 
 
 	//修改或发布景点view
-	public function scenicFrom(){
+	public function scenicForm(){
 		$scenic_id = I('get.id','');
 		$ProvinceModel = D('Province');
 		$CityModel = D('City');

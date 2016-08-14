@@ -43,7 +43,7 @@
 
 	<div class="col-xs-12 p-l-md m-t-sm tc-gray9">
 		总共 <span class="tc-black"> {$all_count} </span>个相关内容
-		<a href="{:U('Equipment/equipmentFrom',array('province_id'=>$province_id,array('city_id',$city_id)))}" class="pull-right"><span class="glyphicon glyphicon-plus"></span> 添加装备</a>
+		<a href="{:U('Equipment/equipmentForm')}" class="pull-right"><span class="glyphicon glyphicon-plus"></span> 添加装备</a>
 		
 	</div>
 	<div class="col-xs-12 m-t-sm">
@@ -52,14 +52,14 @@
 			<div class="city-item">
 				<div class="left-img">
 					<a class="img-change-btn" data-id="{$vo.id}" href="javascrip:;">修改图片</a>
-					<img src="{$vo.image|default='__PUBLIC__/img/city.jpg'}">
+					<img src="{$vo.image|default='__PUBLIC__/img/equipment.jpg'}">
 				</div>
 				<div class="font-12 tc-gray9 item-info">
 					<div class="to1">
 						<a class="font-bold" title="{$vo.name}">{$vo.name}</a>
 					</div>
 					<div class="to1">
-						<a href="#" class="font-bold" title="{$vo.brand}">{$vo.brand}</a>
+						<a href="{:U('Equipment/equipment',array('brand_id'=>$vo['brand_id']))}" class="font-bold" title="{$vo.brand}">{$vo.brand}</a>
 					</div>
 					<div class="">
 						<a href="#">{$vo.type}</a>
@@ -68,9 +68,9 @@
 						·
 						<a href="{:U('ScenicGrade/grade',array('scenic_id'=>$vo['id']))}">{$vo.comment_count}</a>个评论
 						·
-						估价 <a>￥{$vo.price}</a>
+						估价 <a><if condition="$vo['price'] neq ''">￥{$vo.price}<else/>暂无估价</if></a>
 						·
-						（<a href="{:U('Home/Equipment/equipment',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Equipment/equipmentFrom',array('id'=>$vo['id']))}">修改</a>）
+						（<a href="{:U('Home/Equipment/equipment',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Equipment/equipmentForm',array('id'=>$vo['id']))}">修改</a>）
 					</div>
 				</div>
 			</div>

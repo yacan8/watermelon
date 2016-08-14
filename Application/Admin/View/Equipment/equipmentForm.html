@@ -5,35 +5,42 @@
 	
 	<div class="col-xs-12">
 
-		<form class="form-horizontal" method="post" action="{:U('Scenic/opScenic')}" enctype="multipart/form-data">
-			<input name="scenic_id" type="hidden" value="{$scenic_id}">
+		<form class="form-horizontal" method="post" action="{:U('Equipment/opEquipment')}" enctype="multipart/form-data">
+			<input name="equipment_id" type="hidden" value="{$equipment_id}">
 		  	<fieldset>
 
 		  		<div class="form-group">
 		  			<div class="col-xs-12">
-				        <input type="text" name="name" class="form-control" title="请输入装备名" placeholder="装备名" value="{$scenic.name}" required/>
+				        <input type="text" name="name" class="form-control" title="请输入装备名" placeholder="装备名:小于等于40个字符" maxLength="40" value="{$equipment.name}" required/>
 				    </div>
 			    </div>
 				<div class="form-group">
 					<div class="col-xs-12">
 					    <div class="dd-container">
-					    	
+					    	<if condition="$equipment_id neq ''">
+					    	<span data-id="{$equipment.brand_id}" class="dd-item">{$equipment.brand} <span data-role="remove">×</span></span>
+						    </if>
 					    	<input type="text" data-role="dd-input" class="dd-input" placeholder="地点，如：森马、奈克" style="width: 20em;">
 					    	<ul class="dd-load-list dropdown-menu" style="display:none;"></ul>
 					    </div>
 				    </div>
 				</div>
 				<input type="hidden" name="brand" />
+				<input type="hidden" name="brand_name" />
 
 
 			    <div class="form-group">
-				    <div class="col-xs-4">
+				    <div class="col-xs-6">
 				      	<select class="form-control" id="type" name="type">
 				          <option value="0">--装备类型--</option>
 				          <volist name="typeList" id="vo">
-				          	<option value="{$vo.id}" <if condition="$scenic['type_id'] eq $vo['id']">selected</if>>{$vo.type}</option>
+				          	<option value="{$vo.id}" <if condition="$equipment['type_id'] eq $vo['id']">selected</if>>{$vo.type}</option>
 				          </volist>
 				        </select>
+				    </div>
+
+				    <div class="col-xs-6">
+				      	<input type="text" name="price" class="form-control" title="请输入装备估价" placeholder="估价" value="{$equipment.price}" />
 				    </div>
 			    </div>
 				
@@ -42,7 +49,7 @@
 
 				<div class="form-group">
 					<div class="col-xs-12">
-						<textarea id="dd_content" name="desciption" style="resize:none;height:1px;width:1px" required>{$scenic.desciption}</textarea>
+						<textarea id="dd_content" name="description" style="resize:none;height:1px;width:1px" required>{$equipment.description}</textarea>
 					</div>
 				</div>
 			    <div class="form-group">
@@ -53,8 +60,8 @@
 				    </div>
 			    </div>
 			    <div id="img-upload-container">
-			    	<if condition="$scenic['image'] neq ''">
-			    		<img src="{:C('__DATA__')}/{$scenic.image}" style="margin:10px 0;max-width:100%;padding:5px;border-radio:2px;border:1px solid #eee;">
+			    	<if condition="$equipment['image'] neq ''">
+			    		<img src="{:C('__DATA__')}/{$equipment.image}" style="margin:10px 0;max-width:100%;padding:5px;border-radio:2px;border:1px solid #eee;">
 			    	</if>
 			    </div>
 			</fieldset>
@@ -65,16 +72,14 @@
 <script type="text/javascript">
 	var PUBLIC = "__PUBLIC__";
 	var dd_load_url = "{:U('Equipment/brand_load')}";
-	$('#dd_content').froalaEditor({
-      heightMin: 300,
-      imageUploadURL: '{:U('Upload/equipment_upload')}',
-      language: 'zh_cn',
-      pasteDeniedAttrs: ['class', 'id','style'],
-      placeholderText:"在这里写入装备的介绍！！！"
-    });
-    $("a[href='https://froala.com/wysiwyg-editor']").remove();
 </script>
 <link rel="stylesheet" href="__PUBLIC__/css/travel.css">
+<style type="text/css">
+	.dd-load-list{
+		max-height: 400px;
+		overflow-y: auto; 
+	}
+</style>
 <script type="text/javascript" src="__PUBLIC__/js/admin/addEquipment.js"></script>
 
 
@@ -94,7 +99,6 @@ var city_load_url = "{:U('City/city_load')}";
                 $("#img-upload-container").html(str);//设置灯箱效果的值
             }
 		});
-
 
 
 		

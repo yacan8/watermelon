@@ -32,6 +32,8 @@
 			var length = item.length;
 			if(length==1){
 				var str = item.first().attr('data-id');
+				var brand_name_str = item.first().text();
+				var brand_name = brand_name_str.substring(0,brand_name_str.length-1);
 				if($.trim($("input[name='name']").val())==''){
 					$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入装备名'});
 					_self.button('reset');
@@ -45,6 +47,7 @@
 					_self.button('reset');
 					return false;
 				}
+				$("input[name='brand_name']").val(brand_name);
 				$("input[name='brand']").val(str);
 			}else if(length==0){
 				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '请输入品牌'});
@@ -119,7 +122,7 @@
 	})
 	
 	var g_dd_item_str = function(id,name){
-		var str = '<span data-id="'+id+'" class="dd-item">'+name+'<span data-role="remove">×</span></span>';
+		var str = '<span data-id="'+id+'" class="dd-item">'+name+' <span data-role="remove">×</span></span>';
 		return str;
 	}
 	var add_dd_item = function(){

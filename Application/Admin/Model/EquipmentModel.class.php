@@ -1,7 +1,24 @@
 <?php
 namespace Admin\Model;
-use Think\Model;
-class EquipmentModel extends Model{
+use Think\Model\RelationModel;
+class EquipmentModel extends RelationModel{
+	//关联属性
+	protected $_link = array(
+	    'type' => array(
+			'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'EquipmentType',
+	        'foreign_key'=>'type_id',
+	        'mapping_fields'=>'type',
+	        'as_fields'=>'type'
+	    ),
+	    'brand' => array(
+			'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'EquipmentBrand',
+	        'foreign_key'=>'brand_id',
+	        'mapping_fields'=>'brand',
+	        'as_fields'=>'brand'
+	    ),
+	);
 
 
 	/**

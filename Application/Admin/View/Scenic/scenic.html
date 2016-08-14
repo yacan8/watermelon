@@ -31,7 +31,7 @@
 	<div class="col-xs-12 p-l-md m-t-sm tc-gray9">
 		<span class="tc-black">{$city}</span> 总共 <span class="tc-black"> {$scenic_count} </span>个景点
 		
-		<a href="{:U('Scenic/scenicFrom',array('province_id'=>$province_id,array('city_id',$city_id)))}" class="pull-right"><span class="glyphicon glyphicon-plus"></span> 添加景点</a>
+		<a href="{:U('Scenic/scenicForm',array('province_id'=>$province_id,'city_id'=>$city_id))}" class="pull-right"><span class="glyphicon glyphicon-plus"></span> 添加景点</a>
 		
 	</div>
 	<div class="col-xs-12 m-t-sm">
@@ -43,7 +43,7 @@
 					<img src="{$vo.image|default='__PUBLIC__/img/city.jpg'}">
 				</div>
 				<div class="font-12 tc-gray9 item-info">
-						<a class="font-bold">{$vo.name}（<a href="{:U('Home/Scenic/scenic',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Scenic/scenicFrom',array('id'=>$vo['id']))}">修改</a>）</a>
+						<a class="font-bold">{$vo.name}（<a href="{:U('Home/Scenic/scenic',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Scenic/scenicForm',array('id'=>$vo['id']))}">修改</a>）</a>
 						·
 						评分 <a>{$vo.grade}</a>
 						·
