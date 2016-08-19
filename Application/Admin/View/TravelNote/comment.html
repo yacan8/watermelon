@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">{$scenic_name|default="景点"}评论管理</h3>
+	</div>
+	<div class="col-xs-12">
+		<div class="boder-e-container m-t-sm">
+			<a href="{:U('Comment/comment',array('r'=>0,'user_id'=>$user_id,'other_id'=>$other_id))}" class="space-item <if condition="$r eq '0'"> active</if>">全部({$all_count})</a>
+			
+			<volist name="rCountList" id="vo">
+				<a href="{:U('Comment/comment',array('r'=>$vo['r'],'user_id'=>$user_id,'other_id'=>$other_id))}" class="space-item <if condition="$r eq $vo['r']"> active</if>"><php>echo $vo['r']/2;</php>星({$vo.count})</a>
+			</volist>
+		</div>
+	</div>
+	<if condition ="$userinfo neq '' or $scenic_name neq ''">
+	<div class="col-xs-12 m-t-md">
+		<if condition ="$userinfo neq ''">
+			<span class='space-item'>{$userinfo.nickname} <a href="{:U('Comment/comment',array('other_id'=>$other_id))}">×</a></span>
+		</if>
+		<if condition ="$scenic_name neq ''">
+			<span class='space-item'>{$scenic_name} <a href="{:U('Comment/comment',array('user_id'=>$user_id))}">×</a></span>
+		</if>
+	</div>
+	</if>
+
+
+	<div class="col-xs-12 m-t-md">
+		<volist name="gradeList" id="vo"> 
+		<div class="media boder-b-dashed">
+		  <div class="media-left">
+		    <a href="{:U('Comment/comment',array('user_id'=>$vo['user_id'],'other_id'=>$other_id))}">
+		      <img class="media-object c_u_icon m-t-xs" src="{:C('__DATA__')}/login_thumb/{$vo.icon|default='default.jpg'}" alt="...">
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    <div class="m-b-xs tc-black">{$vo.description}</div>
+		    <div class="tc-gray9 font-12">
+		    	<a href="{:U('Comment/comment',array('user_id'=>$vo['user_id'],'other_id'=>$other_id))}">{$vo.user_nickname}</a>
+		    	·
+		    	<a href="{:U('Comment/comment',array('user_id'=>$user_id,'other_id'=>$vo['other_id']))}">{$vo.scenic_name}</a>
+		    	·
+		    	<span>{$vo.time}</span>
+				·
+				<if condition="$vo['is_delete'] eq 0">
+				<a href="{:U('Comment/delete',array('id'=>$vo['id']))}" onclick="return confirm('确认删除吗')">删除</a>
+				<else/>
+				<span>已删除</span>
+				</if>
+		    </div>
+		  </div>
+		</div>
+		</volist>
+		<ul class="pagination pagination-sm m-t-md">
+			{$page}
+		</ul>
+	</div>
+</div>

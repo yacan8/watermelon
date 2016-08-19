@@ -1,11 +1,15 @@
 <?php
 namespace Admin\Model;
-use Think\Model;
-class LoginModel extends Model{
+use Think\Model\RelationModel;
+class LoginModel extends RelationModel{
 
 	//关联数据
 	protected $_link = array(
-		
+		'userinfo' => array(
+			'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'User',
+	        'foreign_key'=>'user_id',
+	    ),
 	);
 
 	//自动检验
@@ -13,6 +17,12 @@ class LoginModel extends Model{
 	    
 	);
 
+
+
+	public function getList($order,$page,$count){
+		$List = $this->order($order)->page("$page,$count")->select();
+		return $List;
+	}
 	public function checkPower($user_id){
 		$power = $this->where(array('id'=>$user_id))->getField('power');
 		if((int)$power>0)

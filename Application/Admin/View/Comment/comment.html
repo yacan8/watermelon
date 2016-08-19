@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">
+			<if condition="$name eq ''">
+			<if condition="$type eq 2">资讯的<else/>游记的</if>
+			</if>{$name}评论管理
+		</h3>
+	</div>
+	<div class="col-xs-12">
+		<div class="boder-e-container">
+			共 {$all_count} 条结果
+		</div>
+	</div>
+	<if condition ="($userinfo neq '') or ($name neq '')">
+	<div class="col-xs-12 m-t-md">
+		<if condition ="$userinfo neq ''">
+			<span class='space-item'>{$userinfo.nickname} <a href="{:U('Comment/comment',array('other_id'=>$other_id,'type'=>$type))}">×</a></span>
+		</if>
+		<if condition ="$name neq ''">
+			<span title="{$name}" class='space-item'>{$e_name} <a href="{:U('Comment/comment',array('user_id'=>$user_id,'type'=>$type))}">×</a></span>
+		</if>
+	</div>
+	</if>
+
+
+	<div class="col-xs-12 m-t-md">
+		<volist name="commentList" id="vo"> 
+		<div class="media boder-b-dashed">
+		  <div class="media-left">
+		    <a href="{:U('Comment/comment',array('user_id'=>$vo['sender'],'other_id'=>$other_id,'type'=>$type))}">
+		      <img class="media-object c_u_icon m-t-xs" src="{:C('__DATA__')}/login_thumb/{$vo.userinfo.icon|default='default.jpg'}" alt="...">
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    <div class="m-b-xs tc-black"><if condition="$vo['receiver'] neq '0'">回复 <a href="{:U('Comment/comment',array('user_id'=>$vo['receiver'],'other_id'=>$other_id,'type'=>$type))}">{$vo.receiverinfo.nickname}</a>：</if>{$vo.content}</div>
+		    <div class="tc-gray9 font-12">
+		    	<a href="{:U('Comment/comment',array('user_id'=>$vo['sender'],'other_id'=>$other_id,'type'=>$type))}">{$vo.userinfo.nickname}</a>
+		    	·
+		    	<if condition="$vo['title'] neq ''">
+		    	<a href="{:U('Comment/comment',array('user_id'=>$user_id,'other_id'=>$vo['other_id'],'type'=>$type))}">{$vo.title}</a>
+		    	<else/>
+		    	<span>该内容已被删除</span>
+			    </if>
+		    	·
+		    	<span>{$vo.time}</span>
+				·
+				<if condition="$vo['delete_tag'] eq 0">
+				<a href="{:U('Comment/delete',array('id'=>$vo['id']))}" onclick="return confirm('确认删除吗')">删除</a>
+				<else/>
+				<span>已删除</span>
+				</if>
+		    </div>
+		  </div>
+		</div>
+		</volist>
+		<ul class="pagination pagination-sm m-t-md">
+			{$page}
+		</ul>
+	</div>
+</div>

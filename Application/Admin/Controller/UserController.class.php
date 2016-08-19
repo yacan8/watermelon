@@ -2,58 +2,98 @@
 namespace Admin\Controller;
 use Think\Controller;
 class UserController extends Controller{
-	public function _initialize(){
-        if (!isset($_SESSION['Adminlogin'])) {
-            $this->redirect('Login/index');
-        }
- 	}
+	// public function _initialize(){
+ //        if (!isset($_SESSION['Adminlogin'])) {
+ //            $this->redirect('Login/index');
+ //        }
+ // 	}
 	public function index(){
-		$LoginModel = M('Login');
+		$sort = I('get.sort','reg_time');//哪个字段
+		$s = I('get.s','desc');//正序还是逆序
+		$p = I('get.p');
+		$order = $sort.' '.$s;
+		$LoginModel = D('Login');
 		$count      = $LoginModel->count();
-		$Page       = new \Think\Page($count,10);
+		$Page       = new \Think\Page($count,20);
 		$show       = $Page->show();
-		$List = $LoginModel->order('reg_time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
-		for ($i=0; $i < count($List); $i++) { 
-			if($List[$i]['icon'] == '')
-				$List[$i]['icon'] = 'default.jpg';
-		}
+		$List = $LoginModel->getList($order,$p,20);
+		$this->assign('sort',$sort);
+		$this->assign('s',$s);
 		$this->assign('title','用户管理');
 		$this->assign('page',$show);
 		$this->assign('List',$List);
 		$this->display();
 	}
 
-	//修改权限
-	public function setPower(){
-		$tel = I('get.id');
+
+	public function user(){
+		$id = I('get.id');
 		$LoginModel = D('Login');
-		$login = $LoginModel->where("tel ='".session('Adminlogin')."'")->getField('power');
-		if($login == '2'){
-			$result = $LoginModel->setPower($tel);
-			if($result)
-				$this->success('修改成功');
-			else
-				$this->error('修改失败');
+		$user = $LoginModel->relation(true)->find($id);
+		$this->assign('user',$user);
+		$this->display();
+	}
+
+
+	//删除active
+	public function delete(){
+		$id = I('get.id',0);
+		if($id!=0){
+			$user_id = session('login');
+			$LoginModel = D('Login');
+			if($user_id == $id){
+				$this->error('不能修改自己');
+			}else{
+				$power = $LoginModel->where(array('id'=>$user_id))->getField('power');
+				if($power=='2'){
+					$data['delete_tag'] = (bool)1;
+					$result = $LoginModel->where(array('id'=>$id))->save($data);
+					if($result !== false){
+						$this->success('操作成功');
+					}else{
+						$this->error('操作失败');
+					}
+				}else{
+					$this->error('没有权限');
+				}
+			}
 		}else{
-			$this->error('无权限修改');
+			$this->error('参数错误');
 		}
 	}
 
-	//注册用户根据日期统计view
-	public function reg_s(){
-		$this->display("reg_statistics");
+	//成员管理权限切换
+	public function power_toggle(){
+		$id = I('get.id',0);
+		if($id!=0){
+			$user_id = session('login');
+			$LoginModel = D('Login');
+			if($user_id == $id){
+				$this->error('不能修改自己');
+			}else{
+				$power = $LoginModel->where(array('id'=>$user_id))->getField('power');
+				$change_power = $LoginModel->where(array('id'=>$id))->getField('power');
+				if($power=='2'){
+					if($change_power == '1'){
+						$data['power'] = 0;
+					}else{
+						$data['power'] = 1;
+					}
+					$result = $LoginModel->where(array('id'=>$id))->save($data);
+					if($result !== false){
+						$this->success('操作成功');
+					}else{
+						$this->error('操作失败');
+					}
+				}else{
+					$this->error('没有权限');
+				}
+			}
+		}else{
+			$this->error('参数错误');
+		}
 	}
-	//注册用户根据日期统计action
-	public function reg_statistics(){
-		$mouth = I('post.mouth');
-		$year = date('Y');
-		$days_count = mouth_days($year,$mouth);
-	 	$time_start = date('Y-m-d H:i:s',mktime(0,0,0,$mouth,1,$year));//获取开始时间
-    	$time_end = date('Y-m-d H:i:s',mktime(23,59,59,$mouth,$days_count,$year));//获取结束时间
-        $LoginModel = D('Login');
-        $List = $LoginModel->reg_statistics($time_start,$time_end);
-        // dump($List);
-        $LoginModel->init_days($days_count,$year,$mouth,$List);
-        echo json_encode($List);
-	}
+
+
+
 }

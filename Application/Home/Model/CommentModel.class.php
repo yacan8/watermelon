@@ -12,15 +12,14 @@ class CommentModel extends Model{
 	 * @return [List]        [评论列表信息]
 	 */
 	public function getCommentByOtherId($id,$type,$page,$count){
-		$firstrow = ($page-1)*$count;
 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
 		$M = M('');
 		$List = $M->table($DB_PREFIX.'comment c')
 				  ->field('c.id id, c.time time,c.content content, s.icon sender_icon, s.nickname sender_nickname , s.id sender_id, r.nickname receiver_nickname , r.id receiver_id')
 				  ->join($DB_PREFIX.'login s on s.id = c.sender','left')
 				  ->join($DB_PREFIX.'login r on r.id = c.receiver','left')
-				  ->where("c.type = $type and c.other_id = $id")
-				  ->limit("$firstrow,$count")
+				  ->where("c.type = $type and c.other_id = $id and c.delete_tag = 0")
+				  ->page("$page,$count")
 				  ->order('time desc')
 				  ->select();
 				  // dump($M->getLastSql());

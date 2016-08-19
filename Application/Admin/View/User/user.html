@@ -1,0 +1,63 @@
+<div class="row margin-bottom">
+	<div class="col-xs-12">
+        <h3 class="page-header">用户昵称</h3>
+    </div>
+	
+	<div class="m-t-sm font-12">
+		<div class="m-l-md m-b-md">
+			<img src="{:C('__DATA__')}/login_thumb/{$user.icon|default='default.jpg'}" style="width:50px;height:50px;">
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">用户名:</span>
+			<span>{$user.tel}<if condition="$user['userinfo'] eq ''"><font class="m-l-sm" color="red"> 未完善资料 </font></if></span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">昵称:</span>
+			<span class="">{$user.nickname}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">权限:</span>
+			<span class="">
+				<switch name="user.power">    
+	              <case value="2">超级管理员</case>    
+	              <case value="1">管理员</case>    
+	              <default />用户
+	            </switch>
+			</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">邮箱:</span>
+			<span class="">{$user.userinfo.email|default="未填写"}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">职业:</span>
+			<span class="">{$user.userinfo.job|default="未填写"}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">地区:</span>
+			<span class="">{$user.userinfo.province|default="未填写省份"} | {$user.userinfo.city|default="未填写城市"}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">注册时间:</span>
+			<span class="">{$user.reg_time}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">最后登录时间:</span>
+			<span class="">{$user.last_time}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">最后查看消息时间:</span>
+			<span class="">{$user.last_read_message_time}</span>
+		</div>
+		<div class="m-l-md m-b-md">
+			<span class="tc-gray9 m-r-sm">个性签名:</span>
+			<span class="">{$user.userinfo.signature|default="未填写"}</span>
+		</div>
+
+		
+	</div>
+
+
+
+
+</div>
