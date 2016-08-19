@@ -3,22 +3,42 @@ namespace Home\Controller;
 use Think\Controller;
 class AccountController extends Controller{
 
+	public $userinfo;
+	public $visiter;
+
+	public function _initialize(){
+		$userinfo = $this->getInfo(session('login'));
+	}
+
+	public function getInfo($id){
+		$umodel = D('User');
+		$lmodel = D('Login');
+		$condition['user_id'] = $id;
+		$info_one = $umodel->getUserInfoById($condition);
+		$info_two = $lmodel->getById($condition['user_id']);
+		$info = $info_two;
+		$info['signature'] = $info_one['signature'];
+		return $info;
+	}
+
 	public function index(){
-		$model = D('User');
-		$id = session('userid');
-		$signature = $model->getSignaById($id);
-		if($signature){	
-			session('signature',$signature);
-		}
+		// $visitid = I('get.id');
+		// if($visitid){
+		// 	$this->assign('info',$this->getInfo($visitid));
+		// }else{
+		// 	$this->assign('info',$userinfo);			
+		// }
+		$this->assign('info',$userinfo);
 		$this->display('index');
 	}
 
 	// 个人动态view
 	public function dynamics(){
 		$model = D('Dynamics');
-		$reslut = $model->select(); 
+		$Page = new \Think\Page($model->getCount(),2);
+		$reslut = $model->getList(); 
 		$this->assign('content','AccountContent/dynamics');
-		$this->assign('content','');
+		$this->assign('dynamics',$reslut);
 		$this->display('index');
 	}
 
@@ -63,8 +83,10 @@ class AccountController extends Controller{
 	public function board(){
 		$this->assign('content','AccountContent/board');
 		$model = D('Board');
-		$Page = new \Think\Page($model->getCount(session('userid')),4);
-		$result = $model->getList(session('userid'),$Page->firstRow,$Page->listRows);
+		$condition['user_id'] = session('login');
+		$Page = new \Think\Page($model->getCount($condition),4);
+		$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
+		$this->assign('count',$model->getCount($condition));
 		$this->assign('board',$result);
 		$this->assign('page',$Page->show());
 		$this->display('index');
@@ -72,16 +94,34 @@ class AccountController extends Controller{
 
 	// 照片-相册页view
 	public function album(){
+		$amodel = D('Album');
+		$pmodel = D('Photo');
+		$condition['user_id'] = session('login');
+
+		$this->assign('photonum',$pmodel->getCount($condition));
+		dump($pmodel->getCount($condition));
+		$this->assign('albumnum',$amodel->getCount($condition));
+		$this->assign('album',$amodel->getList($condition));
 		$this->assign('content','AccountContent/album');
 		$this->display('photo');
 	}
 	// 照片-相片页view
 	public function photo(){
+		$albumid = I('get.albumid');
+		$condition['album_id'] = $albumid;
+		$pmodel = D('Photo');
+		$this->assign('photo',$pmodel->getList($condition));
 		$this->assign('content','ScenicContent/photoList');
 		$this->display('photo');
 	}
 	// 我的收藏view
 	public function collection(){
+		$model = D('Collection');
+		$condition['user_id'] = session('login');
+		$Page = new \Think\Page($model->getCount($condition),4);
+		$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
+		$this->assign('page',$Page->show());
+		$this->assign('collection',$result);
 		$this->assign('content','AccountContent/collection');
 		$this->display('index');
 	}
@@ -98,7 +138,7 @@ class AccountController extends Controller{
 		$umodel = D('User');
 		$lmodel = D('Login');
 		$this->assign('content','AccountContent/information');
-		$this->assign('userinfo',$umodel->getUserInfoById(session('userid')));
+		$this->assign('userinfo',$umodel->getUserInfoById(session('login')));
 		$this->assign('logininfo',$lmodel->getLoginInfoById(session('id')));
 		$this->display('index');
 	}

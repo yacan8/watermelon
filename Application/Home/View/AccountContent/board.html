@@ -1,35 +1,35 @@
-<div class="font-20 m-b-sm p-l-sm">留言板(20)</div>
+<div class="font-20 m-b-sm p-l-sm">留言板({$count})</div>
 <div class="p-md border-gray-e bg-white m-b-md">
-	<for start="1" end="5">
+	<volist name="borad" id="vo">
 	<div class="board-item p-b-md border-gray-b-e m-b-md">
 		<div class="media">
 			<div class="media-left">
 				<a href="#"><img class="media-object media-img" src="__PUBLIC__/img/f2.png" alt="..."></a>
 			</div>
 			<div class="media-body">
-				<a href="#" class="media-heading">Media heading</a>
+				<a href="#" class="media-heading"></a>
 				<div class="m-t-xs line-24">
-					看完您的说说后,我的心久久不能平静!这条说说构思新颖,题材独具匠心,段落清晰,情节诡异,跌宕起伏,主线分明,引人入胜,平淡中显示出不凡的文学功底,可谓是字字珠玑,句句经典,是我辈应学习之典范.就小说艺术的角度而言,可能不算太成功,但它的实验意义却远大于成功本身
+					{$vo.content}
 				</div>
 				<div class="m-t-xs tc-gray9">
-					<span class="">2016-2-4</span>
+					<span class="">{$vo.time}</span>
 					<a href="javascript:void(0)" class="pull-right">
 						<span class="glyphicon glyphicon-comment"> </span>
 						回复
 					</a>
 				</div>
-
+				<volist name="$vo.reply" id="re">
 				<div class="media">
 					<div class="media-left">
-						<a href="#"><img class="media-object media-img" src="__PUBLIC__/img/f2.png" alt="..."></a>
+						<a href="#"><img class="media-object media-img" src="__PUBLIC__/img/{$re.senderinfo.icon}" alt="..."></a>
 					</div>
 					<div class="media-body">
-						<a href="#" class="media-heading">Media heading</a> 回复 <a href="#" class="media-heading">昵称2</a>
+						<a href="#" class="media-heading">{$re.ssenderinfo.nickname}</a> 回复 <a href="#" class="media-heading">{$re.receiverinfo.nickname}</a>
 						<div class="m-t-xs line-24">
-							看完您的说说后,我的心久久不能平静!这条说说构思新颖,题材独具匠心,段落
+							{$re.content}
 						</div>
 						<div class="m-t-xs tc-gray9">
-							<span class="">2016-2-4</span>
+							<span class="">{$re.time}</span>
 							<a href="javascript:void(0)" class="pull-right">
 								<span class="glyphicon glyphicon-comment"> </span>
 								回复
@@ -37,22 +37,16 @@
 						</div>
 					</div>
 				</div>
-
+				</volist>
 
 
 			</div>
 		</div>
 	</div>
-	</for>
+	</volist>
 	<div class="text-right">
 		<ul class="pagination pagination-sm">
-		  <li class="disabled"><a href="#">&laquo;</a></li>
-		  <li class="active"><a href="#">1</a></li>
-		  <li><a href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		  <li><a href="#">&raquo;</a></li>
+		  {$page}
 		</ul>	
 	</div>
 

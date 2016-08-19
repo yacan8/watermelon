@@ -1,6 +1,6 @@
 <?php
 namespace Home\Model;
-use Think\Model\Model;
+use Think\Model;
 /**
 * 
 */
@@ -8,12 +8,11 @@ class BoardModel extends Model{
 	/**
 	 * [getList 获取留言列表]
 	 */
-	public function getList($userid,$first,$list){
-		// $condition['user_id'] = $userid;
+	public function getList($first,$list,$condition){
 		$lmodel = D('Login');
 		$rmodel = D('BoardReply');
-		$result = $this->where($condition)->limit($first.','.$list)->select();
-		foreach ($result as $value) { 
+		$result = $this->where($condition)->order('time desc')->limit($first.','.$list)->select();
+		foreach ($result as &$value) { 
 			$value['messageuserinfo'] = $lmodel->getById($value['message_user_id']);
 			$value['reply'] = $rmodel->getList($value['id']);
 		}
@@ -22,13 +21,11 @@ class BoardModel extends Model{
 
 	/**
 	 * [getCount 获取该用户留言总数]
-	 *	@param [Integer] $userid 用户编号
+	 *	@param [Array] $condition 条件
 	 *	@return 留言总数
 	 */
-	public function getCount($userid){
-		$condition['user_id'] = $userid;
-		$result = $this->where($condition)->count();
-		return $result;
+	public function getCount($condition){
+		return $this->where($condition)->count();
 	}
 
 }

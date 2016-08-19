@@ -40,4 +40,38 @@ class CollectionModel extends RelationModel{
 		$list = $this->where($data)->field('id,delete_tag')->select();
 		return $list;
 	}
+
+	public function getList($first,$list,$condition=null){
+		$result = $this->where($condition)
+					   ->limit($first.','.$list)
+					   ->select();
+		foreach ($result as &$value) {
+			switch ($value['type']) {
+				case '1': $model = D('TravelNote'); 
+						  $info = $model->getInfoByUserId($value['other_id']);
+						  $value['title'] = $info['title'];
+						  break;
+				case '2': $model = D('Topic'); 
+						  $info = $model->getById($value['other_id']);
+						  $value['title'] = $info['title'];
+						  break;
+				case '3': $model = D('Equipment'); 
+						  $info = $model->getById($value['other_id']);
+						  $value['title'] = $info['name'];
+						  break;
+				default: break;
+			}
+		}
+		return $result;
+	}
+
+	public function getCount($condition){
+		$result = $this->where($condition)->count();
+		if ($result) {
+			return $result;
+		} else {
+			return 0;
+		}
+		
+	}
 }
