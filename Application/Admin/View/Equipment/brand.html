@@ -10,7 +10,7 @@
 	<div class="col-xs-12 m-t-sm">
 		<div class="boder-e-container" id="brand-container">
 			<volist name="List" id="vo">
-				<span class="space-item "><span>{$vo.brand}</span>({$vo.count}) <a href="{:U('Equipment/equipment',array('brand_id'=>$vo['id']))}" data-role="remove">查看</a><a>丨</a><a href="{:U('EquipmentBrand/delete',array('id'=>$vo['id']))}" data-role="remove" onclick="return confirm('确认删除吗？')">删除</a></span>
+				<span class="space-item "><span>{$vo.brand}</span>({$vo.count}) <a href="{:U('Equipment/equipment',array('brand_id'=>$vo['id']))}" data-role="remove">查看</a><a>丨</a><a href="{:U('Equipment/brand_delete',array('id'=>$vo['id']))}" data-role="remove" onclick="return confirm('确认删除吗？')">删除</a></span>
 			</volist>
 		</div>
 	</div>

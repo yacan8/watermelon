@@ -18,7 +18,7 @@ class InfomationController extends Controller {
 
 		$this->assign('page',$show);
 		$this->assign('UpList',$UpList);
-		$this->assign('List',$List);
+		$this->assign('infomationList',$List);
 		$this->assign('p',$p);
 		$this->assign('title','资讯管理');
 		$this->display();

@@ -42,14 +42,14 @@ class EquipmentModel extends RelationModel{
 		$condition['_string'] = 'e.type_id = et.id and e.brand_id = eb.id';
 		$condition['_logic'] = 'and';
 		if($order!=''){
-			$order_str = $order_str.' desc';
+			$order_str = ','.$order_str.' desc';
 		}else
 			$order_str = '';
 		$List = $this->table($DB_PREFIX.'equipment e,'.$DB_PREFIX.'equipment_type et,'.$DB_PREFIX.'equipment_brand eb')
-					 ->field('e.id id,e.name name,eb.id brand_id,eb.brand brand,e.image image,e.price price,e.grade grade,e.type_id type_id,et.type type,(select count(*) from '.$DB_PREFIX.'equipment_grade where equipment_id = e.id) comment_count')
+					 ->field('e.id id,e.name name,eb.id brand_id,eb.brand brand,e.image image,e.price price,e.grade grade,e.type_id type_id,et.type type,e.delete_tag,(select count(*) from '.$DB_PREFIX.'equipment_grade where equipment_id = e.id) comment_count')
 					 ->page("$page,$count")
 					 ->where($condition)
-					 ->order($order_str)
+					 ->order('e.delete_tag asc '.$order_str)
 					 ->select();
 		$count = $this->table($DB_PREFIX.'equipment e,'.$DB_PREFIX.'equipment_type et,'.$DB_PREFIX.'equipment_brand eb')->where($condition)->count();
 		for ($i=0; $i < count($List); $i++) { 
@@ -58,8 +58,37 @@ class EquipmentModel extends RelationModel{
 			}
 		}
 		return $List;
+	}
 
-
-		
+	/**
+	 * [search 搜索装备]
+	 * @param  [string] $key    [关键字]
+	 * @param  [Integer] $page   [页数]
+	 * @param  [Integer] &$count [引用，每页显示数量，引用后为总数]
+	 * @return [List] 
+	 */
+	public function search($key,$page,&$count){
+		$DB_PREFIX = $this->tablePrefix;
+		$condition['e.name']  = array('like','%'.$key.'%');
+		$condition['_string'] = 'e.type_id = et.id and e.brand_id = eb.id';
+		$condition['_logic'] = 'and';
+		if($order!=''){
+			$order_str = ','.$order_str.' desc';
+		}else
+			$order_str = '';
+		$List = $this->table($DB_PREFIX.'equipment e,'.$DB_PREFIX.'equipment_type et,'.$DB_PREFIX.'equipment_brand eb')
+					 ->field('e.id id,e.name name,eb.id brand_id,eb.brand brand,e.image image,e.price price,e.grade grade,e.type_id type_id,et.type type,e.delete_tag,(select count(*) from '.$DB_PREFIX.'equipment_grade where equipment_id = e.id) comment_count')
+					 ->page("$page,$count")
+					 ->where($condition)
+					 ->order('e.delete_tag asc '.$order_str)
+					 ->select();
+		$count = $this->table($DB_PREFIX.'equipment e,'.$DB_PREFIX.'equipment_type et,'.$DB_PREFIX.'equipment_brand eb')->where($condition)->count();
+		for ($i=0; $i < count($List); $i++) { 
+			$List[$i]['name'] = str_replace($key, "<span style='color:red'>".$key."</span>", $List[$i]['name']);//关键字高亮
+			if($List[$i]['image']!=''){
+				$List[$i]['image'] = U('Image/i',array('w'=>163,'h'=>100,'i'=>urlencode($List[$i]['image']).'!feature'),false,false);
+			}
+		}
+		return $List;
 	}
 }

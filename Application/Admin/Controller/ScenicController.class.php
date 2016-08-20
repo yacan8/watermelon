@@ -55,7 +55,22 @@ class ScenicController extends Controller{
 		$this->assign('scenic_count',$scenic_count);
 		$this->display('Scenic/scenic');
 	}
-
+	//景点删除active
+	public function delete(){
+		$id = I('get.id');
+		if($id!=0){
+			$ScenicModel = M('Scenic');
+			$data['delete_tag'] = (bool)1;
+			$result = $ScenicModel->where(array('id'=>$id))->save($data);
+			if($result !== false){
+				$this->success('操作成功');
+			}else{
+				$this->error('操作失败');
+			}
+		}else{
+			$this->error('参数错误');
+		}
+	}
 
 	/**
 	 * [city_img_change 修改景点图片]

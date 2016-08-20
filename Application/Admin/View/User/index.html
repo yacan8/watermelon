@@ -1,61 +1,29 @@
 
 	<div class="row margin-bottom">
 		<div class="col-xs-12">
-	        <h3 class="page-header">用户查询</h3>
+	        <h3 class="page-header">
+            用户查询
+            <div class="btn-group pull-right">
+              <a href="#" class="btn btn-default btn-sm">{$sort_text}</a>
+              <a href="#" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{:U('User/index',array('sort'=>'reg_time','s'=>'desc'))}">注册时间 <span class="glyphicon glyphicon-circle-arrow-down"></span></a></li>
+                <li><a href="{:U('User/index',array('sort'=>'reg_time','s'=>'asc'))}">注册时间 <span class="glyphicon glyphicon-circle-arrow-up"></span></a></li>
+                <li class="divider"></li>
+                <li><a href="{:U('User/index',array('sort'=>'last_time','s'=>'desc'))}">登录时间 <span class="glyphicon glyphicon-circle-arrow-down"></span></a></li>
+                <li><a href="{:U('User/index',array('sort'=>'last_time','s'=>'asc'))}">登录时间 <span class="glyphicon glyphicon-circle-arrow-up"></span></a></li>
+              </ul>
+            </div>
+
+          </h3>
 	    </div>
 		<!-- / .col-xs-12 -->
 		
 	</div>
-  <div class="" style="overflow:auto">
-	<table class="table table-striped" style="min-width:1112px;">
-      <thead>
-        <tr>
-          <th>用户名</th>
-          <th>昵称</th>
-          <th>权限</th>
-          <th>头像</th>
-          <th>注册时间</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <volist name="List" id="vo">
-          <tr>
-        	<td>{$vo.tel}</td>
-          <td>{$vo.nickname}</td>
-          <td>
-            <switch name="vo.power">    
-              <case value="2">超级管理员</case>    
-              <case value="1">管理员</case>    
-              <default />用户
-            </switch>
-          </td>
-        	<td><img src="{:C('__DATA__')}/login_thumb/{$vo.icon|default='default.jpg'}" style="width:30px;height:30px;"></td>
-        	<td>{$vo.reg_time}</td>
-          <td class="font-12">
-            <a href="{:U('User/user',array('id'=>$vo['id']))}">查看信息</a>
-            · 
-            <switch name="vo.power">    
-              <case value="2">超级管理员</case>    
-              <case value="1"><a href="{:U('User/power_toggle',array('id'=>$vo['id']))}">设为成员</a></case>    
-              <default /><a href="{:U('User/power_toggle',array('id'=>$vo['id']))}">设为管理</a>
-            </switch>
-            
-            ·
-            <if condition="$vo['delete_tag'] eq 0">
-            <a href="{:U('User/delete',array('id'=>$vo['id']))}" onclick="return confirm('确认删除吗')">删除</a>
-            <else/>
-            <span>已删除</span>
-            </if>
-          </td>
-          </tr>
-        </volist>
-      </tbody>
-    </table>
-    </div>
-    <div class="text-right">
+  <include file="User/list" />
+    <nav>
       <ul class="pagination pagination-sm">
       {$page}
       </ul>
-    </div>
+    </nav>
 	<!-- / .row -->

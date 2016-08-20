@@ -10,6 +10,17 @@ class UserController extends Controller{
 	public function index(){
 		$sort = I('get.sort','reg_time');//哪个字段
 		$s = I('get.s','desc');//正序还是逆序
+		if($sort=='reg_time'){
+			$sort_str = '注册时间';
+		}else{
+			$sort_str = '登录时间';
+		}
+		if($s == 'desc'){
+			$s_str = ' <span class="glyphicon glyphicon-circle-arrow-down">';
+		}else{
+			$s_str = ' <span class="glyphicon glyphicon-circle-arrow-up">';
+		}
+		$sort_text = $sort_str.$s_str;
 		$p = I('get.p');
 		$order = $sort.' '.$s;
 		$LoginModel = D('Login');
@@ -17,11 +28,12 @@ class UserController extends Controller{
 		$Page       = new \Think\Page($count,20);
 		$show       = $Page->show();
 		$List = $LoginModel->getList($order,$p,20);
+		$this->assign('sort_text',$sort_text);
 		$this->assign('sort',$sort);
 		$this->assign('s',$s);
 		$this->assign('title','用户管理');
 		$this->assign('page',$show);
-		$this->assign('List',$List);
+		$this->assign('userList',$List);
 		$this->display();
 	}
 

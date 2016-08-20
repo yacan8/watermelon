@@ -25,7 +25,7 @@ class InfomationModel extends RelationModel{
 	 * @param [Integer] $page [传入的页数]
 	 * @return [list]           [查询到的列表]
 	 */
-	public function getList($upline,$page,$contributor,&$count){
+	public function getList($upline,$page,$contributor=0,&$count){
 		if($contributor!=0){
 			$data['contributor'] = $contributor;
 		}
@@ -46,6 +46,33 @@ class InfomationModel extends RelationModel{
 			}
 		}
 		return $List;
+	}
+
+	/**
+	 * [search 搜索资讯]
+	 * @param  [string] $key    [关键字]
+	 * @param  [Integer] $page   [页数]
+	 * @param  [Integer] &$count [引用，每页显示数量，引用后为总数]
+	 * @return [List] 
+	 */
+	public function search($key,$page,&$count){
+		$condition['title']  = array('like','%'.$key.'%');
+		$page = ($page-1)*10;
+		$List = $this->where($condition)->page("$page,$count")->field('id,title,browse,comment_count,image,image_thumb,publish_time,contributor,state')->order('publish_time desc')->relation(true)->select();
+		$count = $this->where($condition)->count();
+		
+		for ($i=0; $i < count($List); $i++) { 
+			$List[$i]['title'] = str_replace($key, "<span style='color:red'>".$key."</span>", $List[$i]['title']);//关键字高亮
+			if($List[$i]['image_thumb']== '')
+				$List[$i]['image'] = $List[$i]['image_thumb']= C('__DATA__').'/infomation/default.jpg';
+			else{
+				$List[$i]['image'] = C('__DATA__')."/".$List[$i]['image'];
+				$List[$i]['image_thumb'] = C('__DATA__')."/".$List[$i]['image_thumb'];
+			}
+		}
+		return $List;
+
+
 	}
 	/**
 	 * [upload 图片上传 设置图片名字]

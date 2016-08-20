@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="page-header to">{$key} 的搜索结果</h3>
+	</div>
+</div>
+<div class="p-t-md p-b-md">
+	
+<div class="form-group" style="max-width:500px;">
+	<form action="__ACTION__">
+		<div class="input-group">
+		    <input type="text" class="form-control" name="key" value="{$key}">
+		    <span class="input-group-btn">
+		      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+		    </span>
+		</div>
+	</form>
+
+	<div class="bg-gray-f6 p-sm tc-gray9 font-12 m-t-md">共找到 {$count} 个相关内容</div>
+</div>
+
+</div>
+<div class="search-menu">
+    <a <if condition="ACTION_NAME eq 'scenic'">class="active"</if> href="{:U('Search:scenic',array('key'=>$key))}">景点</a>
+    <a <if condition="ACTION_NAME eq 'infomation'">class="active"</if> href="{:U('Search:infomation',array('key'=>$key))}">资讯</a>
+    <a <if condition="ACTION_NAME eq 'travel_note'">class="active"</if> href="{:U('Search:travel_note',array('key'=>$key))}">游记</a>
+    <a <if condition="ACTION_NAME eq 'topic'">class="active"</if> href="{:U('Search:topic',array('key'=>$key))}">话题</a>
+    <a <if condition="ACTION_NAME eq 'equipment'">class="active"</if> href="{:U('Search:equipment',array('key'=>$key))}">装备</a>
+    <a <if condition="ACTION_NAME eq 'user'">class="active"</if> href="{:U('Search:user',array('key'=>$key))}">用户</a>
+</div>
+<include file="$content" />

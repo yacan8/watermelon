@@ -21,7 +21,7 @@ class TopicController extends Controller{
 		$show       = $Page->show();// 分页显示输出
 		$this->assign('select','t');
 		$this->assign('page',$show);
-		$this->assign('List',$List);
+		$this->assign('topicList',$List);
 		$this->display();
 	}
 

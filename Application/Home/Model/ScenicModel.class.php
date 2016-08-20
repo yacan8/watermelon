@@ -44,6 +44,7 @@ class ScenicModel extends RelationModel{
 			$condition['s.type_id'] = M('ScenicType')->where(array('type'=>$type))->getField('id');
 		}
 		$condition['s.city_id'] = $city_id;
+		$condition['s.delete_tag'] = (bool)0;
 		$List = $Model->table($DB_PREFIX.'scenic s')
 					   ->field('s.id,s.image,s.name,s.grade,(select count(*) from '.$DB_PREFIX.'scenic_want where scenic_id = s.id) want_count')
 					   ->order('want_count desc,grade desc')
@@ -69,6 +70,7 @@ class ScenicModel extends RelationModel{
 		$condition['s.city_id'] = $city_id;
 		$condition['_string'] = 's.type_id=st.id';
 		$condition['_logic'] = 'and';
+		$condition['s.delete_tag'] = (bool)0;
 		if($type_id!=0){
 			$condition['s.type_id'] = $type_id;
 		}

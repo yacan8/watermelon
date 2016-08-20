@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col-xs-12 m-t-sm">
+		<div class="city-container">
+			<include file="Scenic/list" />
+		</div>
+		<ul class="pagination pagination-sm m-t-lg">
+			{$page}
+		</ul>
+	</div>
+</div>
+<form action="{:U('Scenic/scenic_img_change')}" id="img-change-form" method="post" data-obj="" enctype="multipart/form-data">
+	<input type="hidden" name="id" />
+	<input type="file" name="img" class="hidden" accept="image/jpg,image/png,image/jpeg"/>
+</form>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.form.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/admin/addcity.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('button[type="submit"]').click(function(){
+			$(this).button('loading');
+		}).blur(function(){
+			$(this).button('reset');
+		});
+	})
+</script>

@@ -44,35 +44,7 @@
 	        <h3 class="page-header"><a href="{:U('Infomation/index')}">列表</a></h3>
 	    </div>
 		
-		<volist name="List" id="vo">
-			<div class="col-xs-6">
-		        <div class="infomation-item">
-					<div class="infomation-img">
-						<a href="{:U('Infomation/infomation',array('id'=>$vo['id']))}"><img src="{$vo.image}"></a>
-					</div>
-					<h5 class="infomation-title to1"><a href="{:U('Infomation/infomation',array('id'=>$vo['id']))}">{$vo.title}</a></h5>
-					<div class="m-t-sm tc-grap6 font-12">
-						{$vo.publish_time}
-						·
-						<a href="{:U('Infomation/index',array('contributor'=>$vo['user']['id']))}">{$vo.user.nickname}</a>
-						·
-						{$vo.browse}次浏览
-						·
-						{$vo.comment_count}个评论
-					</div>
-					<div class="m-t-sm">
-						<a href="{:U('Infomation/view',array('id'=>$vo['id']))}" target="_blank" class="btn btn-xs btn-info m-r-sm">查看</a>
-						<a href="{:U('Infomation/infomation',array('id'=>$vo['id']))}" class="btn btn-xs btn-default m-r-sm">修改</a>
-						<if condition ="$vo['state'] eq '0'">
-						<a href="{:U('Infomation/uplinetoggle',array('id'=>$vo['id']))}" class="btn btn-xs btn-success m-r-sm">置顶</a>
-						<else/>
-						<a href="{:U('Infomation/uplinetoggle',array('id'=>$vo['id']))}" class="btn btn-xs btn-warning m-r-sm">取消置顶</a>
-						</if>
-						<a href="{:U('Infomation/delete',array('id'=>$vo['id']))}" class="btn btn-xs btn-danger m-r-sm" onclick="return confirm('确认删除吗？')">删除</a>
-					</div>
-				</div>
-			</div>
-		</volist>
+		<include file="Infomation/list" />
 
 		</div>
 	

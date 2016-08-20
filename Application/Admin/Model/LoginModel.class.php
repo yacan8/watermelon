@@ -18,11 +18,38 @@ class LoginModel extends RelationModel{
 	);
 
 
-
+	/**
+	 * [getList 获取用户列表]
+	 * @param  [string] $order [排序字段]
+	 * @param  [integer] $page  [页数]
+	 * @param  [integer] $count [每页显示个数]
+	 * @return List
+	 */
 	public function getList($order,$page,$count){
 		$List = $this->order($order)->page("$page,$count")->select();
 		return $List;
 	}
+	/**
+	 * [search 搜索用户]
+	 * @param  [string] $key    [关键字]
+	 * @param  [Integer] $page   [页数]
+	 * @param  [Integer] &$count [引用，每页显示数量，引用后为总数]
+	 * @return [List] 
+	 */
+	public function search($key,$page,&$count){
+		$condition['nickname'] = array('like','%'.$key.'%');
+		$condition['tel'] = array('like','%'.$key.'%');
+		$condition['_logic'] = 'or';
+		$List = $this->order('delete_tag asc,reg_time desc')->where($condition)->page("$page,$count")->select();
+		$count = $this->where($condition)->count();
+		for ($i=0; $i <count($List) ; $i++) { 
+			$List[$i]['nickname'] = str_replace($key, "<span style='color:red'>".$key."</span>", $List[$i]['nickname']);//关键字高亮
+			$List[$i]['tel'] = str_replace($key, "<span style='color:red'>".$key."</span>", $List[$i]['tel']);//关键字高亮
+		}
+		return $List;
+	}
+
+
 	public function checkPower($user_id){
 		$power = $this->where(array('id'=>$user_id))->getField('power');
 		if((int)$power>0)

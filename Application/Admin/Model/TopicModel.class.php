@@ -61,6 +61,41 @@ class TopicModel extends RelationModel{
 	
 		return $List;
 	}
-	
+	/**
+	 * [search 搜索话题]
+	 * @param  [string] $key    [关键字]
+	 * @param  [Integer] $page   [页数]
+	 * @param  [Integer] &$count [引用，每页显示数量，引用后为总数]
+	 * @return [List] 
+	 */
+	public function search($key,$page,&$count){
+		$condition['title']  = array('like','%'.$key.'%');
+		$condition['delete_tag'] = (bool)0;
+		$condition['_logic'] = "AND";
+		$firstRow = ($page-1)*$count;
+		$List = $this->relation(array('type','userinfo'))
+					 ->where($condition)
+					 ->page("$page,$count")
+					 ->field("id,user_id,title,time,browse,comment_count")
+					 ->order('time desc')
+					 ->select();
+		$count = $this->where($condition)->count();
+		$TopicTypeModel = M('TopicType');
+		for ($i=0; $i < count($List); $i++) {
+			$List[$i]['title'] = str_replace($key, "<span style='color:red'>".$key."</span>", $List[$i]['title']);//关键字高亮
+			for ($j=0; $j < count($List[$i]['type']); $j++) { 
+				$str = $TopicTypeModel->where(array('id'=> $List[$i]['type'][$j]['type_id']))->getField('type');
+				$List[$i]['type'][$j]['type'] = $str;
+			}
 
+			if($List[$i]['userinfo']['icon']=='')
+				$List[$i]['userinfo']['icon'] = C('__DATA__').'/login_thumb/default.jpg';
+			else{
+				$List[$i]['userinfo']['icon'] = C('__DATA__')."/login_thumb/".$List[$i]['userinfo']['icon'];
+			}
+			
+		}
+	
+		return $List;
+	}
 }

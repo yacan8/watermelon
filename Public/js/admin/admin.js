@@ -1,6 +1,9 @@
     $(function(){
 
-        
+        $("#action-change>li>a").click(function(event) {
+            var action = $(this).attr('data-action');
+            $("#search-form").attr('action',action);
+        });
         //图片浏览
         $('.btn-file').click(function(event) {
             $('#file').click();

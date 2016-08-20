@@ -17,7 +17,7 @@ class TravelNoteController extends Controller{
 		$this->assign('user_id',$user_id);
 		$this->assign('nickname',$nickname);
 		$this->assign('page',$show);
-		$this->assign('List',$List);
+		$this->assign('travelNoteList',$List);
 		$this->display();
 	}
 

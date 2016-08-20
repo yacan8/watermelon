@@ -1,0 +1,23 @@
+<volist name="scenicList" id="vo">
+			<div class="city-item">
+				<div class="left-img">
+					<a class="img-change-btn" data-id="{$vo.id}" href="javascrip:;">修改图片</a>
+					<img src="{$vo.image|default='__PUBLIC__/img/city.jpg'}">
+				</div>
+				<div class="font-12 tc-gray9 item-info">
+						<a class="font-bold">{$vo.name}（<a href="{:U('Home/Scenic/scenic',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Scenic/scenicForm',array('id'=>$vo['id']))}">修改</a> | 
+						<if condition="$vo['delete_tag'] eq 0">
+						<a href="{:U('Scenic/delete',array('id'=>$vo['id']))}" onclick="return confirm('确认删除吗')">删除</a>
+						<else/>
+						<span>已删除</span>
+						</if>
+						）</a>
+						·
+						评分 <a>{$vo.grade}</a>
+						·
+						<a href="{:U('ScenicGrade/grade',array('scenic_id'=>$vo['id']))}">{$vo.comment_count}</a>个评论
+						·
+						<a href="{:U('Scenic/image',array('scenic_id'=>$vo['id']))}">{$vo.image_count}</a>张图片
+				</div>
+			</div>
+			</volist>

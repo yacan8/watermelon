@@ -62,7 +62,7 @@ class EquipmentGradeModel extends Model{
 		$List = $this->table($DB_FREFIX.'equipment_grade eg,'.$DB_FREFIX.'equipment s,'.$DB_FREFIX.'login l')
 					 ->field('eg.id id,eg.price_source,eg.advantage,eg.disadvantage,eg.synthesize,eg.recommend r,eg.time time,eg.delete_tag is_delete,s.name equipment_name,s.id equipment_id,l.id user_id,l.nickname user_nickname,l.icon icon')
 					 ->where($condition)
-					 ->order('time desc')
+					 ->order('eg.delete_tag asc,time desc')
 					 ->page("$page,$count")
 					 ->select();
 		return $List;

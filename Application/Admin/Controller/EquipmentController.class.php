@@ -57,6 +57,22 @@ class EquipmentController extends Controller {
 
 	}
 
+	//装备删除active
+	public function delete(){
+		$id = I('get.id');
+		if($id!=0){
+			$EquipmentModel = M('Equipment');
+			$data['delete_tag'] = (bool)1;
+			$result = $EquipmentModel->where(array('id'=>$id))->save($data);
+			if($result !== false){
+				$this->success('操作成功');
+			}else{
+				$this->error('操作失败');
+			}
+		}else{
+			$this->error('参数错误');
+		}
+	}
 
 
 	/**
@@ -123,6 +139,29 @@ class EquipmentController extends Controller {
 		$this->assign('List',$List);
 		$this->display();
 	}
+	//删除在装备品牌
+	public function brand_delete(){
+		$id = I('get.id');
+		$EquipmentBrandModel = M('EquipmentBrand');
+		$delete_name = $EquipmentBrandModel->where(array('id'=>$id))->getField('brand');
+		if($delete_name!='其他'){
+			$model = M('');
+			$model->startTrans();
+			$other_id = $EquipmentBrandModel->where(array('brand'=>'其他'))->getField('id');
+			$data['brand_id'] = $other_id;
+			$equipmentResult = M('Equipment')->where(array('brand_id'=>$id))->save($data);
+			$brandResult = $EquipmentBrandModel->where(array('id'=>$id))->delete();
+			if($equipmentResult!==false&&$brandResult!==false){
+				$model->commit();
+				$this->success('删除成功');
+			}else{
+				$model->rollback();
+				$this->error('删除失败');
+			}
+		}else{//如果删除为名为其他的品牌
+			$this->error('不能删除该品牌');
+		}
+	}
 
 	//添加品牌action
 	public function addBrand(){
@@ -155,6 +194,33 @@ class EquipmentController extends Controller {
 		$this->assign('List',$List);
 		$this->display();
 	}
+
+
+
+	//删除在装备类型
+	public function type_delete(){
+		$id = I('get.id');
+		$EquipmentTypeModel = M('EquipmentType');
+		$delete_name = $EquipmentTypeModel->where(array('id'=>$id))->getField('type');
+		if($delete_name!='其他'){
+			$model = M('');
+			$model->startTrans();
+			$other_id = $EquipmentTypeModel->where(array('type'=>'其他'))->getField('id');
+			$data['type_id'] = $other_id;
+			$equipmentResult = M('Equipment')->where(array('type_id'=>$id))->save($data);
+			$typeResult = $EquipmentTypeModel->where(array('id'=>$id))->delete();
+			if($equipmentResult!==false&&$typeResult!==false){
+				$model->commit();
+				$this->success('删除成功');
+			}else{
+				$model->rollback();
+				$this->error('删除失败');
+			}
+		}else{//如果删除为名为其他的类型
+			$this->error('不能删除该类型');
+		}
+	}
+
 
 	//添加装备action
 	public function addType(){

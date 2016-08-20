@@ -33,6 +33,7 @@ class ScenicGradeModel extends Model{
 		if($recommend_level!=0){
 			$condition['sg.recommend_level'] = $recommend_level*2;
 		}
+		$condition['sg.delete_tag'] = (bool)0;
 		$condition['_string'] = 'sg.user_id = l.id';
 		$condition['_logic']  = 'and';
 		$Model = M('');
@@ -63,6 +64,7 @@ class ScenicGradeModel extends Model{
 		if($recommend_level!=0){
 			$condition['recommend_level'] = $recommend_level*2;
 		}
+		$condition['delete_tag'] = (bool)0;
 		$count = $this ->where($condition)->count();
 		return $count;
 	}
