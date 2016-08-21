@@ -61,4 +61,16 @@ class CityModel extends RelationModel{
 		}
 		return $List;
 	}
+
+	/**
+	 * [getAllWantTo 获取相同想去的城市]
+	 * @param  [Integer] $city_id [城市ID]
+	 * @return List
+	 */
+	public function getAllWantTo($city_id){
+		// SELECT cw.city_id,c.city,c.image,count(*) count from wt_city_want cw,wt_city c where user_id in (select user_id from wt_city_want where city_id = 2 and delete_tag = 0) and c.id = cw.city_id group by city_id order by count desc
+		$DB_PREFIX = $this->tablePrefix;
+		$List = $this->query("SELECT cw.city_id,c.city,c.image,count(*) count from {$DB_PREFIX}city_want cw,{$DB_PREFIX}city c where user_id in (select user_id from {$DB_PREFIX}city_want where city_id = $city_id and delete_tag = 0) and c.id = cw.city_id and cw.city_id != $city_id group by city_id order by count desc limit 4");
+		return $List;
+	}
 }

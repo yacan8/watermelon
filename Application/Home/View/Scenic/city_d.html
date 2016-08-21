@@ -30,7 +30,7 @@
 				</div>
 
 				
-				<div class="col-xs-12">
+				<!-- <div class="col-xs-12">
 					<div class="border-t-gray-e">
 						<ul class="head-menu-l">
 							<li><a href="javascript:void(0)" data-content="scenic">景点</a></li>
@@ -42,7 +42,7 @@
 							<li><a class="map-view" href="javascript:void(0)">地图</a></li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
 			</div>
 	    </div>
 	</div>
@@ -76,11 +76,11 @@
 								<foreach name="HotScenicList" item="vo" >
 								<li>
 									<div class="pull-left">
-										<a href="#">
+										<a href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">
 											<img src="{:U('Image/ScenicImg',array('image'=>urlencode($vo['image']).'!feature'),false,false)}">
 										</a>
 									</div>
-									<div class="to1"><a href="#">{$vo.name}</a></div>
+									<div class="to1"><a href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">{$vo.name}</a></div>
 									<div class="m-t-3 to1">
 										{:W('Scenic/score',array('score'=>$vo['grade']))}
 
@@ -131,7 +131,7 @@
 
 									</div>
 									<div class="m-t-xs tc-gray6">
-										{:str_sub($vo['desciption'],170)}
+										{:str_sub($vo['desciption'],100)}
 									</div>
 								</div>
 							</div>
@@ -159,11 +159,10 @@
 					<button class="map-view btn btn-sm btn-default btn-block m-t-sm">查看地图</button>
 					<hr>
 					<div class="font-18 m-t-sm">
-						该城市游记
-						<a href="#" class="pull-right font-12 tc-gray9 m-t-xs">更多>></a>
+						想去该城市的瓜友也想去
 					</div>
 					<div class="m-t-sm">
-						
+						{:W('Scenic/sideCity',array('city_id'=>$city_id))}
 					</div>
 					<hr>
 				</div>

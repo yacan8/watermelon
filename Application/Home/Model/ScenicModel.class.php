@@ -106,5 +106,20 @@ class ScenicModel extends RelationModel{
 		$List = M('')->query($sql);
 		return $List;
 	}
+
+
+	/**
+	 * [getAllWantTo 获取相同想去的景点]
+	 * @param  [Integer] $scenic_id [城市ID]
+	 * @return List
+	 */
+	public function getAllWantTo($scenic_id){
+		// SELECT cw.city_id,c.city,c.image,count(*) count from wt_city_want cw,wt_city c where user_id in (select user_id from wt_city_want where city_id = 2 and delete_tag = 0) and c.id = cw.city_id group by city_id order by count desc
+		$DB_PREFIX = $this->tablePrefix;
+		$List = $this->query("SELECT cw.scenic_id id,c.grade,c.name,c.image,count(*) want_count from {$DB_PREFIX}scenic_want cw,{$DB_PREFIX}scenic c where user_id in (select user_id from {$DB_PREFIX}scenic_want where scenic_id = $scenic_id and delete_tag = 0) and c.id = cw.scenic_id and cw.scenic_id != $scenic_id group by cw.scenic_id order by want_count desc limit 4");
+		return $List;
+	}
+
+
 }
 

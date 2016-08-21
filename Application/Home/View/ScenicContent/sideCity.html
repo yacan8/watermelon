@@ -1,0 +1,17 @@
+<ul class="sideList">
+	<volist name="List" id="vo">
+		<li>
+			<a href="{:U('Scenic/city',array('id'=>$vo['city_id']))}">
+				<img class="sideImg1" src="{:U('Image/ScenicImg',array('w'=>90,'h'=>70,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+			</a>
+			<div class="sideContent1">
+				<div class="info_item">
+					<a class="tc-black" href="{:U('Scenic/city',array('id'=>$vo['city_id']))}">{$vo.city}</a>
+				</div>
+				<div class="info_item font-12 tc-gray6">
+					{$vo.count}个人想去这里
+				</div>
+			</div>
+		</li>
+	</volist>
+</ul>

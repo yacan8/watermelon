@@ -189,4 +189,26 @@ class ScenicWidget extends Controller{
 		$this->display('ScenicContent/hotFood');
 	}
 
+	/**
+	 * [sideCity 相同想去的城市]
+	 * @param  [Integer] $city_id [城市编号]
+	 */
+	public function sideCity($city_id){
+		$List = D('City')->getAllWantTo($city_id);
+		$this->assign('List',$List);
+		$this->display('ScenicContent/sideCity');
+	}
+
+
+	/**
+	 * [sideCity 相同想去的景点]
+	 * @param  [Integer] $scenic_id [景点编号]
+	 */
+	public function sideScenic($scenic_id){
+		$List = D('Scenic')->getAllWantTo($scenic_id);
+		$this->assign('HotFoodList',$List);
+		$this->display('ScenicContent/hotFood');
+	}
+
+
 }
