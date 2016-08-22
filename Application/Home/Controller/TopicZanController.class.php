@@ -29,16 +29,23 @@ class TopicZanController extends Controller{
 					if($type=='1'){//话题点赞
 						$mesData['type'] = 3;
 						$receiver = M('Topic')->where(array('id'=>$zan_id))->getField('user_id');
-						
+						$dynamicsData['type'] = 17;
 					}else{
 						$mesData['type'] = 4;
 						$receiver = M('TopicComment')->where(array('id'=>$zan_id))->getField('sender');
+						$dynamicsData['type'] = 18;
 					}
+
+					//添加动态
+					$dynamicsData['user_id'] = session('login');
+					$dynamicsData['content_id'] =$topic_id;
+					$dynamicsData['time'] = date('Y-m-d H-i-s',time());
+					$dynamicsResult = M('Dynamics')->add($dynamicsData);
+
 					if($receiver!=$user_id){//如果为点赞自己
 						$mesData['user_id'] = $receiver;
 						$mesData['content_id'] = $id;
 						$mesData['time'] = date('Y-m-d H:i:s',time());
-						$mesData['read_tag'] = (bool)0;
 						$messageResult = $MessageModel->add($mesData);
 					}else{
 						$messageResult = 1;
@@ -55,6 +62,7 @@ class TopicZanController extends Controller{
 					$result = $ZanModel->where("id=".$list[0]['id'])->save($data);
 					// echo $ZanModel->getLastSql();
 					$messageResult = 1;
+					$dynamicsResult = 1;
 				}
 
 				//冗余字段zan_count加减
@@ -70,11 +78,7 @@ class TopicZanController extends Controller{
 				}
 
 
-
-				
-				
-
-				if($result!=0&&$resultZanCount!=0&&$messageResult!=0){//成功 提交
+				if($result!=0&&$resultZanCount!=0&&$messageResult!=0&&$dynamicsResult!==false){//成功 提交
 					$json['Code'] = '200';
 					$json['Message'] = '操作成功';
 					$model->commit();

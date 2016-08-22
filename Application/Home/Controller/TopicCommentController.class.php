@@ -47,27 +47,29 @@ class TopicCommentController extends Controller {
 					if($topic_user_id!=$user_id){//如果评论者不为自己
 						$messageData[$j]['content_id'] = $other_id;//消息数据
 						$messageData[$j]['time'] = date('Y-m-d H-i-s',time());
-						$messageData[$j]['read_tag'] = (bool)0;
 						$messageData[$j]['type'] = 1;
 						$messageData[$j]['user_id'] = $topic_user_id;
 						$j++;
 					}
+					//发表动态类型
+					$dynamicsData['type'] = 15;
+
+
+
 				}else{//如果为回复信息
 					$comment_user_id = $TopicCommentModel->where(array('id'=>$comment_id))->getField('sender');
 					if($comment_user_id==$topic_user_id && $comment_user_id!=$user_id){//评论者==话题者!=发送者
 						$messageData[$j]['content_id'] = $other_id;//消息数据
 						$messageData[$j]['time'] = date('Y-m-d H:i:s',time());
-						$messageData[$j]['read_tag'] = (bool)0;
 						$messageData[$j]['type'] = 2;
 						$messageData[$j]['user_id'] = $topic_user_id;
 						$j++;
 					}else if($comment_user_id!=$topic_user_id){
-			
+
 
 						if($topic_user_id!=$user_id){//评论者!=话题者==发送者
 							$messageData[$j]['content_id'] = $other_id;//话题者接收消息
 							$messageData[$j]['time']       = date('Y-m-d H:i:s',time());
-							$messageData[$j]['read_tag']   = (bool)0;
 							$messageData[$j]['type']       = 2;
 							$messageData[$j]['user_id']    = $topic_user_id;
 							$j++;
@@ -76,7 +78,6 @@ class TopicCommentController extends Controller {
 							//评论者发送消息
 							$messageData[$j]['content_id'] = $other_id;//评论者接收消息
 							$messageData[$j]['time']       = date('Y-m-d H:i:s',time());
-							$messageData[$j]['read_tag']   = (bool)0;
 							$messageData[$j]['type']       = 2;
 							$messageData[$j]['user_id']    = $comment_user_id;
 							$j++;
@@ -90,7 +91,6 @@ class TopicCommentController extends Controller {
 					if($messageReplyData!==false){
 						$messageData[$j]['content_id'] = $other_id;//评论者接收消息
 						$messageData[$j]['time']       = date('Y-m-d H:i:s',time());
-						$messageData[$j]['read_tag']   = (bool)0;
 						$messageData[$j]['type']       = 6;
 						$messageData[$j]['user_id']    = $messageReplyData['user_id'];
 
@@ -100,6 +100,7 @@ class TopicCommentController extends Controller {
 	
 
 					$comment_count_up = 1;
+					$dynamicsData['type'] = 16;//动态类型
 				}
 
 				
@@ -108,7 +109,15 @@ class TopicCommentController extends Controller {
 					$MessageResult = $MessageModel->addAll($messageData);
 				}else
 					$MessageResult = 'no_message';
-				if($TopicCommentResult!=0&&$comment_count_up!=0&&$MessageResult!==false){
+
+
+				// 添加动态
+				$dynamicsData['user_id'] =$user_id;
+				$dynamicsData['content_id'] =$other_id;
+				$dynamicsData['time'] = date('Y-m-d H-i-s',time());
+				$dynamicsResult = M('Dynamics')->add($dynamicsData);
+				
+				if($TopicCommentResult!=0&&$comment_count_up!=0&&$MessageResult!==false&&$dynamicsResult!==false){
 					if($ImgStr!= '' ){
 						if($PictrueResult!=0){
 							$message = '200';

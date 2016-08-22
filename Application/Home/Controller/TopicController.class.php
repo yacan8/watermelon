@@ -84,7 +84,17 @@ class TopicController extends Controller{
 					$TopicPictrueModel = D('TopicPicture');
 					$PictrueResult = $TopicPictrueModel->addDataByTypeAndImgStr($topic_id,1,$ImgStr);
 				}
-				if($TopicResult!=0 && $TypeResult!=0){
+
+
+				//添加动态
+				$dynamicsData['user_id'] = session('login');
+				$dynamicsData['content_id'] =$topic_id;
+				$dynamicsData['type'] = 14;
+				$dynamicsData['time'] = date('Y-m-d H-i-s',time());
+				$dynamicsResult = M('Dynamics')->add($dynamicsData);
+
+
+				if($TopicResult!=0 && $TypeResult!=0&$dynamicsResult!==false){
 					if($ImgStr!= '' ){
 						if($PictrueResult!=0){
 							$message = '200';

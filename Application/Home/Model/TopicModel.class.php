@@ -114,4 +114,38 @@ class TopicModel extends RelationModel{
 		$List['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $List['content']);//特定字符替换为表情
 		return $List;
 	}
+
+
+
+	/**
+	 * [search 搜索]
+	 * @param  [String]  $key         [关键字]
+	 * @param  boolean $is_subQuery [是否为子查询]
+	 * @param  max $page [页数，如果为空，只返回全部]
+	 * @param  max $count [每页显示页数]
+	 * @return max 如果is_subQuery为true，则为自查询，返回查询SQL，如果为false，则返回搜索到的列表List
+	 */
+	public function search($key,$is_subQuery=true,$page='',&$count=''){
+		$firstrow = ($page-1)*$count;
+		if($page!='')
+			$limit_str = "$firstrow,$count";
+		else
+			$limit_str = '';
+		$DB_FREFIX = $this->tablePrefix;
+		if($is_subQuery){
+			$result = $this ->table($DB_FREFIX.'topic w')
+							->field('id,title,content,time,user_id,null image,(select nickname from '.$DB_FREFIX.'login where id = w.user_id) nickname,3 type')
+							->where(array('w.title'=>array('like','%'.$key.'%')))
+							->limit($limit_str)
+							->select(false);
+		}else{
+			$result = $this ->table($DB_FREFIX.'topic w')
+							->field('id,title,content,time,user_id,null image,(select nickname from '.$DB_FREFIX.'login where id = w.user_id) nickname,3 type')
+							->where(array('w.title'=>array('like','%'.$key.'%')))
+							->limit($limit_str)
+							->select();
+		}
+		$count = $this ->table($DB_FREFIX.'topic w')->where(array('w.title'=>array('like','%'.$key.'%')))->count();
+		return $result;
+	}
 }

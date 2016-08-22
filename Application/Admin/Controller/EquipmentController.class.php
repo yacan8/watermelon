@@ -317,6 +317,7 @@ class EquipmentController extends Controller {
 			$model->startTrans();
 			if($data["brand_id"]=='0'){//如果品牌未存在，添加品牌
 				$brandData['brand'] = trim(I('post.brand_name'));
+				$brandData['time'] = date('Y-m-d H:i:s',time());
 				$EquipmentBrandModel= M('EquipmentBrand');
 				$brandResult = $EquipmentBrandModel->add($brandData);
 				$brand_id = $EquipmentBrandModel->getLastInsID();

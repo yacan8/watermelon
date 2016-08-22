@@ -52,27 +52,38 @@ class TravelNoteModel extends Model{
 	}
 
 
-	/**
-	 * [getHotByCityId 通过城市ID获取最热游记]
-	 * @param  [Integer] $city_id [城市ID]
-	 * @param  [Integer] $count   [数量]
-	 * @return [List]
-	 */
-	public function getHotByCityId($city_id,$count){
-		$DB_PREFIX = $this->tablePrefix;
-		$Model = M('');
-		$condition['t.city_id'] = $city_id;
-		$condition['_string'] = 't.user_id = l.id';
-		$condition['_logic'] = 'and';
-		// SELECT t.id,t.title,t.image,l.id user_id,l.nickname,l.icon FROM wt_travel_note t,wt_login l WHERE t.user_id = l.id
-		// $List = $Model  ->table($DB_PREFIX.'travel_note t,'.$DB_PREFIX.'login l')
-		// 				->field('t.id,t.title,t.image,l.id user_id,l.nickname,l.icon')
-		// 				->where($condition)
-		// 				->limit($count)
-		// 				->order('t.browse desc')
-		// 				->select();
-						// dump($Model->getLastSql());
-		return $List;
 
+	/**
+	 * [search 搜索]
+	 * @param  [String]  $key         [关键字]
+	 * @param  boolean $is_subQuery [是否为子查询]
+	 * @param  max $page [页数，如果为空，只返回全部]
+	 * @param  max $count [每页显示页数]
+	 * @return max 如果is_subQuery为true，则为自查询，返回查询SQL，如果为false，则返回搜索到的列表List
+	 */
+	public function search($key,$is_subQuery=true,$page='',&$count=''){
+		$firstrow = ($page-1)*$count;
+		$DB_FREFIX = $this->tablePrefix;
+		if($page!='')
+			$limit_str = "$firstrow,$count";
+		else
+			$limit_str = '';
+		if($is_subQuery){
+			$result = $this ->table($DB_FREFIX.'travel_note w')
+						->field('id,title,content,time,user_id,null image,(select nickname from '.$DB_FREFIX.'login where id = w.user_id) nickname,2 type')
+						->where(array('w.title'=>array('like','%'.$key.'%')))
+						->limit($limit_str)
+						->select(false);
+		}else{
+			$result = $this ->table($DB_FREFIX.'travel_note w')
+						->field('id,title,content,time,user_id,null image,(select nickname from '.$DB_FREFIX.'login where id = w.user_id) nickname,2 type')
+						->where(array('w.title'=>array('like','%'.$key.'%')))
+						->limit($limit_str)
+						->select();
+		}
+		
+		
+		$count = $this ->table($DB_FREFIX.'travel_note w')->where(array('w.title'=>array('like','%'.$key.'%')))->count();
+		return $result;
 	}
 }

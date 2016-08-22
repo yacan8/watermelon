@@ -12,6 +12,17 @@ class IndexController extends Controller {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
     public function imgChange(){
         
         $model = M('Image');

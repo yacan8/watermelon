@@ -102,4 +102,38 @@ class InfomationModel extends RelationModel{
 		$List =  $this ->where($condition)->field('id,image_thumb,title')-> limit("0,$count")->order('browse desc')->select();
 		return $List;
 	}
+
+
+	/**
+	 * [search 搜索]
+	 * @param  [String]  $key         [关键字]
+	 * @param  boolean $is_subQuery [是否为子查询]
+	 * @param  max $page [页数，如果为空，只返回全部]
+	 * @param  max $count [每页显示页数]
+	 * @return max 如果is_subQuery为true，则为自查询，返回查询SQL，如果为false，则返回搜索到的列表List
+	 */
+	public function search($key,$is_subQuery=true,$page='',&$count=''){
+		$firstrow = ($page-1)*$count;
+		if($page!='')
+			$limit_str = "$firstrow,$count";
+		else
+			$limit_str = '';
+		$DB_FREFIX = $this->tablePrefix;
+		if($is_subQuery){
+			$result = $this ->table($DB_FREFIX.'infomation w')
+							->field('id,title,content,publish_time time,contributor user_id,image,(select nickname from '.$DB_FREFIX.'login where id = w.contributor) nickname,1 type')
+							->where(array('w.title'=>array('like','%'.$key.'%')))
+							->limit($limit_str)
+							->select(!$is_subQuery);
+		}else{
+			$result = $this ->table($DB_FREFIX.'infomation w')
+							->field('id,title,content,publish_time time,contributor user_id,image,(select nickname from '.$DB_FREFIX.'login where id = w.contributor) nickname,1 type')
+							->where(array('w.title'=>array('like','%'.$key.'%')))
+							->limit($limit_str)
+							->select();
+		}
+		$count = $this ->table($DB_FREFIX.'infomation w')->where(array('w.title'=>array('like','%'.$key.'%')))->count();
+		return $result;
+	}
+	
 }

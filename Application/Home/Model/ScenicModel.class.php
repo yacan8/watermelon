@@ -120,6 +120,31 @@ class ScenicModel extends RelationModel{
 		return $List;
 	}
 
+	/**
+	 * [search 搜索景点]
+	 * @param  [String] $key    [关键字]
+	 * @param  [Integer] $page   [页数]
+	 * @param  [Integer] &$count [引用，每页显示页数，引用后为总共个数]
+	 * @return [List]
+	 */
+	public function search($key,$page,&$count){
+		$DB_PREFIX = $this->tablePrefix;
+		$condition['s.name'] = array('like',"%$key%");
+		$condition['s.delete_tag'] = (bool)0;
+		$condition['_string'] = 'c.id = s.city_id and c.province = p.id';
+		$condition['_logic'] = 'and';
+		if($page!=''){
+			$List = $this->table($DB_PREFIX.'scenic s,'.$DB_PREFIX.'city c,'.$DB_PREFIX.'province p')
+					 ->field('s.id,s.city_id,s.name,s.desciption,s.grade,s.image,c.city city,p.province province')
+					 ->where($condition)
+					 ->page("$page,$count")
+					 ->order('s.grade desc')
+					 ->select();
+		}
+		$count = $this->table($DB_PREFIX.'scenic s,'.$DB_PREFIX.'city c,'.$DB_PREFIX.'province p')->where($condition)->count();
+		return $List;
+	}
+
 
 }
 

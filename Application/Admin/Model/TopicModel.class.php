@@ -98,4 +98,5 @@ class TopicModel extends RelationModel{
 	
 		return $List;
 	}
+	
 }
