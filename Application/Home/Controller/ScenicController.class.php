@@ -5,13 +5,14 @@ use Think\Controller;
 class ScenicController extends Controller {
     //城市首页
     public function index(){
-        $province = I('get.province',0);
         $CityModel = D('City');
-        $CityList = $CityModel->getList(1,8);
+        $CityList = $CityModel->getList('',1,8);
         $ProvinceModel = D('Province');
-        if($province!=0)
-            $condition['id'] = $province;
-        $ProvinceList = $ProvinceModel->where($condition)->relation('city')->select();
+        $ProvinceList = $ProvinceModel->relation('city')->select();
+
+        $scenicList = D('Scenic')->getHot();
+
+        $this->assign('scenicList',$scenicList);
         $this->assign('ProvinceList',$ProvinceList);
         $this->assign('CityList',$CityList);
     	$this->display('city_list');
@@ -158,6 +159,25 @@ class ScenicController extends Controller {
             exit('参数错误');
         }
 
+    }
+
+
+
+    //省份
+    public function province(){
+        $id = I('get.id');
+        $province = M('Province')->where(array('id'=>$id))->getField('province');
+        if($province !=''){
+            $CityModel = D('City');
+            $CityList = $CityModel->getList($id,0,0);
+            $this->assign('CityList',$CityList);
+            $this->assign('province',$province);
+            $this->assign('province_id',$id);
+            $this->display('province');
+        }else{
+            $this->error('参数错误');
+        }
+        
     }
 }
 

@@ -33,22 +33,22 @@
 
 
 .p-item{
-
 	width: 326px;
-	float: left;
 }
 .p-title{
 	font-size: 18px;
 	color: #000;
 	display: block;
-	margin-top: 15px;
+	margin-top: 20px;
 }
 
 .city_list{
-	margin: 15px 0;
+	margin: 5px 0 15px 0;
 }
 .city_list li{
 	margin-top: 5px;
+	display: inline-block;
+	margin-right: 15px;
 }
 .city_list li a{
 	color:#666;

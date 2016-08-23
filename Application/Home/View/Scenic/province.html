@@ -14,10 +14,9 @@
     <div class="p-t-md">
       <div class="container">
           <div class="m-b-md">
-            {:W('Scenic/breadcrumb',array('type'=>-1))}
+            {:W('Scenic/breadcrumb',array('type'=>0,'id'=>$province_id))}
           </div>
-
-          <h2>热门城市</h2>
+          <h2>{$province}</h2>
           <div class="hot_container over-h m-t-lg">
             <volist name="CityList" id="vo">
             <div class="hit_item">
@@ -39,45 +38,9 @@
         </div>
     </div>
 
-  
-    <div class="p-t-md">
-      <div class="container">
-          <h2>热门景点</h2>
-          <div class="hot_container over-h m-t-lg">
-            <include file="ScenicContent/hot" />
-          </div>
-        </div>
-    </div>
-
-
 
     
-   	<div class="container">
-      <h2>城市列表</h2>
-      <!-- <div class="city-type m-l-lg pull-left">
-            <a class="active" href="#">全部</a>
-            <a href="#">东北</a>
-            <a href="#">华东</a>
-            <a href="#">西南</a>
-      </div> -->
-
-      <div style="clear: both;">
-        <!-- <h3 class="tc-main">东北</h3> -->
-        <volist name="ProvinceList" id="vo">
-          <div class="p-item">
-            <a href="{:U('Scenic/province',array('id'=>$vo['id']))}" class="p-title">{$vo.province}</a>
-            <ul class="city_list">
-              <volist name="vo.city" id="c_item">
-                <li><a href="{:U('Scenic/city',array('id'=>$c_item['id']))}">{$c_item.city}</a></li>
-              </volist>
-            </ul>
-          </div>
-        </volist>
-
-
-
-      </div>
-    </div>
+   	
 
 
     <include file="Common/footer" />

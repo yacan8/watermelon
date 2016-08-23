@@ -60,7 +60,7 @@ class InfomationModel extends RelationModel{
 			$count = $count + 3 - $lack;
 		else
 			$firstrow = $firstrow + 3 - $lack;
-		$List = $this->relation('user')->where('state=0')->order('publish_time desc')->field('id,image,title,browse,comment_count,contributor,publish_time,image_thumb')->limit($firstrow.",".$count)->select();
+		$List = $this->relation('user')->where('state=0')->order('publish_time desc')->field('id,image,title,browse,comment_count,contributor,publish_time,image_thumb,content')->limit($firstrow.",".$count)->select();
 		$Date = new \Org\Util\Date();/*发布时间人性化转换*/
 		for ($i=0; $i < count($List); $i++) { 
 			$List[$i]['publish_time'] = $Date ->timeDiff($List[$i]['publish_time']); 
@@ -71,6 +71,26 @@ class InfomationModel extends RelationModel{
 				$List[$i]['image'] = C('__DATA__')."/".$List[$i]['image'];
 				$List[$i]['image_thumb'] = C('__DATA__')."/".$List[$i]['image_thumb'];
 			}
+		}
+		return $List;
+	}
+
+
+	/**
+	 * [getList 获取最新资讯]
+	 * @param  [Integer] $page  [页数]
+	 * @param  [Integer] $count [获取列表个数]
+	 * @return [List]
+	 */
+	public function getList1($page,$count){
+		$firstrow = ($page-1)*$count;
+		$List = $this->relation('user')->order('publish_time desc')->field('id,image,title,browse,comment_count,contributor,publish_time,image_thumb,content')->page("$page,$count")->select();
+		$Date = new \Org\Util\Date();/*发布时间人性化转换*/
+		for ($i=0; $i < count($List); $i++) { 
+			$List[$i]['publish_time'] = $Date ->timeDiff($List[$i]['publish_time']); 
+			$List[$i]['url'] = U('Infomation/detail',array('id'=>$List[$i]['id']));
+			if($List[$i]['image']== '')
+				$List[$i]['image'] = $List[$i]['image_thumb']= 'infomation/default.jpg';
 		}
 		return $List;
 	}

@@ -1,34 +1,45 @@
 <!-- 路径导航 -->
 
 
-<a href="{:U('Scenic/index')}">首页</a>
+<a href="{:U('Index/index')}">首页</a>
 <span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-<a href="{:U('Scenic/index',array('province'=>$Data['province']['id']))}">{$Data.province.province}</a>
-<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-<if condition="$Data['scenic'] eq ''">
 
+<if condition="$type eq -1">
+	<span>景点</span>
+	
 
-<if condition= "ACTION_NAME neq 'photo'">
-<span>{$Data.city}</span>
 <else/>
-<a href="{:U('Scenic/city',array('id'=>$Data['id']))}">{$Data.city}</a>
-<span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
-<span>{$Data.city}的相片</span>
+<a href="{:U('Scenic/index')}">景点</a>
+<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
+
+
 </if>
-
-
-
-
-
+<switch name="type" >
+<case value="0">
+	<span>{$province}</span>
+</case>
+<case value="1">
+<a href="{:U('Scenic/province',array('id'=>$Data['province']['id']))}">{$Data.province.province}</a>
+<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
+<if condition= "ACTION_NAME neq 'photo'">
+	<span>{$Data.city}</span>
 <else/>
+	<a href="{:U('Scenic/city',array('id'=>$Data['id']))}">{$Data.city}</a>
+	<span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
+	<span>{$Data.city}的相片</span>
+</if>
+</case>
+<case value="2">
+<a href="{:U('Scenic/province',array('id'=>$Data['province']['id']))}">{$Data.province.province}</a>
+<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
 <a href="{:U('Scenic/city',array('id'=>$Data['id']))}">{$Data.city}</a>
 <span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
 <if condition ="ACTION_NAME neq 'photo'">
-<span>{$Data.scenic}</span>
+	<span>{$Data.scenic}</span>
 <else/>
-<a href="{:U('Scenic/scenic',array('id'=>$Data['scenic_id']))}">{$Data.scenic}</a>
-<span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
-<span>{$Data.scenic}的相片</span>
+	<a href="{:U('Scenic/scenic',array('id'=>$Data['scenic_id']))}">{$Data.scenic}</a>
+	<span class="tc-gray9 font-12  m-r-xs m-l-xs">/</span>
+	<span>{$Data.scenic}的相片</span>
 </if>
-
-</if>
+</case>
+</switch>

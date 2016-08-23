@@ -1,63 +1,18 @@
-<div class="font-18 tc-black border-gray-b-e m-b-sm p-b-sm">
-	OSPREY  Stratos 云层24L 背包的同类装备
-</div>
+
 <ul class="sideList m-b-sm">
-	<for start="1" end ="6">
+	<volist name="List" id ="vo">
 	<li>
-		<a href="#"><img class="side_img" src="http://image1.8264.com/forum/201403/21/141256huu0nrurbb9z0gbb.jpg!t1w231h231"></a>
+		<a href="{:U('/eq/'.$vo['id'])}"><img class="side_img" src="{:U('Image/ScenicImg',array('w'=>62,'h'=>62,'image'=>urlencode($vo['image']).'!feature'),false,false)}"></a>
 		<div class="side_info">
-			<a href="#" class="tc-black to2">兄弟偕行走川藏——从然乌湖、岗乡、林芝到松潘、九寨沟</a>
+			<a href="{:U('/eq/'.$vo['id'])}" class="tc-black to2">{$vo.name}</a>
 			<div class="m-t-xs tc-gray9 font-12">
-				{:W('Scenic/score',array('score'=>'8.0'))}
+				{:W('Scenic/score',array('score'=>$vo['grade']))}
 				<span class="pull-right">
-				<span class="glyphicon glyphicon-comment tc-grayd"></span> <php>echo rand(1,200);</php>
+				<span class="glyphicon glyphicon-comment tc-grayd"></span> {$vo.comment_count}
 				</span>
-
 			</div>
 		</div>
 	</li>
-	</for>
+	</volist>
 </ul>
 
-<div class="font-18 tc-black border-gray-b-e m-t-md m-b-sm p-b-sm">
-	OSPREY  Stratos 云层24L 背包的同品牌装备 Stratos 云层24L 背包的同品牌装备
-</div>
-<ul class="sideList border-gray-b-e m-b-sm p-b-sm">
-	<for start="1" end ="6">
-	<li>
-		<a href="#"><img class="side_img" src="http://image1.8264.com/forum/201403/21/141256huu0nrurbb9z0gbb.jpg!t1w231h231"></a>
-		<div class="side_info">
-			<a href="#" class="tc-black to2">兄弟偕行走川藏——从然乌湖、岗乡、林芝到松潘、九寨沟</a>
-			<div class="m-t-xs tc-gray9 font-12">
-				{:W('Scenic/score',array('score'=>'8.0'))}
-				<span class="pull-right">
-				<span class="glyphicon glyphicon-comment tc-grayd"></span> <php>echo rand(1,200);</php>
-				</span>
-
-			</div>
-		</div>
-	</li>
-	</for>
-</ul>
-
-
-<div class="font-18 tc-black border-gray-b-e m-t-md m-b-sm p-b-sm">
-	热门装备
-</div>
-<ul class="sideList border-gray-b-e m-b-sm p-b-sm">
-	<for start="1" end ="8">
-	<li>
-		<a href="#"><img class="side_img" src="http://image1.8264.com/forum/201403/21/141256huu0nrurbb9z0gbb.jpg!t1w231h231"></a>
-		<div class="side_info">
-			<a href="#" class="tc-black to2">兄弟偕行走川藏——从然乌湖、岗乡、林芝到松潘、九寨沟</a>
-			<div class="m-t-xs tc-gray9 font-12">
-				{:W('Scenic/score',array('score'=>'8.0'))}
-				<span class="pull-right">
-				<span class="glyphicon glyphicon-comment tc-grayd"></span> <php>echo rand(1,200);</php>
-				</span>
-
-			</div>
-		</div>
-	</li>
-	</for>
-</ul>

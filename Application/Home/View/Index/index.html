@@ -44,26 +44,7 @@
     <div class="container m-t-md">
     	<h3 class="text-center">你想去哪儿？</h3>
     	<div class="m-t-lg">
-    		<ul class="index-scenic-list">
-    			<for start="1" end="9">
-    			<li>
-    				<a href="#">
-    					<img class="scenic-img" src="__PUBLIC__/img/f5.jpg">
-    				</a>
-    				<div class="scenic-info">
-    					<div class="scenic-title to1">
-    						<a href="#">星光大道</a>
-    					</div>
-    					<div class="scenic-bottom">
-    						<span class="bottom-text" href="#">香港</span>
-							<span class="bottom-right">
-								<span class="keyword">15</span>人想去
-							</span>
-    					</div>
-    				</div>
-    			</li>
-	    		</for>
-    		</ul>
+    		<include file="ScenicContent/hot" />
     	</div>
 
     	<div class="m-t-md">
@@ -74,66 +55,53 @@
     					<a href="#" class="tc-black pull-right m-t-xs">>></a>
     				</div>
     				<div class="infomation-container">
-    					<for start="1" end="8">
-    					<div class="infomation-item">
-    						<a href="#"><img class="infomation-img pull-right m-l-sm" src="__PUBLIC__/img/f2.png"></a>
-    						<div class="infomation-title to3">
-	    						<a class="tc-black" href="#">广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动广东省旅游局联合澳门特区政府旅游局赴泰国开展旅游推广活动</a>
-	    					</div>
-	    					<div class="to1 tc-gray9">
-	    						<a class='tc-black' href="#"><span class="glyphicon glyphicon-user tc-gray8 font-12"></span> 河边人</a> · <span class='tc-gray9 font-12'>16-8-8 00:04</span>
-	    					</div>
-    					</div>
-	    				</for>
+    					<volist name="infomationList" id="vo">
+        					<div class="infomation-item">
+        						<a href="{:U('Infomation/detail',array('id'=>$vo['id']))}"><img class="infomation-img pull-right m-l-sm" src="{:U('Image/ScenicImg',array('w'=>160,'h'=>100,'image'=>urlencode($vo['image']).'!feature'),false,false)}"></a>
+        						<div class="to">
+    	    						<a class="tc-black" href="{:U('Infomation/detail',array('id'=>$vo['id']))}">{$vo.title}</a>
+    	    					</div>
+                                <div class="m-t-xs font-12 to2">
+                                    {:str_sub($vo['content'],100)}
+                                </div>
+    	    					<div class="to1 tc-gray9 m-t-sm font-12">
+    	    						<a class='tc-black' href="{:U('/u/'.$vo['contributor'])}"><span class="glyphicon glyphicon-user tc-gray8 font-12"></span> {$vo.user.nickname}</a> · <span class='tc-gray9 font-12'>{$vo.publish_time}</span>
+    	    					</div>
+        					</div>
+	    				</volist>
 	    				<div class="text-center m-t-md m-b-md">
-	    					<a href="#" class="btn-blue">查看更多</a>
+	    					<a href="{:U('Infomation/index')}" class="btn-blue btn-block">查看更多</a>
 	    				</div>
     				</div>
 
     			</div>
     			<div class="col-xs-4">
     				<div class="p-b-sm m-b-sm border-gray-b-e">
-    					<a class="font-20 tc-black" href="#">丨热评装备</a>
-    					<a href="#" class="tc-black pull-right m-t-xs">>></a>
+    					<a class="font-20 tc-black" href="{:U('Equipment/index')}">丨热评装备</a>
+    					<a href="{:U('Equipment/index')}" class="tc-black pull-right m-t-xs">>></a>
     				</div>
     				<div class="equipment-container">
-    					<ul class="sideList m-b-sm">
-							<for start="1" end ="6">
-							<li>
-								<a href="#"><img class="side_img" src="http://image1.8264.com/forum/201403/21/141256huu0nrurbb9z0gbb.jpg!t1w231h231"></a>
-								<div class="side_info">
-									<a href="#" class="tc-black to2">兄弟偕行走川藏——从然乌湖、岗乡、林芝到松潘、九寨沟</a>
-									<div class="m-t-xs tc-gray9 font-12">
-										{:W('Scenic/score',array('score'=>'8.0'))}
-										<span class="pull-right">
-										<span class="glyphicon glyphicon-comment tc-grayd"></span> <php>echo rand(1,200);</php>
-										</span>
-
-									</div>
-								</div>
-							</li>
-							</for>
-						</ul>
+    					{:W("Equipment/hotComment",array('brand_id'=>0,'type_id'=>0,'limit'=>5))}
     				</div>
     				<div class="p-b-sm m-b-sm border-gray-b-e m-t-md">
-    					<a class="font-20 tc-black" href="#">丨热门话题</a>
-    					<a href="#" class="tc-black pull-right m-t-xs">>></a>
+    					<a class="font-20 tc-black" href="{:U('Topic/index')}">丨热门话题</a>
+    					<a href="{:U('Topic/index')}" class="tc-black pull-right m-t-xs">>></a>
     				</div>
     				<div class="topic-container">
-    					<for start="1" end="8">
+    					<volist name="topicList" id="vo">
     					<div class="topic-item">
     						<div class="m-b-xs to1">
-    							<a href="#" class="tc-black">今天第一天上班。。有点小紧张呢~~我帅气吗？！~</a>
+    							<a href="{:U('/t/'.$vo['t_id'])}" class="tc-black">{$vo.t_title}</a>
     						</div>
     						<div class="topic-info font-12 to1">			
-						          <a href="#" class="tc-black">青春故事</a>
+						          <a  href="{:U('Topic/index',array('t'=>$vo['type_id']))}" class="tc-black">{$vo.type}</a>
 						          ·
-						          3个人在讨论
+						          {$vo.discuss_count}个人在讨论
 						          ·
-						          222次浏览
+						          {$vo.t_browse}次浏览
     						</div>
     					</div>
-	    				</for>
+	    				</volist>
     				</div>
     			</div>
     		

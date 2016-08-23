@@ -46,14 +46,23 @@ class CityModel extends RelationModel{
 
 	/**
 	 * [getList 获取列表根据想去数量排序]
+	 * @param  [max] $province_id  [省份ID]
 	 * @param  [Integer] $page  [页数]
-	 * @param  [Integer] $count [每页个数]
+	 * @param  [max] $count [每页个数]
 	 * @return [List] 
 	 */
-	public function getList($page,$count){
+	public function getList($province_id='',$page=0,$count){
 		$DB_PREFIX = $this->tablePrefix;
+		if($province_id!=''){
+			$condition['c.province'] = $province_id;
+		}
+		if($page!=0){
+			$page_str = "$page,$count";
+		}else{
+			$page_str = '';
+		}
 		// select c.city,(select count(*) from wt_city_want where city_id = c.id) want from wt_city c order by want desc
-		$List = M('')->table($DB_PREFIX."city c")->where($condition)->field("id,c.city,image,(select count(*) from ".$DB_PREFIX."city_want where city_id = c.id) want,(select count(*) from ".$DB_PREFIX."city_been where city_id = c.id) been")->page("$page,$count")->order('want desc')->select();
+		$List = M('')->table($DB_PREFIX."city c")->where($condition)->field("id,c.city,image,(select count(*) from ".$DB_PREFIX."city_want where city_id = c.id) want,(select count(*) from ".$DB_PREFIX."city_been where city_id = c.id) been")->page($page_str)->order('want desc')->select();
 		for ($i=0; $i < count($List); $i++) { 
 			if($List[$i]['image']!=''){
 				$List[$i]['image'] = U('Image/ScenicImg',array('w'=>228,'h'=>150,'image'=>urlencode($List[$i]['image']).'!feature'),false,false);

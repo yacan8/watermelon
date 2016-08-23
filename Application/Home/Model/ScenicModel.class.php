@@ -145,6 +145,15 @@ class ScenicModel extends RelationModel{
 		return $List;
 	}
 
+	/**
+	 * [getHot 获取热门景点]
+	 * @return [List] 
+	 */
+	public function getHot(){
+		$SQL = "select s.id,s.name,s.image,s.city_id,(select city from wt_city where id = s.city_id) city,(select count(*) from wt_scenic_want where scenic_id = s.id) want_count from wt_scenic s order by want_count desc limit 8";
+		$List = $this->query($SQL);
+		return $List;
+	}
 
 }
 

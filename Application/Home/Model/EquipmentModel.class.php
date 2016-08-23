@@ -42,4 +42,33 @@ class EquipmentModel extends Model{
 		$count = $this ->where(array('name'=>array('like','%'.$key.'%')))->count();
 		return $result;
 	}
+
+	/**
+	 * [getHotCommentEquipment 获取热评装备]
+	 * @param  integer $brand_id [品牌ID]
+	 * @param  integer $type_id  [类型ID]
+	 * @param  integer $limit    [个数]
+	 * @return [List] 
+	 */
+	public function getHotCommentEquipment($brand_id=0,$type_id=0,$limit=5){
+		$DB_FREFIX = $this->tablePrefix;
+		if($brand_id!=0){
+			$condition['e.brand_id'] = $brand_id;
+		}
+		if($type_id!=0){
+			$condition['e.type_id'] = $type_id;
+		}
+
+		$List = $this->table($DB_FREFIX.'equipment e')
+					 ->field("e.id,e.name,e.image,e.grade,(select count(*) from {$DB_FREFIX}equipment_grade where equipment_id = e.id) comment_count")
+					 ->where($condition)
+					 ->order('comment_count desc')
+					 ->limit($limit)
+					 ->select();
+		for ($i=0; $i < count($List); $i++) { 
+			if($List[$i]['image'] == '')
+				$List[$i]['image'] = 'default.jpg';
+		}
+		return $List;
+	}
 }

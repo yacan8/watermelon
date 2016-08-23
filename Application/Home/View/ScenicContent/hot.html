@@ -1,0 +1,24 @@
+<ul class="index-scenic-list">
+	<volist name="scenicList" id="vo">
+	<li>
+		<a href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">
+            <if condition="$vo['image'] neq ''">
+			<img class="scenic-img" src="{:U('Image/ScenicImg',array('w'=>228,'h'=>150,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+            <else/>
+                <img class="scenic-img" src="__PUBLIC__/img/scenicdefault.jpg">
+            </if>
+		</a>
+		<div class="scenic-info">
+			<div class="scenic-title to1">
+				<a href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">{$vo.name}</a>
+			</div>
+			<div class="scenic-bottom">
+				<a class="bottom-text" href="{:U('Scenic/city',array('id'=>$vo['city_id']))}">{$vo.city}</a>
+				<span class="bottom-right font-12 tc-gray9">
+					<span class="keyword">{$vo.want_count}</span>人想去
+				</span>
+			</div>
+		</div>
+	</li>
+	</volist>
+</ul>

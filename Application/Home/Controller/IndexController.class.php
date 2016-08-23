@@ -8,6 +8,14 @@ class IndexController extends Controller {
      * 主页view
      */
     public function index(){
+
+        $infomationList = D("Infomation")->getList1(1,7);
+        $scenicList = D('Scenic')->getHot();
+        $topicList = D('Topic') ->getList(0,1,7);
+        $this->assign('topicList',$topicList);
+        $this->assign('scenicList',$scenicList);
+        $this->assign('infomationList',$infomationList);
+
         $this->display();
     }
 

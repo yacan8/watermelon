@@ -20,6 +20,9 @@ class ScenicWidget extends Controller{
 			$Data = $CityModel->getById($ScenicInfo['city_id']);
 			$Data['scenic'] = $ScenicInfo['name'];
 			$Data['scenic_id'] = $id;
+		}else if($type == 0){
+			$province = M('Province')->where(array('id'=>$id))->getField('province');
+			$this->assign('province',$province);
 		}
 		$this->assign('type',$type);
 		$this->assign('Data',$Data);
