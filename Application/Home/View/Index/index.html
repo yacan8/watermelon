@@ -16,25 +16,16 @@
     	<div class="search-container">
     		<h1 class='index-hello'>你好,中国！</h1>
     		<div class="panel-inner">
-                <form class="search-form" target="_blank" action="http://place.qyer.com/lac-leman-ch/" method="post">
-                    <input class="search-input" type="text" placeholder="去哪儿？">
-                    <button class="search-btn" type="submit" data-bn-ipg="index-top-place-search">搜索</button>
+                <form class="search-form" target="_blank" action="{:U('Search/all')}" method="get">
+                    <input class="search-input" type="text" name="key" placeholder="去哪儿？">
+                    <button class="search-btn" type="submit">搜索</button>
                 </form>
                 <div class="search-hot">
                 	<div class="hot-title">热门搜索</div>
                 	<div class="hot-container">
-                		<a href="#">深度</a>
-                		<a href="#">反倒是</a>
-                		<a href="#">规范的加</a>
-                		<a href="#">跟韩剧</a>
-                		<a href="#">合法</a>
-                		<a href="#">深度</a>
-                		<a href="#">圣诞节</a>
-                		<a href="#">方式</a>
-                		<a href="#">深度</a>
-                		<a href="#">飞</a>
-                		<a href="#">公司的</a>
-                		<a href="#">飞士大夫</a>
+                        <volist name="searchList" id="vo">
+                    		<a href="{:U('Search/all',array('key'=>$vo['key']))}">{$vo.key}</a>
+                        </volist>
                 	</div>
 	            </div>
     		</div>

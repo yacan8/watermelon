@@ -11,7 +11,6 @@ class ScenicController extends Controller {
         $ProvinceList = $ProvinceModel->relation('city')->select();
 
         $scenicList = D('Scenic')->getHot();
-
         $this->assign('scenicList',$scenicList);
         $this->assign('ProvinceList',$ProvinceList);
         $this->assign('CityList',$CityList);

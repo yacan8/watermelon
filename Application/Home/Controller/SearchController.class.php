@@ -7,6 +7,8 @@ class SearchController extends Controller {
 
 	public function all(){
 		$key = trim(I('get.key'));
+
+
         if($key!=''){
             $Model = M('');
             $p = I('get.p',1);
@@ -68,6 +70,14 @@ class SearchController extends Controller {
             $this->assign('key',$key);
             $this->assign('searchList',$searchList);
             $this->display('Index:search');
+            
+            if(session('search')!=$key){//添加搜索记录
+                $data['time'] = date('Y-m-d H:i:s',time());
+                $data['key'] = $key;
+                M('Search')->add($data);
+                session('search',$key);
+            }
+            
         }else{
             $this->error('请输入搜索关键字');
         }
