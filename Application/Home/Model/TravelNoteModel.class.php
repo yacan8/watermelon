@@ -8,37 +8,26 @@ class TravelNoteModel extends Model{
 	 *  @param [Integer] $first 分页参数
 	 *	@param [Interger] $list 分页参数
 	 */
-	public function getList($first,$list){
-		$model = M('TravelNote');
-		$cmodle = D('City');
+	public function getList($first,$list,$condition){
 		$lmodel = D('Login');
-		$condition['user_id'] = session('userid'); 
-		// $result = $model->limit($first.','.$list)->where($condition)->select();
-		$result = $model->limit($first.','.$list)->select();
-		foreach ($variable as &$value) {
-			preg_match_all('/(?<=original=").+?(?=")/', $value['content'],$value['pic']);
-			$value['content'] = substr(preg_replace('/<img.+?>/', " ", $value['content']),0,1000)."。。。。";
-			$city = $cmodle->getById($value['city_id']);
-			$value['city'] = $city['city'];
-			$value['nickname'] = $lmodel->getNickByUserId($value['user_id']);
+		$result = $this->limit($first.','.$list)->where($condition)->select();
+		foreach ($result as &$value) {
+			preg_match_all('/(?<=src=").+"/',$value['content'],$value['pic']);
+			$value['content'] = str_sub(preg_replace('/<img.+?>/'," ", $value['content']),200);
+			$value['user'] = $lmodel->getById($value['user_id']);
 		}
 		return $result;
 	}
 
 	/**
 	 * [getInfoByUserId 获取单条信息]
-	 *	@param [Integer] $userid 用户编号
+	 *	@param [Array] $condition 查询条件
 	 *	@return 单条游记信息
 	 */
-	public function getInfoByUserId($userid){
-		$condition['user_id'] = $userid; 
+	public function getInfoByUserId($condition){
 		$result = $this->where($condition)->find();
-		preg_match_all('/(?<=original=").+?(?=")/', $result['content'],$result['pic']);
-		$result['content'] = preg_replace('/<img.+?>/', " ", $result['content']);
-		// $city = $cmodle->getById($result['city_id']);
-		// $result['city'] = $city['city'];
 		$lmodel = D('Login');
-		$result['nickname'] = $lmodel->getNickByUserId($result['user_id']);
+		$result['user'] = $lmodel->getById($result['user_id']);
 		return $result;
 	}
 
@@ -46,8 +35,7 @@ class TravelNoteModel extends Model{
 	 * [getCount 获取记录总条数]
 	 * @return 记录总条数
 	 */
-	public function getCount(){
-		$condition['user_id'] =	session('userid'); 
+	public function getCount($condition){
 		return $this->count();
 	}
 

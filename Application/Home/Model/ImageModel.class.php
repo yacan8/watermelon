@@ -24,6 +24,12 @@ class ImageModel extends RelationModel{
 	        'foreign_key'=>'city_id',
 	        'mapping_fields'=>'id,city'
 	    ),
+	    'album' => array(
+	    	'mapping' =>self::BELONGS_TO,
+	    	'class_name' => 'Album',
+	    	'foreign_key' => 'album_id',
+	    	'mapping_filed' => 'id'
+	    ),
 	);
 
 
@@ -133,7 +139,15 @@ class ImageModel extends RelationModel{
 		
 	}
 
+	public function getCountByUserId($userid){
+		$count = $this ->where(array('delete_tag'=>(bool)0,'user_id'=>$userid))->count();
+		return $count;
+	}
 
+	public function getListByAlbumId($condition){
+		$result = $this->relation(false)->where($condition)->select();
+		return $result;
+	}
 
 
 	

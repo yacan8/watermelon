@@ -35,6 +35,7 @@ class AccountController extends Controller{
 	// 个人动态view
 	public function dynamics(){
 		$model = D('Dynamics');
+		$condition['user_id'] = session("login");
 		$Page = new \Think\Page($model->getCount(),2);
 		$reslut = $model->getList(); 
 		$this->assign('content','AccountContent/dynamics');
@@ -45,10 +46,11 @@ class AccountController extends Controller{
 	// 个人游记view
 	public function travelNote(){
 		$model = D('TravelNote');
+		$condition['user_id'] = session("login");
 		$this->assign('content','AccountContent/travelNote');
-		$Page = new \Think\Page($model->getCount(),2);
-		$reslut = $model->getList($Page->firstRow,$Page->listRows);
-		$this->assign('result',$reslut);
+		$Page = new \Think\Page($model->getCount($condition),2);
+		$result = $model->getList($Page->firstRow,$Page->listRows);
+		$this->assign('result',$result);
 		$this->assign('page',$Page->show());
 		$this->display('index');
 	}
@@ -95,11 +97,10 @@ class AccountController extends Controller{
 	// 照片-相册页view
 	public function album(){
 		$amodel = D('Album');
-		$pmodel = D('Photo');
+		$imodel = D('image');
 		$condition['user_id'] = session('login');
 
-		$this->assign('photonum',$pmodel->getCount($condition));
-		dump($pmodel->getCount($condition));
+		$this->assign('photonum',$imodel->getCountByUserId(session("login")));
 		$this->assign('albumnum',$amodel->getCount($condition));
 		$this->assign('album',$amodel->getList($condition));
 		$this->assign('content','AccountContent/album');
@@ -109,8 +110,8 @@ class AccountController extends Controller{
 	public function photo(){
 		$albumid = I('get.albumid');
 		$condition['album_id'] = $albumid;
-		$pmodel = D('Photo');
-		$this->assign('photo',$pmodel->getList($condition));
+		$imodel = D('Image');
+		$this->assign('image',$imodel->getListByAlbumId($condition));
 		$this->assign('content','ScenicContent/photoList');
 		$this->display('photo');
 	}
@@ -128,6 +129,8 @@ class AccountController extends Controller{
 
 	// 我的消息view
 	public function message(){
+		$mmodel = D('Message');
+		// $
 		$this->assign('content','AccountContent/message');
 		$this->display('index');
 	}
@@ -139,17 +142,48 @@ class AccountController extends Controller{
 		$lmodel = D('Login');
 		$this->assign('content','AccountContent/information');
 		$this->assign('userinfo',$umodel->getUserInfoById(session('login')));
-		$this->assign('logininfo',$lmodel->getLoginInfoById(session('id')));
+		$this->assign('logininfo',$lmodel->getLoginInfoById(session('login')));
 		$this->display('index');
 	}
 
 
 	// 资料编辑view
 	public function edit(){
+		$umodel = D('User');
+		$lmodel = D('Login');
+		$this->assign('userinfo',$umodel->getUserInfoById(session('login')));
+		$this->assign('logininfo',$lmodel->getLoginInfoById(session('login')));
 		$provinceList = M("AddressProvinces")->select();
 		$this->assign('content','AccountContent/edit_information');
 		$this->assign('provinceList',$provinceList);
 		$this->display('index');
+	}
+
+	public function Doedit(){
+		$data = I('post.');
+		dump($data);
+		$lmodel = D('Login');
+		$umodel = D('User');
+		$login['nickname'] = $data['nickname'];
+		$login['id'] = session('login');
+		$lmodel->updateNickname($login);
+		unset($data['nickname']);
+		$data['id'] = session('login');
+		$umodel->updateUserInfo($data);
+		redirect(U('Account/edit'));
+	} 
+
+	public function ChangePassword(){
+		$data = I('post.');
+		$model = D('Login');
+		$result = $model->ChangePassword($data['o_password'],$data['$n_password'],session('login'));
+		switch ($result) {
+			case '0': $this->error('修改失败');break;
+			case '1': $this->error('原密码错误');break;
+			case '2': $this->error('原密码与新密码相同');break;
+			case '3': $this->success('修改成功');break;
+			default:redirect(U('Account/edit')); break;
+		}
 	}
 
 	//粉丝view

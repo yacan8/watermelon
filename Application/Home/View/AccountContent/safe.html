@@ -1,6 +1,6 @@
 <!-- 修改密码 -->
 <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
-	<form class="form-horizontal" action="{:U('User/ChangePassword')}" method="post">
+	<form class="form-horizontal" action="{:U('Account/ChangePassword')}" method="post">
 	  <fieldset>
 	    <legend class="p-b-md font-16">修改密码</legend>
 
@@ -24,7 +24,10 @@
 	        <input type="password" class="form-control" name="re_password">
 	      </div>
 	    </div>
-		
+
+		<div class="form-group">
+	      <label for="inputPassword" class="col-xs-2 control-label text-danger">{$warn}</label>
+	    </div>
 
 	    <div class="form-group">
 	      <div class="col-xs-10 col-xs-offset-2">

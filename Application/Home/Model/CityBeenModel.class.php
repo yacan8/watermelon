@@ -27,4 +27,10 @@ class CityBeenModel extends Model{
 		$list = $this->where($condition)->field('id,delete_tag')->select();
 		return $list;
 	}
+
+
+	public function getListByUserId($user_id,$limit){
+		$condition['user_id'] = $user_id;
+		return $this->where($condition)->limit($limit)->select();
+	}
 }

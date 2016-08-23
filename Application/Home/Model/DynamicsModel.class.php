@@ -11,18 +11,31 @@ class DynamicsModel extends Model{
 	 * @return 动态列表
 	 */
 	public function getList($first,$list,$condition=null){
-		$result = $this->where($condition)
+		$amodel = D('Attention');
+		$lmodel = D('Login');
+		$attentioner = $amodel->getAttentioner($condition);
+		$con['user_id'] = array('in',$attentioner);
+		$result = $this->where($con)
 					   ->order('time desc')
 					   ->limit($first.','.$list)
 					   ->select();
-		return $result;
+		// foreach ($result as &$value) {
+		// 	$value['nickname'] = $lmodel->getNickByUserId($value['user_id']);
+		// 	switch ($value['type']) {
+		// 		case 6: break;
+				
+		// 		default:
+		// 			# code...
+		// 			break;
+		// 	}
+		// }
 	}
 
 	/**
 	 * [getCount] 获取数目
 	 *	@param [Array] $condition
 	 */
-	public function getCount($condiiton=null){
-		return $this->where($condiiton)->count();
+	public function getCount($condition=null){
+		return $this->where($condition)->count();
 	}
 }

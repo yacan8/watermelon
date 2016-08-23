@@ -15,4 +15,12 @@ class AttentionModel extends Model{
 		$list = $this->where($condition)->field('id,delete_tag')->select();
 		return $list;
 	}
+
+	public function getAttentioner($condition){
+		$condition['delete_tag'] = 0;
+		$result = $this->where($condition)
+			 		   ->field('Attention_id')
+			 		   ->select();
+		return $result;
+	}
 }

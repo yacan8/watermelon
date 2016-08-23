@@ -1,30 +1,29 @@
 <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
-	<form class="form-horizontal" method="post" action="{:U('User/ChangeUserinfo')}" enctype="multipart/form-data">
+	<form class="form-horizontal" method="post" action="{:U('Account/Doedit')}" enctype="multipart/form-data">
           <fieldset>
             <legend class="p-b-md font-16">个人资料</legend>
             <div class="form-group">
               <label class="col-xs-2 control-label user_icon_label">头像：</label>
               <div class="col-xs-6">
                  <div class="user_icon">
-                  <img class="icon" src="{:C('__DATA__')}/login_thumb/{$userinfo.icon|default='default.jpg'}">
+                  <img class="icon" src="{:C('__DATA__')}/login_thumb/{$logininfo.icon|default='default.jpg'}">
                   <a href="javascript:void(0)" class="icon icon_btn transition-all-03 icon_change">修改</a>
                   <input type="file" id="icon_file" name="file" accept="image/*" hidden/>
                  </div>
               </div>
             </div>
 			
-
             <div class="form-group">
               <label class="col-xs-2 control-label">用户名：</label>
               <div class="col-xs-6">
-                <input type="text" class="form-control" value="{$user_info.tel}" disabled/>
+                <input type="text" class="form-control" value="{$logininfo.tel}" disabled/>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-xs-2 control-label">昵称：</label>
               <div class="col-xs-6">
-                <input type="text" class="form-control" name="nickname" placeholder="输入昵称" value="{$user_info.nickname}">
+                <input type="text" class="form-control" name="nickname" placeholder="输入昵称" value="{$logininfo.nickname}">
               </div>
             </div>
 
@@ -32,7 +31,7 @@
             <div class="form-group">
               <label class="col-xs-2 control-label">邮箱：</label>
               <div class="col-xs-6">
-                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="">
+                <input type="text" class="form-control" name="email" placeholder="请输入邮箱" value="{$userinfo.email}">
               </div>
             </div>
 
@@ -40,7 +39,7 @@
             <div class="form-group">
               <label class="col-xs-2 control-label">职业：</label>
               <div class="col-xs-6">
-                <input type="text" class="form-control" name="profession" placeholder="如：程序员" value="">
+                <input type="text" class="form-control" name="job" placeholder="如：程序员" value="{$userinfo.job}">
               </div>
             </div>
 
@@ -51,7 +50,7 @@
                 <select class="form-control" name="province">
                   <option value="0">请选择省份</option>
                   <volist name="provinceList" id= 'vo'>
-                    <if condition = "$user_info['userinfo']['province'] eq $vo['province']">
+                    <if condition = "$userinfo['province'] eq $vo['province']">
                       <option selected>{$vo.province}</option>
                       <else/>
                       <option>{$vo.province}</option>
@@ -64,7 +63,7 @@
                 <select class="form-control" name="city">
                   <option value="0">请选择城市</option>
                   <volist name="cities" id= 'vo'>
-                    <if condition = "$user_info['userinfo']['city'] eq $vo['city']">
+                    <if condition = "$userinfo['city'] eq $vo['city']">
                       <option selected>{$vo.city}</option>
                       <else/>
                       <option>{$vo.city}</option>
@@ -80,7 +79,7 @@
             <div class="form-group">
               <label for="textArea" class="col-xs-2 control-label">签名：</label>
               <div class="col-xs-8">
-                <textarea class="form-control" rows="3" name="shelfIntroduction" placeholder="输入你的个人简介或者签名">{$user_info.userinfo.shelfintroduction}</textarea>
+                <textarea class="form-control" rows="3" name="signature" placeholder="输入你的个人简介或者签名">{$userinfo.signature}</textarea>
    
               </div>
             </div>

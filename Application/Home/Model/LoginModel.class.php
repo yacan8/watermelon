@@ -103,20 +103,20 @@ class LoginModel extends RelationModel{
 	 * @param [string] $n_password [新密码]
 	 * @return  [string] [<返回修改状态>]
 	 */
-	public function ChangePassword($o_password,$n_password,$tel){
-		$password = $this->where(array('tel'=>$tel))->getField('password');
+	public function ChangePassword($o_password,$n_password,$id){
+		$password = $this->where(array('id'=>$id))->getField('password');
 		if($password==md5($o_password)){
 			if($o_password==$n_password){
-				return '新密码与原密码相同';
+				return '2';
 			}else{
 				$data['password'] = md5($n_password);
 				$result = $this->where(array('tel'=>$tel))->save($data);
 				if($result==0)
-					return "修改失败";
-				else return "修改成功";
+					return "1";
+				else return "3";
 			}
 		}else{
-			return "密码错误";
+			return "0";
 		}
 
 	}
@@ -141,5 +141,14 @@ class LoginModel extends RelationModel{
 		$condition['user_id'] = $userid;
 		$result = $this->where($condition)->field('nickname')->find();
 		return $result['nickname'];
+	}
+
+	public function updateNickname($data){
+		if($this->create($data)){
+			return $this->save();
+		}else{
+			return false;
+		}
+		
 	}
 }

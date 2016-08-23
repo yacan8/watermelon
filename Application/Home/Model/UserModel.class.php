@@ -10,4 +10,13 @@ class UserModel extends Model{
 		return $this->where($condition)->find();
 	}
 
+	public function updateUserInfo($data){
+		if ($this->create($data)) {
+			return $this->save();
+		} else {
+			return false;
+		}
+		
+	}
+
 }
