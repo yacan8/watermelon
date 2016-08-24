@@ -43,4 +43,18 @@ class ZanModel extends Model{
 
  		return $array;
  	}
+
+
+ 	public function getCountById($type,$other_id){
+ 		$condition['type'] = $type;
+ 		$condition['other_id'] = $other_id;
+ 		$condition['delete_tag'] = 0;
+ 		return $this->where($condition)->count();
+ 	}
+
+ 	public function getZanSortByType($type){
+ 		$condition['type'] = $type;
+ 		$condition['delete_tag'] = 0;
+ 		return $this->where($condition)->order('count(user_id) desc')->field('other_id,count(user_id) zannum')->group('other_id')->select();
+ 	}
 }

@@ -74,4 +74,40 @@ class TravelNoteModel extends Model{
 		$count = $this ->table($DB_FREFIX.'travel_note w')->where(array('w.title'=>array('like','%'.$key.'%')))->count();
 		return $result;
 	}
+
+
+	public function getReletive($id){
+		$base = $this->where('id='.$id)->find();
+		
+		$condition_one['user_id'] = $base['user_id'];
+		$result_one = $this->where($condition_one)->field('time,id,title,browse,image')->select();
+		$id = array();
+		foreach ($result_one as $key => $value) {
+			$id[$key] = $value['id'];
+		}
+
+		$viewdown = $base['browse'] - 20;
+		$viewtop = $base['browse'] + 20;
+		$condition_two['browse'] = array('between',$viewdown.','.$viewtop);
+		$condition_two['id'] = array('not in',$id);
+		$result_two = $this->where($condition_two)->field('time,id,title,browse,image')->select();
+		$result = array_merge($result_one,$result_two);
+		unset($id);
+		if(count($result)>5){
+
+			rsort($result);
+			array_splice($result,5);
+		}else{
+			$limit = 5 - count($result);
+			foreach ($result as $key => $value) {
+				$id[$key] = $value['id'];
+			}
+			$con['id'] = array('not in',$id);
+			$result_three = $this->where($con)->limit($limit)->order('time desc')->field('time,id,title,browse,image')->select();
+			$result = array_merge($result,$result_three);
+		}
+		
+		return $result;
+
+	}
 }

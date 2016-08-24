@@ -34,6 +34,8 @@ class TravelNoteController extends Controller {
     }
 
     public function Dopublish(){
-
+         $model = D('Zan');
+         $result = $model->getZanSortByType(1);
+         dump($result);
     }
 }

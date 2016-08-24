@@ -103,7 +103,8 @@
 			<div class="col-xs-4 m-t-md">
 				<div id="side-list" class="">
 					<div class="font-18 p-b-sm border-gray-b-e m-b-sm">相关游记</div>
-					<include file="TravelNoteContent/relevantTravelNote" />
+					<!-- <include file="TravelNoteContent/relevantTravelNote" /> -->
+					{:W('TravelNote/relevant',array($travelnote['id']))}
 					<hr>
 
 

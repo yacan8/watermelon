@@ -14,4 +14,12 @@ class TravelNoteWidget extends Controller{
 		$this->display('TravelNoteContent/Hot');
 	}
 
+	public function relevant($id){
+		$model = D('TravelNote');
+        $result = $model->getReletive($id);
+        $this->assign('travelnote',$result);
+       	$this->display('TravelNoteContent/relevantTravelNote');
+       	// dump($result);
+	}
+
 }
