@@ -27,8 +27,7 @@ class IndexController extends Controller {
 
 
 
-
-
+    
 
 
 

@@ -1,31 +1,26 @@
 // 忘记密码Js
 ;$(function(){
+
+
+	
 	//绑定提交按钮事件
 	$(document).on('click','#form_submit',function(){
-		var _SMS = $("#SMS");
+		// var _SMS = $("#FSMS");
 		var _self = $(this);
-		var _SMS_value = _SMS.val();
+		// var _SMS_value = $.trim(_SMS.val());
 		_self.button('loading');
-		$.ajax({
-			url: check_SMS_url,
-			type: 'post',
-			dataType: 'text',
-			data: {SMS: _SMS_value},
-			success:function(data){
-				var result = $.parseJSON(data);
-				if(result.Code != '200'&&result.Code !="2"){
-					alert(result.Message);
-				}else if(result.Code == '2'){
-					_SMS.addClass('has-error').siblings(".help-block").css("color","red").html(result.Message);
-				}else{
-					if(check_submit(_self))
-						$("#f_form").submit();
-				}
-			},
-			error:function(data){
-				alert('请求失败');
-			}
-		})
+		$("#f_form").append('<input name="tel" type="hidden" value="'+forget_tel+'" >');
+		var objarr = $('.from-input');
+		var submit = true;
+		for(var i=0 ; i<objarr.length;i++){
+			if(objarr.eq(i).hasClass('has-error'))
+				submit = false;
+		}
+		if(submit)
+			$("#f_form").submit();
+		else
+			_self.button('reset');
+
 	})
 	//短信验证码输入框绑定数值修改事件
 	$(document).on('change',"#SMS",function(){
@@ -62,10 +57,10 @@
 		if(tel.length==11){
 			var tel_geshi= /^((\(\d{3}\))|(\d{3}\-))?13\d{9}|14[57]\d{8}|15\d{9}|18\d{9}$/ ;
 	        if(!tel.match(tel_geshi)){
+	        	_self.button('reset');
 	            _tel_input.addClass('has-error').siblings(".help-block").css("color","red").html("号码格式不正确");
-	            _self.button('reset');
-	        }else
-	         {
+	            
+	        }else{
 	        	_tel_input.removeClass('has-error').siblings(".help-block").html('');
 				$.ajax({
 					url: check_url,
@@ -77,6 +72,7 @@
 							_tel_input.addClass('has-error').siblings(".help-block").css("color","red").html("该用户已不存在");
 							_self.button('reset');
 						}else{
+							forget_tel = tel;
 							$.post(forget_user,{tel:tel},function(data){})
 							_form_container.html(second());
 						}
@@ -87,21 +83,43 @@
 				})
 			}
 		}else{
+			_self.button('reset');
 	        _tel_input.addClass('has-error').siblings(".help-block").css("color","red").html("号码格式不正确");
 		}
 	});
+
+	$(document).on('click',"#Fsend",function(){
+		var _self = $(this);
+		_self.addClass('disabled').attr('disabled','').html('等待<span>120</span>秒');
+		set_time = set_interval_time(_self);
+		$.ajax({
+			url: SMS_SEND,
+			type: 'post',
+			dataType: 'text',
+			data: {tel: forget_tel},
+			success:function(data){
+				var result = $.parseJSON(data);
+				if(result.Code != '200')
+					alert(result.Message);
+			},
+			error:function(data){
+				alert('请求失败');
+			}
+		})
+	
+	
+
+
+	})
+
+
+
 	
 	function second(){
-		var str ='<div class="input-g m-r-110">'+
-                 '<span class="input-icon glyphicon glyphicon-check"></span>'+
-                 '<input id="verify" class="from-input" type="text" placeholder="图形验证码" />'+
-                 '<img class="verify" src="'+verify_src+'" title="看不清？点击刷新验证码">'+
-                 '<span class="help-block m-t-sm"></span>'+
-                 '</div>'+
-                 '<div class="input-g m-r-130">'+
+		var str ='<div class="input-g m-r-130">'+
                  '<span class="input-icon glyphicon glyphicon-eye-open"></span>'+
-                 '<input id="SMS" class="from-input" name="SMS" type="text" placeholder="短信验证码" title="点击获取短信验证码" />'+
-                 '<a id="send" href="javascript:void(0)" class="btn" >点击发送短信</a>'+
+                 '<input id="FSMS" class="from-input" name="SMS" type="text" placeholder="邮箱验证码" title="点击获取验证码" />'+
+                 '<a id="Fsend" href="javascript:void(0)" class="btn" >点击发送验证码</a>'+
                  '<span class="help-block m-t-sm"></span>'+
                  '</div>'+
 				 '<div class="input-g">'+

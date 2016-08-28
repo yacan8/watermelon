@@ -13,14 +13,27 @@
         <div class="container">
             <div class="bg-white p-lg re-container transition-all-03">
                 <form id="r_form" class="form-horizontal" method="post" action="{:U('Login/reg')}">
-                  <fieldset>
-                    <legend class="login_header">注册CL<i></i><a href="{:U('Login/index')}" class="pull-right header-right m-t-sm">使用已有账号登录</a></legend>
+                    <fieldset>
+
+                    
+
+
+                    <legend class="login_header">注册西瓜游<i></i><a href="{:U('Login/index')}" class="pull-right header-right m-t-sm">使用已有账号登录</a></legend>
                     <div class="input-g">
                         <span class="input-icon glyphicon glyphicon-earphone"></span>
                         <input class="from-input" type="text" name="tel" id="tel" placeholder="手机号" maxlength="11" title="请输入手机号码" required/>
                         <img id="username_check" src="__PUBLIC__/img/loading.gif">
                         <span class="help-block m-t-sm"></span>
                     </div>
+
+                    <div class="input-g">
+                        <span class="input-icon glyphicon glyphicon-envelope"></span>
+                        <input class="from-input" type="email" name="email" id="email" placeholder="邮箱" title="请输入邮箱" required/>
+                        <img id="username_check" src="__PUBLIC__/img/loading.gif">
+                        <span class="help-block m-t-sm"></span>
+                    </div>
+
+
                     <div class="input-g">
                         <span class="input-icon glyphicon glyphicon-user"></span>
                         <input class="from-input" type="text" name="nickname" id="nickname" placeholder="昵称" maxlength="15" title="请输入昵称" required/>
@@ -38,7 +51,12 @@
                         <input class="from-input" id="repassword" type="password" name="repassword" title="确认密码" placeholder="确认密码" />
                         <span class="help-block m-t-sm"></span>
                     </div>
-                    
+                    <div class="input-g m-r-130">
+                        <span class="input-icon glyphicon glyphicon-eye-open"></span>
+                        <input id="SMS" class="from-input" name="SMS" type="text" placeholder="短信验证码" title="短信验证码" required/>
+                        <a title="点击获取验证码" id="send" href="javascript:void(0)" class="btn" >点击发送验证码</a>
+                        <span class="help-block m-t-sm"></span>
+                    </div>
                     <div class="input-g m-r-110">
                         <span class="input-icon glyphicon glyphicon-check"></span>
                         <input id="verify" class="from-input" type="text" placeholder="图形验证码" title="图形验证码" required/>
@@ -68,8 +86,9 @@
 </body>
     <script type="text/javascript">
         var set_time;
-        
+        var SMS_url = "{:U('Login/sms_send')}"
         var sight = 0;
+        var check_SMS_url = "{:U('Login/checkSMS')}";
         var check_verify_url = "{:U('Login/check_verify')}";
         var check_url = "{:U('Login/check')}";
         var verify_src = "{:U('Login/verify')}";

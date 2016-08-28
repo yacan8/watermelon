@@ -12,7 +12,7 @@
 						<a href="{:U('Equipment/equipment',array('brand_id'=>$vo['brand_id']))}" class="font-bold" title="{$vo.brand}">{$vo.brand}</a>
 					</div>
 					<div class="">
-						<a href="#">{$vo.type}</a>
+						<a href="{:U('Home/eq/'.$vo['id'])}" target="_blank">{$vo.type}</a>
 						·
 						评分 <a>{$vo.grade}</a>
 						·

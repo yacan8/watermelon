@@ -3,7 +3,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class TopicTypeController extends Controller{
-	
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 	/**
 	 * [change 修改话题类型action ajax请求]
 	 * @param [Integer] $id [post参数 要修改的话题类型的id]

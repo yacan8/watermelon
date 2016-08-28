@@ -1,6 +1,6 @@
 <volist name="travelNoteList" id="vo">
 			<div class="boder-b-dashed">
-				<div class="travel-note-title"><a href="#">{$vo.title}</a></div>
+				<div class="travel-note-title"><a href="{:U('Home/tn/'.$vo['id'])}" target="_blank">{$vo.title}</a></div>
 				<div class="m-t-sm"> 
 					
 					<volist name="vo.pic" id="item" offset="0" length='6'>
@@ -15,7 +15,7 @@
 					<span class="tc-gray4 m-r-md"><span class="glyphicon glyphicon glyphicon-thumbs-up tc-gray9"></span> {$vo.zan}</span>
 				</div>
 				<div class="m-t-sm">
-					<a href="#" class="btn btn-default btn-xs m-r-sm" target="_blank">查看</a>
+					<a href="{:U('Home/tn/'.$vo['id'])}" target="_blank" class="btn btn-default btn-xs m-r-sm" target="_blank">查看</a>
 					<a href="{:U('TravelNote/delete',array('id'=>$vo['id']))}" class="btn btn-danger btn-xs" onclick="return confirm('确认删除吗？')">删除</a>
 				</div>
 			</div>

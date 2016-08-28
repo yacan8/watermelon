@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class CommentController extends Controller {
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 
 	public function comment(){
 		$other_id = I('get.other_id',0);

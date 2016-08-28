@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class InfomationController extends Controller {
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 	//管理列表
     public function index(){
     	$contributor = I('get.contributor',0);

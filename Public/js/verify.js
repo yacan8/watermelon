@@ -1,10 +1,28 @@
 // 登录注册验证JS
+// 	//验证码发送等待60秒
+function set_interval_time(obj){
+	return window.setInterval(function(){
+		var time = obj.find('span').html();
+		var count = Number(time);
+		if(count>=1&&count<=120){
+			count--;
+			obj.html('等待<span>'+count+'</span>秒');
+		}else{
+			window.clearInterval(set_time);
+			obj.removeClass('disabled').attr('disabled',false).html('重新发送');
+		}
+	},1000);
+}
 ;$(function(){
 	//绑定确认密码输入框失去焦点事件
 	$(document).on('blur',"#repassword",function(e){
+		// alert(e);
 		var _self = $(this);
 		var password = $("#password").val();
 		var repassword = _self.val();
+		if(repassword.length==0){
+			_self.addClass('has-error').siblings(".help-block").css("color","red").html("请重复输入密码");
+		}
 		if(password != repassword){
 			_self.addClass('has-error').siblings(".help-block").css("color","red").html("密码输入不一致");
 		}else{
@@ -37,23 +55,21 @@
 	//发送绑定验证码事件
 	$(document).on('click',"#send",function(event) {
 		var _self = $(this);
-		if(sight==0)
-			return false;
-		else{
-			var tel;
-			var _tel_input = $("#tel");
-			if(_tel_input.length==0)
-				tel = 'forget';
-			else
-				tel = _tel_input.val();
-			if (tel!=''&&!_tel_input.hasClass('has-error')) {
-				_self.addClass('disabled').attr('disabled','').html('等待<span>60</span>秒');
-				set_time = set_interval_time();
+
+			
+		var _email_input = $("#email");
+		var email = $.trim(_email_input.val());
+		var pattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;    
+		var flag = pattern.test(email);
+		if(flag){
+			if (email!=''&&!_email_input.hasClass('has-error')) {
+				_self.addClass('disabled').attr('disabled','').html('等待<span>120</span>秒');
+				set_time = set_interval_time($("#send"));
 				$.ajax({
 					url: SMS_url,
 					type: 'post',
 					dataType: 'text',
-					data: {tel: tel},
+					data: {email: email},
 					success:function(data){
 						var result = $.parseJSON(data);
 						if(result.Code != '200')
@@ -67,22 +83,10 @@
 				_tel_input.focus();
 			}
 		}
+		
+		
 	});
-	//验证码发送等待60秒
-	function set_interval_time(){
-		var obj = $("#send");
-		return window.setInterval(function(){
-			var time = obj.find('span').html();
-			var count = Number(time);
-			if(count>=1&&count<=60){
-				count--;
-				obj.html('等待<span>'+count+'</span>秒');
-			}else{
-				window.clearInterval(set_time);
-				obj.removeClass('disabled').attr('disabled',false).html('重新发送');
-			}
-		},1000);
-	}
+
 
 
 	//验证码是否正确

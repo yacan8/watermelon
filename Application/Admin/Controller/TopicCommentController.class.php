@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class TopicCommentController extends Controller{
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 
 	public function index(){
 		$user_id = I('get.user_id',0);

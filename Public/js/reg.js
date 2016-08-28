@@ -28,66 +28,66 @@
 		var _self = $(this);
 		_self.button('loading');
 
+		// if(sight==1)
+		// 	$("#r_form").submit();
+		// else
+		// 	_self.button('reset');
+		var _SMS = $("#SMS");
+		var SMS = $.trim(_SMS.val());
 
-		if(sight==1)
-			$("#r_form").submit();
-		else
-			_self.button('reset');
-
-
-		// $.ajax({
-		// 	url: check_SMS_url,
-		// 	type: 'post',
-		// 	dataType: 'text',
-		// 	data: {SMS: SMS},
-		// 	success:function(data){
-		// 		var result = $.parseJSON(data);
-		// 		if(result.Code != '200'){
-		// 			_SMS.siblings('.help-block').css("color","red").html(result.Message);
-		// 			_self.button('reset');
-		// 		}else{
-		// 			var objarr = $('.from-input');
-		// 			var submit = true;
-		// 			for(var i=0 ; i<objarr.length;i++){
-		// 				if(objarr.eq(i).hasClass('has-error'))
-		// 					submit = false;
-		// 			}
-		// 			if(submit)
-		// 				$("#r_form").submit();
-		// 			else
-		// 				_self.button('reset');
-		// 		}
-		// 	},
-		// 	error:function(data){
-		// 		alert('请求失败');
-		// 	}
-		// })
+		$.ajax({
+			url: check_SMS_url,
+			type: 'post',
+			dataType: 'text',
+			data: {SMS: SMS},
+			success:function(data){
+				var result = $.parseJSON(data);
+				if(result.Code != '200'){
+					_SMS.siblings('.help-block').css("color","red").html(result.Message);
+					_self.button('reset');
+				}else{
+					var objarr = $('.from-input');
+					var submit = true;
+					for(var i=0 ; i<objarr.length;i++){
+						if(objarr.eq(i).hasClass('has-error'))
+							submit = false;
+					}
+					if(submit)
+						$("#r_form").submit();
+					else
+						_self.button('reset');
+				}
+			},
+			error:function(data){
+				alert('请求失败');
+			}
+		})
 	});
 	
 	//验证码检测
-	// $('#SMS').on('change',function(event) {
-	// 	var _SMS = $(this);
-	// 	var SMS = _SMS.val();
-	// 	$.ajax({
-	// 		url: check_SMS_url,
-	// 		type: 'post',
-	// 		dataType: 'text',
-	// 		data: {SMS: SMS},
-	// 		success:function(data){
-	// 			var result = $.parseJSON(data);
-	// 			if(result.Code == '200'){
-	// 				_SMS.siblings('.help-block').css("color","red").html("");
-	// 			}
-	// 		},
-	// 		error:function(data){
-	// 			alert('请求失败');
-	// 		}
-	// 	})
-	// })
+	$('#SMS').on('change',function(event) {
+		var _SMS = $(this);
+		var SMS = _SMS.val();
+		$.ajax({
+			url: check_SMS_url,
+			type: 'post',
+			dataType: 'text',
+			data: {SMS: SMS},
+			success:function(data){
+				var result = $.parseJSON(data);
+				if(result.Code == '200'){
+					_SMS.siblings('.help-block').css("color","red").html("");
+				}
+			},
+			error:function(data){
+				alert('请求失败');
+			}
+		})
+	})
 	
 
 	
-		//用户名ajax检查
+	//用户名ajax检查
 	$("#tel").blur(function(event) {
 		var _self = $(this);
 		var tel = _self.val();
@@ -121,6 +121,24 @@
 				}
 			})
 		}
-
 	});
+
+
+
+	//检测邮箱是否合法
+	$("#email").blur(function(event) {
+		var _self = $(this);
+		var email = $.trim(_self.val());
+		var pattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+		var flag = pattern.test(email);
+        if(!flag){
+            _self.addClass('has-error');
+            _self.siblings(".help-block").css("color","red").html("请输入正确的邮箱地址");
+        }else{
+        	_self.removeClass('has-error');
+			_self.siblings(".help-block").html('');
+		}
+	});
+
+
 })

@@ -109,3 +109,12 @@ function abslength($str){
     }
 }
 
+
+/**
+ * [check_email 检验邮箱是否合法]
+ * @param  [string] $email_address [邮箱地址]
+ * @return [bool]                [description]
+ */
+function check_email($email_address){
+    return (ereg("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+",$email_address));   
+}

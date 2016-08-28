@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class ScenicController extends Controller{
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 	
 	public function scenic(){
 		$province_id = I('get.province_id','');

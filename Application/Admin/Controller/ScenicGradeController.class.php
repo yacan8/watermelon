@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class ScenicGradeController extends Controller{
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 
 	public function grade(){
 		$scenic_id = I('get.scenic_id',0);

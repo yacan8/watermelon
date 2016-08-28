@@ -2,11 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class UserController extends Controller{
-	// public function _initialize(){
- //        if (!isset($_SESSION['Adminlogin'])) {
- //            $this->redirect('Login/index');
- //        }
- // 	}
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 	public function index(){
 		$sort = I('get.sort','reg_time');//哪个字段
 		$s = I('get.s','desc');//正序还是逆序

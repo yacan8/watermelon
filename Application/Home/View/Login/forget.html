@@ -6,13 +6,13 @@
     <include file="Common/footerJS" />
     <script type="text/javascript">
         var set_time;
-        var check_SMS_url = "{:U('Service/checkSMS')}";
-        var SMS_url = "{:U('Service/sendTemplateSMS')}";
+        var check_SMS_url = "{:U('Login/checkFSMS')}";
         var sight = 0;
         var check_verify_url = "{:U('Login/check_verify')}";
         var check_url = "{:U('Login/check')}";
-        var verify_src = "{:U('Index/verify')}";
+        var verify_src = "{:U('Login/verify')}";
         var forget_user = "{:U('Login/forget_user')}";
+        var SMS_SEND = "{:U('Login/forgetSMS')}"
         $(function(){
             <if condition="session('?message')">
             alert("<php>echo session('message')</php>");
@@ -46,7 +46,6 @@
                         <div class="input-g">
                             <button id="first" data-loading-text="Loading..." type="button" class="btn-submit btn-danger btn-block">下一步</button>
                         </div>
-                        <br><br><br><br><br>
 
                     </div>
                    

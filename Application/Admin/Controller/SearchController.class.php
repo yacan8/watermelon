@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class SearchController extends Controller{
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 	//搜索景点
 	public function scenic(){
 		$key = trim(I('get.key'));

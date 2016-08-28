@@ -2,7 +2,11 @@
 namespace Admin\Controller;
 use Think\Controller;
 class UploadController extends Controller{
-
+	public function _initialize(){
+        if (!isset($_SESSION['Adminlogin'])) {
+            $this->redirect('Login/index');
+        }
+ 	}
 	public function upload() {
 		C('SHOW_PAGE_TRACE',false);
 		$config = array(
