@@ -12,7 +12,7 @@ class IndexController extends Controller {
         $infomationList = D("Infomation")->getList1(1,7);
         $scenicList = D('Scenic')->getHot();
         $topicList = D('Topic') ->getList(0,1,7);
-        $searchList = M('')->table(C('DB_PREFIX')."search e")->group('e.key')->field('e.key,count(*) count')->order('count desc')->limit(10)->select();
+        // $searchList = M('')->table(C('DB_PREFIX')."search e")->group('e.key')->field('e.key,count(*) count')->order('count desc')->limit(10)->select();
         $this->assign('searchList',$searchList);
         $this->assign('topicList',$topicList);
         $this->assign('scenicList',$scenicList);

@@ -28,50 +28,50 @@
 	<div class="container m-t-md">
 		<div class="row">
 			<div class="col-xs-8">
-				<div class="font-20 p-b-sm m-b-sm">OSPREY  Stratos 云层24L 背包 </div>
+				<div class="font-20 p-b-sm m-b-sm">{$equipment.name} </div>
 				<div class="info_container">
 					<div class="info_left table-tell">
 						<a href="http://image1.8264.com/plugin/201403/14/150636ppucbmuhjbubpjjo.jpg!t3w322h0" target="_blank">
-						<img src="http://image1.8264.com/plugin/201403/14/150636ppucbmuhjbubpjjo.jpg!t3w322h0"></a>
+						<img src="{:C(__DATA__)}/{$equipment['image']}"></a>
 					</div>
 					<div class="info_right table-tell">
-						<span class="font-16">{:W('Scenic/score',array('score'=>9))}</span>
-						<div class="tc-gray6 m-t-xs font-12">（56个人点评）</div>
+						<span class="font-16">{:W('Scenic/score',array('score'=>$equipment['grade']))}</span>
+						<div class="tc-gray6 m-t-xs font-12">（{$equipment.gradenum}个人点评）</div>
 						<div class="m-t-sm font-12">
 							<div>
 								{:W('Scenic/score',array('score'=>10,'info'=>' '))}
 								<span class="progress_inline">
-									<span class="progress_bar" style="width:56%"></span>
+									<span class="progress_bar" style="width:{$equipment['agrade'][4]}"></span>
 								</span>
-								<span class="m-l-sm tc-gray9">56%（力推）</span>
+								<span class="m-l-sm tc-gray9">{$equipment['agrade'][4]}（力推）</span>
 							</div>
 							<div>
 								{:W('Scenic/score',array('score'=>8,'info'=>' '))}
 								<span class="progress_inline">
-									<span class="progress_bar" style="width:37%"></span>
+									<span class="progress_bar" style="width:{$equipment['agrade'][3]}"></span>
 								</span>
-								<span class=" m-l-sm tc-gray9">37%（推荐）</span>
+								<span class=" m-l-sm tc-gray9">{$equipment['agrade'][3]}（推荐）</span>
 							</div>
 							<div>
 								{:W('Scenic/score',array('score'=>6,'info'=>' '))}
 								<span class="progress_inline">
-									<span class="progress_bar" style="width:7%"></span>
+									<span class="progress_bar" style="width:{$equipment['agrade'][2]}"></span>
 								</span>
-								<span class=" m-l-sm tc-gray9">7%（还行）</span>
+								<span class=" m-l-sm tc-gray9">{$equipment['agrade'][2]}（还行）</span>
 							</div>
 							<div>
 								{:W('Scenic/score',array('score'=>4,'info'=>' '))}
 								<span class="progress_inline">
-									<span class="progress_bar" style="width:0%"></span>
+									<span class="progress_bar" style="width:{$equipment['agrade'][1]}"></span>
 								</span>
-								<span class=" m-l-sm tc-gray9">0%（较差）</span>
+								<span class=" m-l-sm tc-gray9">{$equipment['agrade'][1]}（较差）</span>
 							</div>
 							<div>
 								{:W('Scenic/score',array('score'=>2,'info'=>' '))}
 								<span class="progress_inline">
-									<span class="progress_bar" style="width:0%"></span>
+									<span class="progress_bar" style="width:{$equipment['agrade'][0]}"></span>
 								</span>
-								<span class=" m-l-sm tc-gray9">0%（很差）</span>
+								<span class=" m-l-sm tc-gray9">{$equipment['agrade'][0]}（很差）</span>
 							</div>
 						</div>
 
@@ -79,15 +79,15 @@
 						<div class="m-t-sm ">
 							<div class="m-b-xs to1">
 								<img class="sm_icon" src="__PUBLIC__/img/ebrand.png">
-								<a class="tc-gray9 font-12" href="#">OSPREY的更多品牌</a>
+								<a class="tc-gray9 font-12" href="#">{$equipment.brandname}的更多品牌</a>
 							</div>
 							<div class="m-b-xs to1">
 								<img class="sm_icon" src="__PUBLIC__/img/etype.png">
-								<a class="tc-gray9 font-12" href="#">小型背包</a>
+								<a class="tc-gray9 font-12" href="#">{$equipment.type}</a>
 							</div>
 							<div class="m-b-xs to1">
 								<img class="sm_icon" src="__PUBLIC__/img/eprice.png">
-								<a class="tc-gray9 font-12" href="#">￥123.5</a>
+								<a class="tc-gray9 font-12" href="#">￥{$equipment.price}</a>
 							</div>
 
 						</div>
@@ -95,52 +95,33 @@
 				</div>
 
 				<div class="m-t-md font-20 p-b-sm border-gray-b-e">
-					OSPREY  Stratos 云层24L 背包的简介
+					{$equipment.name}的简介
 					<a href="javascript:void(0)" class="pull-right font-12 m-t-sm dp_a"><span class="glyphicon glyphicon-comment"></span> 我要点评</a>
 				</div>
 				<div class="e_content m-t-sm p-b-sm">
 					<!-- 内容 -->
-						<p align="left">容量：50L<br>
-						重量：2600g<br>
-						面料：包主体为超轻高强度抗撕裂CROSSRIP3OOD尼龙和高强度耐磨防撕裂NAILHEAD420D尼龙<br>
-						<strong>框架：</strong><br>
-						轻便的带记忆性的铝杆<br>
-						ERGOFORMPRO专业的背负系统能提供很好的负重，甚至是高于肩部和臀部以上的负重。<br>
-						使用者可以根据自身情况调节背板长度<br>
-						铝钢制支撑和宽厚的腰带也提供了很好的支撑，分散了负重，<br>
-						在复杂艰苦的户外地形中也可以发挥出极好的负重性，<br>
-						带救生口哨的可调节肩带，<br>
-						双开式主仓（可从包顶进入，也可从正面拉链进入），包内部口袋，<br>
-						可调节高度的包顶袋，<br>
-						正面大口袋，<br>
-						两侧可扩容的口袋，<br>
-						包两侧大网袋<br>
-						包底部口袋收纳袋，方便放置物品，<br>
-						冰镐、冰斧、雪靴、登山杖悬挂件，<br>
-						内部、侧面和底部压缩绑带，<br>
-						兼容水合系统，<br>
-						包底部整合防雨罩<br>
+						{$equipment.description}
 					<!-- /内容 -->
 				</div>
 
 				<div id="dp" class="m-t-lg font-20 p-b-sm border-gray-b-e">
-					OSPREY  Stratos 云层24L 背包的点评
+					{$equipment.name}的点评
 				</div>
 				<div class="m-t-sm dp_level p-b-sm border-gray-b-e">
-					<a href="#" class="active">全部（150）</a>
-					<a href="#" class="">5星</a>
-					<a href="#" class="">4星</a>
-					<a href="#" class="">3星</a>
-					<a href="#" class="">2星</a>
-					<a href="#" class="">1星</a>
+					<a href="{:U('Equipment/detail',array('id'=>$equipment['id']))}" class="active">全部（{$equipment.gradenum}）</a>
+					<a href="{:U('Equipment/detail',array('id'=>$equipment['id'],'recommend'=>'10'))}" class="">5星</a>
+					<a href="{:U('Equipment/detail',array('id'=>$equipment['id'],'recommend'=>'8'))}" class="">4星</a>
+					<a href="{:U('Equipment/detail',array('id'=>$equipment['id'],'recommend'=>'6'))}" class="">3星</a>
+					<a href="{:U('Equipment/detail',array('id'=>$equipment['id'],'recommend'=>'4'))}" class="">2星</a>
+					<a href="{:U('Equipment/detail',array('id'=>$equipment['id'],'recommend'=>'2'))}" class="">1星</a>
 				</div>
 
 				<div class="m-t-sm">
-					<for start="1" end="5">
+					<volist name="commond" id="vo">
 					<div class="media boder-b-dashed m-b-sm">
 					  <div class="media-left">
-					    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="这是一个昵称">
-					      <img class="media-object c_u_icon" src="__PUBLIC__/img/udefault.png" alt="...">
+					    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{$vo.userinfo.nickname}">
+					      <img class="media-object c_u_icon" src="__PUBLIC__/img/{$vo.userinfo.icon}" alt="...">
 					    </a>
 					  </div>
 					  <div class="media-body">
@@ -149,7 +130,7 @@
 					    			<span class="glyphicon glyphicon-leaf"></span> 推荐
 					    		</div>
 								<div class="rows_info">
-									{:W('Scenic/score',array('score'=>10,'info'=>'力荐'))}
+									{:W('Scenic/score',array('score'=>$vo['recommend'],'info'=>$vo['recommendinfo']))}
 								</div>
 					    	</div>
 				
@@ -159,7 +140,7 @@
 					    			价格来源
 					    		</div>
 								<div class="rows_info">
-									15年6月份7＋2商城200元购得
+									{$vo.price_source}
 								</div>
 					    	</div>
 
@@ -168,7 +149,7 @@
 					    			<span class="glyphicon glyphicon-thumbs-down"></span> 不足
 					    		</div>
 								<div class="rows_info">
-									购买的绿色，内衬是黄色绒面的，容易脏，容易起球
+									{$vo.disadvantage}
 								</div>
 					    	</div>
 
@@ -178,7 +159,7 @@
 					    			<span class="glyphicon glyphicon-thumbs-up"></span> 优点
 					    		</div>
 								<div class="rows_info">
-									可以结合到大包上，徒步时非常方便，主包斜拉拉链使开口更大，方便取放相机，防雨罩设计很棒，关键时刻起很大作用，内衬很到位，非常好的保护相机
+									{$vo.advantage}
 								</div>
 					    	</div>
 							
@@ -187,38 +168,23 @@
 					    			<span class="glyphicon glyphicon-globe"></span> 综合
 					    		</div>
 								<div class="rows_info">
-									从设计到质量，都能看出厂家很用心，从外观到实用几乎也无可挑剔，唯独价格感觉对于一个相机包来说还是偏高些，还有户外使用的包包质量第一，耐脏也是要很在乎的，希望以后还会提高
+									{$vo.synthesize}
 								</div>
 					    	</div>
 							
 							<div class="rows_content">
 								<div class="rows_info to1">
-									<span class="tc-gray9 m-r-md">2015-9-16 22:19</span>
-									<a href="#" class="tc-gray9">OSPREY Stratos 云层24L</a>
+									<span class="tc-gray9 m-r-md">{$vo.time}</span>
+									<a href="#" class="tc-gray9">{$equipment.name}</a>
 								</div>
 					    	</div>
 
 					  </div>
 					</div>
-					</for>
+					</volist>
 					<nav class="over-h">
 					  <ul class="pagination pagination-sm pull-right">
-						
-						<li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="active"><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
+						{$page}
 					  </ul>
 					</nav>
 				</div>
@@ -230,7 +196,7 @@
 				<include file="EquipmentContent/dp" /> 
 			</div>
 			<div class="col-xs-4">
-				<include file="EquipmentContent/side" />
+				{:W('Equipment/side',array($equipment['type_id'],$equipment['brand_id']))}
 			</div>
 		</div>
 
