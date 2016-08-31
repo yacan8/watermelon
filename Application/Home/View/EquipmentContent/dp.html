@@ -1,4 +1,4 @@
-<form id="dp_form" action="#" method="post">
+<form id="dp_form" action="{:U('Equipment/dp')}" method="post">
 							<div class="rows_content">
 					    		<div class="rows_sign bg-tj">
 					    			<span class="glyphicon glyphicon-leaf"></span> 推荐
@@ -17,13 +17,12 @@
 								</div>
 					    	</div>
 				
-
 					    	<div class="rows_content">
 					    		<div class="rows_sign bg-jgly">
 					    			价格来源
 					    		</div>
 								<div class="rows_info">
-									<textarea  class="dp_textarea" cols="30" rows="2" placeholder="请写明自己从哪里得到的，入手时间，购买价格。"></textarea>
+									<textarea name="price_sourse" class="dp_textarea" cols="30" rows="2" placeholder="请写明自己从哪里得到的，入手时间，购买价格。"></textarea>
 									<div class="hidden tc-blue dp_info_con"><span class="glyphicon glyphicon-info-sign"></span> <span class="dp_info"></span></div>
 								</div>
 					    	</div>
@@ -33,7 +32,7 @@
 					    			<span class="glyphicon glyphicon-thumbs-down"></span> 不足
 					    		</div>
 								<div class="rows_info">
-									<textarea  class="dp_textarea" cols="30" rows="3" placeholder="请结合自己使用一段时间后的感受详细说明该装备本身的缺点，价格知名度不是装备本身的缺点。"></textarea>
+									<textarea name="disadvantage" class="dp_textarea" cols="30" rows="3" placeholder="请结合自己使用一段时间后的感受详细说明该装备本身的缺点，价格知名度不是装备本身的缺点。"></textarea>
 									<div class="hidden tc-blue dp_info_con"><span class="glyphicon glyphicon-info-sign"></span> <span class="dp_info"></span></div>
 								</div>
 					    	</div>
@@ -44,7 +43,7 @@
 					    			<span class="glyphicon glyphicon-thumbs-up"></span> 优点
 					    		</div>
 								<div class="rows_info">
-									<textarea  class="dp_textarea" cols="30" rows="3" placeholder="请结合自己的使用感受说明该装备的优点。"></textarea>
+									<textarea name="advantage" class="dp_textarea" cols="30" rows="3" placeholder="请结合自己的使用感受说明该装备的优点。"></textarea>
 									<div class="hidden tc-blue dp_info_con"><span class="glyphicon glyphicon-info-sign"></span> <span class="dp_info"></span></div>
 								</div>
 					    	</div>
@@ -54,7 +53,7 @@
 					    			<span class="glyphicon glyphicon-globe"></span> 综合
 					    		</div>
 								<div class="rows_info">
-									<textarea  class="dp_textarea" cols="30" rows="5" placeholder="请结合自己的使用感受综合对该装备进行客观评价。"></textarea>
+									<textarea name="synthesize" class="dp_textarea" cols="30" rows="5" placeholder="请结合自己的使用感受综合对该装备进行客观评价。"></textarea>
 									<div class="hidden tc-blue dp_info_con"><span class="glyphicon glyphicon-info-sign"></span> <span class="dp_info"></span></div>
 								</div>
 					    	</div>
@@ -66,4 +65,5 @@
 								</div>
 					    	</div>
 					    	<input type="hidden" name="recommend" id="recommend" />
+					    	<input type="hidden" name="equipment_id" value="{$equipment.id}" />
 						</form>

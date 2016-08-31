@@ -25,46 +25,32 @@
 			<div class="select_container">
 				<div class="select_left border-l-blue">装备类型：</div>
 				<div class="select_right">
-					<a class="active" href="#">全部</a>
-					<a href="#">服装</a>
-					<a href="#">鞋袜</a>
-					<a href="#">背包</a>
-					<a href="#">露营装备</a>
-					<a href="#">登山攀岩装备</a>
-					<a href="#">综合装备</a>
-					<a href="#">手表/眼镜/仪器/数码</a>
-					<a href="#">骑行装备</a>
-					<a href="#">滑雪装备</a>
+					<a class="active" href="{:U('Equipment/index')}">全部</a>
+					<volist name="type" id="vo">
+						<a class="" href="{:U('Equipment/index',array('type_id'=>$vo['id']))}">{$vo.type}</a>
+					</volist>
 				</div>
 			</div>
 			<div class="select_container">
 				<div class="select_left border-l-orange">装备价格：</div>
 				<div class="select_right">
-					<a href="#">100元以下</a>
-					<a href="#">100~500元</a>
-					<a href="#">500~1000元</a>
-					<a href="#">1000~2000元</a>
-					<a href="#">2000~3000元</a>
-					<a href="#">3000~4000元</a>
-					<a href="#">4000~5000元</a>
-					<a href="#">5000以上</a>
+					<a href="{:U('Equipment/index',array('price'=>'lt 100'))}">100元以下</a>
+					<a href="{:U('Equipment/index',array('price'=>'between 100,500'))}">100~500元</a>
+					<a href="{:U('Equipment/index',array('price'=>'between 500,1000'))}">500~1000元</a>
+					<a href="{:U('Equipment/index',array('price'=>'between 1000,2000'))}">1000~2000元</a>
+					<a href="{:U('Equipment/index',array('price'=>'between 2000,3000'))}">2000~3000元</a>
+					<a href="{:U('Equipment/index',array('price'=>'between 3000,4000'))}">3000~4000元</a>
+					<a href="{:U('Equipment/index',array('price'=>'between 4000,5000'))}">4000~5000元</a>
+					<a href="{:U('Equipment/index',array('price'=>'gt 5000'))}">5000以上</a>
 				</div>
 			</div>
 			<div class="select_container">
 				<div class="select_left border-l-darkblue">装备品牌：</div>
 				<div class="select_right">
-					<a class="active" href="#">全部</a>
-					<a href="#">KALIS（凯乐石）</a>
-					<a href="#">Decathlon(迪卡侬)</a>
-					<a href="#">ARC TERYX(始祖鸟)</a>
-					<a href="#">The North Face (北面)</a>
-					<a href="#">JACK WOLFSKIN</a>
-					<a href="#">Telent（天伦天）</a>
-					<a href="#">自由之魂（THE FREE SPIRITS)</a>
-					<a href="#">timberland(添柏岚)</a>
-					<a href="#">Thermore</a>
-					<a href="#">THE FOURTEEN MOUNTAINS</a>
-					<a href="#">TomTom</a>
+					<a class="active" href="{:U('Equipment/index')}">全部</a>
+					<volist	name="brand" id="vo">
+						<a href="{:U('Equipment/index',array('brand_id'=>$vo['id']))}">{$vo.brand}</a>
+					</volist>
 					<a href="#">更多品牌</a>
 				</div>
 			</div>
@@ -84,89 +70,27 @@
 	<div class="container bg-gray-fa p-t-md p-b-md">
 		<div class="equipment_container">
 			<ul class="equipment_list">
-				<for start="1" end="5">
+				<volist name="equipment" id="vo">
 				<li class="equipment_item">
 					<div class="img_con">
-						<a href="#"><img src="http://image1.8264.com/forum/201403/26/180735gpgzqzryftaatzus.jpg!t1w231h231"></a>
+						<a href="{:U('Equipment/detail',array('id'=>$vo['id']))}"><img src="{:C(__DATA__)}/{$vo['image']}"></a>
 					</div>
 					<div class="equipment_info p-sm text-center">
-						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="#">Decathlon(迪卡侬)-Quechua（趣岳）</a></div>
-						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="#">Decathlon(迪卡侬)男单层薄款冲锋衣QUECHUA</a></div>
+						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="{:U('Equipment/detail',array('id'=>$vo['id']))}">{$vo.brandname}</a></div>
+						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="{:U('Equipment/detail',array('id'=>$vo['id']))}">{$vo.name}</a></div>
 						<div class="m-t-sm text-center m-b-sm">
-							{:W('Scenic/score',array('score'=>rand(2,10)))}
+							{:W('Scenic/score',array('score'=>$vo['grade']))}
 						</div>
 						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
-						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
+						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">{$vo.gradenum}</span> 个人点评</div>
 					</div>
 				</li>
-
-
-				<li class="equipment_item">
-					<div class="img_con">
-						<a href="#"><img src="http://image1.8264.com/forum/201404/18/112750427wnm4wg4neo0d7.jpg!t1w231h231"></a>
-					</div>
-					<div class="equipment_info p-sm text-center">
-						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="#">Decathlon(迪卡侬)</a></div>
-						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="#">Decathlon（迪卡侬）男式皮肤风衣 QUECHUA HELIUM WIND</a></div>
-						<div class="m-t-sm text-center m-b-sm">
-							{:W('Scenic/score',array('score'=>10))}
-						</div>
-						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
-						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
-					</div>
-				</li>
-
-
-				<li class="equipment_item">
-					<div class="img_con">
-						<a href="#"><img src="http://image1.8264.com/forum/201403/19/1607328z3ozcce0elcb15s.jpg!t1w231h231"></a>
-					</div>
-					<div class="equipment_info p-sm text-center">
-						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="#">Decathlon(迪卡侬)-Quechua（趣岳）</a></div>
-						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="#">迪卡侬户外抓绒衣QUECHUA</a></div>
-						<div class="m-t-sm text-center m-b-sm">
-							{:W('Scenic/score',array('score'=>rand(2,10)))}
-						</div>
-						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
-						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
-					</div>
-				</li>
-
-				<li class="equipment_item">
-					<div class="img_con">
-						<a href="#"><img src="http://image1.8264.com/forum/201404/23/134118e4z8ubtteb8bbz44.jpg!t1w231h231"</a>
-					</div>
-					<div class="equipment_info p-sm text-center">
-						<div class="m-t-sm font-bold eq_pp to2"><a class="tc-black" href="#">Decathlon(迪卡侬)</a></div>
-						<div class="d_text to1 m-t-sm font-12 over-h"><a class="tc-gray9" href="#">Decathlon（迪卡侬） 露营野营垫Quechua PLAID</a></div>
-						<div class="m-t-sm text-center m-b-sm">
-							{:W('Scenic/score',array('score'=>rand(2,10)))}
-						</div>
-						<div class="dp_btn"><a href="#" class="btn-blue btn-sm">点评</a></div>
-						<div class="m-t-sm tc-gray9 font-12"><span class="keyword">15</span> 个人点评</div>
-					</div>
-				</li>
-				</for>
+				</volist>
 			</ul>
 
 			<nav class="over-h">
 					  <ul class="pagination pagination-sm pull-right">
-						
-						<li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="active"><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
+						{$page}
 					  </ul>
 					</nav>
 

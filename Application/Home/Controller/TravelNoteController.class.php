@@ -8,6 +8,10 @@ class TravelNoteController extends Controller {
         $condition = null;
         $Page = new \Think\Page($model->getCount($condition),6);
         $result = $model->getList($Page->firstRow,$Page->listRows,$condition);
+        for ($i=0; $i < count($result); $i++) { 
+            dump($result[$i]['pic']);
+        }
+        
         // dump($result);
         $this->assign('travelnote',$result);
         $this->assign('page',$Page->show());
@@ -34,8 +38,8 @@ class TravelNoteController extends Controller {
     }
 
     public function Dopublish(){
-         $model = D('Zan');
-         $result = $model->getZanSortByType(1);
-         dump($result);
+        $data = I('post.');
+        $model = D('TravelNote');
+        $result = $this->addNew($data);
     }
 }

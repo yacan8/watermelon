@@ -17,4 +17,19 @@ class EquipmentWidget extends Controller{
 
 	}
 
+	public function side($type_id,$brand_id){
+		$emodel = D('Equipment');
+		$condition_one['type_id'] = $type_id;
+		$condition_one['order'] = "grade desc";
+		$sametype = $emodel->getList(0,5,$condition_one);
+		$condition_two['brand_id'] = $brand_id;
+		$condition_two['order'] = "grade desc";
+		$samebrand = $emodel->getList(0,5,$condition_two);
+		$hotequip = $emodel->getHotCommentEquipment($brand_id,$type_id);
+		$this->assign('sametype',$sametype);
+		$this->assign('samebrand',$samebrand);
+		$this->assign('hotequip',$hotequip);
+		$this->display("EquipmentContent:side");
+	}
+
 }

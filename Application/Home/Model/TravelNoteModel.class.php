@@ -12,7 +12,7 @@ class TravelNoteModel extends Model{
 		$lmodel = D('Login');
 		$result = $this->limit($first.','.$list)->where($condition)->select();
 		foreach ($result as &$value) {
-			preg_match_all('/(?<=src=").+"/',$value['content'],$value['pic']);
+			preg_match_all('/(?<=src=").+(?=>>)/',$value['content'],$value['pic']);
 			$value['content'] = str_sub(preg_replace('/<img.+?>/'," ", $value['content']),200);
 			$value['user'] = $lmodel->getById($value['user_id']);
 		}
@@ -109,5 +109,14 @@ class TravelNoteModel extends Model{
 		
 		return $result;
 
+	}
+
+
+	public function addNew($data){
+		if ($this->create($data)) {
+			$this->add();
+		} else {
+			return false;
+		}
 	}
 }
