@@ -15,7 +15,7 @@
 					<div class="container">
 						
 						<a href="javascript:void(0)" class="city_btn transition-all-03" id="city_btn"><span class="glyphicon glyphicon-chevron-down"></span></a>
-						<span class="city_btn_label">城市：</span>
+						<span class="city_btn_label">城市：{$citynow}</span>
 						<a href="{:U('TravelNote/publish')}" class="pull-right btn-main btn-sm m-r-sm m-t-sm">发布游记</a>
 						<div class="font-20">
 							游记攻略
@@ -35,17 +35,9 @@
 				<div id="select_city" class="container p-t-md p-b-md border-gray-b-e" style="display:none">
 					<div class="font-20">选择城市</div>
 					<div class="m-t-sm">
-						<a href="#" class="la_item active">尼泊尔</a>
-						<a href="#" class="la_item">成都</a>
-						<a href="#" class="la_item">桂林</a>
-						<a href="#" class="la_item">玉林</a>
-						<a href="#" class="la_item">三江</a>
-						<a href="#" class="la_item">澳门</a>
-						<a href="#" class="la_item">台北</a>
-						<a href="#" class="la_item">高雄市</a>
-						<a href="#" class="la_item">北京</a>
-						<a href="#" class="la_item">上海</a>
-						<a href="#" class="la_item">更多地点</a>
+						<volist name="city" id="vo">
+							<a href="{:U('TravelNote/index',array('citynow'=>$vo['city']))}" class="la_item active">{$vo.city}</a> &nbsp;
+						</volist>
 
 					</div>
 				</div>
@@ -61,7 +53,7 @@
 						    <div class="info m-t-sm font-12">
 						    	<a href="#" class="m-r-sm">{$vo.user.nickname}</a>
 						    	<span class="m-r-sm">{$vo.time}</span>
-						    	<!-- <span class="m-r-sm la_item">垦丁</span> -->
+						    	<span class="m-r-sm la_item">{$citynow}</span>
 						    </div>
 						    <div class="m-t-sm travel_text">
 								{$vo.content}
@@ -77,7 +69,7 @@
 
 							<div class="m-t-sm font-12 border-gray-b-e p-b-md m-b-xs">
 								<span class="keywords">{$vo.browse}</span>次浏览
-								<span class="keywords m-l-md">???</span>次点赞
+								<span class="keywords m-l-md">{$vo.zan}</span>次点赞
 							</div>
 						</div>
 					</div>

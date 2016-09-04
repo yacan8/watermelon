@@ -8,18 +8,31 @@ class EquipmentController extends Controller {
 	public function index(){
 		$data = I('get.');
 		$condition = array();
-		if($data['type']){
+		if($data['type_id']){
 			$condition['type_id'] = $data['type_id'];
+			$type_id = $data['type_id'];
+		}else{
+			$type_id = 0;
 		}
 		if($data['price']){
 			$con = explode("+", $data['price']);
 			$condition['price'] = array($con[0],$con[1]);
+			$price = $data['price'];
+		}else{
+			$price = 0;
 		}
 		if($data['brand_id']){
 			$condition['brand_id'] = $data['brand_id'];
+			$brand_id = $data['brand_id'];
+		}else{
+			$brand_id = 0;
 		}
 		if($data['order']){
-			$condition['order'] = $data['order'];
+			$or = explode("+", $data['order']);
+			$condition['order'] = $or[0]." ".$or[1];
+			$order = $data['order'];
+		}else{
+			$order = 0;
 		}
 		$emodel = D('Equipment');
 		$ebmodel = D('EquipmentBrand');
@@ -27,7 +40,11 @@ class EquipmentController extends Controller {
 		$Page = new \Think\Page($emodel->getCount($condition),16);
 		$this->assign('type',$etmodel->getList());
 		$this->assign('brand',$ebmodel->getList());
-		$this->assign('equipment',$emodel->getList($Page->firstRow,$Page->listRows,$condition));	
+		$this->assign('equipment',$emodel->getList($Page->firstRow,$Page->listRows,$condition));
+		$this->assign('type_id',$type_id);
+		$this->assign('brand_id',$brand_id);
+		$this->assign('price',$price);	
+		$this->assign('order',$order);
 		$this->assign('page',$Page->show());
 		$this->display();
 		

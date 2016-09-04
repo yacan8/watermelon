@@ -1,5 +1,6 @@
 <div class="m-t-sm m-b-md bg-white border-gray-e p-md font-12">
-	<a href="{:U('Account/edit')}" class="pull-right btn btn-default btn-sm">编辑资料</a>
+	<if condition="$info['id'] eq session('login')"><a href="{:U('Account/edit',array('info'=>$info))}" class="pull-right btn btn-default btn-sm">编辑资料</a><else />
+	</if>
 	<div class="m-l-md m-b-md">
 		<span class="tc-gray9 m-r-sm">用户名:</span>
 		<span class="">{$logininfo.nickname}</span>

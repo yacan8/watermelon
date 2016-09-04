@@ -6,13 +6,15 @@ class TravelNoteController extends Controller {
     public function index(){
         $model = D('TravelNote');
         $condition = null;
-        $Page = new \Think\Page($model->getCount($condition),6);
-        $result = $model->getList($Page->firstRow,$Page->listRows,$condition);
-        for ($i=0; $i < count($result); $i++) { 
-            dump($result[$i]['pic']);
+        if(I('get.citynow')){
+            $condition['city'] = I('get.citynow');
         }
         
-        // dump($result);
+        $Page = new \Think\Page($model->getCount($condition),6);
+        $result = $model->getList($Page->firstRow,$Page->listRows,$condition);
+        $tsmodel = M('TravelNoteSpace');
+        $this->assign('city',$tsmodel->select());
+        $this->assign('citynow',$condition['city']);
         $this->assign('travelnote',$result);
         $this->assign('page',$Page->show());
     	$this->display('index');
@@ -24,9 +26,9 @@ class TravelNoteController extends Controller {
     	$id = I('get.id');
         $model = D('TravelNote');
         $condition['id'] = $id;
-        $travelnote = $model->getInfoByUserId($condition);
+        $travelnote = $model->getInfoById($condition);
     	$CommentModel = D('Comment');
-		$CommentList = $CommentModel->getCommentByOtherId($id,3,1,4);
+		// $CommentList = $CommentModel->getCommentByOtherId($id,3,1,4);
 		$this->assign('id',$id);
         $this->assign('travelnote',$travelnote);
 		$this->assign('CommentList',$CommentList);
@@ -39,7 +41,15 @@ class TravelNoteController extends Controller {
 
     public function Dopublish(){
         $data = I('post.');
-        $model = D('TravelNote');
-        $result = $this->addNew($data);
+        dump($data);
+        // $model = D('TravelNote');
+        // $result = $this->addNew($data);
+    }
+
+
+    public function getCityList(){
+        $cmodel = D('TravelNoteSpace');
+        $result = $cmodel->select();
+        $this->ajaxReturn(json_encode($result));
     }
 }

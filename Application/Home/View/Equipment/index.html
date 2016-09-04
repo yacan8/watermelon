@@ -25,31 +25,32 @@
 			<div class="select_container">
 				<div class="select_left border-l-blue">装备类型：</div>
 				<div class="select_right">
-					<a class="active" href="{:U('Equipment/index')}">全部</a>
+					<a href="{:U('Equipment/index',array('type_id'=>0,'brand_id'=>$brand_id,'price'=>$price))}" class="space-item <if condition="$type_id eq 0"> active</if>">全部</a>
 					<volist name="type" id="vo">
-						<a class="" href="{:U('Equipment/index',array('type_id'=>$vo['id']))}">{$vo.type}</a>
+						<a href="{:U('Equipment/index',array('type_id'=>$vo['id'],'brand_id'=>$brand_id,'price'=>$price))}" class="<if condition="$type_id eq $vo['id']"> active</if>">{$vo.type}</a>
 					</volist>
 				</div>
 			</div>
 			<div class="select_container">
 				<div class="select_left border-l-orange">装备价格：</div>
 				<div class="select_right">
-					<a href="{:U('Equipment/index',array('price'=>'lt 100'))}">100元以下</a>
-					<a href="{:U('Equipment/index',array('price'=>'between 100,500'))}">100~500元</a>
-					<a href="{:U('Equipment/index',array('price'=>'between 500,1000'))}">500~1000元</a>
-					<a href="{:U('Equipment/index',array('price'=>'between 1000,2000'))}">1000~2000元</a>
-					<a href="{:U('Equipment/index',array('price'=>'between 2000,3000'))}">2000~3000元</a>
-					<a href="{:U('Equipment/index',array('price'=>'between 3000,4000'))}">3000~4000元</a>
-					<a href="{:U('Equipment/index',array('price'=>'between 4000,5000'))}">4000~5000元</a>
-					<a href="{:U('Equipment/index',array('price'=>'gt 5000'))}">5000以上</a>
+					<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>0))}" class="<if condition="$price eq 0"> active</if>">全部</a>
+					<a class="<if condition="$price eq 'lt+100'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'lt 100'))}">100元以下</a>
+					<a class="<if condition="$price eq 'between+100,500'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 100,500'))}">100~500元</a>
+					<a class="<if condition="$price eq 'between+500,1000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 500,1000'))}">500~1000元</a>
+					<a class="<if condition="$price eq 'between+1000,2000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 1000,2000'))}">1000~2000元</a>
+					<a class="<if condition="$price eq 'between+2000,3000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 2000,3000'))}">2000~3000元</a>
+					<a class="<if condition="$price eq 'between+3000,4000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 3000,4000'))}">3000~4000元</a>
+					<a class="<if condition="$price eq 'between+4000,5000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 4000,5000'))}">4000~5000元</a>
+					<a class="<if condition="$price eq 'gt+5000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'gt 5000'))}">5000以上</a>
 				</div>
 			</div>
 			<div class="select_container">
 				<div class="select_left border-l-darkblue">装备品牌：</div>
 				<div class="select_right">
-					<a class="active" href="{:U('Equipment/index')}">全部</a>
+					<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>0,'price'=>$price))}" class="<if condition="$brand_id eq 0"> active</if>">全部</a>
 					<volist	name="brand" id="vo">
-						<a href="{:U('Equipment/index',array('brand_id'=>$vo['id']))}">{$vo.brand}</a>
+						<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$vo['id'],'price'=>$price))}" class="<if condition="$brand_id eq $vo['id']"> active</if>">{$vo.brand}</a>
 					</volist>
 					<a href="#">更多品牌</a>
 				</div>
@@ -58,12 +59,12 @@
 
 
 		<div class="m-b-md container">
-			<a href="#" class="la_item m-r-sm active"><span class="glyphicon glyphicon-circle-arrow-down"></span> 默认</a>
-			<a href="#" class="la_item m-r-sm"><span class="glyphicon glyphicon-circle-arrow-down"></span> 热度</a>
-			<a href="#" class="la_item"><span class="glyphicon glyphicon-circle-arrow-down"></span> 评分</a>
+			<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>$price,order=>0))}" class="la_item m-r-sm <if condition="$order eq null"> active</if>"><span class="glyphicon glyphicon-circle-arrow-down"></span> 默认</a>
+			<!-- <a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$vo['id'],'price'=>$price,'order'=>'grade desc'))}" class="la_item m-r-sm"><span class="glyphicon glyphicon-circle-arrow-down"></span> 热度</a> -->
+			<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>$price,'order'=>'grade desc'))}" class="la_item <if condition="$order eq 'grade+desc'"> active</if>"><span class="glyphicon glyphicon-circle-arrow-down"></span> 评分</a>
 
 
-			<a href="#" class="m-l-md la_item active">Decathlon(迪卡侬) ×<!-- <span class="glyphicon glyphicon-remove"></span> --></a>
+		<!-- 	<a href="#" class="m-l-md la_item active">Decathlon(迪卡侬) ×<span class="glyphicon glyphicon-remove"></span></a> -->
 		</div>
 	</div>
 

@@ -26,7 +26,7 @@ class EquipmentModel extends Model{
 		if($condition['order']){
 			unset($condition['order']);
 		}
-		$condition['delete_tag'] = 0;
+		$condition = array('delete_tag'=>0) + $condition;
 		$result = $this->where($condition)->count();
 		return $result;
 	}

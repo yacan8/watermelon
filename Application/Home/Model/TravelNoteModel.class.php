@@ -10,11 +10,18 @@ class TravelNoteModel extends Model{
 	 */
 	public function getList($first,$list,$condition){
 		$lmodel = D('Login');
-		$result = $this->limit($first.','.$list)->where($condition)->select();
+		$zmodel = D('Zan');
+		$result = $this->join('left join wt_travel_note_space_belong on wt_travel_note.id = wt_travel_note_space_belong.travel_note_id')
+					   ->join('left join wt_travel_note_space on wt_travel_note_space.id = wt_travel_note_space_belong.space_id')
+					   ->field('wt_travel_note.id,title,time,user_id,content,image,browse,wt_travel_note_space.city')
+					   ->limit(5)
+					   ->where($condition)
+					   ->select();
 		foreach ($result as &$value) {
-			preg_match_all('/(?<=src=").+(?=>>)/',$value['content'],$value['pic']);
+			preg_match_all('/(?<=src=").+?(?=">)/',$value['content'],$value['pic']);
 			$value['content'] = str_sub(preg_replace('/<img.+?>/'," ", $value['content']),200);
 			$value['user'] = $lmodel->getById($value['user_id']);
+			$value['zan'] = $zmodel->getCountById(2,$value['id']);
 		}
 		return $result;
 	}
@@ -24,7 +31,7 @@ class TravelNoteModel extends Model{
 	 *	@param [Array] $condition 查询条件
 	 *	@return 单条游记信息
 	 */
-	public function getInfoByUserId($condition){
+	public function getInfoById($condition){
 		$result = $this->where($condition)->find();
 		$lmodel = D('Login');
 		$result['user'] = $lmodel->getById($result['user_id']);
@@ -36,7 +43,7 @@ class TravelNoteModel extends Model{
 	 * @return 记录总条数
 	 */
 	public function getCount($condition){
-		return $this->count();
+		return $this->where($condition)->count();
 	}
 
 

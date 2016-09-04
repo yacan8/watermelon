@@ -21,14 +21,10 @@
       <link rel="stylesheet" href="__PUBLIC__/css/wait.css">
     </if>
 
-
+    <if condition="$info['id'] eq session('login')"> <assign name="refer" value="我" />
+    <else /><assign name="refer" value="TA" />
+    </if>
     <title>西瓜游-景点</title>
-  <php>
-    if(session('login') == $user_id)//判断是自己还是他人
-      $self = '我';
-    else
-      $self = 'TA';
-  </php>
 </head>
 
 <body>
@@ -44,7 +40,7 @@
 
           <div class="col-xs-3">
             <!-- <include file="AccountContent:sideContent" /> -->
-            {:W('Account/sideBar')}
+            {:W('Account/sideBar',array($info['id']))}
           </div>
         </div>
         

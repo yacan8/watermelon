@@ -17,10 +17,14 @@ class AttentionModel extends Model{
 	}
 
 	public function getAttentioner($condition){
-		$condition['delete_tag'] = 0;
 		$result = $this->where($condition)
 			 		   ->field('Attention_id')
 			 		   ->select();
+		return $result;
+	}
+
+	public function getFans($condition){
+		$result = $this->where($condition)->field('user_id')->select();
 		return $result;
 	}
 }
