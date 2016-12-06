@@ -96,7 +96,7 @@ $(function(){
     //收藏点击事件绑定
     $('#collection').click(function(e) {
         var _self = $(this);
-        collection(topic_id,1,collect_url,_self);
+        collection(topic_id,2,collect_url,_self);
     });
     //关注点击事件
     $(".follow").click(function(e){

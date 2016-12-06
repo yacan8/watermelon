@@ -1,7 +1,18 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class ScenicWantModel extends Model{
+use Think\Model\RelationModel;
+class ScenicWantModel extends RelationModel{
+
+	//关联属性
+	protected $_link = array(
+		'scenic'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'Scenic',
+	        'foreign_key'=>'scenic_id',
+	        'mapping_fields'=>'name',
+	        'as_fields'=>'name'
+	    )
+	);
 
 	/**
 	 * [getCountByScenicId 获取数量通过景点编号]
@@ -29,5 +40,18 @@ class ScenicWantModel extends Model{
 		$list = $this->where($condition)->field('id,delete_tag')->select();
 		return $list;
 	}
+
+
+
+	/**
+	 * [getDynamics8 获取动态 类型8 获取景点想去信息]
+	 * @param  [Integer] $id [景点想去ID]
+	 * @return [array] 
+	 */
+	public function getDynamics8($id){
+		$result = $this->relation('scenic')->where(array('delete_tag'=>(bool)0))->find($id);
+		return $result;
+	}
+
 
 }

@@ -35,4 +35,17 @@ class AccountWidget extends Controller{
 		$this->assign('id',$id);
 		$this->display("AccountContent:sideContent");
 	}
+
+
+
+
+	public function dynamicsImg($dynamics_id){
+        $ImageModel = D('Image');
+        $List = $ImageModel->getImgByDynamicsId($dynamics_id);
+        for ($i=0; $i < count($List); $i++) { 
+        	$List[$i]['image_loading'] = urlencode($List[$i]['image']);
+        }
+        $this->assign('List',$List);
+        $this->display('Widget:TopicImg');
+    }
 }

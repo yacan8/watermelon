@@ -33,4 +33,67 @@ class CommentModel extends Model{
 
 		return $List;
 	}
+	/**
+	 * [getDynamics1 获取资讯信息 类型1 评论了资讯]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getDynamics1($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'infomation i')
+				  ->field('c.content content,i.title title,i.id infomation_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
+
+	/**
+	 * [getDynamics2 获取资讯信息 类型2 在资讯中回复]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getDynamics2($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'infomation i,'.$DB_PREFIX.'login l')
+				  ->field('c.content content,i.title title,i.id infomation_id,l.nickname receiver_nickname,c.receiver receiver_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.receiver and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
+
+
+	/**
+	 * [getDynamics20 获取动态信息 类型20 评论了游记]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getDynamics20($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i')
+				  ->field('c.content content,i.title title,i.id travel_note_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
+
+
+	/**
+	 * [getDynamics13 获取资讯信息 类型13 在资讯中回复]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getDynamics13($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i,'.$DB_PREFIX.'login l')
+				  ->field('c.content content,i.title title,i.id travel_note_id,l.nickname receiver_nickname,c.receiver receiver_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.receiver and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
+
+
+
+
+
+
 }

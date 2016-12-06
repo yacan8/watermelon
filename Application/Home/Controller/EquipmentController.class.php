@@ -67,20 +67,44 @@ class EquipmentController extends Controller {
 	}
 
 	public function dp(){
-		$data = I('post.');
-		$data['user_id'] = session("login");
-		$data['time'] = date("Y-m-d H:i:s");
-		$egmodel = D('EquipmentGrade');
-		if ($egmodel->create($date)) {
-			if($egmodel->add()>0){
-				$egmodel->refreshGrade($data['equipment_id']);
-				redirect(U("Equipment/detail",array("id"=>$data['equipment_id'])));
-			}else{
-				$this->error('添加失败');
+		if(session('?login')){
+			$model = M('');
+			$model->startTrans();//开启事务
+			$user_id = session("login");
+			$time = date("Y-m-d H:i:s",time());
+			$egmodel = D('EquipmentGrade');
+			if ($egmodel->create()) {
+				$egmodel->user_id = $user_id;
+				$egmodel->time = $time;
+				$addResult = $egmodel->add();
+				if($addResult!==false){
+					$refreshResult = $egmodel->refreshGrade( $egmodel->equipment_id);//刷新冗余字段评分
+					if($refreshResult!==false){
+						$dynamicsData['type'] = 11;
+						$dynamicsData['content_id'] = $egmodel->getLastInsID();
+						$dynamicsData['user_id'] = $user_id;
+						$dynamicsData['time'] = $time;
+						$dynamicsResult = M('Dynamics')->add($dynamicsData);//添加动态
+						if($dynamicsResult!==false){
+							$model->commit();
+							$this->redirect(U("Equipment/detail",array("id"=>$egmodel->equipment_id)));
+						}else{
+							$model->rollback();
+						}
+					}else{
+						$model->rollback();
+						$this->error('添加失败');
+					}
+				}else{
+					$model->rollback();
+					$this->error('添加失败');
+				}
+				
+			} else {
+				$this->error('数据错误');
 			}
-			
-		} else {
-			$this->error('数据错误');
+		}else{
+			$this->error('你还没有登录');
 		}
 		
 	}

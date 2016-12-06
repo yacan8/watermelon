@@ -47,7 +47,7 @@ class ZanController extends Controller {
 					//添加动态
 					$id = $ZanModel->getLastInsID();
 					$DynamicsModel = M('Dynamics');
-					if($type =='1'){//话题点赞
+					if($type =='1'){//景点点赞
 						$Data['type'] = 10;
 					}else if($type='2'){
 						$Data['type'] = 4;

@@ -44,6 +44,7 @@ class LoginModel extends RelationModel{
 		$password = md5($data['password']);
 		$info = $this->where(array('tel'=>$tel))->field('id,password,user_id,nickname')->find();
 		if($password == $info['password']){
+			session('login',$info['id']);
 			session('id',$info['id']);
 			session('userid',$info['user_id']);
 			session('nickname',$info['nickname']);

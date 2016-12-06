@@ -1,0 +1,4 @@
+<if condition="count($vo['content']) neq 0">
+在 <a href="{:U('Scenic/city',array('id'=>$vo['content'][0]['city'][id]))}"> {$vo.content.0.city.city}</a>   上传了{:count($vo['content'])}张照片 
+{:W('Account/dynamicsImg',array('dynamics_id'=>$vo['id']))}
+</if>

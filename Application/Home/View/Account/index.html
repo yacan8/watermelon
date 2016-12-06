@@ -25,6 +25,12 @@
     <else /><assign name="refer" value="TA" />
     </if>
     <title>西瓜游-景点</title>
+    <php>
+    if(session('login') == $user_id)//判断是自己还是他人
+      $self = '我';
+    else
+      $self = 'TA';
+  </php>
 </head>
 
 <body>

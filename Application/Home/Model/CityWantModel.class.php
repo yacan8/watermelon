@@ -1,7 +1,18 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class CityWantModel extends Model{
+use Think\Model\RelationModel;
+class CityWantModel extends RelationModel{
+
+	//关联属性
+	protected $_link = array(
+		'city'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'City',
+	        'foreign_key'=>'city_id',
+	        'mapping_fields'=>'city',
+	        'as_fields'=>'city'
+	    )
+	);
 
 	/**
 	 * [getCountByCityId 获取数量通过城市编号]
@@ -29,5 +40,16 @@ class CityWantModel extends Model{
 		$list = $this->where($condition)->field('id,delete_tag')->select();
 		return $list;
 	}
+
+	/**
+	 * [getDynamics6 获取动态 类型6 获取想去信息]
+	 * @param  [Integer] $id [城市想去ID]
+	 * @return [array] 
+	 */
+	public function getDynamics6($id){
+		$result = $this->relation('city')->where(array('delete_tag'=>(bool)0))->find($id);
+		return $result;
+	}
+
 
 }

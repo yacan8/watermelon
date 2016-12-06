@@ -38,7 +38,7 @@ class TopicZanController extends Controller{
 
 					//添加动态
 					$dynamicsData['user_id'] = session('login');
-					$dynamicsData['content_id'] =$topic_id;
+					$dynamicsData['content_id'] =$id;
 					$dynamicsData['time'] = date('Y-m-d H-i-s',time());
 					$dynamicsResult = M('Dynamics')->add($dynamicsData);
 

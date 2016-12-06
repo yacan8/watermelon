@@ -1,18 +1,18 @@
-
+<if condition="count($collection) neq 0">
 <div class="bg-white p-md m-b-md border-gray-e over-h">
 	<ul class="list">
 		<volist name="collection" id="vo">
 		<li>
-			<a href="#" target="_blank">
+			
 				<switch name="vo.type" >
-				<case value="1"><span class="m-r-xs tc-gray9">[ 话题 ]</span></case>
-				<case value="2"><span class="m-r-xs tc-gray9">[ 游记 ]</span></case>
-				<case value="3"><span class="m-r-xs tc-gray9">[ 装备用品 ]</span></case>
+				<case value="1"><span class="m-r-xs tc-gray9">[ 游记 ]</span><a href="{:U('/tn/'.$vo['other_id'])}" target="_blank">{$vo.title}</a></case>
+				<case value="2"><span class="m-r-xs tc-gray9">[ 话题 ]</span><a href="{:U('/t/'.$vo['other_id'])}" target="_blank">{$vo.title}</a></case>
+				<case value="3"><span class="m-r-xs tc-gray9">[ 装备用品 ]</span><a href="{:U('/eq/'.$vo['other_id'])}" target="_blank">{$vo.title}</a></case>
 				<default />
 				</switch>
-				{$vo.title}
-			</a>
-			<span class="pull-right font-12 tc-gray9 time">2016-7-4</span>
+				
+			
+			
 			<a href="javascript:void(0)" title="取消收藏" class="op-close collection-close"><span class="glyphicon glyphicon-remove"></span></a>
 		</li>
 		</volist>
@@ -20,9 +20,12 @@
 
 
 	<ul class="pagination pagination-sm pull-right m-t-lg">
-           {$page} 
+        {$page} 
     </ul>
 
 
 
 </div>
+<else/>
+<div class="text-center tc-gray9" style="height:210px;line-height:210px;">暂无收藏</div>
+</if>

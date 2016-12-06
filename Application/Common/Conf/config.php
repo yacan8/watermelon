@@ -16,5 +16,6 @@ return array(
 	'URL_ROUTER_ON'   => true, 
 	'URL_ROUTE_RULES'=>array(    
 		't/:id'  => array('Home/Topic/detail','',array('ext'=>'html')),
+		'i/:id'  => array('Home/Infomation/detail','',array('ext'=>'html'))
 	),
 );

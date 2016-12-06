@@ -1,9 +1,18 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class ScenicGradeModel extends Model{
+use Think\Model\RelationModel;
+class ScenicGradeModel extends RelationModel{
 
-
+	//关联属性
+	protected $_link = array(
+		'scenic'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'Scenic',
+	        'foreign_key'=>'scenic_id',
+	        'mapping_fields'=>'name',
+	        'as_fields'=>'name'
+	    )
+	);
 
 	protected $_validate = array(     
 		array('description','require','请输入评论内容！'), 
@@ -67,5 +76,16 @@ class ScenicGradeModel extends Model{
 		$condition['delete_tag'] = (bool)0;
 		$count = $this ->where($condition)->count();
 		return $count;
+	}
+
+
+
+	/**
+	 * [getDynamics3 获取动态 类型3 评论了景点]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getDynamics3($id){
+		return $this->relation('scenic')->where(array('delete_tag'=>(bool)0))->find($id);
 	}
 }

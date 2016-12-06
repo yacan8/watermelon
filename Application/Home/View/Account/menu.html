@@ -1,9 +1,9 @@
 <div class="bg-white p-md border-gray-e">
 	<div class="header_container">
-		<img class="u_icon" src="__PUBLIC__/img/f4.jpg">
+		<img class="u_icon_" src="__PUBLIC__/img/f4.jpg">
 		<div class="info">
 			<div class="nickname">
-				{$info.nickname}
+				{$info.nickname}  &nbsp;
 				<if condition="$info['id'] neq session('login')" >
 					<if condition="$info['delete_tag'] eq '0'">
 					<button class="btn btn-xs btn-success m-l-sm">

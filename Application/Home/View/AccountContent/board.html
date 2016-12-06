@@ -1,4 +1,6 @@
 <div class="font-20 m-b-sm p-l-sm">留言板({$count})</div>
+
+<if condition="count($borad) neq 0">
 <div class="p-md border-gray-e bg-white m-b-md">
 	<volist name="borad" id="vo">
 	<div class="board-item p-b-md border-gray-b-e m-b-md">
@@ -49,7 +51,11 @@
 		  {$page}
 		</ul>	
 	</div>
-
+	</div>
+	<else/>
+	<div class="text-center tc-gray9" style="height:210px;line-height:210px;">暂无话题</div>
+</if>
+<div class="p-md border-gray-e bg-white m-b-md">
 	<div class="font-20 m-b-lg">留个言吧</div>
 	<div class="board-item p-b-md">
 		<div class="media">

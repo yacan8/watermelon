@@ -23,9 +23,8 @@ class ZanModel extends Model{
 
 
 	public function getMessageType3($id){
-		$M = M('');
  		$DB_PREFIX = C('DB_PREFIX');
- 		$array = $M ->table($DB_PREFIX.'login u,'.$DB_PREFIX.'topic_zan z,'.$DB_PREFIX.'topic t')
+ 		$array = $this->table($DB_PREFIX.'login u,'.$DB_PREFIX.'topic_zan z,'.$DB_PREFIX.'topic t')
  					->field('u.id u_id,u.icon u_icon,u.nickname u_nickname,z.zan_id topic_id, t.title t_title')
  					->where('u.id = z.user_id and t.id = z.zan_id and z.type = 1 and z.id ='.$id)
  					->find();
@@ -34,9 +33,8 @@ class ZanModel extends Model{
  	}
 
  	public function getMessageType4($id){
- 		$M = M('');
  		$DB_PREFIX = C('DB_PREFIX');
- 		$array = $M ->table($DB_PREFIX.'login u,'.$DB_PREFIX.'topic_zan z,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'topic_comment co,'.$DB_PREFIX.'login uu')
+ 		$array = $this ->table($DB_PREFIX.'login u,'.$DB_PREFIX.'topic_zan z,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'topic_comment co,'.$DB_PREFIX.'login uu')
  					->field('u.id u_id,u.icon u_icon,u.nickname u_nickname,z.zan_id comment_id,co.topic_id topic_id, t.title t_title,uu.id topic_user_id,uu.nickname topic_user_nickname')
  					->where('u.id = z.user_id and t.id = co.topic_id and co.id = z.zan_id and z.type = 2 and uu.id = t.user_id and z.id = '.$id)
  					->find();
@@ -57,4 +55,17 @@ class ZanModel extends Model{
  		$condition['delete_tag'] = 0;
  		return $this->where($condition)->order('count(user_id) desc')->field('other_id,count(user_id) zannum')->group('other_id')->select();
  	}
+
+ 	/**
+	 * [getDynamics10 获取动态 类型10 点赞了景点]
+	 * @param  [Integer] $id [点赞ID]
+	 * @return [array] 
+	 */
+ 	public function getDynamics10($id){
+ 		$DB_PREFIX = C('DB_PREFIX');
+ 		$condition['_string'] = 'z.other_id = s.id and z.type = 1 and s.delete_tag = 0';
+ 		$condition['z.id'] = $id;
+ 		return $this->table($DB_PREFIX.'Zan z,'.$DB_PREFIX.'Scenic s')->field('s.name scenic,z.id scenic_id')->where($condition)->find();
+ 	}
+
 }

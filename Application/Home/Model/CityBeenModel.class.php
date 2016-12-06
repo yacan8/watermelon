@@ -1,7 +1,17 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class CityBeenModel extends Model{
+use Think\Model\RelationModel;
+class CityBeenModel extends RelationModel{
+	//关联属性
+	protected $_link = array(
+		'city'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'City',
+	        'foreign_key'=>'city_id',
+	        'mapping_fields'=>'city',
+	        'as_fields'=>'city'
+	    )
+	);
 
 	/**
 	 * [getCountByCityId 获取数量通过城市编号]
@@ -32,5 +42,16 @@ class CityBeenModel extends Model{
 	public function getListByUserId($user_id,$limit){
 		$condition['user_id'] = $user_id;
 		return $this->where($condition)->limit($limit)->select();
+	}
+
+
+	/**
+	 * [getDynamics7 获取动态 类型7 获取城市去过信息]
+	 * @param  [Integer] $id [城市去过ID]
+	 * @return [array] 
+	 */
+	public function getDynamics7($id){
+		$result = $this->relation('city')->where(array('delete_tag'=>(bool)0))->find($id);
+		return $result;
 	}
 }

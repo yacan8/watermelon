@@ -16,7 +16,7 @@ class AccountController extends Controller{
 	}
 
 	public function index(){
-		$id = I('get.id');
+		$id = I('get.id',session('login'));
 		$info = $this->getInfo($id);
 		if($id!=session('login')){
 			$model = D('Attention');
@@ -30,14 +30,17 @@ class AccountController extends Controller{
 
 	// 个人动态view
 	public function dynamics(){
-		$id = I('get.id');
+		$id = I('get.id',session('login'));
+		$p = I('get.p',1);//页数
+		$count = 10 ; //每页显示个数
 		$info = $this->getInfo($id);
 		$model = D('Dynamics');
 		$condition['user_id'] = $id;
-		$Page = new \Think\Page($model->getCount(),2);
-		$reslut = $model->getList(); 
+		$Page = new \Think\Page($model->getCount($id),$count);
+		$reslut = $model->getList($p,$count,$id); 
 		$this->assign('content','AccountContent/dynamics');
 		$this->assign('info',$info);
+		$this->assign('page',$Page->show());
 		$this->assign('dynamics',$reslut);
 		$this->display('index');
 	}

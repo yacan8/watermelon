@@ -28,7 +28,7 @@ class TravelNoteController extends Controller {
         $condition['id'] = $id;
         $travelnote = $model->getInfoById($condition);
     	$CommentModel = D('Comment');
-		// $CommentList = $CommentModel->getCommentByOtherId($id,3,1,4);
+		$CommentList = $CommentModel->getCommentByOtherId($id,3,1,4);
 		$this->assign('id',$id);
         $this->assign('travelnote',$travelnote);
 		$this->assign('CommentList',$CommentList);

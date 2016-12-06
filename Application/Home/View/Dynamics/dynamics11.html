@@ -1,0 +1,16 @@
+<div>评论了装备 <a class="m-r-sm" href="{:U('Equipment/detail',array('id'=>$vo['content']['equipment_id']))}">
+{$vo.content.name}</a></div>
+<div class="m-t-xs">{:W('Scenic/score',array('score'=>$vo['content']['recommend'],'info'=>$vo['content']['recommendinfo']))}</div>
+<div class="m-t-xs tc-gray6">
+	价格来源：{$vo.content.price_source}
+</div>
+<div class="m-t-xs tc-gray6">
+	<span class="glyphicon glyphicon-thumbs-down"></span> 不足：{$vo.content.disadvantage}
+</div>
+
+<div class="m-t-xs tc-gray6">
+	<span class="glyphicon glyphicon-thumbs-up"></span> 优点：{$vo.content.advantage}
+</div>
+<div class="m-t-xs tc-gray6">
+	<span class="glyphicon glyphicon-globe"></span> 综合：{$vo.content.synthesize}
+</div>

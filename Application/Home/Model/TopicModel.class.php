@@ -148,4 +148,14 @@ class TopicModel extends RelationModel{
 		$count = $this ->table($DB_FREFIX.'topic w')->where(array('w.title'=>array('like','%'.$key.'%')))->count();
 		return $result;
 	}
+
+	/**
+	 * [getDynamics14 获取动态 类型14 发表了话题]
+	 * @param  [Integer] $id [话题ID]
+	 * @return [array] 
+	 */
+ 	public function getDynamics14($id){
+ 		return $this->find($id);
+ 	}
+
 }

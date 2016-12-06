@@ -155,4 +155,43 @@ class TopicCommentController extends Controller {
 			$this->redirect('Login/index');
 		}
     }
+
+
+
+    public function view(){
+		$id = I('get.id');
+		if($id!=''){
+			$TopicCommentModel = M('TopicComment');
+			$arr = $TopicCommentModel->where(array('id'=>$id))->field('id,topic_id,comment_id,time')->find();
+			if(count($arr)!=0){
+				if($arr['comment_id']=='0'){
+					$pageId = $arr['id'];
+					$time = $arr['time'];
+				}else{
+					$pageId = $id;
+					$time = $TopicCommentModel->where(array('id'=>$arr['id']))->getField('time');
+				}
+					
+
+				$condition['comment_id'] = array('eq',0);
+				$condition['topic_id']   = array('eq',$arr['topic_id']);
+				$condition['delete_tag'] = array('eq',(bool)0);
+				// $AllCount = $TopicCommentModel->where($condition)->order('time asc')->count();
+				$condition['time'] = array('lt',$time);
+				$PreCount = $TopicCommentModel->where($condition)->order('time asc')->count();
+				if($PreCount%10==0)
+					$p = (int)$PreCount/10;
+				else
+					$p = (int)($PreCount/10)+1;
+				$this->redirect('/t/'.$arr['topic_id']."#c".$id,array('p'=>$p));
+
+			}else{
+				echo '该评论不存在';
+			}
+		}else{
+			echo '参数错误';
+		}
+	}
+
+	
 }

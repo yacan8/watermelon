@@ -47,8 +47,8 @@ class CollectionModel extends RelationModel{
 					   ->select();
 		foreach ($result as &$value) {
 			switch ($value['type']) {
-				case '1': $model = D('TravelNote'); 
-						  $info = $model->getInfoByUserId($value['other_id']);
+				case '1': $model = D('TravelNote'); echo $value['type'];
+						  $info = $model->getById($value['other_id']);
 						  $value['title'] = $info['title'];
 						  break;
 				case '2': $model = D('Topic'); 

@@ -126,4 +126,15 @@ class TravelNoteModel extends Model{
 			return false;
 		}
 	}
+
+
+	/**
+	 * [getDynamics12 获取动态 类型12 发表了游记]
+	 * @param  [Integer] $id [游记ID]
+	 * @return [array] 
+	 */
+ 	public function getDynamics12($id){
+ 		return $this->find($id);
+ 	}
+
 }

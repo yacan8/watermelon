@@ -1,0 +1,4 @@
+<if condition="count($vo['content']) neq 0">
+上传了{:count($vo['content'])}张照片 
+{:W('Account/dynamicsImg',array('dynamics_id'=>$vo['id']))}
+</if>

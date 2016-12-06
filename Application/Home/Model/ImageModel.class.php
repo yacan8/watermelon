@@ -54,7 +54,16 @@ class ImageModel extends RelationModel{
 		$count = $this ->where(array('delete_tag'=>(bool)0,'scenic_id'=>$scenic_id))->count();
 		return $count;
 	}
-
+	/**
+	 * [getImgByDynamicsId 通过动态ID获取图片]
+	 * @param  [Integer] $dynamics_id [动态ID]
+	 * @return [List]       [查询到的图片列表]
+	 */
+	public function getImgByDynamicsId($dynamics_id){
+		$condition['dynamics_id'] = $dynamics_id;
+		$condition['delete_tag'] = (bool)0;
+		return $this->where($condition)->field('image')->select();
+	}
 
 	/**
 	 * [getListByCityId 获取图片列表通过城市编号]
@@ -125,25 +134,33 @@ class ImageModel extends RelationModel{
 			$condition['_logic'] = 'and';
 			$condition['city_id'] = $city_id;
 		}
-		$array = $this	->field('id,scenic_id,time,user_id,image,city_id')
-							->relation(true)
-							->where($condition)
-							->find($id);
+		$array = $this->field('id,scenic_id,time,user_id,image,city_id')
+					  ->relation(true)
+					  ->where($condition)
+					  ->find($id);
 		$next_condition = $pre_condition = $condition;
 		$next_condition['id']  = array('gt',$id);
 		$pre_condition['id']  = array('lt',$id);
-		$array['next'] = $this->where($next_condition)->limit('1')->getField('id');//上一个ID
-		$array['pre'] = $this->where($pre_condition)->limit('1')->order('id desc')->getField('id');//下一个ID
+		$array['next']  = $this->where($next_condition)->limit('1')->getField('id');//上一个ID
+		$array['pre']   = $this->where($pre_condition)->limit('1')->order('id desc')->getField('id');//下一个ID
 		$array['count'] = $this->where($next_condition)->count()+1;
 		return $array;
 		
 	}
-
+	/**
+	 * [getCountByUserId 过去相片数量通过用户ID]
+	 * @param  [Integer] $userid [用户ID]
+	 * @return [Integer] 相片总数
+	 */
 	public function getCountByUserId($userid){
 		$count = $this ->where(array('delete_tag'=>(bool)0,'user_id'=>$userid))->count();
 		return $count;
 	}
-
+	/**
+	 * [getListByAlbumId 通过相册获取相片列表]
+	 * @param  [Array] $condition [查询条件，其中键值包括album_id]
+	 * @return [List]            [相片列表]
+	 */
 	public function getListByAlbumId($condition){
 		$result = $this->relation(false)->where($condition)->select();
 		return $result;
@@ -151,6 +168,57 @@ class ImageModel extends RelationModel{
 
 
 	
+	/**
+	 * [getDynamics4 获取动态 类型4 在城市中上传了照片]
+	 * @param  [Integer] $id [动态ID]
+	 * @return [List] 
+	 */
+	public function getDynamics4($id){
+		$condition['delete_tag'] = (bool)0;
+		$condition['_logic'] = 'and';
+		$condition['dynamics_id'] = $id;
+		$List = $this	->field('id,scenic_id,time,user_id,image,city_id')
+						->relation(true)
+						->where($condition)
+						->order('id desc')
+						->select();
+		return $List;
+	}
 
+	/**
+	 * [getDynamics5 获取动态 类型5 在景点中上传了照片]
+	 * @param  [Integer] $id [动态ID]
+	 * @return [List] 
+	 */
+	public function getDynamics5($id){
+		$condition['delete_tag'] = (bool)0;
+		$condition['_logic'] = 'and';
+		$condition['dynamics_id'] = $id;
+		$List = $this	->field('id,scenic_id,time,user_id,image,city_id')
+						->relation(true)
+						->where($condition)
+						->order('id desc')
+						->select();
+		return $List;
+	}
+
+
+
+	/**
+	 * [getDynamics5 获取动态 类型5 在景点中上传了照片]
+	 * @param  [Integer] $id [动态ID]
+	 * @return [List] 
+	 */
+	public function getDynamics19($id){
+		$condition['delete_tag'] = (bool)0;
+		$condition['_logic'] = 'and';
+		$condition['dynamics_id'] = $id;
+		$List = $this	->field('id,scenic_id,time,user_id,image,city_id')
+						->relation(true)
+						->where($condition)
+						->order('id desc')
+						->select();
+		return $List;
+	}
 
 }
