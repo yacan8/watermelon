@@ -45,4 +45,25 @@ class CollectionController extends Controller{
 			echo json_encode($json);
 		}
 	}
+
+
+	public function delete(){
+		if(session('?login')){
+			$user_id = session('login');
+			$id = I('get.id');
+			$CollectionModel = M('Collection');
+			$data = $CollectionModel->find($id);
+			if($data!=null&&$data['user_id']==$user_id){
+				$data['delete_tag'] = (bool)1;
+				if($CollectionModel->where(array('id'=>$id))->save($data)!==false)
+					$this->success('取消收藏成功');
+				else
+					$this->error('操作失败');
+			}else{
+				$this->error('错误');
+			}
+		}else{
+			$this->error('请先登录');
+		}
+	}
 }

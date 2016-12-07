@@ -136,6 +136,7 @@ class AccountController extends Controller{
 		$id = I('get.id');
 		$info = $this->getInfo($id);
 		$model = D('Collection');
+		$condition['delete_tag'] = (bool)0;
 		$condition['user_id'] = $id;
 		$Page = new \Think\Page($model->getCount($condition),4);
 		$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
