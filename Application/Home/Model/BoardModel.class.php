@@ -1,17 +1,30 @@
 <?php
 namespace Home\Model;
-use Think\Model;
+use Think\Model\RelationModel;
 /**
 * 
 */
-class BoardModel extends Model{
+class BoardModel extends RelationModel{
+
+
+	//关联属性
+	protected $_link = array(
+	    'userinfo'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'Login',
+	        'foreign_key'=>'message_user_id',
+	        'mapping_fields'=>'nickname,icon'
+	    )
+	);
+
+
 	/**
 	 * [getList 获取留言列表]
 	 */
 	public function getList($first,$list,$condition){
 		$lmodel = D('Login');
 		$rmodel = D('BoardReply');
-		$result = $this->where($condition)->order('time desc')->limit($first.','.$list)->select();
+		$result = $this->where($condition)->relation('userinfo')->order('time desc')->limit($first.','.$list)->select();
 		foreach ($result as &$value) { 
 			$value['messageuserinfo'] = $lmodel->getById($value['message_user_id']);
 			$value['reply'] = $rmodel->getList($value['id']);
