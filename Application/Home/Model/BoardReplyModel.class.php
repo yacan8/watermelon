@@ -16,7 +16,7 @@ class BoardReplyModel extends Model{
 		$result = $this->where($condition)->select();
 		$lmodel = D('Login');
 		foreach ($result as &$value) {
-			$value['senderinfo'] = $lmodel->getById($value['sendar']);
+			$value['senderinfo'] = $lmodel->getById($value['sender']);
 			$value['receiverinfo'] = $lmodel->getById($value['receiver']);
 		}
 		return $result;

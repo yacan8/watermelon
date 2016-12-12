@@ -97,7 +97,10 @@ class AccountController extends Controller{
 		$condition['user_id'] = $id;
 		$Page = new \Think\Page($model->getCount($condition),4);
 		$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
-		dump($result);
+		if(session('?login')){
+			$user = D('Login')->getById(session('login'));
+			$this->assign('user',$user);
+		}
 		$this->assign('count',$model->getCount($condition));
 		$this->assign('board',$result);
 		$this->assign('info',$info);

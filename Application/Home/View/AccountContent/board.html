@@ -1,38 +1,37 @@
 <div class="font-20 m-b-sm p-l-sm">留言板({$count})</div>
-
-<if condition="count($borad) neq 0">
+<if condition="count($board) neq 0">
 <div class="p-md border-gray-e bg-white m-b-md">
-	<volist name="borad" id="vo">
+	<volist name="board" id="vo">
 	<div class="board-item p-b-md border-gray-b-e m-b-md">
 		<div class="media">
 			<div class="media-left">
-				<a href="#"><img class="media-object media-img" src="__PUBLIC__/img/f2.png" alt="..."></a>
+				<a href="{:U('/u/'.$vo['message_user_id'],'',false,false)}"><img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/{$vo.userinfo.icon|default='default.jpg'}" alt="..."></a>
 			</div>
 			<div class="media-body">
-				<a href="#" class="media-heading"></a>
+				<a href="{:U('/u/'.$vo['message_user_id'],'',false,false)}" class="media-heading">{$vo.userinfo.nickname}</a>
 				<div class="m-t-xs line-24">
 					{$vo.content}
 				</div>
 				<div class="m-t-xs tc-gray9">
-					<span class="">{$vo.time}</span>
-					<a href="javascript:void(0)" class="pull-right">
+					<span class="font-12">{$vo.time}</span>
+					<a href="javascript:void(0)"  class="font-12 tc-gray9 m-l-sm board" data-nickname="{$vo.userinfo.nickname}" data-board-id="{$vo.id}" data-sender="{$vo.message_user_id}">
 						<span class="glyphicon glyphicon-comment"> </span>
 						回复
 					</a>
 				</div>
-				<volist name="$vo.reply" id="re">
+				<volist name="vo.reply" id="re">
 				<div class="media">
 					<div class="media-left">
-						<a href="#"><img class="media-object media-img" src="__PUBLIC__/img/{$re.senderinfo.icon}" alt="..."></a>
+						<a href="{:U('/u/'.$re['sender'],'',false,false)}"><img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/{$re.senderinfo.icon|default='default.jpg'}" alt="..."></a>
 					</div>
 					<div class="media-body">
-						<a href="#" class="media-heading">{$re.ssenderinfo.nickname}</a> 回复 <a href="#" class="media-heading">{$re.receiverinfo.nickname}</a>
+						<a href="{:U('/u/'.$re['sender'],'',false,false)}" class="media-heading">{$re.senderinfo.nickname}</a> 回复 <a href="#" class="media-heading">{$re.receiverinfo.nickname}</a>
 						<div class="m-t-xs line-24">
 							{$re.content}
 						</div>
 						<div class="m-t-xs tc-gray9">
-							<span class="">{$re.time}</span>
-							<a href="javascript:void(0)" class="pull-right">
+							<span class="font-12">{$re.time}</span>
+							<a href="javascript:void(0)" class="font-12 tc-gray9 m-l-sm board" data-nickname="{$re.senderinfo.nickname}" data-board-id="{$vo.id}" data-sender="{$re.sender}">
 								<span class="glyphicon glyphicon-comment"> </span>
 								回复
 							</a>
@@ -53,27 +52,26 @@
 	</div>
 	</div>
 	<else/>
-	<div class="text-center tc-gray9" style="height:210px;line-height:210px;">暂无话题</div>
+	<div class="text-center tc-gray9" style="height:210px;line-height:210px;">暂无留言</div>
 </if>
 <div class="p-md border-gray-e bg-white m-b-md">
 	<div class="font-20 m-b-lg">留个言吧</div>
 	<div class="board-item p-b-md">
 		<div class="media">
+			<if condition="session('?login')">
+				<div class="media-left">
+					<a href="{:U('/u/'.$user['id'])}"><img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/default.jpg" alt="..."></a>
+				</div>
+			<else/>
 			<div class="media-left">
-				<a href="#"><img class="media-object media-img" src="__PUBLIC__/img/f2.png" alt="..."></a>
+				<a href="{:U('Login/login')}"><img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/{$user.icon|default='default.jpg'}" alt="..."></a>
 			</div>
+			</if>
 			<div class="media-body">
-				<textarea class="form-control" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
-				
-					<a href="javascript:void(0)" data-loading-text="发表中..." id="addComment" class="m-t-md btn bg-main btn-md">发表评论</a>
+				<textarea class="form-control" id="saytext" name="saytext" placeholder="请输入留言内容" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
+					<a href="javascript:void(0)" data-loading-text="发表中..." id="boardAdd" class="m-t-md btn bg-main btn-md">发表评论</a>
 					<div class="reply-container">
-						<div class="btn-group btn-sm m-t-md">
-							<a class="btn btn-default reply-user" data-reply="0">回复：账号19</a>
-							<a href="javascript:void(0)" class="btn btn-info dropdown-toggle remover-reply">×</a>
-						</div>
 					</div>
-				
-				<span style="position: relative;display: inline-block;vertical-align: middle;" class="m-l-sm m-t-md tc-gray9 tag ">请回复一些有意义的信息，不健康的内容将很快被删除。</span>
 			</div>
 		</div>
 	</div>

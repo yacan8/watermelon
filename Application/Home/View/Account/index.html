@@ -86,5 +86,62 @@
   <script type="text/javascript" src="__PUBLIC__/js/wait.js"></script>
   <script type="text/javascript" src="__PUBLIC__/js/edit_information.js"></script>
 </if>
+<if condition="(CONTROLLER_NAME eq 'Account') and (ACTION_NAME eq 'board')">
+<script type="text/javascript">
+  $(document).ready(function($) {
+    $('.board').click(function(event) {
+      var _self = $(this);
+      var receiver = _self.attr('data-sender');
+      var board_id = _self.attr('data-board-id');
+      var nickname = _self.attr('data-nickname');
+      var str = '<div class="btn-group btn-sm m-t-md">'+
+              '<a class="btn btn-default reply-user" data-receiver="'+receiver+'" data-board-id="'+board_id+'">回复：'+nickname+'</a>'+
+              '<a href="javascript:void(0)" class="btn btn-info dropdown-toggle remover-reply">×</a>'+
+            '</div>';
+      $('.reply-container').html(str);
 
+    });
+    $(document).on('click',".remover-reply",function(){
+      $(this).parent().remove();
+    })
+    $("#boardAdd").click(function(event) {
+      var reply = $('.reply-container');
+      var reply_btn = reply.find(".reply-user");
+      var receiver , board_id;
+      if(reply_btn.length>0){
+        receiver = reply_btn.attr('data-receiver');
+        board_id = reply_btn.attr('data-board-id');
+      }else{
+        receiver = board_id = 0;
+      }
+      var content = $.trim($("#saytext").val());
+      var user_id = {$info.id};
+      if(content!=''){
+        $.ajax({
+          url: '{:U("Board/board")}',
+          type: 'post',
+          dataType: 'json',
+          data: {board_id: board_id,receiver:receiver,content:content,user_id:user_id},
+        })
+        .done(function(data) {
+          console.log(data);
+          if(data.code==200){
+            alert('操作成功');
+            history.go(0);
+          }
+          else
+            alert(data.mes);
+        })
+        .fail(function() {
+          alert('请求错误')
+        })
+      }else{
+        alert('请输入内容')
+      }
+      
+    });
+  });
+
+</script>
+</if>
 </html>
