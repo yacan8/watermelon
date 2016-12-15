@@ -1,23 +1,35 @@
 
 <div class="album_con">
-	<volist name="album" id="vo">
-	<div class="album_item">
-		<a href="{:U('Account/photo',array('albumid'=>$vo['id']))}" class="pic_con" style="background-image:url('__PUBLIC__/img/f1.png')">
-			<span class="num">
-				<span class="font-12 glyphicon glyphicon-eye-open"></span>
-					25
-				<span class="font-12 m-l-sm glyphicon glyphicon-picture"></span>	
-					15
-			</span>
-			<span class="browse">
 
-			</span>
-		</a>
-		<div class="to1 info">
-			<a class="tc-black" href="{:U('Account/photo',array('albumid'=>$vo['id']))}">{$vo.name}</a>
+
+		<volist name="album" id="vo">
+		<div class="album_item">
+			<a href="{:U('Account/photo',array('id'=>$user_id,'album_id'=>$vo['id']))}" class="pic_con" style="background-image:url('{:C("__DATA__")}/{$vo.image}')">
+				<span class="num">
+					<span class="font-12 glyphicon glyphicon-eye-open"></span>
+						{$vo.browse}
+					<span class="font-12 m-l-sm glyphicon glyphicon-picture"></span>	
+						{$vo.img_count}
+				</span>
+			</a>
+			<div class="to1 info">
+				<a class="tc-black" href="{:U('Account/photo',array('id'=>$user_id,'album_id'=>$vo['id']))}">{$vo.name}</a>
+			</div>
 		</div>
-	</div>
+		</volist>
+		<div class="album_item">
+			<a href="{:U('Account/photo',array('id'=>$user_id,'album_id'=>$vo['id']))}" class="pic_con" style="background-image:url('{:C("__DATA__")}/default.jpg')">
+				<span class="num">
+					<span class="font-12 m-l-sm glyphicon glyphicon-picture"></span>	
+					{$photonum}
+				</span>
+			</a>
+			<div class="to1 info">
+				<a class="tc-black" href="{:U('Account/photo',array('id'=>$user_id,'album_id'=>0))}">{$self}的默认相册</a>
+			</div>
+		</div>
 
-	</volist>
+	<!-- <div class="text-center tc-gray9" style="height:210px;line-height:210px;">该用户暂无相册</div> -->
+	
 
 </div>

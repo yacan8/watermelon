@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="__PUBLIC__/css/account_pic.css">
     <link rel="stylesheet" href="__PUBLIC__/css/photoViewer.css">
   	<link rel="stylesheet" href="__PUBLIC__/css/photo.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/photo_upload.css">
 
 
     <title>西瓜游-景点</title>
@@ -57,12 +58,12 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="m-t-sm">
-              <a class="m-r-md font-16 tc-black" href="#">{$self}的相册({$albumnum})</a>
-              <a class="font-16 tc-black" href="#">{$self}的旅游相片({$photonum})</a>
-
+              <a class="m-r-md font-16 tc-black" href="{:U('Account/album',array('id'=>$user_id))}">{$self}的相册({$albumnum})</a>
+              <a class="font-16 tc-black" href="{:U('Account/photo',array('id'=>$user_id,'album_id'=>0))}">{$self}的旅游相片({$photonum})</a>
+              <if condition="session('login') eq $user_id">
               <a href="#" class="btn btn-sm btn-info pull-right  m-l-sm" data-toggle="modal" data-target="#myModal">+创建相册</a>
-              <a href="#" class="btn btn-sm btn-success pull-right">上传相片</a>
-
+              <a href="#" class="btn btn-sm btn-success pull-right photo_upload">上传相片</a>
+              </if>
             </div>
             <div class="m-t-md">
               <include file="$content" />
@@ -74,23 +75,36 @@
       </div>
     </div>
 
-
+<include file="ScenicContent/photoUpload" />
     <include file="Common/footer" />
 </body>
 <include file="Common/footerJS" />
 <script type="text/javascript" src="/watermelon/Public/assets/jquery/js/jquery.scrollLoading.js"></script>
  
 <script type="text/javascript" src="__PUBLIC__/js/photoViewer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/exif/js/exif.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/jquery/js/jquery.form.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/img_base64.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/photo_upload.js"></script>
 <script type="text/javascript">
+  var _login_url = "{:U('Login/index')}?url=__SELF__";
+  var album_url = "{:U('Album/load')}";
   var PUBLIC = "__PUBLIC__";
+  var login_state = <if condition="session('?login')">true<else/>false</if>;
+  var save_url = "{:U('Image/upload_save')}";
+  var delete_url = "{:U('Image/cancel')}";
+  var add_album_url = "{:U('Album/add')}";
+  var scenic_id = 0;
+  var city_id = 0;
+
 
  $(function(){
   $('.pic_thumb').scrollLoading();
 
 
   $(".photoItem img").photoViewer({
-        loadUrl : "{:U('Index/ajax_load')}",
-        num: 100
+        loadUrl : "{:U('Image/albumLoad')}",
+        num: {$count}
    });
  })
 </script>

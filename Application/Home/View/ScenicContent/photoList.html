@@ -1,3 +1,35 @@
+
+
+<div class="photoCon">
+  <volist name="imgList" id ="vo">
+    <div class="photoItem">
+      <img data-id="{$vo.id}" src="{:U('Image/ScenicImg',array('w'=>180,'h'=>160,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
+      <div class="info">
+        
+          <a href="{:U('/u/'.$vo['user_id'],'',false,false)}">{$vo.user.nickname}</a>
+          <if condition="$vo['scenic_id'] neq '0' and $vo['city_id'] neq '0'">
+            上传于 </if> <a href="{:U('Scenic/city',array('id'=>$vo['city']['id']))}">{$vo.city.city}</a>
+          <if condition ="$vo['scenic_id'] neq '0'">
+          /
+          <a href="{:U('Scenic/scenic',array('id'=>$vo['scenic']['id']))}">{$vo.scenic.name}</a>
+          </if>
+        
+        
+      </div>
+      <if condition="session('login') eq $user_id">
+      <a href="{:U('Image/delete',array('id'=>$vo['id']))}" onclick="return confirm('确认删除吗？')" class="p_delete">
+        <span class="glyphicon glyphicon-trash"></span>
+      </a>
+      </if>
+        
+    </div>
+  </volist>
+
+</div>
+<ul class="pagination pagination-sm pull-right">
+  {$page}
+</ul>
+<!--
 <div class="photoCon"> 
   <div class="photoItem">
     <img src="http://img2.3lian.com/2014/f2/132/d/6.jpg">
@@ -90,3 +122,4 @@
     </a>
   </div>
 </div>
+-->

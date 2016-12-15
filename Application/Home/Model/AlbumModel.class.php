@@ -9,6 +9,13 @@ class AlbumModel extends Model{
  	 */
 	public function getList($condition=null){
 		$result = $this->where($condition)->select();
+		$ImageModel = M('Image');
+		for ($i=0; $i < count($result); $i++) { 
+			$result[$i]['image'] = $ImageModel->where(array('album_id'=>$result[$i]['id']))->getField('image');
+			$result[$i]['img_count'] = $ImageModel->where(array('album_id'=>$result[$i]['id']))->count();
+			if($result[$i]['image']=='')
+				$result[$i]['image'] = 'default.jpg';
+		}
 		return $result;
 	}
 

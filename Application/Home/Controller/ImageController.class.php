@@ -51,27 +51,7 @@ class ImageController extends Controller {
             imagejpeg ( $i );
         }
     }
-    public function imgLoad(){
-        $type = I('get.type');
-        $image_id = I('get.photoId');
-        $ImageModel = D('Image');
-        $info = $ImageModel->getImage($image_id,$type);
-        $info['time']= substr($info['time'],0,10);
-        $info['describe'] = $info['describe']."<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a>";
-        $info['describe'] = $info['describe']." ".$info['time']." 上传于";
-        $info['describe'] = $info['describe']." <a href='".U('Scenic/city',array('id'=>$info['city']['id']))."'>".$info['city']['city']."</a>";
-        if($info['scenic_id']!='0'){
-            $info['describe'] = $info['describe']." / <a href='".U('Scenic/scenic',array('id'=>$info['scenic_id']))."'>".$info['scenic']['name']."</a>";  
-        }
-        
-        $info['image'] = C('__DATA__').'/'.$info['image'];
-        unset($info['user']);
-        unset($info['scenic']);
-        unset($info['user_id']);
-        unset($info['scenic_id']);
-        unset($info['city']);
-        echo json_encode($info);
-    }
+
 
 
     public function scenic_img_upload(){
@@ -201,7 +181,52 @@ class ImageController extends Controller {
 
     }
 
+    public function imgLoad(){
+        $type = I('get.type');
+        $image_id = I('get.photoId');
+        $ImageModel = D('Image');
+        $info = $ImageModel->getImage($image_id,$type);
+        $info['time']= substr($info['time'],0,10);
+        $info['describe'] = $info['describe']."<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a>";
+        $info['describe'] = $info['describe']." ".$info['time'];
+        if($info['city_id']!='')
+            $info['describe'] = $info['describe']." 上传于 <a href='".U('Scenic/city',array('id'=>$info['city']['id']))."'>".$info['city']['city']."</a>";
+        if($info['scenic_id']!='0'){
+            $info['describe'] = $info['describe']." / <a href='".U('Scenic/scenic',array('id'=>$info['scenic_id']))."'>".$info['scenic']['name']."</a>";  
+        }
+        
+        $info['image'] = C('__DATA__').'/'.$info['image'];
+        unset($info['user']);
+        unset($info['scenic']);
+        unset($info['user_id']);
+        unset($info['scenic_id']);
+        unset($info['city']);
+        echo json_encode($info);
+    }
 
+
+
+    public function albumLoad(){
+        $image_id = I('get.photoId');
+        $ImageModel = D('Image');
+        $info = $ImageModel->getImage2($image_id);
+        $info['time']= substr($info['time'],0,10);
+        $info['describe'] = $info['describe']."<a href='".U('/u/'.$info['user_id'],'',false,false)."'>".$info['user']['nickname']."</a>";
+        $info['describe'] = $info['describe']." ".$info['time'];
+        if($info['city_id']!='0')
+            $info['describe'] = ' 上传于 '.$info['describe']." <a href='".U('Scenic/city',array('id'=>$info['city']['id']))."'>".$info['city']['city']."</a>";
+        if($info['scenic_id']!='0'){
+            $info['describe'] = $info['describe']." / <a href='".U('Scenic/scenic',array('id'=>$info['scenic_id']))."'>".$info['scenic']['name']."</a>";  
+        }
+        $info['image'] = C('__DATA__').'/'.$info['image'];
+        unset($info['user']);
+        unset($info['scenic']);
+        unset($info['user_id']);
+        unset($info['scenic_id']);
+        unset($info['city']);
+        echo json_encode($info);
+
+    }
 
     /**
      * [cancel 取消上传 删除刚上传图片]
@@ -210,5 +235,30 @@ class ImageController extends Controller {
         $name = I('post.name');
         $path = "./Data/$name";
         unlink($path);
+    }
+
+
+    public function delete(){
+        if(session('?login')){
+            $id = I('get.id',0);
+            if($id!=0){
+                $model = M('Image');
+                $user_id = $model->where(array('id'=>$id))->getField('user_id');
+                if(session('login')==$user_id){
+                    $data['delete_tag'] = (bool)1;
+                    if($model->where(array('id'=>$id))->save($data)!==false){
+                        $this->success('删除成功');
+                    }else{
+                        $this->error('你没有权限进行此操作');
+                    }
+                }
+            }else{
+                $this->error('参数错误');
+            }
+        }else{
+            $this->error('你还没有登录');
+        }
+        
+
     }
 }

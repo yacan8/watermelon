@@ -145,7 +145,26 @@ class ImageModel extends RelationModel{
 		$array['pre']   = $this->where($pre_condition)->limit('1')->order('id desc')->getField('id');//下一个ID
 		$array['count'] = $this->where($next_condition)->count()+1;
 		return $array;
-		
+	}
+
+
+	public function getImage2($id){
+		$data = $this->where(array('id'=>$id))->field('album_id,user_id')->find();
+		$condition['delete_tag'] = (bool)0;
+		$condition['_logic'] = 'and';
+		$condition['album_id'] = $data['album_id'];
+		$condition['user_id'] = $data['user_id'];
+		$array = $this->field('id,scenic_id,time,user_id,image,city_id')
+					  ->relation(true)
+					  ->where($condition)
+					  ->find($id);
+		$next_condition = $pre_condition = $condition;
+		$next_condition['id']  = array('gt',$id);
+		$pre_condition['id']  = array('lt',$id);
+		$array['next']  = $this->where($next_condition)->limit('1')->getField('id');//上一个ID
+		$array['pre']   = $this->where($pre_condition)->limit('1')->order('id desc')->getField('id');//下一个ID
+		$array['count'] = $this->where($next_condition)->count()+1;
+		return $array;
 	}
 	/**
 	 * [getCountByUserId 过去相片数量通过用户ID]
@@ -162,7 +181,7 @@ class ImageModel extends RelationModel{
 	 * @return [List]            [相片列表]
 	 */
 	public function getListByAlbumId($condition){
-		$result = $this->relation(false)->where($condition)->select();
+		$result = $this->relation(true)->where($condition)->order('id desc')->select();
 		return $result;
 	}
 
