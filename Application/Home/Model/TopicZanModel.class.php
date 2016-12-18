@@ -41,7 +41,6 @@ class TopicZanModel extends Model{
  	public function getDynamics17($id){
  		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
  		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t')->field('t.id id,t.title title')->where('tz.id = '.$id.' and tz.zan_id = t.id and tz.type=1')->find();
-
  		return $result;
  	}
 
@@ -55,8 +54,32 @@ class TopicZanModel extends Model{
  	public function getDynamics18($id){
  		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
  		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'topic_comment tc')->field('t.id t_id,tc.id tc_id,t.title title,tc.content')->where('tz.id = '.$id.' and tz.zan_id = tc.id and tz.type=2 and tc.topic_id = t.id and tc.delete_tag = 0')->find();
- 		dump($this->getLastSql());
  		$result['content'] = D('TopicComment')->replaceUserText($result['content']);
  		return $result;
  	}
+
+
+ 	/**
+	 * [getMessage3 获取消息 类型3 点赞了话题]
+	 * @param  [Integer] $id [点赞ID]
+	 * @return [array] 
+	 */
+ 	public function getMessage3($id){
+ 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+ 		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t')->field('t.id id,t.title title')->where('tz.id = '.$id.' and tz.zan_id = t.id and tz.type=1')->find();
+ 		return $result;
+ 	}
+
+ 	/**
+	 * [getMessage4 获取动态 类型4 点赞了话题中的评论]
+	 * @param  [Integer] $id [点赞ID]
+	 * @return [array] 
+	 */
+ 	public function getMessage4($id){
+ 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+ 		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'topic_comment tc')->field('t.id t_id,tc.id tc_id,t.title title,tc.content')->where('tz.id = '.$id.' and tz.zan_id = tc.id and tz.type=2 and tc.topic_id = t.id and tc.delete_tag = 0')->find();
+ 		$result['content'] = D('TopicComment')->replaceUserText($result['content']);
+ 		return $result;
+ 	}
+
 }

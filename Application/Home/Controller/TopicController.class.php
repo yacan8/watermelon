@@ -18,6 +18,10 @@ class TopicController extends Controller{
 		else
 			$TotalPage = intval($count/$showCount)+1;
 		$List = $TopicModel ->getList($t,$p,$showCount);
+		$TopicCommentModel = D('TopicComment');
+		for ($i=0; $i < count($List); $i++) {//添加评论
+			$List[$i]['comment_list'] = $TopicCommentModel->getByTopicId($List[$i]['t_id'],0,1,4);
+		}
 		$this->assign('TotalPage',$TotalPage);
 		$this->assign('p',$p);//分页
 		$this->assign('t',$t);

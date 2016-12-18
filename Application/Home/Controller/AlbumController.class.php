@@ -8,7 +8,7 @@ class AlbumController extends Controller{
 		if(session("?login")){
 			$user_id = session('login');
 			$AlbumModel = M('Album');
-			$List = $AlbumModel->where(array('user_id'=>'2'))->field('id,name')->order('create_time asc')->select();
+			$List = $AlbumModel->where(array('user_id'=>$user_id))->field('id,name')->order('create_time asc')->select();
 			// dump($List);
 			// dump($AlbumModel->getLastSql());
 			$json['Code'] = '200';

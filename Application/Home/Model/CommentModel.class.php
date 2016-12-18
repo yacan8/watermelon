@@ -78,7 +78,7 @@ class CommentModel extends Model{
 
 
 	/**
-	 * [getDynamics13 获取资讯信息 类型13 在资讯中回复]
+	 * [getDynamics13 获取资讯信息 类型13 在游记中回复]
 	 * @param  [Integer] $id [评论编号]
 	 * @return [array] 
 	 */
@@ -93,7 +93,46 @@ class CommentModel extends Model{
 
 
 
+	/**
+	 * [getMessage7 获取消息 类型7 评论了游记]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getMessage7($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i')
+				  ->field('c.content content,i.title title,i.id travel_note_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
 
 
+	/**
+	 * [getMessage8 获取消息 类型8 在游记中回复]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getMessage7($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i,'.$DB_PREFIX.'login l')
+				  ->field('c.content content,i.title title,i.id travel_note_id,l.nickname receiver_nickname,c.receiver receiver_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.receiver and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
 
+	/**
+	 * [getMessage10 获取消息 类型10 资讯评论被回复了]
+	 * @param  [Integer] $id [评论编号]
+	 * @return [array] 
+	 */
+	public function getMessage10($id){
+		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'infomation i,'.$DB_PREFIX.'login l')
+				  ->field('c.content content,i.title title,i.id infomation_id,l.nickname receiver_nickname,c.receiver receiver_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.receiver and c.delete_tag = 0')
+				  ->find();
+		return $result;
+	}
 }

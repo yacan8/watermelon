@@ -20,34 +20,6 @@
 </head>
 
 <body>
-  <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">创建相册</h4>
-      </div>
-      <form class="form-horizontal">
-        <div class="modal-body">
-          
-          <fieldset>
-           <div class="form-group">
-              <label for="inputEmail" class="col-lg-2 control-label">相册名</label>
-              <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputEmail" placeholder="输入相册名">
-              </div>
-            </div>
-          </fieldset>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
-          <button type="button" class="btn btn-success btn-sm">创建</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 
 
@@ -74,6 +46,36 @@
         
       </div>
     </div>
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">创建相册</h4>
+      </div>
+      <form class="form-horizontal">
+        <div class="modal-body">
+          
+          <fieldset>
+           <div class="form-group">
+              <label class="col-lg-2 control-label">相册名</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="album_name" placeholder="输入相册名">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-success btn-sm" id="album_add">创建</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 
 <include file="ScenicContent/photoUpload" />
     <include file="Common/footer" />
@@ -97,15 +99,66 @@
   var scenic_id = 0;
   var city_id = 0;
 
-
  $(function(){
   $('.pic_thumb').scrollLoading();
 
-
   $(".photoItem img").photoViewer({
         loadUrl : "{:U('Image/albumLoad')}",
-        num: {$count}
+        num: '{$count}',
    });
  })
 </script>
+<script type="text/javascript">
+// 新建相册JS
+$(function(){
+  $("#album_add").click(function(event) {
+    var _self = $(this);
+    _self.button('loading');
+    var name = $.trim($("#album_name").val());
+    if(name!=''){
+      $.ajax({
+        url: '{:U('Album/add')}',
+        type: 'post',
+        dataType: 'json',
+        data: {name: name},
+      })
+      .done(function(data) {
+        if(data.Code=='200'){
+          $.toaster({ priority : 'success', title : '通知', message : '新建相册成功'});
+          setTimeout(function(){
+            history.go(0);
+          },1500)
+        }else{
+          _self.button('reset');
+          $.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-remove"></span>  ', message : data.Message});
+        }
+      })
+      .fail(function() {
+        _self.button('reset');
+        $.toaster({ priority : 'danger', title : '通知', message : '加载失败'});
+      });
+    }else{
+      _self.button('reset');
+      $.toaster({ priority : 'danger', title : '通知', message : '请输入相册名'});
+    }
+  });
+})
+</script>
+<if condition="count($imgList) eq 0 and session('login') eq $user_id and ACTION_NAME eq 'photo'">
+  <script type="text/javascript">
+  $.toaster({ priority : 'danger', title : '通知', message : '暂无相片'});
+    $(function(){
+      $('.photo_upload').click();
+
+
+      setTimeout(function(){
+        $("#album").find('option[value="{$album_id}"]').attr('selected','');
+      },1500)
+
+
+
+    })
+  </script>
+</if>
+</if>
 </html>

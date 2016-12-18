@@ -157,10 +157,58 @@ class TopicCommentModel extends RelationModel{
 
  	/**
 	 * [getDynamics16 获取动态 类型16 在话题中评论中回复]
-	 * @param  [Integer] $id [话题ID]
+	 * @param  [Integer] $id [话题评论ID]
 	 * @return [array] 
 	 */
  	public function getDynamics16($id){
+ 		$result = $this->relation('topic')->find($id);
+ 		if($result['comment_id']!=0){
+	 		$result['receiver_id'] = $this->where(array('id'=>$result['comment_id']))->getField('sender');
+	 		$result['receiver_nickname'] = M('Login')->where(array('id'=>$result['receiver_id']))->getField('nickname');
+ 		}
+ 		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
+ 		$result['content'] = $this->replaceUserText($result['content']);
+ 		return $result;
+ 	}
+
+
+
+	/**
+	 * [getMessage1 获取消息 类型1 话题被评论了]
+	 * @param  [Integer] $id [话题评论ID]
+	 * @return [array] 
+	 */
+ 	public function getMessage1($id){
+ 		$result = $this->relation('topic')->find($id);
+ 		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
+ 		$result['content'] = $this->replaceUserText($result['content']);
+ 		return $result;
+ 	}
+
+
+ 	/**
+	 * [getMessage2 获取消息 类型2 在话题中评论中回复]
+	 * @param  [Integer] $id [话题评论ID]
+	 * @return [array] 
+	 */
+ 	public function getMessage2($id){
+ 		$result = $this->relation('topic')->find($id);
+ 		if($result['comment_id']!=0){
+	 		$result['receiver_id'] = $this->where(array('id'=>$result['comment_id']))->getField('sender');
+	 		$result['receiver_nickname'] = M('Login')->where(array('id'=>$result['receiver_id']))->getField('nickname');
+ 		}
+ 		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
+ 		$result['content'] = $this->replaceUserText($result['content']);
+ 		return $result;
+ 	}
+
+
+ 	/**
+	 * [getMessage6 获取消息 类型3 在话题评论中@]
+	 * @param  [Integer] $id [话题评论ID]
+	 * @return [array] 
+	 */
+ 	public function getMessage6($id){
  		$result = $this->relation('topic')->find($id);
  		if($result['comment_id']!=0){
 	 		$result['receiver_id'] = $this->where(array('id'=>$result['comment_id']))->getField('sender');

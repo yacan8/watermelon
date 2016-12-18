@@ -11,8 +11,8 @@ class AlbumModel extends Model{
 		$result = $this->where($condition)->select();
 		$ImageModel = M('Image');
 		for ($i=0; $i < count($result); $i++) { 
-			$result[$i]['image'] = $ImageModel->where(array('album_id'=>$result[$i]['id']))->getField('image');
-			$result[$i]['img_count'] = $ImageModel->where(array('album_id'=>$result[$i]['id']))->count();
+			$result[$i]['image'] = $ImageModel->where(array('album_id'=>$result[$i]['id'],'delete_tag'=>(bool)0))->getField('image');
+			$result[$i]['img_count'] = $ImageModel->where(array('album_id'=>$result[$i]['id'],'delete_tag'=>(bool)0))->count();
 			if($result[$i]['image']=='')
 				$result[$i]['image'] = 'default.jpg';
 		}

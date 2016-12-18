@@ -89,11 +89,11 @@
 							<div class="m-t-md over-h">
 								<volist name="NearestScenicList" id ="vo">
 									<div class="imgListCon <if condition ='$i/3 eq 1'> mo</if>">
-										<a class="a_img" href="#">
+										<a class="a_img" href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">
 											<img class="imgList3" src="{:U('Image/ScenicImg',array('w'=>193,'h'=>120,'image'=>urlencode($vo['image']).'!feature'),false,false)}">
 										</a>
 										<div class="m-t-sm text-center">
-											<a href="#">{$vo.name}</a>
+											<a href="{:U('Scenic/scenic',array('id'=>$vo['id']))}">{$vo.name}</a>
 										</div>
 										<div class="m-t-xs text-center">
 											{:W('Scenic/score',array('score'=>$vo['grade'],'info'=>kilometre($vo['distance'])))}

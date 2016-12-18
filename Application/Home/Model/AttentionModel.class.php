@@ -27,4 +27,18 @@ class AttentionModel extends Model{
 		$result = $this->where($condition)->field('user_id')->select();
 		return $result;
 	}
+
+
+
+
+	/**
+	 * [getMessage5 获取消息 类型5 被关注了]
+	 * @param  [Integer] $id [关注ID]
+	 * @return [array] 
+	 */
+ 	public function getMessage3($id){
+ 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
+ 		$result = $this->table($DB_PREFIX.'attention a,'.$DB_PREFIX.'login l')->field('l.id id,l.nickname nickname,l.icon icon')->where('a.id = '.$id.' and a.user_id = l.id')->find();
+ 		return $result;
+ 	}
 }

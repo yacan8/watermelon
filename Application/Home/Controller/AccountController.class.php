@@ -120,7 +120,7 @@ class AccountController extends Controller{
 		$condition['user_id'] = $id;
 		$this->assign('photonum',$imodel->where(array('user_id'=>$id,'delete_tag'=>(bool)0,'album_id'=>0))->count());
 		// $this->assign('photonum',$imodel->getCountByUserId($id));
-		$this->assign('albumnum',$amodel->getCount($condition));
+		$this->assign('albumnum',$amodel->getCount($condition)+1);
 		$this->assign('album',$amodel->getList(array('user_id'=>$id,'delete_tag'=>(bool)0,'album_id'=>0)));
 		$this->assign('info',$info);
 		$this->assign('user_id',$id);
@@ -132,6 +132,8 @@ class AccountController extends Controller{
 		$id = I('get.id');
 		$info = $this->getInfo($id);
 		$album_id = I('get.album_id');
+		$AlbumModel =M('Album');
+		$AlbumModel->where(array('id'=>$album_id))->setInc('browse'); 
 		$condition['album_id'] = $album_id;
 		$condition['user_id'] = $id;
 		$amodel = D('Album');
@@ -139,12 +141,13 @@ class AccountController extends Controller{
 		$imodel = D('Image');
 		$count = $imodel->where(array('album_id'=>$album_id,'delete_tag'=>(bool)0,'user_id'=>$id))->count();
 		$ImageList = $imodel->getListByAlbumId($condition);
-		$this->assign('albumnum',$amodel->getCount(array('user_id'=>$id)));
+		$this->assign('albumnum',$amodel->getCount(array('user_id'=>$id))+1);
 		// $this->assign('album',$amodel->getList(array('user_id'=>$id,'delete_tag'=>(bool)0,'album_id'=>0)));
 		$this->assign('photonum',$imodel->where(array('user_id'=>$id,'delete_tag'=>(bool)0,'album_id'=>0))->count());
 		$this->assign('imgList',$ImageList);
 		$this->assign('count',$count);
 		$this->assign('user_id',$id);
+		$this->assign('album_id',$album_id);
 		$this->assign('content','ScenicContent/photoList');
 		$this->assign('info',$info);
 		$this->display('photo');
