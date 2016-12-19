@@ -41,4 +41,16 @@ class BoardModel extends RelationModel{
 		return $this->where($condition)->count();
 	}
 
+
+	/**
+	 * [getMessage11 获取消息 类型10 个人中心被留言了]
+	 * @param  [Integer] $id [留言编号]
+	 * @return [array] 
+	 */
+	public function getMessage11($id){
+		$result = $this->relation('userinfo')->find($id);
+		return $result;
+	}
+
+
 }

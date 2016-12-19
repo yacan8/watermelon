@@ -66,7 +66,7 @@ class TopicZanModel extends Model{
 	 */
  	public function getMessage3($id){
  		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
- 		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t')->field('t.id id,t.title title')->where('tz.id = '.$id.' and tz.zan_id = t.id and tz.type=1')->find();
+ 		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'login l')->field('t.id id,t.title title,l.nickname nickname,l.icon icon,l.id user_id')->where('tz.id = '.$id.' and tz.zan_id = t.id and tz.type=1 and l.id = tz.user_id')->find();
  		return $result;
  	}
 

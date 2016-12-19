@@ -100,9 +100,9 @@ class CommentModel extends Model{
 	 */
 	public function getMessage7($id){
 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
-		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i')
-				  ->field('c.content content,i.title title,i.id travel_note_id')
-				  ->where('c.id = '.$id.' and c.other_id = i.id and c.delete_tag = 0')
+		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i,'.$DB_PREFIX.'login l')
+				  ->field('c.content content,i.title title,i.id travel_note_id,l.nickname sender_nickname,c.sender sender_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.sender and c.delete_tag = 0')
 				  ->find();
 		return $result;
 	}
@@ -113,11 +113,11 @@ class CommentModel extends Model{
 	 * @param  [Integer] $id [评论编号]
 	 * @return [array] 
 	 */
-	public function getMessage7($id){
+	public function getMessage8($id){
 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
 		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'travel_note i,'.$DB_PREFIX.'login l')
-				  ->field('c.content content,i.title title,i.id travel_note_id,l.nickname receiver_nickname,c.receiver receiver_id')
-				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.receiver and c.delete_tag = 0')
+				  ->field('c.content content,i.title title,i.id travel_note_id,l.nickname sender_nickname,c.sender sender_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.sender and c.delete_tag = 0')
 				  ->find();
 		return $result;
 	}
@@ -130,8 +130,8 @@ class CommentModel extends Model{
 	public function getMessage10($id){
 		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
 		$result = $this->table($DB_PREFIX.'comment c,'.$DB_PREFIX.'infomation i,'.$DB_PREFIX.'login l')
-				  ->field('c.content content,i.title title,i.id infomation_id,l.nickname receiver_nickname,c.receiver receiver_id')
-				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.receiver and c.delete_tag = 0')
+				  ->field('c.content content,i.title title,i.id infomation_id,l.nickname sender_nickname,c.sender sender_id')
+				  ->where('c.id = '.$id.' and c.other_id = i.id and l.id = c.sender and c.delete_tag = 0')
 				  ->find();
 		return $result;
 	}

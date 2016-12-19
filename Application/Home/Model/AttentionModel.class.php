@@ -36,7 +36,7 @@ class AttentionModel extends Model{
 	 * @param  [Integer] $id [关注ID]
 	 * @return [array] 
 	 */
- 	public function getMessage3($id){
+ 	public function getMessage5($id){
  		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
  		$result = $this->table($DB_PREFIX.'attention a,'.$DB_PREFIX.'login l')->field('l.id id,l.nickname nickname,l.icon icon')->where('a.id = '.$id.' and a.user_id = l.id')->find();
  		return $result;
