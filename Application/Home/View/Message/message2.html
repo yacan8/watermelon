@@ -1,0 +1,1 @@
+<a href="{:U('/u/'.$vo['content']['receiver_id'],'',false,false)}">{$vo.content.receiver_nickname}</a> 在话题 <a href="{:U('/t/'.$vo['content']['topic_id'])}">{$vo.content.title}</a> 中回复了你：{$vo.content.content}  <a title="查看" href="{:U('TopicComment/view',array('id'=>$vo['content_id']))}"><span class="glyphicon glyphicon-eye-open"></span></a>
