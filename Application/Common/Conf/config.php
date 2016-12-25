@@ -14,8 +14,10 @@ return array(
 	//调试
 	'SHOW_PAGE_TRACE' => true,
 	'URL_ROUTER_ON'   => true, 
-	'URL_ROUTE_RULES'=>array(    
+	'URL_ROUTE_RULES'=>array(
+		'u/:id'  =>array('Account/dynamics','',array('ext'=>'')),
 		't/:id'  => array('Home/Topic/detail','',array('ext'=>'html')),
-		'i/:id'  => array('Home/Infomation/detail','',array('ext'=>'html'))
+		'i/:id'  => array('Home/Infomation/detail','',array('ext'=>'html')),
+		'tn/:id'  => array('Home/TravelNote/detail','',array('ext'=>'html'))
 	),
 );

@@ -14,14 +14,24 @@ class MessageModel extends RelationModel{
 	        'mapping_fields'=>'id,nickname,icon'
 	    )
 	);
-	public function getList($page=1,$count=10,$user_id=0){
+
+
+	public function getCount($user_id){
 		$LoginModel = M('Login');
 		$last_message_time = $LoginModel->where(array('id'=>$user_id))->getField('last_read_message_time');
+		$condition['time'] = array('gt',$last_message_time);
+		$condition['delete_tag'] = (bool)0;
+		$condition['user_id'] = $user_id;
+		$result = $this->where($condition)->count();
+		return $result;
+	}
+	public function getList($page=1,$count=10,$user_id=0){
+		$LoginModel = M('Login');
+		// $last_message_time = $LoginModel->where(array('id'=>$user_id))->getField('last_read_message_time');
 		$condition['user_id'] = $user_id;
 		$condition['delete_tag'] = (bool)0;
-		$condition['time'] = array('gt',$last_message_time);
+		// $condition['time'] = array('gt',$last_message_time);
 		$result = $this->where($condition)
-					   ->relation('userinfo')
 					   ->order('time desc')
 					   ->page($page.','.$count)
 					   ->select();
@@ -49,12 +59,12 @@ class MessageModel extends RelationModel{
 
 				
 				case 5://被关注了
-				case 19://上传了图片
 					$ContentModel = $AttentionModel;
 				break;
 
 				case 7://游记被评论了
 				case 8://游记评论被回复了
+				case 10://资讯评论被回复了
 					$ContentModel = $CommentModel;
 				break;
 
@@ -62,10 +72,6 @@ class MessageModel extends RelationModel{
 					$ContentModel = $ZanModel;
 				break;
 
-
-				case 10://资讯评论被回复了
-					$ContentModel = $CommentModel;
-				break;
 
 				case 11://个人中心被留言了
 					$ContentModel = $BoardModel;
@@ -82,5 +88,7 @@ class MessageModel extends RelationModel{
 
 			
 		}
+
+		return $result;
 	}
 }

@@ -1,4 +1,48 @@
 
+<volist name="MessageList" id="vo">
+	<div class="dynamics-item bg-white border-gray-e m-b-sm">
+		<div class="p-15 border-gray-b-e">
+			<div class="media">
+			  <div class="media-left">
+			    <a href="{:U('/u/'.$vo['content']['user_id'],'',false,false)}">
+			      <img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/{$vo.content.icon|default='default.jpg'}">
+			    </a>
+			  </div>
+			  <div class="media-body">
+			    <h4 class="media-heading font-16"><a href="{:U('/u/'.$vo['content']['user_id'],'',false,false)}">{$vo.content.nickname}</a></h4>
+			    <div class="dynamics-info">
+<!-- 			    	{$vo.type}-
+			    	{$vo.id} -->
+			    	<switch name="vo.type">    
+						<case value="1"><include file="Message/message1" /></case>
+						<case value="2"><include file="Message/message2" /></case>
+						<case value="3"><include file="Message/message3" /></case> 
+						<case value="4"><include file="Message/message4" /></case> 
+						<case value="5"><include file="Message/message5" /></case> 
+						<case value="6"><include file="Message/message6" /></case> 
+						<case value="7"><include file="Message/message7" /></case> 
+						<case value="8"><include file="Message/message8" /></case> 
+						<case value="9"><include file="Message/message9" /></case> 
+						<case value="10"><include file="Message/message10" /></case> 
+						<case value="11"><include file="Message/message11" /></case> 
+						<case value="12"><include file="Message/message12" /></case> 
+						<default />
+					</switch>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<div class="p-sm p-l-15 font-12 tc-gray9">
+			<span class="glyphicon glyphicon-time"></span> {$vo.time}
+		</div>
+	</div>
+</volist>
+
+<ul class="pagination pagination-sm">
+  {$Page}
+</ul>
+
+<!-- 
 
 <div class="media p-md m-b-sm bg-white">
 	<div class="media-left">
@@ -250,3 +294,4 @@
 
 
 
+ -->

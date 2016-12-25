@@ -1,1 +1,1 @@
-<a href="{:U('/u/'.$vo['content']['sender_id'])}">{$vo.content.sender_nickname}</a> 评论了你的游记 <a href="{:U('TravelNote/detail',array('id'=>$vo['content']['travel_note_id']))}">{$vo.content.title}</a>  内容：{$vo.content.content}
+<a href="{:U('/u/'.$vo['content']['user_id'])}">{$vo.content.sender_nickname}</a> 评论了你的游记 <a href="{:U('TravelNote/detail',array('id'=>$vo['content']['travel_note_id']))}">{$vo.content.title}</a>  内容：{$vo.content.content}

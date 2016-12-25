@@ -6,12 +6,12 @@
 				{$info.nickname}  &nbsp;
 				<if condition="$info['id'] neq session('login')" >
 					<if condition="$info['delete_tag'] eq '0'">
-					<button class="btn btn-xs btn-success m-l-sm">
+					<button type='button' id="attention" class="btn btn-xs btn-success m-l-sm">
 						<span class="glyphicon glyphicon-plus"></span> 加关注
 					</button>
 					<else />
-					<button class="btn btn-xs btn-success active m-l-sm">
-						<span class="glyphicon glyphicon-ok"></span> 已关注
+					<button type='button' id="attention" class="btn btn-xs btn-success active m-l-sm">
+						<span id="attention" class="glyphicon glyphicon-ok"></span> 已关注
 					</button>
 					</if>
 				<else />
@@ -36,7 +36,11 @@
 	<li <if condition="ACTION_NAME eq 'collection'">class="active"</if> ><a href="{:U('Account/collection',array('id'=>$info['id']))}">我的收藏</a></li><else />
 	</if>
 	<if condition="$info['id'] eq session('login')">
-	<li <if condition="ACTION_NAME eq 'message'">class="active"</if> ><a href="{:U('Account/message',array('id'=>$info['id']))}">我的消息 <span class="label label-info">5</span></a></li><else />
+	<li <if condition="ACTION_NAME eq 'message'">class="active"</if> ><a href="{:U('Account/message',array('id'=>$info['id']))}">我的消息 
+	<if condition="$info['message_count'] neq 0">
+		<span class="label label-info">{$info.message_count}</span>
+	</if>
+	</a></li><else />
 	</if>
 	<li class="last <if condition="ACTION_NAME eq 'information'">active</if>"><a href="{:U('Account/information',array('id'=>$info['id']))}"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
 	<if condition="$info['id'] eq session('login')">

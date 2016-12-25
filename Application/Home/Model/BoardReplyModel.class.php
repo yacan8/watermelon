@@ -45,6 +45,9 @@ class BoardReplyModel extends RelationModel{
 	 */
 	public function getMessage12($id){
 		$result = $this->relation('sender')->find($id);
+		$result['user_id'] = $result['sender'];
+		$result['nickname'] = $result['userinfo']['nickname'];
+		$result['icon'] = $result['userinfo']['icon'];
 		return $result;
 	}
 

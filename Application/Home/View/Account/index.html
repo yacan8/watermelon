@@ -144,4 +144,41 @@
 
 </script>
 </if>
+
+<script type="text/javascript">
+  $(function(){
+    $("#attention").click(function(){
+      var obj = $(this);
+      var follow_id = {$user_id};
+      $.ajax({
+          url: '{:U("Attention/AjaxAttention")}',
+          type: 'post',
+          dataType: 'html',
+          data: {follow_id: follow_id},
+          success:function(data){
+            var result = $.parseJSON(data);
+            if(result.Code =='202')
+              $.toaster({ priority : 'danger', title : '通知', message : result.Message});
+            else{
+              if(result.Code =='200'){
+                  obj.addClass('active').html('<span class="glyphicon glyphicon-ok"></span> 已关注');
+              }
+              else if(result.Code == '201'){
+                  obj.removeClass('active').html('<span class="glyphicon glyphicon-plus"></span> 关注');
+              }
+                 
+            }
+          },
+          error:function(xhr){
+            alert('请求失败')
+          }
+      });
+      
+    })
+  })
+
+</script>
+
+
+
 </html>

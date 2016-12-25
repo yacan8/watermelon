@@ -12,6 +12,9 @@ class AccountController extends Controller{
 		$info = $info_two;
 		$info['signature'] = $info_one['signature'];
 		$info['id'] = $id;
+		if(session('login')==$id){
+			$info['message_count'] = D('Message')->getCount($id);
+		}
 		return $info;
 	}
 
@@ -49,12 +52,13 @@ class AccountController extends Controller{
 	// 个人游记view
 	public function travelNote(){
 		$id = I('get.id');
+		$p = I('get.p',1);
 		$info = $this->getInfo($id);
 		$model = D('TravelNote');
 		$condition['user_id'] = $id;
 		$this->assign('content','AccountContent/travelNote');
-		$Page = new \Think\Page($model->getCount($condition),2);
-		$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
+		$Page = new \Think\Page($model->getCount($condition),10);
+		$result = $model->getList($p,10,$condition);
 		$this->assign('user_id',$id);
 		$this->assign('result',$result);
 		$this->assign('info',$info);
@@ -170,13 +174,27 @@ class AccountController extends Controller{
 
 	// 我的消息view
 	public function message(){
-		$id = I('get.id');
-		$info = $this->getInfo($id);
-		$mmodel = D('Message');
-		// $
-		$this->assign('info',$info);
-		$this->assign('content','AccountContent/message');
-		$this->display('index');
+		$id = I('get.id',0);
+		if(session('login')!=$id||$id==0){
+			$this->error('参数错误');
+		}else{
+			$p = I('get.p',1);
+			$info = $this->getInfo($id);
+			$MessageModel = D('Message');
+			$MessageList = $MessageModel ->getList($p,10,$id);
+			$LoginModel = D('Login');
+			$data['last_read_message_time'] = date('Y-m-d H:i:s',time());
+			$LoginModel->where(array('id'=>$id))->save($data);
+			// dump($MessageModel->getLastSql());
+			// dump($MessageList);
+			$Page = new \Think\Page($MessageModel->where(array('user_id'=>$id))->count(),10);
+			$this->assign('Page',$Page->show());
+			$this->assign('MessageList',$MessageList);
+			$this->assign('info',$info);
+			$this->assign('content','AccountContent/message');
+			$this->display('index');
+		}
+		
 	}
 
 

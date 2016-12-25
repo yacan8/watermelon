@@ -5,24 +5,28 @@ class TravelNoteModel extends Model{
 
 	/**
 	 * [getList 获取游记列表]
-	 *  @param [Integer] $first 分页参数
-	 *	@param [Interger] $list 分页参数
+	 *  @param [Integer] $count 分页参数
+	 *	@param [Interger] $count 分页参数
 	 */
-	public function getList($first,$list,$condition){
+	public function getList($page,$count,$condition){
 		$lmodel = D('Login');
 		$zmodel = D('Zan');
-		$result = $this->join('left join wt_travel_note_space_belong on wt_travel_note.id = wt_travel_note_space_belong.travel_note_id')
-					   ->join('left join wt_travel_note_space on wt_travel_note_space.id = wt_travel_note_space_belong.space_id')
-					   ->field('wt_travel_note.id,title,time,user_id,content,image,browse,wt_travel_note_space.city')
-					   ->limit(5)
+		$result = $this->table('wt_travel_note tn')->join('left join wt_travel_note_space_belong tnspb on tn.id = tnspb.travel_note_id')
+					   ->join('left join wt_travel_note_space tnsp on tnsp.id = tnspb.space_id')
+					   ->field('tn.id,title,time,user_id,content,image,browse,tnsp.city')
+					   ->page($page.','.$count)
+					   ->group('tn.id')
 					   ->where($condition)
 					   ->select();
 		foreach ($result as &$value) {
-			preg_match_all('/(?<=src=").+?(?=">)/',$value['content'],$value['pic']);
-			$value['content'] = str_sub(preg_replace('/<img.+?>/'," ", $value['content']),200);
+			preg_match_all('/(?<=src=").+\.jpg.*(?=">)/',$value['content'],$value['pic']);
+			// dump($value['pic']);
+			// preg_match_all('/(?<=src=").+?(?=">)/',$value['content'],$value['pic']);
+			$value['content'] = str_sub(preg_replace('/<img.+>/'," ", $value['content']),200);
 			$value['user'] = $lmodel->getById($value['user_id']);
 			$value['zan'] = $zmodel->getCountById(2,$value['id']);
 		}
+
 		return $result;
 	}
 
@@ -87,7 +91,7 @@ class TravelNoteModel extends Model{
 		$base = $this->where('id='.$id)->find();
 		
 		$condition_one['user_id'] = $base['user_id'];
-		$result_one = $this->where($condition_one)->field('time,id,title,browse,image')->select();
+		$result_one = $this->where($condition_one)->field('time,id,title,browse,image,content')->select();
 		$id = array();
 		foreach ($result_one as $key => $value) {
 			$id[$key] = $value['id'];
@@ -97,7 +101,7 @@ class TravelNoteModel extends Model{
 		$viewtop = $base['browse'] + 20;
 		$condition_two['browse'] = array('between',$viewdown.','.$viewtop);
 		$condition_two['id'] = array('not in',$id);
-		$result_two = $this->where($condition_two)->field('time,id,title,browse,image')->select();
+		$result_two = $this->where($condition_two)->field('time,id,title,browse,image,content')->select();
 		$result = array_merge($result_one,$result_two);
 		unset($id);
 		if(count($result)>5){
@@ -113,7 +117,17 @@ class TravelNoteModel extends Model{
 			$result_three = $this->where($con)->limit($limit)->order('time desc')->field('time,id,title,browse,image')->select();
 			$result = array_merge($result,$result_three);
 		}
-		
+		foreach ($result as &$value) {
+			// $value['content'] = str_sub(preg_replace('/<img=.+>/'," ", $value['content']),200);
+			// preg_match_all('/(?<=src=").+\.jpg.*(?=">)/',$value['content'],$value['pic']);
+
+			preg_match_all('/(?<=src=").+\.jpg.*(?=">)/',$value['content'],$pic);
+			// dump($pic[0][0]);
+			// dump($pic);
+			$value['pic'] = $pic[0][0];
+			$pic = null;
+
+		}
 		return $result;
 
 	}

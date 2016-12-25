@@ -180,6 +180,11 @@ class TopicCommentModel extends RelationModel{
 	 */
  	public function getMessage1($id){
  		$result = $this->relation('topic')->find($id);
+ 		$result['user_id'] = $result['sender'];
+ 		$LoginModel = M('Login');
+ 		$info = M('Login')->where(array('id'=>$result['sender']))->field('icon,nickname')->find();
+ 		$result['nickname'] = $info['nickname'];
+ 		$result['icon'] = $info['icon'];
  		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
  		$result['content'] = $this->replaceUserText($result['content']);
  		return $result;
@@ -196,6 +201,11 @@ class TopicCommentModel extends RelationModel{
  		if($result['comment_id']!=0){
 	 		$result['sender_nickname'] = M('Login')->where(array('id'=>$result['sender']))->getField('nickname');
  		}
+ 		$result['user_id'] = $result['sender'];
+ 		$LoginModel = M('Login');
+ 		$info = M('Login')->where(array('id'=>$result['sender']))->field('icon,nickname')->find();
+ 		$result['nickname'] = $info['nickname'];
+ 		$result['icon'] = $info['icon'];
  		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
  		$result['content'] = $this->replaceUserText($result['content']);
  		return $result;
@@ -213,6 +223,11 @@ class TopicCommentModel extends RelationModel{
 	 		$result['receiver_id'] = $this->where(array('id'=>$result['comment_id']))->getField('sender');
 	 		$result['receiver_nickname'] = M('Login')->where(array('id'=>$result['receiver_id']))->getField('nickname');
  		}
+ 		$result['user_id'] = $result['sender'];
+ 		$LoginModel = M('Login');
+ 		$info = M('Login')->where(array('id'=>$result['sender']))->field('icon,nickname')->find();
+ 		$result['nickname'] = $info['nickname'];
+ 		$result['icon'] = $info['icon'];
  		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
  		$result['content'] = $this->replaceUserText($result['content']);
  		return $result;

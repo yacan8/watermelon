@@ -4,12 +4,12 @@
 	<volist name="result" id="vo"> 
 	<div class="media">
 	    <div class="media-left">
-	    	<a href="#"><img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/{$vo['user']['icon']}" alt="..."></a>
+	    	<a href="{:U('/u/'.$vo['user_id'],'',false,false)}"><img class="media-object media-img" src="{:C('__DATA__')}/login_thumb/{$vo['user']['icon']}" alt="..."></a>
 		</div>
 	  	<div class="media-body">
-	    	<h4 class="media-heading"><a class="tc-black" href="#">{$vo.title}</a></h4>
+	    	<h4 class="media-heading"><a class="tc-black" target="_blank" href="{:U('/tn/'.$vo['id'])}">{$vo.title}</a></h4>
 		    <div class="info m-t-sm font-12">
-		    	<a href="#" class="m-r-sm">{$vo.user.nickname}</a>
+		    	<a href="{:U('/u/'.$vo['user_id'],'',false,false)}" class="m-r-sm">{$vo.user.nickname}</a>
 		    	<span class="m-r-sm">{$vo.time}</span>
 		    	<span class="m-r-sm la_item">{$vo.city}</span>
 		    </div>
@@ -25,7 +25,7 @@
 
 		    <div class="m-t-sm font-12 border-gray-b-e p-b-md m-b-xs">
 		   		<span class="keywords">{$vo.browse}</span>次浏览
-		   		<span class="keywords m-l-md">{$vo.zan_count}</span>次点赞
+		   		<!-- <span class="keywords m-l-md">{$vo.zan_count}</span>次点赞 -->
 		    </div>
 		</div>
 	</div>

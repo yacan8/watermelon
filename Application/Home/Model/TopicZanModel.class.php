@@ -67,6 +67,7 @@ class TopicZanModel extends Model{
  	public function getMessage3($id){
  		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
  		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'login l')->field('t.id id,t.title title,l.nickname nickname,l.icon icon,l.id user_id')->where('tz.id = '.$id.' and tz.zan_id = t.id and tz.type=1 and l.id = tz.user_id')->find();
+		$result['content'] = D('TopicComment')->replaceUserText($result['content']);
  		return $result;
  	}
 
@@ -77,7 +78,8 @@ class TopicZanModel extends Model{
 	 */
  	public function getMessage4($id){
  		$DB_PREFIX = C('DB_PREFIX');/*获取数据库前缀*/
- 		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'topic_comment tc')->field('t.id t_id,tc.id tc_id,t.title title,tc.content')->where('tz.id = '.$id.' and tz.zan_id = tc.id and tz.type=2 and tc.topic_id = t.id and tc.delete_tag = 0')->find();
+ 		$result = $this->table($DB_PREFIX.'topic_zan tz,'.$DB_PREFIX.'topic t,'.$DB_PREFIX.'topic_comment tc,'.$DB_PREFIX.'login l')->field('t.id topic_id,tc.id tc_id,t.title title,tc.content,l.nickname nickname,l.icon icon,l.id user_id')->where('tz.id = '.$id.' and tz.zan_id = tc.id and tz.type=2 and tc.topic_id = t.id and tc.delete_tag = 0 and l.id = tz.user_id')->find();
+ 		$result['content'] =  preg_replace('/\[\:(\S{5})\:\]/', '<span class="fr-emoticon fr-emoticon-img" style="background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/${1}.svg)">&nbsp;</span>', $result['content']);//特定字符替换为表情
  		$result['content'] = D('TopicComment')->replaceUserText($result['content']);
  		return $result;
  	}

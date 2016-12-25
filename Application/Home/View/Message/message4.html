@@ -1,1 +1,1 @@
-点在了你在话题 <a href="{:U('/t/'.$vo['content']['topic_id'])}">{$vo.content.title}</a> 中的评论：{$vo.content.content}  <a title="查看" href="{:U('TopicComment/view',array('id'=>$vo['content_id']))}"><span class="glyphicon glyphicon-eye-open"></span></a>
+<a href="{:U('/u/'.$vo['content']['user_id'],'',false,false)}">{$vo.content.nickname}</a> 点赞我！ 在话题 <a href="{:U('/t/'.$vo['content']['topic_id'])}">{$vo.content.title}</a> 中的评论：{$vo.content.content}  <a title="查看" href="{:U('TopicComment/view',array('id'=>$vo['content_id']))}"><span class="glyphicon glyphicon-eye-open"></span></a>
