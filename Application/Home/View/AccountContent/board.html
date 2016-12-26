@@ -31,10 +31,12 @@
 						</div>
 						<div class="m-t-xs tc-gray9">
 							<span class="font-12">{$re.time}</span>
-							<a href="javascript:void(0)" class="font-12 tc-gray9 m-l-sm board" data-nickname="{$re.senderinfo.nickname}" data-board-id="{$vo.id}" data-sender="{$re.sender}">
-								<span class="glyphicon glyphicon-comment"> </span>
-								回复
-							</a>
+							<if condition="$user_id neq $re['sender']">
+								<a href="javascript:void(0)" class="font-12 tc-gray9 m-l-sm board" data-nickname="{$re.senderinfo.nickname}" data-board-id="{$vo.id}" data-sender="{$re.sender}">
+									<span class="glyphicon glyphicon-comment"> </span>
+									回复
+								</a>
+							</if>
 						</div>
 					</div>
 				</div>

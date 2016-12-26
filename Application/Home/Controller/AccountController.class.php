@@ -214,17 +214,26 @@ class AccountController extends Controller{
 
 	// 资料编辑view
 	public function edit(){
-		$umodel = D('User');
-		$lmodel = D('Login');
-		$this->assign('userinfo',$umodel->getUserInfoById(session('login')));
-		$this->assign('logininfo',$lmodel->getLoginInfoById(session('login')));
-		$provinceList = M("AddressProvinces")->select();
-		$this->assign('content','AccountContent/edit_information');
-		$this->assign('provinceList',$provinceList);
-		$this->display('index');
+		if(session('?login')){
+			$user_id = session('login');
+			$info = $this->getInfo($user_id);
+			$umodel = D('User');
+			$lmodel = D('Login');
+			$this->assign('userinfo',$umodel->getUserInfoById(session('login')));
+			$this->assign('logininfo',$lmodel->getLoginInfoById(session('login')));
+			$provinceList = M("AddressProvinces")->select();
+			$this->assign('content','AccountContent/edit_information');
+			$this->assign('provinceList',$provinceList);
+			$this->assign('user_id',$user_id);
+			$this->assign('info',$info);
+			$this->display('index');
+		}else{
+			$this->error('你还未登录');
+		}
 	}
 
 	public function Doedit(){
+
 		$data = I('post.');
 		$lmodel = D('Login');
 		$umodel = D('User');
@@ -235,6 +244,7 @@ class AccountController extends Controller{
 		$data['id'] = session('login');
 		$umodel->updateUserInfo($data);
 		redirect(U('Account/edit'));
+
 	} 
 
 	public function ChangePassword(){

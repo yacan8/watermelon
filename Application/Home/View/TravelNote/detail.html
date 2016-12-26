@@ -18,11 +18,11 @@
 				游记攻略
 			</div>
 			<div class="m-t-xs">
-				<a href="#">首页</a>
+				<a href="{:U('Index/index')}">首页</a>
 				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-				<a href="">游记攻略</a>
+				<a href="{:U('TravelNote/index')}">游记攻略</a>
 				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-				<span>成都</span>
+				<span>游记详情</span>
 			</div>
 
 		</div>
@@ -36,17 +36,17 @@
 					<span class="time tc-gray7">{$travelnote.time}</span>
 					<a href="" class="author m-l-md">{$travelnote.user.nickname}</a>
 					<span class="browse m-l-md tc-gray7">{$travelnote.browse}次浏览</span>
-					<span class="m-l-md tc-gray9 iconfont icon-dianzan"></span>
-					<span class="zan tc-gray9">点赞：??</span>
+					<!-- <span class="m-l-md tc-gray9 iconfont icon-dianzan"></span> -->
+					<!-- <span class="zan tc-gray9">点赞：??</span> -->
 				</div>
 				<div class="m-t-md m-b-md travel_note_content">
 					{$travelnote.content}
 				</div>
 
-					<div class="text-center">
+		<!-- 			<div class="text-center">
 						<span class="icon-dianzan1 iconfont icon s-zan" data-type='3'></span>
 						<span class="t">点赞</span>
-					</div>
+					</div> -->
 					<div class="c_area">
 		            	<h4 class="b_main"><span class="b_border">发表评论</span></h4>
 		            	<textarea class="form-control m-t-lg" id="saytext" name="saytext" placeholder="客官，8个字起评，不讲价哟" rows="5" style="resize: none; overflow-y: hidden;"></textarea>
