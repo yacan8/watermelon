@@ -1,21 +1,21 @@
 <div class="bg-white border-gray-e p-md font-12">
 	<div class="font-16 p-b-md border-gray-b-e m-b-md">
-		{$self}的想去(5)
+		{$self}的想去({:count($List)})
 	</div>
 	<div class="row border-gray-b-e">
-		<for start="1" end="9">
+		<volist name="List" id="vo">
 			<div class="col-xs-6">
 				<div class="w_item">
-					<a href="#">
-						<img class="w_img" src="__PUBLIC__/img/f1.png">
+					<a target="_blank" href="{:U('Scenic/city',array('id'=>$vo['city_id']))}">
+						<img class="w_img" src="{:C('__DATA__')}/{$vo.city.image|default='default.jpg'}">
 					</a>
 					<div class="info">
-						<div class="title"><a href="#">成都</a></div>
-						<div class="m-t-xs tc-gray9"><span class="keyword">1535</span>个人想去</div>
-						<div class="m-t-xs tc-gray9">更新时间：<span class="tc-black">2016-2-5</span></div>
+						<div class="title"><a target="_blank" href="{:U('Scenic/city',array('id'=>$vo['city_id']))}">{$vo.city.city}</a></div>
+						<div class="m-t-xs tc-gray9"><span class="keyword">{$vo.count}</span>个人想去</div>
+						<div class="m-t-xs tc-gray9">更新时间：<span class="tc-black">{:substr($vo['time'],0,10)}</span></div>
 					</div>
 				</div>
 			</div>
-		</for>
+		</volist>
 	</div>
 </div>

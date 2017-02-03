@@ -1,0 +1,16 @@
+<div class="bg-white border-gray-e p-md font-12">
+	<div class="font-16 p-b-md border-gray-b-e m-b-md">
+		{$self}的关注({:count($List)})
+	</div>
+	<volist name="List" id="vo">
+		<div class="fans-item p-b-md m-b-md">
+			<a href="{:U('/u/'.$vo['attention_id'],'',false,false)}"><img class="fans-icon" src="{:C('__DATA__')}/login_thumb/{$vo['attentions']['icon']|default='default.jpg'}"></a>
+			<a class="m-r-sm" href="{:U('/u/'.$vo['attention_id'],'',false,false)}">{$vo.attentions.nickname}</a>
+			<if condition="$vo['userinfo']['province'] neq ''">
+			<span class="glyphicon glyphicon-home tc-grayb"></span> {$vo.userinfo.province} {$vo.userinfo.city} {$vo.userinfo.area}
+			</if>
+			{:W('Account/checkFollowOrFans',array('follow_id'=>$vo['attention_id']))}
+		</div>
+	</volist>
+
+</div>

@@ -11,14 +11,18 @@
 		    <div class="info m-t-sm font-12">
 		    	<a href="{:U('/u/'.$vo['user_id'],'',false,false)}" class="m-r-sm">{$vo.user.nickname}</a>
 		    	<span class="m-r-sm">{$vo.time}</span>
-		    	<span class="m-r-sm la_item">{$vo.city}</span>
+		    	<volist name="vo.space" id="_vo">
+		    		<a href="{:U('TravelNote/index',array('citynow'=>$_vo['id']))}" class="m-r-sm la_item">{$_vo['city']}</a>
+			    </volist>
 		    </div>
 		    <div class="m-t-sm travel_text">
 		   	{$vo.content}
 		   	</div>
 		    <div class="m-t-sm over-h">
 		    	<for start="0" end="6" name="t">
-			   	<a class="travel_pic" href="{$vo['pic'][0][$t]}"><img src="{$vo['pic'][0][$t]}"></a>
+		    		<if condition="(bool)$vo['pic'][0][$n]">
+						<a class="travel_pic" href="{:U('TravelNote/detail',array('id'=>$vo['id']))}"><img src="{$vo['pic'][0][$t]}"></a>
+					</if>
 			   	</for>
 		    </div>
 

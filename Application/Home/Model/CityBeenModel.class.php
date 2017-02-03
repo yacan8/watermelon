@@ -8,8 +8,7 @@ class CityBeenModel extends RelationModel{
 	    	'mapping_type' =>self::BELONGS_TO,
 	        'class_name' => 'City',
 	        'foreign_key'=>'city_id',
-	        'mapping_fields'=>'city',
-	        'as_fields'=>'city'
+	        'mapping_fields'=>'city,image',
 	    )
 	);
 
@@ -39,9 +38,20 @@ class CityBeenModel extends RelationModel{
 	}
 
 
-	public function getListByUserId($user_id,$limit){
+	public function getListByUserId($user_id,$limit=5,$relation=false){
 		$condition['user_id'] = $user_id;
-		return $this->where($condition)->limit($limit)->select();
+		$condition['delete_tag'] = (bool)0;
+		if($limit!=0)
+			$result =  $this->where($condition)->relation($relation)->order('time desc')->limit($limit)->select();
+		else{
+			$result =  $this->where($condition)->relation($relation)->order('time desc')->select();
+			for ($i=0; $i < count($result); $i++) { 
+				$result[$i]['count'] = $this->where(array('city_id'=>$result[$i]['city_id'],'delete_tag'=>(bool)0))->count();
+			}
+		}
+		
+		return $result;
+
 	}
 
 

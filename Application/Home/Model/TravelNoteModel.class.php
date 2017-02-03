@@ -8,15 +8,42 @@ class TravelNoteModel extends Model{
 	 *  @param [Integer] $count 分页参数
 	 *	@param [Interger] $count 分页参数
 	 */
-	public function getList($page,$count,$condition){
+	public function getList($page,$count,$user_id=0,$space_id=0){
+		$DB_FREFIX = $this->tablePrefix;
 		$lmodel = D('Login');
 		$zmodel = D('Zan');
-		$result = $this->table('wt_travel_note tn')->join('left join wt_travel_note_space_belong tnspb on tn.id = tnspb.travel_note_id')
-					   ->join('left join wt_travel_note_space tnsp on tnsp.id = tnspb.space_id')
-					   ->field('tn.id,title,time,user_id,content,image,browse,tnsp.city')
-					   ->page($page.','.$count)
+		$SpaceModel = M('TravelNoteSpace');
+		$SpaceBelongModel = D('TravelNoteSpaceBelong');
+		if($user_id!=0){
+			$condition['tn.user_id'] = $user_id;
+		}
+		if($space_id!=0){
+			$condition['tnsb.space_id'] = $space_id;
+		}
+		$idList = $this->table($DB_FREFIX.'travel_note_space_belong tnsb,'.$DB_FREFIX.'travel_note tn')->distinct(true)->where($condition)->field('tnsb.travel_note_id')->page($page,$count)->select();
+		$idStr = '';
+		for($i = 0 ; $i<count($idList);$i++){
+			if($i==0){
+				$idStr .= (int)$idList[$i]['travel_note_id'];
+			}else{
+				$idStr .= ','.(int)$idList[$i]['travel_note_id'];
+			}
+		}
+		if($user_id!=0){
+			$_condition['tn.user_id'] = $user_id;
+		}
+		$_condition['tn.id'] = array('in',$idStr);
+		// $result = $this->table('wt_travel_note tn')->join('left join wt_travel_note_space_belong tnspb on tn.id = tnspb.travel_note_id')
+		// 			   ->join('left join wt_travel_note_space tnsp on tnsp.id = tnspb.space_id')
+		// 			   ->field('tn.id,title,time,user_id,content,image,browse,tnsp.city')
+		// 			   ->page($page.','.$count)
+		// 			   ->group('tn.id')
+		// 			   ->where($condition)
+		// 			   ->select();
+		$result = $this->table($DB_FREFIX.'travel_note tn,'.$DB_FREFIX.'travel_note_space tnsp')
+					   ->field('tn.id,title,time,user_id,content,image,browse')
+					   ->where($_condition)
 					   ->group('tn.id')
-					   ->where($condition)
 					   ->select();
 		foreach ($result as &$value) {
 			preg_match_all('/(?<=src=").+\.jpg.*(?=">)/',$value['content'],$value['pic']);
@@ -25,9 +52,22 @@ class TravelNoteModel extends Model{
 			$value['content'] = str_sub(preg_replace('/<img.+>/'," ", $value['content']),200);
 			$value['user'] = $lmodel->getById($value['user_id']);
 			$value['zan'] = $zmodel->getCountById(2,$value['id']);
+			$value['space'] = $this->query('select tns.id , tns.city from '.$DB_FREFIX.'travel_note tn,'.$DB_FREFIX.'travel_note_space_belong tnsb,'.$DB_FREFIX.'travel_note_space tns where tn.id = tnsb.travel_note_id and tnsb.space_id = tns.id and tn.id = '.$value['id']);
 		}
-
 		return $result;
+	}
+
+	public function getCount($user_id=0,$space_id=0){
+		$DB_FREFIX = $this->tablePrefix;
+		if($user_id!=0){
+			$condition['tn.user_id'] = $user_id;
+		}
+		if($space_id!=0){
+			$condition['tnsb.space_id'] = $space_id;
+		}
+		$allCount =  $this->table($DB_FREFIX.'travel_note_space_belong tnsb,'.$DB_FREFIX.'travel_note tn')->distinct(true)->where($condition)->field('tnsb.travel_note_id')->select();
+		return count($allCount);
+
 	}
 
 	/**
@@ -40,14 +80,6 @@ class TravelNoteModel extends Model{
 		$lmodel = D('Login');
 		$result['user'] = $lmodel->getById($result['user_id']);
 		return $result;
-	}
-
-	/**
-	 * [getCount 获取记录总条数]
-	 * @return 记录总条数
-	 */
-	public function getCount($condition){
-		return $this->where($condition)->count();
 	}
 
 
@@ -120,10 +152,7 @@ class TravelNoteModel extends Model{
 		foreach ($result as &$value) {
 			// $value['content'] = str_sub(preg_replace('/<img=.+>/'," ", $value['content']),200);
 			// preg_match_all('/(?<=src=").+\.jpg.*(?=">)/',$value['content'],$value['pic']);
-
 			preg_match_all('/(?<=src=").+\.jpg.*(?=">)/',$value['content'],$pic);
-			// dump($pic[0][0]);
-			// dump($pic);
 			$value['pic'] = $pic[0][0];
 			$pic = null;
 

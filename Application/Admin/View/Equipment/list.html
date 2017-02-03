@@ -20,7 +20,7 @@
 						·
 						估价 <a><if condition="$vo['price'] neq ''">￥{$vo.price}<else/>暂无估价</if></a>
 						·
-						（<a href="{:U('Home/Equipment/equipment',array('id'=>$vo['id']))}" target="_blank">查看</a> | <a href="{:U('Equipment/equipmentForm',array('id'=>$vo['id']))}">修改</a> | 
+						（<a href="{:U('Home/eq/'.$vo['id'])}" target="_blank">查看</a> | <a href="{:U('Equipment/equipmentForm',array('id'=>$vo['id']))}">修改</a> | 
 						<if condition="$vo['delete_tag'] eq 0">
 						<a href="{:U('Equipment/delete',array('id'=>$vo['id']))}" onclick="return confirm('确认删除吗')">删除</a>
 						<else/>

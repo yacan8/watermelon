@@ -5,22 +5,22 @@
 
              <h4>
               {$refer}去过的城市
-            <a class="font-12 tc-gray9 pull-right m-t-xs" href="#">>>更多</a>
+            <a class="font-12 tc-gray9 pull-right m-t-xs" href="{:U('Account/been',array('id'=>$id))}">>>更多</a>
             </h4>
             <ul class="city_list">
               <volist name="citybeen" id="vo">
-              <li><a href="#"><img src="{:C('__DATA__')}/{$vo['image']}"></a><a href="#">{$vo.city}</a></li>
+              <li><a href="#" target="_blank"><img src="{:C('__DATA__')}/{$vo['city']['image']}"></a><a href="#">{$vo.city.city}</a></li>
               </volist>
             </ul>
 
             <hr>
             <h4>
               {$refer}的粉丝({$fansnum})
-              <a class="font-12 tc-gray9 pull-right m-t-xs" href="#">>>更多</a>
+              <a class="font-12 tc-gray9 pull-right m-t-xs" href="{:U('Account/fans',array('id'=>$id))}">>>更多</a>
             </h4>
             <ul class="img_list">
               <volist name="fans" id="vo">
-              <li><a href="#"><img src="{:C('__DATA__')}/login_thumb/{$vo['icon']}"></a></li>
+              <li><a title="{$vo.nickname}" href="{:U('/u/'.$vo['id'],'',false,false)}" target="_blank"><img src="{:C('__DATA__')}/login_thumb/{$vo['icon']}"></a></li>
               </volist>
             </ul>
 
@@ -28,11 +28,11 @@
             <hr>
             <h4>
               {$refer}的关注({$attentionnum})
-              <a class="font-12 tc-gray9 pull-right m-t-xs" href="#">>>更多</a>
+              <a class="font-12 tc-gray9 pull-right m-t-xs" href="{:U('Account/follow',array('id'=>$id))}">>>更多</a>
             </h4>
             <ul class="img_list">
               <volist name="attention" id="vo">
-              <li><a href="#"><img src="{:C('__DATA__')}/login_thumb/{$vo['icon']}"></a></li>
+              <li><a title="{$vo.nickname}" href="{:U('/u/'.$vo['id'],'',false,false)}" target="_blank"><img src="{:C('__DATA__')}/login_thumb/{$vo['icon']}"></a></li>
               </volist>
             </ul>
             <hr>

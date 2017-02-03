@@ -19,7 +19,6 @@ class TravelNoteWidget extends Controller{
         $result = $model->getReletive($id);
         $this->assign('travelnote',$result);
        	$this->display('TravelNoteContent/relevantTravelNote');
-       	// dump($result);
 	}
 
 }

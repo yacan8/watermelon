@@ -17,6 +17,7 @@ return array(
 	'URL_ROUTE_RULES'=>array(
 		'u/:id'  =>array('Account/dynamics','',array('ext'=>'')),
 		't/:id'  => array('Home/Topic/detail','',array('ext'=>'html')),
+		'eq/:id' => array('Equipment/detail','',array('ext'=>'html')),
 		'i/:id'  => array('Home/Infomation/detail','',array('ext'=>'html')),
 		'tn/:id'  => array('Home/TravelNote/detail','',array('ext'=>'html'))
 	),

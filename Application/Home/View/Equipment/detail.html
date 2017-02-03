@@ -14,13 +14,13 @@
 				装备用品
 			</div>
 			<div class="m-t-xs">
-				<a href="#">首页</a>
+				<a href="{:U('Index/index')}">首页</a>
 				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-				<a href="#" class>装备用品</a>
+				<a href="{:U('Equipment/index')}" class>装备用品</a>
 				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-				<a href="#" class>装备分类</a>
-				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
-				<span class>装备名</span>
+<!-- 				<a href="#" class>装备分类</a>
+				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span> -->
+				<span class>{$equipment.name}</span>
 			</div>
 		</div>
 	</div>
@@ -31,8 +31,9 @@
 				<div class="font-20 p-b-sm m-b-sm">{$equipment.name} </div>
 				<div class="info_container">
 					<div class="info_left table-tell">
-						<a href="http://image1.8264.com/plugin/201403/14/150636ppucbmuhjbubpjjo.jpg!t3w322h0" target="_blank">
-						<img src="{:C(__DATA__)}/{$equipment['image']}"></a>
+						<a href="{:C(__DATA__)}/{$equipment['image']}" target="_blank">
+							<img src="{:C(__DATA__)}/{$equipment['image']}">
+						</a>
 					</div>
 					<div class="info_right table-tell">
 						<span class="font-16">{:W('Scenic/score',array('score'=>$equipment['grade']))}</span>

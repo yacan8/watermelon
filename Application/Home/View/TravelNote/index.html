@@ -35,8 +35,9 @@
 				<div id="select_city" class="container p-t-md p-b-md border-gray-b-e" style="display:none">
 					<div class="font-20">选择城市</div>
 					<div class="m-t-sm">
+						<a href="{:U('TravelNote/index',array('citynow'=>0))}" class="la_item">全部</a> &nbsp;
 						<volist name="city" id="vo">
-							<a href="{:U('TravelNote/index',array('citynow'=>$vo['city']))}" class="la_item active">{$vo.city}</a> &nbsp;
+							<a href="{:U('TravelNote/index',array('citynow'=>$vo['id']))}" class="la_item">{$vo.city}</a> &nbsp;
 						</volist>
 
 					</div>
@@ -53,23 +54,27 @@
 						    <div class="info m-t-sm font-12">
 						    	<a href="#" class="m-r-sm">{$vo.user.nickname}</a>
 						    	<span class="m-r-sm">{$vo.time}</span>
-						    	<span class="m-r-sm la_item">{$citynow}</span>
+						    	<volist name="vo.space" id="_vo">
+						    		<a href="{:U('TravelNote/index',array('citynow'=>$_vo['id']))}" class="m-r-sm la_item">{$_vo['city']}</a>
+							    </volist>
 						    </div>
 						    <div class="m-t-sm travel_text">
 								{$vo.content}
 							</div>
 							<div class="m-t-sm over-h img_container">
 								<for start="0" end="10" name="n">
-						    	<a class="travel_pic" href="#">
-						    		<img src="{$vo['pic'][0][$n]}">
-						    	</a>
+									<if condition="(bool)$vo['pic'][0][$n]">
+							    	<a class="travel_pic" href="{:U('TravelNote/detail',array('id'=>$vo['id']))}">
+							    		<img src="{$vo['pic'][0][$n]|default='__PUBLIC__/img/default.jpg'}">
+							    	</a>
+								    </if>
 						    	</for>    
 						    </div>
 
 
 							<div class="m-t-sm font-12 border-gray-b-e p-b-md m-b-xs">
 								<span class="keywords">{$vo.browse}</span>次浏览
-								<span class="keywords m-l-md">{$vo.zan}</span>次点赞
+								<!-- <span class="keywords m-l-md">{$vo.zan}</span>次点赞 -->
 							</div>
 						</div>
 					</div>

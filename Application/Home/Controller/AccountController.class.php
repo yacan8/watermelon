@@ -18,6 +18,13 @@ class AccountController extends Controller{
 		return $info;
 	}
 
+
+	public function getSideContent($user_id){
+		$CityBeenModel = D('CityBeen');
+		$CityBeenList = $CityBeenModel->getListByUserId($user_id,5,true);
+
+	}
+
 	public function index(){
 		$id = I('get.id',session('login'));
 		$info = $this->getInfo($id);
@@ -58,7 +65,7 @@ class AccountController extends Controller{
 		$condition['user_id'] = $id;
 		$this->assign('content','AccountContent/travelNote');
 		$Page = new \Think\Page($model->getCount($condition),10);
-		$result = $model->getList($p,10,$condition);
+		$result = $model->getList($p,10,$id,0);
 		$this->assign('user_id',$id);
 		$this->assign('result',$result);
 		$this->assign('info',$info);
@@ -261,31 +268,54 @@ class AccountController extends Controller{
 	}
 
 	//粉丝view
-	public function fans(){
-		$this->assign('content','AccountContent/userList');
+	public function follow(){
+
+		$id = I('get.id',session('login'));
+		$info = $this->getInfo($id);
+		$AttentionModel = D('Attention');
+		$AttentionerList = $AttentionModel->getAttentionerList($id);
+		$this->assign('user_id',$id);
+		$this->assign('List',$AttentionerList);
+		$this->assign('info',$info);
+		$this->assign('content','AccountContent/attention');
 		$this->assign('contentTitle','粉丝');
 		$this->display('index');
 	}
 
 
 	//关注view
-	public function follow(){
-		$this->assign('content','AccountContent/userList');
+	public function fans(){
+		$id = I('get.id',session('login'));
+		$info = $this->getInfo($id);
+		$AttentionModel = D('Attention');
+		$FansList = $AttentionModel->getFansList($id);
+		$this->assign('user_id',$id);
+		$this->assign('List',$FansList);
+		$this->assign('info',$info);
+		$this->assign('content','AccountContent/fans');
 		$this->assign('contentTitle','关注');
 		$this->display('index');
 	}
 
 
-	//想去view
-	public function want(){
-		$this->assign('content','AccountContent/cityList');
-		$this->assign('contentTitle','想去的地方');
-		$this->display('index');
-	}
+	// //想去view
+	// public function want(){
+	// 	$this->assign('content','AccountContent/cityList');
+	// 	$this->assign('contentTitle','想去的地方');
+	// 	$this->display('index');
+	// }
 
 
 	//去过view
 	public function been(){
+		$id = I('get.id',session('login'));
+		$info = $this->getInfo($id);
+		$CityBeenModel = D('CityBeen');
+		$CityBeenList = $CityBeenModel->getListByUserId($id,0,true);
+		// dump($CityBeenList);
+		$this->assign('user_id',$id);
+		$this->assign('info',$info);
+		$this->assign('List',$CityBeenList);
 		$this->assign('content','AccountContent/cityList');
 		$this->assign('contentTitle','去过的地方');
 		$this->display('index');

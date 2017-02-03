@@ -2,17 +2,17 @@
 	<div class="container">
 		<a href="{:U('Index/index')}"><img class="logo_img" src="__PUBLIC__/img/logo.png"></a>
 		<ul class="nav_l">
-			<li class="active"><a href="{:U('Index/index')}">首页</a></li>
-			<li class="transition-all-03"><a class="transition-all-03" href="#">资讯</a></li>
-			<li><a href="#">景点</a></li>
-			<li><a href="{:U('Equipment/index')}">装备</a></li>
-			<li><a href="{:U('TravelNote/index')}">游记</a></li>
-			<li><a href="#">论坛</a></li>
+			<li <if condition="CONTROLLER_NAME eq 'Index'"> class="active"</if>><a href="{:U('Index/index')}">首页</a></li>
+			<li <if condition="CONTROLLER_NAME eq 'Infomation'"> class="active"</if>><a href="{:U('Infomation/index')}">资讯</a></li>
+			<li <if condition="CONTROLLER_NAME eq 'Scenic'"> class="active"</if>><a href="{:U('Scenic/index')}">景点</a></li>
+			<li <if condition="CONTROLLER_NAME eq 'Equipment'"> class="active"</if>><a href="{:U('Equipment/index')}">装备</a></li>
+			<li <if condition="CONTROLLER_NAME eq 'TravelNote'"> class="active"</if>><a href="{:U('TravelNote/index')}">游记</a></li>
+			<li <if condition="CONTROLLER_NAME eq 'Topic'"> class="active"</if>><a href="{:U('Topic/index')}">论坛</a></li>
 		</ul>
 
 		<ul class="nav_l pull-right">
-			<if condition="session('id') neq null"><li class="user"><a href="{:U('Account/dynamics')}">{$Think.session.nickname}</a></li>
-			<else /><li><a href="{:U('Login/index')}">注册/登录</a></li><li class="user">游客</li>
+			<if condition="session('id') neq null"><li class="user <if condition="CONTROLLER_NAME eq 'Account'"> active</if>"><a href="{:U('Account/dynamics')}">{$Think.session.nickname}</a></li>
+			<else /><li><a href="{:U('Login/index')}">注册/登录</a></li>
 			</if>
 		</ul>
 	</div>

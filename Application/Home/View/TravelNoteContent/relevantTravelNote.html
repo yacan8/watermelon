@@ -1,9 +1,12 @@
 <ul class="sideList">
 	<volist name="travelnote" id="vo">
 	<li>
-		<a href="{:U('/tn/'.$vo['id'])}"><img class="side_img" src="{$vo.pic}"></a>
+		<a href="{:U('/tn/'.$vo['id'])}">
+
+			<img class="side_img" src="{$vo.pic|default='__PUBLIC__/img/default.jpg'}">
+		</a>
 		<div class="side_info">
-			<a href="{:U('/tn/'.$vo['id'])}" class="tc-black to2">{$vo.id}{$vo.title}</a>
+			<a href="{:U('/tn/'.$vo['id'])}" class="tc-black to2">{$vo.title}</a>
 			<div class="m-t-xs tc-gray9 font-12"><span class="glyphicon glyphicon-eye-open"></span> {$vo.browse}</div>
 		</div>
 	</li>

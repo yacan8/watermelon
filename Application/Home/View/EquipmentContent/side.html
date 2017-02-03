@@ -4,7 +4,7 @@
 <ul class="sideList m-b-sm">
 	<volist name="sametype" id="vo">
 	<li>
-		<a href="#"><img class="side_img" src="{:C(__DATA__)}/{$vo['image']}"></a>
+		<a href="{:U('/eq/'.$vo['id'])}"><img class="side_img" src="{:C(__DATA__)}/{$vo['image']}"></a>
 		<div class="side_info">
 			<a href="{:U('Equipment/detail',array('id'=>$vo['id']))}" class="tc-black to2">{$vo.name}</a>
 			<div class="m-t-xs tc-gray9 font-12">
@@ -25,7 +25,7 @@
 <ul class="sideList border-gray-b-e m-b-sm p-b-sm">
 	<volist name="samebrand" id="vo">
 	<li>
-		<a href="#"><img class="side_img" src="{:C(__DATA__)}/{$vo['image']}"></a>
+		<a href="{:U('/eq/'.$vo['id'])}"><img class="side_img" src="{:C(__DATA__)}/{$vo['image']}"></a>
 		<div class="side_info">
 			<a href="{:U('Equipment/detail',array('id'=>$vo['id']))}" class="tc-black to2">{$vo.name}</a>
 			<div class="m-t-xs tc-gray9 font-12">
@@ -47,7 +47,7 @@
 <ul class="sideList border-gray-b-e m-b-sm p-b-sm">
 	<volist name="hotequip" id="vo">
 	<li>
-		<a href="#"><img class="side_img" src="{:C(__DATA__)}/{$vo['image']}"></a>
+		<a href="{:U('/eq/'.$vo['id'])}"><img class="side_img" src="{:C(__DATA__)}/{$vo['image']}"></a>
 		<div class="side_info">
 			<a href="{:U('Equipment/detail',array('id'=>$vo['id']))}" class="tc-black to2">{$vo.name}</a>
 			<div class="m-t-xs tc-gray9 font-12">

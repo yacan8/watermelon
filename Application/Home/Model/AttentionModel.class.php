@@ -1,7 +1,25 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class AttentionModel extends Model{
+use Think\Model\RelationModel;
+class AttentionModel extends RelationModel{
+
+
+	//关联属性
+	protected $_link = array(
+	    'fans'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'Login',
+	        'foreign_key'=>'user_id',
+	        'mapping_fields'=>'nickname,icon,user_id'
+	    ),
+	    'attentions'  =>  array(
+	    	'mapping_type' =>self::BELONGS_TO,
+	        'class_name' => 'Login',
+	        'foreign_key'=>'attention_id',
+	        'mapping_fields'=>'nickname,icon,user_id'
+	    )
+	);
+
 	/**
 	 * [checkFollow 检查是否已关注]
 	 * @param  [Integer] $user_id  [用户id]
@@ -28,6 +46,24 @@ class AttentionModel extends Model{
 		return $result;
 	}
 
+
+	public function getFansList($user_id){
+		$result = $this->where(array('Attention_id'=>$user_id,'delete_tag'=>(bool)0))->relation('fans')->select();
+		$userModel = M('User');
+		for ($i=0; $i < count($result); $i++) { 
+			$result[$i]['userinfo'] = $userModel->where(array('id'=>$result[$i]['fans']['user_id']))->find();
+		}
+		return $result;
+	}
+
+	public function getAttentionerList($user_id){
+		$result = $this->where(array('user_id'=>$user_id,'delete_tag'=>(bool)0))->relation('attentions')->select();
+		$userModel = M('User');
+		for ($i=0; $i < count($result); $i++) { 
+			$result[$i]['userinfo'] = $userModel->where(array('id'=>$result[$i]['attentions']['user_id']))->find();
+		}
+		return $result;
+	}
 
 
 

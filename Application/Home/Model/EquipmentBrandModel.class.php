@@ -4,10 +4,9 @@ use Think\Model;
 /**
 * 		
 */
-class EquipmentBrandModel extends Model
-{
+class EquipmentBrandModel extends Model{
 	public function getList(){
-		return $this->limit(10)->select();
+		return $this->select();
 	}
 	
 	public function getById($id){

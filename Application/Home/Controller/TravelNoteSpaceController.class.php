@@ -15,4 +15,11 @@ class TravelNoteSpaceController extends Controller {
 
         echo json_encode($arr);
     }
+
+    public function spaceLoading(){
+        $word = I('get.word');
+        $result = M('TravelNoteSpace')->where(array('city'=>array('like','%'.$word.'%')))->field('id as id,city as name')->select();
+        echo json_encode($result);
+
+    }
 }

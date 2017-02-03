@@ -14,7 +14,7 @@
 				装备用品
 			</div>
 			<div class="m-t-xs">
-				<a href="#">首页</a>
+				<a href="{:U('Index/index')}">首页</a>
 				<span class="tc-gray9 font-12 m-r-xs m-l-xs">/</span>
 				<span class>装备用品</span>
 			</div>
@@ -34,15 +34,15 @@
 			<div class="select_container">
 				<div class="select_left border-l-orange">装备价格：</div>
 				<div class="select_right">
-					<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>0))}" class="<if condition="$price eq 0"> active</if>">全部</a>
-					<a class="<if condition="$price eq 'lt+100'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'lt 100'))}">100元以下</a>
-					<a class="<if condition="$price eq 'between+100,500'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 100,500'))}">100~500元</a>
-					<a class="<if condition="$price eq 'between+500,1000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 500,1000'))}">500~1000元</a>
-					<a class="<if condition="$price eq 'between+1000,2000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 1000,2000'))}">1000~2000元</a>
-					<a class="<if condition="$price eq 'between+2000,3000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 2000,3000'))}">2000~3000元</a>
-					<a class="<if condition="$price eq 'between+3000,4000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 3000,4000'))}">3000~4000元</a>
-					<a class="<if condition="$price eq 'between+4000,5000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 4000,5000'))}">4000~5000元</a>
-					<a class="<if condition="$price eq 'gt+5000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'gt 5000'))}">5000以上</a>
+					<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>0))}" class="<if condition="(string)$price eq '0'"> active</if>">全部</a>
+					<a class="<if condition="(string)$price eq 'lt+100'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'lt 100'))}">100元以下</a>
+					<a class="<if condition="(string)$price eq 'between+100,500'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 100,500'))}">100~500元</a>
+					<a class="<if condition="(string)$price eq 'between+500,1000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 500,1000'))}">500~1000元</a>
+					<a class="<if condition="(string)$price eq 'between+1000,2000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 1000,2000'))}">1000~2000元</a>
+					<a class="<if condition="(string)$price eq 'between+2000,3000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 2000,3000'))}">2000~3000元</a>
+					<a class="<if condition="(string)$price eq 'between+3000,4000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 3000,4000'))}">3000~4000元</a>
+					<a class="<if condition="(string)$price eq 'between+4000,5000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'between 4000,5000'))}">4000~5000元</a>
+					<a class="<if condition="(string)$price eq 'gt+5000'"> active</if>" href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$brand_id,'price'=>'gt 5000'))}">5000以上</a>
 				</div>
 			</div>
 			<div class="select_container">
@@ -52,7 +52,6 @@
 					<volist	name="brand" id="vo">
 						<a href="{:U('Equipment/index',array('type_id'=>$type_id,'brand_id'=>$vo['id'],'price'=>$price))}" class="<if condition="$brand_id eq $vo['id']"> active</if>">{$vo.brand}</a>
 					</volist>
-					<a href="#">更多品牌</a>
 				</div>
 			</div>
 		</div>
