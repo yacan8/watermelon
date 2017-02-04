@@ -10,7 +10,7 @@
 	<div class="col-xs-12 m-t-sm">
 		<div class="boder-e-container" id="brand-container">
 			<volist name="List" id="vo">
-				<span class="space-item "><span>{$vo.type}</span>({$vo.count}) <a href="#" data-role="remove">查看</a><a>丨</a><a href="{:U('Equipment/type_delete',array('id'=>$vo['id']))}" data-role="remove" onclick="return confirm('确认删除吗？')">删除</a></span>
+				<span class="space-item "><span>{$vo.type}</span>({$vo.count}) <a href="{:U('Equipment/equipment',array('type_id'=>$vo['id']))}">查看</a><a>丨</a><a href="{:U('Equipment/type_delete',array('id'=>$vo['id']))}" data-role="remove" onclick="return confirm('确认删除吗？')">删除</a></span>
 			</volist>
 		</div>
 	</div>
@@ -29,12 +29,12 @@
 				obj.children('font').remove();
 				var new_text;
 				if(old_text.indexOf(value) >= 0){
-					new_text = old_text.replace(value,"<font color='red'>"+value+"</font>"); 
+					new_text = old_text.replace(value,"<font color='red'>"+value+"</font>");
 					obj.html(new_text);
 				}else{
 					obj.html(old_text);
 				}
-				
+
 			}
 		});
 	})

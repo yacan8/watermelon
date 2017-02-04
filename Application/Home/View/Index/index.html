@@ -8,9 +8,9 @@
 </head>
 
 <body>
-    
+
     <include file="Common/navbar" />
- 
+
     <div class="index-header">
     	<div class="header-img-container"><img src="__PUBLIC__/img/index1.jpg" alt="..." class="header-img"></div>
     	<div class="search-container">
@@ -42,8 +42,8 @@
     		<div class="row">
     			<div class="col-xs-8">
     				<div class="p-b-sm m-b-sm border-gray-b-e">
-    					<a class="font-20 tc-black" href="#">丨最新资讯</a>
-    					<a href="#" class="tc-black pull-right m-t-xs">>></a>
+    					<a class="font-20 tc-black" href="{:U('Infomation/index')}">丨最新资讯</a>
+    					<a href="{:U('Infomation/index')}" class="tc-black pull-right m-t-xs">>></a>
     				</div>
     				<div class="infomation-container">
     					<volist name="infomationList" id="vo">
@@ -84,7 +84,7 @@
     						<div class="m-b-xs to1">
     							<a href="{:U('/t/'.$vo['t_id'])}" class="tc-black">{$vo.t_title}</a>
     						</div>
-    						<div class="topic-info font-12 to1">			
+    						<div class="topic-info font-12 to1">
 						          <a  href="{:U('Topic/index',array('t'=>$vo['type_id']))}" class="tc-black">{$vo.type}</a>
 						          ·
 						          {$vo.discuss_count}个人在讨论
@@ -95,7 +95,7 @@
 	    				</volist>
     				</div>
     			</div>
-    		
+
 	    	</div>
     	</div>
     </div>

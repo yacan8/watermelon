@@ -5,7 +5,7 @@
 	<div class="col-xs-12">
 		<div class="boder-e-container m-t-sm">
 			<a href="{:U('EquipmentGrade/grade',array('r'=>0,'user_id'=>$user_id,'equipment_id'=>$equipment_id))}" class="space-item <if condition="$r eq '0'"> active</if>">全部({$all_count})</a>
-			
+
 			<volist name="rCountList" id="vo">
 				<a href="{:U('EquipmentGrade/grade',array('r'=>$vo['r'],'user_id'=>$user_id,'equipment_id'=>$equipment_id))}" class="space-item <if condition="$r eq $vo['r']"> active</if>"><php>echo $vo['r']/2;</php>星({$vo.count})</a>
 			</volist>
@@ -24,7 +24,7 @@
 
 
 	<div class="col-xs-12 m-t-md">
-		<volist name="gradeList" id="vo"> 
+		<volist name="gradeList" id="vo">
 		<div class="media boder-b-dashed">
 		  <div class="media-left">
 		    <a href="{:U('EquipmentGrade/grade',array('user_id'=>$vo['user_id'],'equipment_id'=>$equipment_id))}">
@@ -34,7 +34,7 @@
 		  <div class="media-body">
 		    <div class="m-b-xs tc-black">
 				<div class="m-b-xs tc-gray9"><a>价格来源：</br></a>{$vo.price_source}</div>
-				<div class="m-b-xs tc-gray9"><a>有点：</br></a>{$vo.advantage}</div>
+				<div class="m-b-xs tc-gray9"><a>优点：</br></a>{$vo.advantage}</div>
 				<div class="m-b-xs tc-gray9"><a>不足：</br></a>{$vo.disadvantage}</div>
 				<div class="tc-gray9"><a>综合：</br></a>{$vo.synthesize}</div>
 		    </div>
