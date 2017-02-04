@@ -12,8 +12,8 @@ return array(
 	'MODULE_ALLOW_LIST' => array('Home','Admin'), // 配置你原来的分组列表
 	'DEFAULT_MODULE' => 'Home', // 配置你原来的默认分组
 	//调试
-	'SHOW_PAGE_TRACE' => true,
-	'URL_ROUTER_ON'   => true, 
+	'SHOW_PAGE_TRACE' => false,
+	'URL_ROUTER_ON'   => true,
 	'URL_ROUTE_RULES'=>array(
 		'u/:id'  =>array('Account/dynamics','',array('ext'=>'')),
 		't/:id'  => array('Home/Topic/detail','',array('ext'=>'html')),
