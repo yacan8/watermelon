@@ -165,18 +165,23 @@ class AccountController extends Controller{
 	}
 	// 我的收藏view
 	public function collection(){
-		$id = I('get.id');
-		$info = $this->getInfo($id);
-		$model = D('Collection');
-		$condition['delete_tag'] = (bool)0;
-		$condition['user_id'] = $id;
-		$Page = new \Think\Page($model->getCount($condition),4);
-		$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
-		$this->assign('page',$Page->show());
-		$this->assign('collection',$result);
-		$this->assign('info',$info);
-		$this->assign('content','AccountContent/collection');
-		$this->display('index');
+		if(session('?login')){
+			$id = session('login');
+			$info = $this->getInfo($id);
+			$model = D('Collection');
+			$condition['delete_tag'] = (bool)0;
+			$condition['user_id'] = $id;
+			$this->assign('user_id',$id);
+			$Page = new \Think\Page($model->getCount($condition),4);
+			$result = $model->getList($Page->firstRow,$Page->listRows,$condition);
+			$this->assign('page',$Page->show());
+			$this->assign('collection',$result);
+			$this->assign('info',$info);
+			$this->assign('content','AccountContent/collection');
+			$this->display('index');
+		}else{
+			$this->error('你还未登录');
+		}
 	}
 
 	// 我的消息view
@@ -197,6 +202,7 @@ class AccountController extends Controller{
 			$Page = new \Think\Page($MessageModel->where(array('user_id'=>$id))->count(),10);
 			$this->assign('Page',$Page->show());
 			$this->assign('MessageList',$MessageList);
+			$this->assign('user_id',$id);
 			$this->assign('info',$info);
 			$this->assign('content','AccountContent/message');
 			$this->display('index');
@@ -207,15 +213,21 @@ class AccountController extends Controller{
 
 	// 个人资料页
 	public function information(){
-		$id = I('get.id');
-		$info = $this->getInfo($id);
-		$umodel = D('User');
-		$lmodel = D('Login');
-		$this->assign('content','AccountContent/information');
-		$this->assign('userinfo',$umodel->getUserInfoById($id));
-		$this->assign('logininfo',$lmodel->getLoginInfoById($id));
-		$this->assign('info',$info);
-		$this->display('index');
+		if(session('?login')){
+			$id = session('login');
+			$info = $this->getInfo($id);
+			$umodel = D('User');
+			$lmodel = D('Login');
+			$this->assign('content','AccountContent/information');
+			$this->assign('userinfo',$umodel->getUserInfoById($id));
+			$this->assign('logininfo',$lmodel->getLoginInfoById($id));
+			$this->assign('user_id',$id);
+			$this->assign('info',$id);
+			$this->display('index');
+		}else{
+			$this->error('你还未登录');
+		}
+		
 	}
 
 

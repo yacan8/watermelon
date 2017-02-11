@@ -3,6 +3,7 @@
         $("#action-change>li>a").click(function(event) {
             var action = $(this).attr('data-action');
             $("#search-form").attr('action',action);
+            $("#search-action-show").html($(this).html()+' <span class="caret"></span>')
         });
         //图片浏览
         $('.btn-file').click(function(event) {

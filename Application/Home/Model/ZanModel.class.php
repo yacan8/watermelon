@@ -65,7 +65,7 @@ class ZanModel extends Model{
  		$DB_PREFIX = C('DB_PREFIX');
  		$condition['_string'] = 'z.other_id = s.id and z.type = 1 and s.delete_tag = 0';
  		$condition['z.id'] = $id;
- 		return $this->table($DB_PREFIX.'Zan z,'.$DB_PREFIX.'Scenic s')->field('s.name scenic,z.id scenic_id')->where($condition)->find();
+ 		return $this->table($DB_PREFIX.'zan z,'.$DB_PREFIX.'scenic s')->field('s.name scenic,z.id scenic_id')->where($condition)->find();
  	}
 
 }

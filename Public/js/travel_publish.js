@@ -55,7 +55,39 @@
 				return false;
 			}
 		})
-		$('[data-role="dd-input"]').keyup(function(e) {
+		var lastTime;
+		$('[data-role="dd-input"]').keyup(function (e) {
+			var _self = $(this);
+			var load_list =$(".dd-load-list");
+	    	lastTime = e.timeStamp;
+		    setTimeout(function () {
+		        if (lastTime - e.timeStamp == 0) {
+		            var value = $.trim(_self.val());
+					if(value!=''){
+						$.get(dd_load_url,{word:value},function(data) {
+							var result = $.parseJSON(data);
+							var str ='';
+							if(result.length>0){
+								for(var i=0;i<result.length;i++){
+									if(i!=0)
+										str = str + '<li data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
+									else
+										str = str + '<li class="active" data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
+								}
+							}else{
+								str = '<li data-id="'+value+'"><a href="javascript:;">创建地点 <span>'+value+'</span></a></li>';
+							}
+							var con = _self.parents('.form-group');
+								var left = _self.offset().left-con.offset().left-5;
+							$('.dd-load-list').html(str);
+							load_list.css('left',left).show();
+						});
+					}
+
+		        }
+		      }, 1000);
+	    })
+		$('[data-role="dd-input"]').keydown(function(e) {
 			var _self = $(this);
 			var _vaule = _self.val();
 			var load_list =$(".dd-load-list");
@@ -79,35 +111,34 @@
 				//按键Enter
 				add_dd_item();
 				_self.val('');
+				return false;
 			}else if(e.keyCode == 188){
 				$.toaster({ priority : 'danger', title : '<span class="glyphicon glyphicon-info-sign"></span>', message : '逗号 , 为非法字符'});
 				_self.val(_vaule.substring(0,_vaule.length-1));
-			}else{
-				var value = $.trim(_self.val());
-				if(value!=''){
-					$.get(dd_load_url,{word:value},function(data) {
-						var result = $.parseJSON(data);
-						var str ='';
-						if(result.length>0){
-							for(var i=0;i<result.length;i++){
-								if(i!=0)
-									str = str + '<li data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
-								else
-									str = str + '<li class="active" data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
-							}
-						}else{
-							str = '<li data-id="'+value+'"><a href="javascript:;">创建地点 <span>'+value+'</span></a></li>';
-						}
-						var con = _self.parents('.form-group');
-							var left = _self.offset().left-con.offset().left-5;
-						$('.dd-load-list').html(str);
-						load_list.css('left',left).show();
-					});
-				}
-
-				
-				
 			}
+			// else{
+			// 	var value = $.trim(_self.val());
+			// 	if(value!=''){
+			// 		$.get(dd_load_url,{word:value},function(data) {
+			// 			var result = $.parseJSON(data);
+			// 			var str ='';
+			// 			if(result.length>0){
+			// 				for(var i=0;i<result.length;i++){
+			// 					if(i!=0)
+			// 						str = str + '<li data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
+			// 					else
+			// 						str = str + '<li class="active" data-id="'+result[i].id+'"><a href="javascript:;"><span>'+result[i].name+'</span></a></li>';
+			// 				}
+			// 			}else{
+			// 				str = '<li data-id="'+value+'"><a href="javascript:;">创建地点 <span>'+value+'</span></a></li>';
+			// 			}
+			// 			var con = _self.parents('.form-group');
+			// 				var left = _self.offset().left-con.offset().left-5;
+			// 			$('.dd-load-list').html(str);
+			// 			load_list.css('left',left).show();
+			// 		});
+			// 	}
+			// }
 		});
 		$('[data-role="dd-input"]').bind('blur',dd_input_blur);
 	})
