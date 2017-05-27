@@ -76,9 +76,11 @@ class EquipmentController extends Controller {
 			if ($egmodel->create()) {
 				$egmodel->user_id = $user_id;
 				$egmodel->time = $time;
+				$equipment_id = I('post.equipment_id');
+				$egmodel->equipment_id = $equipment_id;
 				$addResult = $egmodel->add();
 				if($addResult!==false){
-					$refreshResult = $egmodel->refreshGrade( $egmodel->equipment_id);//刷新冗余字段评分
+					$refreshResult = $egmodel->refreshGrade( $equipment_id);//刷新冗余字段评分
 					if($refreshResult!==false){
 						$dynamicsData['type'] = 11;
 						$dynamicsData['content_id'] = $egmodel->getLastInsID();
@@ -87,7 +89,7 @@ class EquipmentController extends Controller {
 						$dynamicsResult = M('Dynamics')->add($dynamicsData);//添加动态
 						if($dynamicsResult!==false){
 							$model->commit();
-							$this->redirect("Equipment/detail",array("id"=>$egmodel->equipment_id));
+							$this->redirect("detail",array("id"=>$equipment_id));
 						}else{
 							$model->rollback();
 						}

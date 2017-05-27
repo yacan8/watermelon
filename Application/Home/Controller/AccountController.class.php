@@ -222,7 +222,7 @@ class AccountController extends Controller{
 			$this->assign('userinfo',$umodel->getUserInfoById($id));
 			$this->assign('logininfo',$lmodel->getLoginInfoById($id));
 			$this->assign('user_id',$id);
-			$this->assign('info',$id);
+			$this->assign('info',$info);
 			$this->display('index');
 		}else{
 			$this->error('你还未登录');
@@ -256,7 +256,6 @@ class AccountController extends Controller{
 		$umodel = D('User');
 		$lmodel->id = session('login');
 		$lmodel->nickname = I('post.nickname');
-		$lmodel->email = I('post.email');
 		if($_FILES['file']['name']!=null){
 			$errorMessage = $lmodel->change_icon($user_id);
 		}
@@ -276,7 +275,8 @@ class AccountController extends Controller{
 			$user['city'] = $city;
 		}
 		$user['signature'] = I('post.signature');
-		$userResult = $umodel->where(array('id'=>$user['id']))->save();
+		$user['email'] = I('post.email');
+		$userResult = $umodel->where(array('id'=>$user['id']))->save($user);
 		if($userResult!==false && $loginResult!==false){
 			redirect(U('Account/edit'));
 		}else{
