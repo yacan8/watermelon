@@ -87,7 +87,7 @@ class EquipmentController extends Controller {
 						$dynamicsResult = M('Dynamics')->add($dynamicsData);//添加动态
 						if($dynamicsResult!==false){
 							$model->commit();
-							$this->redirect("Equipment/detail",array("id"=>$egmodel->equipment_id)));
+							$this->redirect("Equipment/detail",array("id"=>$egmodel->equipment_id));
 						}else{
 							$model->rollback();
 						}
