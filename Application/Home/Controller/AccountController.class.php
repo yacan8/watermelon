@@ -219,7 +219,7 @@ class AccountController extends Controller{
 			$umodel = D('User');
 			$lmodel = D('Login');
 			$this->assign('content','AccountContent/information');
-			$this->assign('userinfo',$umodel->getUserInfoById($id));
+			$this->assign('userinfo',$umodel->find($lmodel->where(array('id'=>$id))->getField('user_id')));
 			$this->assign('logininfo',$lmodel->getLoginInfoById($id));
 			$this->assign('user_id',$id);
 			$this->assign('info',$info);
