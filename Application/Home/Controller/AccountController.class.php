@@ -260,7 +260,7 @@ class AccountController extends Controller{
 			$errorMessage = $lmodel->change_icon($user_id);
 		}
 		$loginResult = $lmodel->where(array('id'=>session('login')))->save();
-		$userId = $lmodel->where(array('id'=>session('login')))->getField('userId');
+		$userId = $lmodel->where(array('id'=>session('login')))->getField('user_id');
 		$user['id'] = $userId?$userId:0;
 		$province = I('post.province');
 		if( $province == '0' || $province == '--请选择--') {
