@@ -47,7 +47,7 @@ class AccountController extends Controller{
 		$model = D('Dynamics');
 		$condition['user_id'] = $id;
 		$Page = new \Think\Page($model->getCount($id),$count);
-		$reslut = $model->getList($p,$count,$id); 
+		$reslut = $model->getList($p,$count,$id);
 		$this->assign('content','AccountContent/dynamics');
 		$this->assign('info',$info);
 		$this->assign('user_id',$id);
@@ -96,7 +96,7 @@ class AccountController extends Controller{
 			$this->assign('content','AccountContent/topic');
 			$this->display('index');
 		}else{
-			header("Content-type: text/html; charset=utf-8"); 
+			header("Content-type: text/html; charset=utf-8");
 			exit('参数错误');
 		}
 	}
@@ -144,7 +144,7 @@ class AccountController extends Controller{
 		$info = $this->getInfo($id);
 		$album_id = I('get.album_id');
 		$AlbumModel =M('Album');
-		$AlbumModel->where(array('id'=>$album_id))->setInc('browse'); 
+		$AlbumModel->where(array('id'=>$album_id))->setInc('browse');
 		$condition['album_id'] = $album_id;
 		$condition['user_id'] = $id;
 		$amodel = D('Album');
@@ -207,7 +207,7 @@ class AccountController extends Controller{
 			$this->assign('content','AccountContent/message');
 			$this->display('index');
 		}
-		
+
 	}
 
 
@@ -227,7 +227,7 @@ class AccountController extends Controller{
 		}else{
 			$this->error('你还未登录');
 		}
-		
+
 	}
 
 
@@ -252,19 +252,38 @@ class AccountController extends Controller{
 	}
 
 	public function Doedit(){
-
-		$data = I('post.');
 		$lmodel = D('Login');
 		$umodel = D('User');
-		$login['nickname'] = $data['nickname'];
-		$login['id'] = session('login');
-		$lmodel->updateNickname($login);
-		unset($data['nickname']);
-		$data['id'] = session('login');
-		$umodel->updateUserInfo($data);
-		redirect(U('Account/edit'));
+		$lmodel->id = session('login');
+		$lmodel->nickname = I('post.nickname');
+		$lmodel->email = I('post.email');
+		if($_FILES['file']['name']!=null){
+			$errorMessage = $lmodel->change_icon($user_id);
+		}
+		$loginResult = $lmodel->where(array('id'=>session('login')))->save();
+		$userId = $lmodel->where(array('id'=>session('login')))->getField('userId');
+		$user['id'] = $userId?$userId:0;
+		$province = I('post.province');
+		if( $province == '0' || $province == '--请选择--') {
+			$user['province'] = '';
+		}else {
+			$user['province'] = $province;
+		}
+		$city = I('post.city');
+		if( $city == '0' || $city == '--请选择--') {
+			$user['city'] = '';
+		}else {
+			$user['city'] = $city;
+		}
+		$user['signature'] = I('post.signature');
+		$userResult = $umodel->where(array('id'=>$user['id']))->save();
+		if($userResult!==false && $loginResult!==false){
+			redirect(U('Account/edit'));
+		}else{
+			$this->error('操作错误');
+		}
 
-	} 
+	}
 
 	public function ChangePassword(){
 		$data = I('post.');

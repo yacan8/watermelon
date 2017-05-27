@@ -9,8 +9,8 @@ class LoginModel extends RelationModel{
 		    'mapping_type' =>  self::MANY_TO_MANY,
 		    'class_name'=>'News',
 		    'foreign_key' =>  'collecting',
-		    'relation_foreign_key' => 'collected', 
-		    'relation_table' => 'cl_collection', 
+		    'relation_foreign_key' => 'collected',
+		    'relation_table' => 'cl_collection',
 		   )
 	);
 
@@ -65,38 +65,7 @@ class LoginModel extends RelationModel{
 		return $list;
 	}
 
-	/**
-	 * [change_icon 修改头像，生成缩略图，删除原本头像]
-	 * @param  [string] $tel [传入的手机号码]
-	 */
-	public function change_icon($tel){
-		$config = array(
-				'maxSize' => 8145728,// 设置附件上传大小
-				'exts' => array('jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
-				'savePath'=>'login/',// 设置附件上传目录
-				'subName' => null,
-				'rootPath'=> './Data/'
-			);
-		$upload = new \Think\Upload($config);// 实例化上传类
-		$info = $upload->uploadOne($_FILES['file']);
-		if(!$info){
-			return $upload->getError();
-		}
-		$Savename = $info['savename'];
-		$SavenameArray = explode('.',$Savename);
-		$thumbname = $SavenameArray[0]."_thumb.".$SavenameArray[1];
-		$Image = new \Think\Image(\Think\Image::IMAGE_GD);
-		$Image->open('./Data/login/'.$Savename);
-		$Image->thumb(150, 150)->save('./Data/login_thumb/'.$thumbname);
 
-		unlink('./Data/login/'.$Savename);
-		$this->icon = $thumbname;	//图片名字
-		$bef = $this->where(array('tel'=>$tel))->getField('icon');
-		if($bef!=''){
-			unlink('./Data/login_thumb/'.$bef);
-		}
-		return '';
-	}
 
 	/**
 	 * [ChangePassword 修改密码]
@@ -125,7 +94,7 @@ class LoginModel extends RelationModel{
 	/**
 	 *	[getLoginInfoById 获取登陆信息]
 	 *	@param [Integer] $id 登陆编号
-	 *	@return 登陆信息 
+	 *	@return 登陆信息
 	 */
 	public function getLoginInfoById($id){
 		$condition['id'] = $id;
@@ -143,13 +112,53 @@ class LoginModel extends RelationModel{
 		$result = $this->where($condition)->field('nickname')->find();
 		return $result['nickname'];
 	}
+	/**
+	 * [change_icon 修改头像，生成缩略图，删除原本头像]
+	 * @param  [string] $tel [传入的手机号码]
+	 */
+	public function change_icon($user_id){
+		$config = array(
+				'maxSize' => 8145728,// 设置附件上传大小
+				'exts' => array('jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
+				'savePath'=>'login/',// 设置附件上传目录
+				'subName' => null,
+				'rootPath'=> './Data/'
+			);
+		$upload = new \Think\Upload($config);// 实例化上传类
+		$info = $upload->uploadOne($_FILES['file']);
+		if(!$info){
+			return $upload->getError();
+		}
+		$Savename = $info['savename'];
+		$SavenameArray = explode('.',$Savename);
+		$thumbname = $SavenameArray[0]."_thumb.".$SavenameArray[1];
+		$Image = new \Think\Image(\Think\Image::IMAGE_GD);
+		$Image->open('./Data/login/'.$Savename);
+		$Image->thumb(150, 150)->save('./Data/login_thumb/'.$thumbname);
 
+		unlink('./Data/login/'.$Savename);
+		$this->icon = $thumbname;	//图片名字
+		$bef = $this->where(array('id'=>$user_id))->getField('icon');
+		if($bef!=''){
+			unlink('./Data/login_thumb/'.$bef);
+		}
+		return '';
+	}
 	public function updateNickname($data){
 		if($this->create($data)){
-			return $this->save();
+			if($_FILES['file']['name']!=null){
+				$user_id = session('login');
+				$this->id = $user_id;
+				$errorMessage = $this->change_icon($user_id);
+				if($errorMessage==''){
+					return $this->save();
+				} else {
+					return false;
+				}
+			}
 		}else{
 			return false;
 		}
-		
+
 	}
 }

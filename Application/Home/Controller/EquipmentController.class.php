@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 
 class EquipmentController extends Controller {
-	
+
 	//装备列表
 	public function index(){
 		$data = I('get.');
@@ -43,11 +43,11 @@ class EquipmentController extends Controller {
 		$this->assign('equipment',$emodel->getList($Page->firstRow,$Page->listRows,$condition));
 		$this->assign('type_id',$type_id);
 		$this->assign('brand_id',$brand_id);
-		$this->assign('price',$price);	
+		$this->assign('price',$price);
 		$this->assign('order',$order);
 		$this->assign('page',$Page->show());
 		$this->display();
-		
+
 	}
 
 	//装备详情
@@ -87,7 +87,7 @@ class EquipmentController extends Controller {
 						$dynamicsResult = M('Dynamics')->add($dynamicsData);//添加动态
 						if($dynamicsResult!==false){
 							$model->commit();
-							$this->redirect(U("Equipment/detail",array("id"=>$egmodel->equipment_id)));
+							$this->redirect("Equipment/detail",array("id"=>$egmodel->equipment_id)));
 						}else{
 							$model->rollback();
 						}
@@ -99,14 +99,14 @@ class EquipmentController extends Controller {
 					$model->rollback();
 					$this->error('添加失败');
 				}
-				
+
 			} else {
 				$this->error('数据错误');
 			}
 		}else{
 			$this->error('你还没有登录');
 		}
-		
+
 	}
-	
+
 }

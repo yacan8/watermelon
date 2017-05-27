@@ -18,7 +18,7 @@ class ProvinceController extends Controller{
 			$this->assign('city_count',$city_count);
 			$this->assign('cityList',$cityList);
 			$this->assign('province_id',$id);
-			for ($i=0; $i <count($List); $i++) { 
+			for ($i=0; $i <count($List); $i++) {
 				if($List[$i]['id']==$id)
 					$province = $List[$i]['province'];
 			}
@@ -30,7 +30,7 @@ class ProvinceController extends Controller{
 	 * [add 添加省份操作]
 	 */
 	public function add(){
-			
+
 		$province = trim(I('post.province'));
 		if($province!=''){
 			$ProvinceModel = M('Province');
@@ -41,12 +41,12 @@ class ProvinceController extends Controller{
 			else
 				$this->error('添加失败');
 		}else exit('参数错误');
-			
-		
+
+
 	}
 
 
-	public function cityAdd(){	
+	public function cityAdd(){
 		$city = trim(I('post.city'));
 		$province = I('post.province');
 		if($city!=''&&$province!=''){
@@ -54,7 +54,7 @@ class ProvinceController extends Controller{
 			$data['province'] = $province;
 			$CityModel = M('City');
 			$count = $CityModel->where($data)->count();
-			if($count!=0){
+			if($count==0){
 				$city_id = $CityModel->getLastInsID();
 				if($_FILES['city_img']['name']!=null){
 					$upload_result = $this->city_image_upload('city_img',$province);
@@ -71,8 +71,8 @@ class ProvinceController extends Controller{
 				$this->error('已存在'.$city.'城市');
 			}
 		}else exit('参数错误');
-			
-		
+
+
 	}
 	/**
 	 * [city_img_change 修改城市图片]
@@ -101,18 +101,18 @@ class ProvinceController extends Controller{
 	}
 
 	private function city_image_upload($name,$province_id){
-		$config = array(    
+		$config = array(
 			'maxSize'    =>    3145728,
 			'rootPath'=> './Data/',
-			'savePath'   =>    'Scenic/city/', 
-			'saveName'   =>    array('uniqid',''),    
-			'exts'       =>    array('jpg', 'png', 'jpeg'),    
+			'savePath'   =>    'Scenic/city/',
+			'saveName'   =>    array('uniqid',''),
+			'exts'       =>    array('jpg', 'png', 'jpeg'),
 			'autoSub'    =>    true,
 			'subName'    =>    $province_id,
 		);
 
-		$upload = new \Think\Upload($config);// 实例化上传类       
-		$info = $upload->uploadOne($_FILES[$name]);    
+		$upload = new \Think\Upload($config);// 实例化上传类
+		$info = $upload->uploadOne($_FILES[$name]);
 		if(!$info) {// 上传错误提示错误信息
 			$result['result'] = false;
 			$result['message'] = $upload->getError();
