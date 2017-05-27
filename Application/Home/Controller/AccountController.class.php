@@ -238,10 +238,15 @@ class AccountController extends Controller{
 			$info = $this->getInfo($user_id);
 			$umodel = D('User');
 			$lmodel = D('Login');
-			$this->assign('userinfo',$umodel->getUserInfoById(session('login')));
+			$userInfo = $umodel->getUserInfoById(session('login'));
+			$this->assign('userinfo',$userInfo);
 			$this->assign('logininfo',$lmodel->getLoginInfoById(session('login')));
-			$provinceList = M("AddressProvinces")->select();
+			$ProvincesModel = M("AddressProvinces");
+			$provinceList = $ProvincesModel->select();
+			$provinceId = $ProvincesModel->where(array('province'=>$userInfo['province']))->getField("provinceid");
+			$cities = M('AddressCities')->where(array('provinceid'=>$provinceId))->select();
 			$this->assign('content','AccountContent/edit_information');
+			$this->assign('cities',$cities);
 			$this->assign('provinceList',$provinceList);
 			$this->assign('user_id',$user_id);
 			$this->assign('info',$info);
@@ -274,8 +279,9 @@ class AccountController extends Controller{
 		}else {
 			$user['city'] = $city;
 		}
-		$user['signature'] = I('post.signature');
 		$user['email'] = I('post.email');
+		$user['signature'] = I('post.signature');
+		$user['job'] = I('post.job');
 		$userResult = $umodel->where(array('id'=>$user['id']))->save($user);
 		if($userResult!==false && $loginResult!==false){
 			redirect(U('Account/edit'));
