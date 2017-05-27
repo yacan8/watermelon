@@ -238,7 +238,7 @@ class AccountController extends Controller{
 			$info = $this->getInfo($user_id);
 			$umodel = D('User');
 			$lmodel = D('Login');
-			$userInfo = $umodel->getUserInfoById(session('login'));
+			$userInfo = $umodel->find($lmodel->where(array('id'=>$user_id))->getField('user_id'));
 			$this->assign('userinfo',$userInfo);
 			$this->assign('logininfo',$lmodel->getLoginInfoById(session('login')));
 			$ProvincesModel = M("AddressProvinces");
