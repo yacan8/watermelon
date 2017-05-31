@@ -14,7 +14,7 @@ class LoginController extends Controller{
 		$userinfo = $LoginModel->where(array('tel'=>$tel))->find();
 		if($userinfo['power'] != '0'){
 			if($userinfo['password']== md5($password)){
-				session('Adminlogin',$tel);
+				session('Adminlogin',$userinfo['id']);
 				$this->redirect('Index/index');
 			}else{
 				session('message','用户名或密码错误');

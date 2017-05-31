@@ -27,20 +27,20 @@ function base64_upload($base64) {
  * [mkFolder 判断文件夹是否存在，不存在则创建]
  * @param  [String] $path [文件夹路径]
  */
-function mkFolder($path){  
-    if(!is_readable($path)){  
-        is_file($path) or mkdir($path,0700);  
-    }  
-} 
+function mkFolder($path){
+    if(!is_readable($path)){
+        is_file($path) or mkdir($path,0700,true);  
+    }
+}
 
 /**
  * [is_weixin 判断是否为微信浏览器]
- * @return boolean 
+ * @return boolean
  */
-function is_weixin(){ 
+function is_weixin(){
     if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
             return true;
-    }   
+    }
     return false;
 }
 function timeDiff($DateObj,$time){
@@ -56,8 +56,8 @@ function timeDiff($DateObj,$time){
  * 邮件发送函数
  */
     function sendMail($to, $title, $content) {
-     
-        Vendor('PHPMailer.PHPMailerAutoload');     
+
+        Vendor('PHPMailer.PHPMailerAutoload');
         $mail = new PHPMailer(); //实例化
         $mail->IsSMTP(); // 启用SMTP
         $mail->Host=C('MAIL_HOST'); //smtp服务器的名称（这里以QQ邮箱为例）
@@ -75,4 +75,3 @@ function timeDiff($DateObj,$time){
         $mail->AltBody = "这是一个纯文本的身体在非营利的HTML电子邮件客户端"; //邮件正文不支持HTML的备用显示
         return($mail->Send());
     }
-    

@@ -40,7 +40,7 @@ class TravelNoteController extends Controller{
 	//删除游记地点
 	public function delete(){
 		if(session('?login')){
-			$user_id = session('login');
+			$user_id = session('Adminlogin');
 			$power = M('Login')->where(array('id'=>$user_id))->getField('power');
 			if($power!=0){
 				$id = I('get.id');
@@ -60,17 +60,17 @@ class TravelNoteController extends Controller{
 		}
 	}
 
-	
+
 	public function change(){
 		$model = M('TravelNote');
 		$List = $model->field('id,content')->select();
-		for ($i=0; $i < count($List); $i++) { 
+		for ($i=0; $i < count($List); $i++) {
 
 			$List[$i]['content'] =  preg_replace('/<img.*data-original=\"(.+)\".*>/', '<img src="${1}">', $List[$i]['content']);//特定字符替换为表情
 			// $r = $model->where('id='.$List[$i]['id'])->save($List[$i]);
 			dump($r);
 		}
-		
+
 	}
 
 }

@@ -51,7 +51,7 @@ class UserController extends Controller{
 	public function delete(){
 		$id = I('get.id',0);
 		if($id!=0){
-			$user_id = session('login');
+			$user_id = session('Adminlogin');
 			$LoginModel = D('Login');
 			if($user_id == $id){
 				$this->error('不能修改自己');
